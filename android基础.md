@@ -44,3 +44,47 @@ box1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 2. [参考](https://cloud.tencent.com/developer/article/1025731)
 
 ## sp/dp/px/pt
+1. sp,这个主要用于字体显示，android的字体都是使用该单位
+2. dp,设备独立像素,不同设备有不同的显示效果，一般来说，在android中除了使用sp对字体，都是使用dp设备独立像素来支持WXGA,HVGA等
+3. android同时还支持pt(长度单位),px(像素)
+
+## 日期选择器
+```
+<DatePicker
+            android:id="@+id/datepi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+			
+DatePicker datepi;
+    int year;
+    int month;
+    int day;
+	
+	onCreate函数内
+datepi=findViewById(R.id.datepi);
+        Calendar cal=Calendar.getInstance();//创建日期实例
+        year=cal.get(Calendar.YEAR);
+        month=cal.get(Calendar.MONTH);
+        day=cal.get(Calendar.DAY_OF_MONTH);
+		//获取当前年月日，初始化日期选择器时的初始时间就是这个
+	
+	datepi.init(year, month, day, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                PPTControl.this.year=year;  //如果要把值传递给onCreate函数外的变量就这样做
+//                PPTControl.this.month=monthOfYear;
+//                PPTControl.this.day=dayOfMonth;
+                show(year,monthOfYear,dayOfMonth);//调用show函数
+            }
+        });
+		
+		private void show(int year,int month,int day){
+        String str=year+"年"+month+"月"+day+"日";
+        Toast.makeText(PPTControl.this,str,Toast.LENGTH_LONG).show();
+    }
+```
+
+## 日期选择器显示不全(class继承的是appcompaActivity)
+1. AS软件中默认类继承的是AppcompaActivity,而eclipse软件中类默认继承的是activity
+2. `AppcompaActivity的类会自带顶部栏，activity默认没有顶部栏，所以想要显示完整的日期选择器可以设置类继承activity`
+3. [参考](https://blog.csdn.net/today_work/article/details/79300181)
