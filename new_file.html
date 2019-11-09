@@ -4,18 +4,48 @@
 		<meta charset="utf-8">
 		<title></title>
 		<style type="text/css">
-			.two .a:last-child{
-				color: red;
-			}
 		</style>
 	</head>
 	<body>
-		<div id="one">
-			<div class="d">2</div>
-			<div class="two" style="height: 2000px;color: red;opacity: 0.6;">
-				<div class="a">1</div>
-				<a href="one.html#w" id="t" style="opacity: 1;">单向定位</a>
-			</div>
+		<div>
+			<canvas id="one" width="600" height="600"></canvas>
+			<img src="one/3.jpg" id="two">
 		</div>
+		<script type="text/javascript">
+			function draw(){
+				var canvas=document.getElementById('one');
+				if(!canvas.getContext) return;
+				var can=canvas.getContext('2d');
+				
+				can.beginPath();
+				// can.arc(100,100,50,0,Math.PI/2,false);
+				can.strokeRect(50,50,50,50);//该方法可以绘制矩形,不需要使用stroke
+				can.fillStyle='rgb(153,153,153)'
+				
+				can.beginPath()
+				can.font='20px sans-serif';//字体样式要设置在文本之前,否则无效
+				can.strokeText('我在下遗憾',50,150);//绘制的是文本边框
+				can.fillText('我在下遗憾',50,200);//绘制文本
+				// can.closePath();//从起始点到当前点画线,有点多此一举!
+				// can.stroke();//通过线条来绘制图形轮廓
+				
+				can.beginPath();
+				var img=document.getElementById('two');
+				//必须在图片加载完再绘制图片,否则会失效
+				img.onload=function(){
+					can.drawImage(img,50,250,100,100);
+				}
+				
+				can.beginPath();
+				var img2=new Image();//可以自己创建一个图片元素
+				//指定一个src属性
+				img2.src='https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture'
+				img2.onload=()=>{
+					can.drawImage(img2,50,400,100,100)
+				}
+				
+			}
+			draw()
+		</script>
 	</body>
 </html>
