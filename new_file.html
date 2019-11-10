@@ -7,25 +7,16 @@
 		</style>
 	</head>
 	<body>
-		<div>
-			
+		<div class="one">
+			<div class="one">2</div>
+			<form action="#" method="get" class="two">
+				<input type="button" name="" id="" value="two" class="two" />
+			</form>
 		</div>
 		<script type="text/javascript">
-			var one=(function(){
-				return {
-					getName:function (name){
-						return name;
-					}
-				}
-			})();
-			var one_child=function(){};
-			// var one_child_child=new one_child();
-			// console.log(one_child_child.getName('yiyi'));//往上找getName()方法,但是不存在
-			
-			one_child.prototype=one;//修改one_child原型指向为one函数
-			var one_child_child=new one_child();
-			console.log(one_child_child.getName('dsa'));
-			
+			var two=document.getElementsByClassName('two');
+			console.log(two);
+			console.log(two[1])
 		</script>
 	</body>
 </html>
