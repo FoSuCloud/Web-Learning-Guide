@@ -8,15 +8,24 @@
 	</head>
 	<body>
 		<div class="one">
-			<div class="one">2</div>
-			<form action="#" method="get" class="two">
-				<input type="button" name="" id="" value="two" class="two" />
-			</form>
+			
 		</div>
 		<script type="text/javascript">
-			var two=document.getElementsByClassName('two');
-			console.log(two);
-			console.log(two[1])
+			function count(str) {
+			    var obj={};
+			    var arr=str.split("");
+				
+			    arr.forEach((item)=>{
+			        if(obj[item]==undefined&&item!=' '){
+			            obj[item]=1;
+			        }
+			        else if(obj[item]>0){
+			            obj[item]+=1;
+			        }
+			    })
+			    return obj;
+			}
+			console.log(count('hello world'));
 		</script>
 	</body>
 </html>
