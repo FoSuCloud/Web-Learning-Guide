@@ -88,3 +88,48 @@ datepi=findViewById(R.id.datepi);
 1. AS软件中默认类继承的是AppcompaActivity,而eclipse软件中类默认继承的是activity
 2. `AppcompaActivity的类会自带顶部栏，activity默认没有顶部栏，所以想要显示完整的日期选择器可以设置类继承activity`
 3. [参考](https://blog.csdn.net/today_work/article/details/79300181)
+
+## 时间选择器TimePicker
+```
+        timepicker=findViewById(R.id.timepicker);
+        timepicker.setIs24HourView(true);//采用24小时制，可以不设置，不设置就要调整am,pm
+        timepicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                String str="时:"+hourOfDay+"分:"+minute;
+                Toast.makeText(PPTControl.this, str, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+```
+
+## 计时器
+```
+		ch=findViewById(R.id.chronometer);
+        ch.setBase(SystemClock.elapsedRealtime());//获取当前的系统时间设置为起始时间
+        ch.setFormat("%s");//设置时间格式
+        ch.start();//开启计时器
+        ch.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                //SystemClock.elapsedRealtime()-ch.getBase()>3当前系统时间减去设置的起始时间
+                if(SystemClock.elapsedRealtime()-ch.getBase()>3){
+                    Toast.makeText(PPTControl.this, "超过3秒啦~", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+```
+
+##  进度条
+1. `android进度条有三种，水平进度条，大圆圈进度条，小圆圈进度条`
+2. 设置静态的水平进度条
+```
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal" 设置进度条样式(水平进度条)
+            android:max="100"	设置进度条最大值
+            android:progress="30"  设置进度条初始值
+            />
+```
