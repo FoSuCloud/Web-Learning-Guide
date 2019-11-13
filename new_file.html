@@ -11,21 +11,14 @@
 			
 		</div>
 		<script type="text/javascript">
-			function count(str) {
-			    var obj={};
-			    var arr=str.split("");
-				
-			    arr.forEach((item)=>{
-			        if(obj[item]==undefined&&item!=' '){
-			            obj[item]=1;
-			        }
-			        else if(obj[item]>0){
-			            obj[item]+=1;
-			        }
-			    })
-			    return obj;
+			function square(arr) {
+				arr.filter((item,index)=>{
+					arr[index]=Math.pow(item,2);
+					return true;
+				})
+				return arr
 			}
-			console.log(count('hello world'));
+			console.log(square([1, 2, 3, 4]))
 		</script>
 	</body>
 </html>
