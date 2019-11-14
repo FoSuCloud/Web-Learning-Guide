@@ -11,14 +11,35 @@
 			
 		</div>
 		<script type="text/javascript">
-			function square(arr) {
-				arr.filter((item,index)=>{
-					arr[index]=Math.pow(item,2);
-					return true;
-				})
-				return arr
-			}
-			console.log(square([1, 2, 3, 4]))
+			  function getWeek(){
+				// 一周
+				var arr = [];  // 周一开始
+				var newdate = new Date('2019-11-14')
+				var now_day=newdate.getDate();
+				var now = newdate.getTime();
+				var month=newdate.getMonth()+1;
+				var day = newdate.getDay();    // 星期
+				var oneDayTime = 60 * 60 * 24 * 1000;
+				for (var i = 1; i < 8; i++) {
+				  if (day >= i) {
+					var dd = new Date(now - (day - i) * oneDayTime).getDate();
+					if(now_day<dd){
+						arr.push((month-1)+'-'+(dd < 10 ? '0' + dd : dd + ''));
+					}else{
+						arr.push(month+'-'+(dd < 10 ? '0' + dd : dd + ''));
+					}
+				  } else {
+					var aa = new Date(now + (i - day) * oneDayTime).getDate();
+					if(now_day>aa){
+						arr.push((month)+'-'+(aa < 10 ? '0' + aa : aa + ''));
+					}else{
+						arr.push(month+'-'+(aa < 10 ? '0' + aa : aa + ''));
+					}
+				  }
+				}
+				return arr;
+			  };
+			  console.log(getWeek())
 		</script>
 	</body>
 </html>
