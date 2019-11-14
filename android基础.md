@@ -133,3 +133,55 @@ datepi=findViewById(R.id.datepi);
             android:progress="30"  设置进度条初始值
             />
 ```
+
+## 注册页面
+1. 为了帮女票做安卓作业弄了一下注册页面，发现还挺简单的
+```
+selected=findViewById(radioGroup01.getCheckedRadioButtonId());//选中的性别的id
+		对于添加按钮
+        button02.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String sex=selected.getText().toString();//性别
+                String nation=spinner01.getSelectedItem().toString();//民族
+                String str=tv_name.getText()+"——"+tv_stu_num.getText()+"——"+sex+"——"+nation+
+                        "——"+arriveDateBtn.getText()+"——"+profe.getText()+"——"+cla.getText();
+                if(tv_name.getText().length()==0){
+                    Toast.makeText(MainActivity.this,"姓名不能为空！",Toast.LENGTH_LONG).show();
+                }else if(tv_stu_num.getText().length()==0){
+                    Toast.makeText(MainActivity.this,"学号不能为空！",Toast.LENGTH_LONG).show();
+                }else if(profe.getText().length()==0){
+                    Toast.makeText(MainActivity.this,"专业不能为空！",Toast.LENGTH_SHORT).show();
+                }else if(cla.getText().length()==0){
+                    Toast.makeText(MainActivity.this,"班级不能为空！",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(MainActivity.this,str,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+//需要注意的是，不要在onClick方法之前就getText()，这样是错误的，因为点击之前的文本是默认文本
+//另外如果要保存数据为String,那么需要getText().toString()
+
+//清空按钮
+        button03.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                tv_name.setText("");
+                tv_stu_num.setText("");
+                profe.setText("");
+                cla.setText("");
+                man.setChecked(true);//性别
+                woman.setChecked(false);
+                arriveDateBtn.setText("");//出生日期
+                spinner01.setSelection(0,true);//设置XSpinner当前值为汉族(索引为0)
+            }
+        });
+```
+2. 干货
+```
+2.1 从RadioGroup获取选中的RadioButton,通过findViewById(radioGroup01.getCheckedRadioButtonId())找到选中的按钮的id，然后就可以通过findViewById找到选中的按钮
+2.2 获取RadioButton的文本也是通过selected.getText().toString();
+2.3 修改RadioButton的状态，man.setChecked(true);选中男， woman.setChecked(false);不选中女
+2.4 获取Spinner的文本值spinner01.getSelectedItem().toString();
+2.5 更改Spinner当前选中值，spinner01.setSelection(0,true)，第一个参数是索引值，从零开始，第二个参数是true,表示选中
+```
