@@ -176,6 +176,40 @@ selected=findViewById(radioGroup01.getCheckedRadioButtonId());//选中的性别�
                 spinner01.setSelection(0,true);//设置XSpinner当前值为汉族(索引为0)
             }
         });
+// 弹出日期选择器的框(选择OK之后就退出)
+        Button05.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // 通过View.inflate去找到需要在本页面用到的其他layout文件
+                //getApplicationContext返回的是应用的上下文
+                View view = View.inflate(getApplicationContext(), R.layout.date_time_picker, null);
+                final DatePicker datePicker =view.findViewById(R.id.new_act_date_picker);//获取view这个layout中的日期选择器
+                int month;
+                int day;
+                int year;
+                final Calendar c = Calendar.getInstance();
+                year = c.get(Calendar.YEAR);
+                month = c.get(Calendar.MONTH);
+                day = c.get(Calendar.DAY_OF_MONTH);
+                datePicker.init(year, month, day, null);//初始化日期选择器(初始值为当前年月日)
+                // AlertDialog就是一个对话框,而AlertDialog.Builder就是一个内部静态类，可以通过AlertDialog.Builder获取到一个AlertDialog对象
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setView(view);//给该对话框添加一个layout文件页面，对话框显示layout文件内容
+				//android.R.string.ok也就是给该对话框添加一个OK的按钮，点击该按钮就退出该对话框
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final int arrive_year = datePicker.getYear();
+                        final int arrive_month = datePicker.getMonth();
+                        final int arrive_day = datePicker.getDayOfMonth();
+                        String dateStr=arrive_year+"-"+arrive_month+"-"+arrive_day;
+                        System.out.println(dateStr);
+                        arriveDateBtn.setText(dateStr);//在MainActivity所在的页面的arriveDateBtn日期文本位置设置值
+                    }
+                });
+                builder.show();//显示对话框
+            }
+        });
 ```
 2. 干货
 ```
@@ -184,4 +218,18 @@ selected=findViewById(radioGroup01.getCheckedRadioButtonId());//选中的性别�
 2.3 修改RadioButton的状态，man.setChecked(true);选中男， woman.setChecked(false);不选中女
 2.4 获取Spinner的文本值spinner01.getSelectedItem().toString();
 2.5 更改Spinner当前选中值，spinner01.setSelection(0,true)，第一个参数是索引值，从零开始，第二个参数是true,表示选中
+```
+3. `在本页面显示其他页面内容`
+```
+                // 通过View.inflate去找到需要在本页面用到的其他layout文件
+                //getApplicationContext返回的是应用的上下文
+                View view = View.inflate(getApplicationContext(), R.layout.date_time_picker, null);
+				
+				// AlertDialog就是一个对话框,而AlertDialog.Builder就是一个内部静态类，可以通过AlertDialog.Builder获取到一个AlertDialog对象
+				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+				builder.setView(view);//给该对话框添加一个layout文件页面，对话框显示layout文件内容
+				
+				//android.R.string.ok表示点击OK按钮就退出该对话框
+				 builder.setPositiveButton(android.R.string.ok, new DialogInterface....
+				builder.show();显示对话框
 ```
