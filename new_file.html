@@ -4,22 +4,32 @@
 		<meta charset="utf-8">
 		<title></title>
 		<style type="text/css">
+			.one{
+				border: 1px solid red;
+				width: 400px;
+				line-height: 0;
+			}
+			img{
+				width: 200px;
+				height: 202px;
+				/* height: 202px;是为了消除border的影响 */
+			}
+			p{
+				font-size: 10px;
+				line-height: 10px;
+				height: 10px;
+				margin: 0;
+				padding: 0;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="one">
-			
+			<img src="one/3.jpg" >
+			<p>dasdasd</p>
 		</div>
 		<script type="text/javascript">
-			var  one='global'
-			function global(){
-				one='private';
-				//没有使用var声明变量,那么默认为全局变量
-				return one;
-			}
-			console.log(one);//global 
-			console.log(global());//执行函数,修改了全局变量one,结果为private 
-			console.log(one);//private 
+
 		</script>
 	</body>
 </html>
