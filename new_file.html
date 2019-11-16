@@ -11,35 +11,19 @@
 			
 		</div>
 		<script type="text/javascript">
-			  function getWeek(){
-			  				// 一周
-			  				var arr = [];  // 周一开始
-			  				var newdate = new Date('2019-11-14')
-			  				var now_day=newdate.getDate();//该月的日期
-			  				var now = newdate.getTime();//时间戳
-			  				var month=newdate.getMonth()+1;
-			  				var day = newdate.getDay();    // 星期几
-			  				var oneDayTime = 60 * 60 * 24 * 1000;
-			  				for (var i = 1; i < 8; i++) {
-			  				  if (day >= i) {
-			  					var dd = new Date(now - (day - i) * oneDayTime).getDate();
-			  					if(now_day<dd){
-			  						arr.push((month-1)+'-'+(dd < 10 ? '0' + dd : dd + ''));
-			  					}else{
-			  						arr.push(month+'-'+(dd < 10 ? '0' + dd : dd + ''));
-			  					}
-			  				  } else {
-			  					var aa = new Date(now + (i - day) * oneDayTime).getDate();
-			  					if(now_day>aa){
-			  						arr.push((month)+'-'+(aa < 10 ? '0' + aa : aa + ''));
-			  					}else{
-			  						arr.push(month+'-'+(aa < 10 ? '0' + aa : aa + ''));
-			  					}
-			  				  }
-			  				}
-			  				return arr;
-			  };
-			  console.log(getWeek())
+			function count(start, end) {
+			    console.log(start);
+			    var time=setInterval(()=>{
+			        if(start<end){
+						start+=1;
+						console.log(start);
+					}
+			    },100)
+				return {cancel:function(){
+					clearInterval(time)
+				}};
+			}
+			count(1,3).cancel()
 		</script>
 	</body>
 </html>
