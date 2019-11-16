@@ -11,19 +11,15 @@
 			
 		</div>
 		<script type="text/javascript">
-			function count(start, end) {
-			    console.log(start);
-			    var time=setInterval(()=>{
-			        if(start<end){
-						start+=1;
-						console.log(start);
-					}
-			    },100)
-				return {cancel:function(){
-					clearInterval(time)
-				}};
+			var  one='global'
+			function global(){
+				one='private';
+				//没有使用var声明变量,那么默认为全局变量
+				return one;
 			}
-			count(1,3).cancel()
+			console.log(one);//global 
+			console.log(global());//执行函数,修改了全局变量one,结果为private 
+			console.log(one);//private 
 		</script>
 	</body>
 </html>
