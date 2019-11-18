@@ -233,3 +233,14 @@ selected=findViewById(radioGroup01.getCheckedRadioButtonId());//选中的性别�
 				 builder.setPositiveButton(android.R.string.ok, new DialogInterface....
 				builder.show();显示对话框
 ```
+
+## android图片使用png和jpg
+1. `android开发对png图片情有独钟！`
+2. png和jpg图片的对比
+---
+1. `png有透明通道，jpg没有`
+2. `png是无损压缩，jpg是无损压缩，所以png图片可以存储比较多的图片信息(颜色),但是带来的缺点是png图片的体积较大`
+3. `虽然因为存储了比较多的信息，png图片的体积较大，但是android对png图片情有独钟，会对png图片采用硬件加速，所以png图片实际的加载速度是快于jpg图片的`
+---
+* `所以对于android开发中，android包中用到的图片都是使用png格式;而对于网络图片，考虑到网络速度和流量，我们一般使用jpg格式`
+* `但是！对于背景页引导页这些大尺寸的图片来说，我们还是用jpg格式比较好，虽然加载较慢，但是减小了开发包的体积`
