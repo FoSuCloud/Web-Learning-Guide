@@ -8,5 +8,27 @@
 		<div id="two">
 			<a href="new_file.html#t">跳</a>
 		</div>
+		<script type="text/javascript">
+			var arr="4 1 5 4".split(" ");
+			for(var i=0;i<arr.length;i++){
+				for(var j=0;j<arr.length-i-1;j++){
+					if(arr[j]>arr[j+1]){
+						var tem=arr[j];
+						arr[j]=arr[j+1];
+						arr[j+1]=tem
+					}
+				}
+			}
+			console.log(arr)
+			var mid=Math.round((parseInt(arr[1])+parseInt(arr[2]))/2);
+			console.log(mid)
+			var new_num=0;
+			arr.forEach((item)=>{
+			    if(parseInt(item)!=mid){
+			        new_num=new_num+Math.abs(mid-parseInt(item))
+			    }
+			})
+			console.log(new_num)
+		</script>
 	</body>
 </html>

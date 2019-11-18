@@ -11,34 +11,24 @@
 		html,body{
 			height: 100%;
 		}
-		.one{
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-		}
-		.top{
-			flex: 0;
-			background: red;
-		}
-		.middle{
-			flex: 1;
-			background: gray;
-		}
-		.footer{
-			flex: 0;
-			background: yellow;
-		}
 		</style>
 	</head>
 	<body>
-		<div class="ttt"></div>
-		  <div class="one">
-			  <div class="top">头</div>
-			  <div class="middle">中间</div>
-			  <div class="footer">底部栏</div>
-		  </div>
 		<script type="text/javascript">
-			
+			function bubble(arr){
+				var len=arr.length;
+				for(var i=0;i<len;i++){
+					for(var j=0;j<len-i-1;j++){
+						if(arr[j]>arr[j+1]){
+							var temp=arr[j];
+							arr[j]=arr[j+1];
+							arr[j+1]=temp;
+						}
+					}
+				}
+				console.log(arr)
+			}
+			bubble([3,44,38,5,47,15,36,26,27,2,46,4,19,50,48])
 		</script>
 	</body>
 </html>
