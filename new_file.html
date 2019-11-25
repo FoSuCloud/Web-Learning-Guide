@@ -15,32 +15,12 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			class Point{
-				constructor(x,y){
-					this.x=x;
-					this.y=y;
-				}
-				//重写toString方法
-				toString(){
-					return '('+this.x+','+this.y+')';
-				}
+			var Foo=class {};
+			class Bar extends Foo{
 			}
-			var one=new Point(5,3);//class类实例化对象
-			console.log(one.toString());//(5,3)
-			console.log(Point===Point.prototype.constructor);//true
-			console.log(typeof Point);//function
+			console.log(Bar)
 			
-			Object.assign(Point.prototype,{
-				getx(){
-					return this.x
-				},
-				gety(){
-					return this.y
-				}
-			})
-			console.log(Point.prototype);//方法已经被添加到类的原型中
-			console.log(Object.keys(Point.prototype));//[getx,gety]
-			console.log(Object.getOwnPropertyNames(Point.prototype));
+			
 		</script>
 	</body>
 </html>
