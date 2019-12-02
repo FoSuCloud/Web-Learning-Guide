@@ -11,41 +11,83 @@
 		html,body{
 			height: 100%;
 		}
-		.one{
-			position: relative;
-			width: 200px;
-			height: 40px;
-			text-align: center;
+		.pubu{
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
 		}
-		.one input{
-			width: 100%;
-			height: 30px;
-			line-height: 40px;
-			/* 垂直居中lne-height=父元素height是不行的，因为这不是文字！ */
+		.column{
+			flex-direction: column;
+			width: calc(100%/2 - 10px);
+			/* 注意，calc函数可以使用+-* /,但是 + - 必须前后都有空格！
+			 所以建议乘除 * /前后也要用空格 */
+			display: flex;
 		}
-		.one input::-webkit-input-placeholder{
-			color: blue;
-			/* padding-left: 50px; */
-		}
-		.one img{
-			position: absolute;
-			left: 20px;
-			top: 10px;
-			width: 20px;
-			height: 20px;
+		.column img{
+			padding: 10px;
 		}
 		</style>
 	</head>
 	<body>
 		<div class="one">
-			<input type="text" placeholder="image点击失效？" onclick="alert('点击input')"/>
-			<img src="./one/3.jpg" alt="这是没网络显示时的" title="img失效" onclick="alert('能点中图片？')">
+			<div class="pubu">
+				<div class="column">
+					<img src="one/3.jpg" >
+					<img src="one/4.jpg" >
+					<img src="one/5.jpg" >
+					<img src="one/3.jpg" >
+				</div>
+				<div class="column">
+					<img src="one/5.jpg" >
+					<img src="one/3.jpg" >
+					<img src="one/3.jpg" >
+					<img src="one/4.jpg" >
+				</div>
+			</div>
+			<!-- 页面结构为
+				1 1
+				2 2
+				3 3 
+				4 4
+				一一对应，所以不应该增加column数量，如果确定只有两列，那么新增加的元素
+				就必须加进这两列其中之一！-->
 		</div>
 		<script type="text/javascript">
-			var Foo=class {};
-			class Bar extends Foo{
+			var hp=parseInt(1000000000);//血槽
+			var normal=parseInt(1);//物理攻击的伤害
+			var bufferd=parseInt(3);//使用魔法时的伤害
+			// 还存在一个问题...可能魔法攻击伤害小于物理攻击(但是小于也不一定就一定不优先使用魔法，)
+			//直接对物理*n,魔法*n都进行计算！
+			//1.使用魔法为主
+			var buf_num=Math.floor(parseInt(hp)/parseInt(bufferd));//魔法攻击次数
+			var buf_yu_num=parseInt(hp)%parseInt(bufferd);//魔法时的余数
+			var buf_nor_num=0;//魔法时的物理攻击次数
+			if(buf_yu_num>normal){
+			    //可能物理攻击为2，魔法攻击是111，所以余数可能是物理攻击的倍数，此时就干脆魔法攻击一次(反正都是至少两回合)，然后不使用物理攻击
+			    buf_nor_num=0
+			    buf_num++;
+			}else if(buf_yu_num>0 && buf_yu_num<normal){
+			    buf_nor_num=1;
 			}
-			console.log(Bar)
+			var buf_all_num=buf_num*2+buf_nor_num;//魔法攻击为主时的攻击总次数
+			
+			//2.使用物理攻击为主
+			var nor_num=Math.floor(parseInt(hp)/parseInt(normal));//物理攻击次数
+			var nor_yu_num=parseInt(hp)%parseInt(normal);//物理时的余数
+			var nor_buf_num=0;//物理时的魔法攻击次数
+			// if(nor_yu_num/2>bufferd){
+			//     //干脆再物理攻击一次
+			//     nor_num++;
+			//     nor_buf_num=0;
+			// }else if(nor_yu_num>0 && nor_yu_num<bufferd){
+			//     nor_buf_num=1;
+			// }
+			if(nor_yu_num>0){
+				nor_num++;
+				nor_buf_num=0;
+			}
+			var nor_all_num=nor_num+nor_buf_num*2;//物理攻击为主时的攻击总次数
+			console.log(nor_all_num>buf_all_num?buf_all_num:nor_all_num)
 		</script>
 	</body>
 </html>
