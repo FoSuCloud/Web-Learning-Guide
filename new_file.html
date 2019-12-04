@@ -11,59 +11,35 @@
 		html,body{
 			height: 100%;
 		}
-		.pubu{
-			display: flex;
-			flex-direction: row;
-			flex-wrap: wrap;
-		}
-		.column{
-			flex-direction: column;
-			width: calc(100%/2 - 10px);
-			/* 注意，calc函数可以使用+-* /,但是 + - 必须前后都有空格！
-			 所以建议乘除 * /前后也要用空格 */
-			display: flex;
-		}
-		.column img{
-			padding: 10px;
-		}
+		
 		</style>
 	</head>
 	<body>
 		<div class="one">
-			<div class="pubu">
-				<div class="column">
-					<img src="one/3.jpg" >
-					<img src="one/4.jpg" >
-					<img src="one/5.jpg" >
-					<img src="one/3.jpg" >
-				</div>
-				<div class="column">
-					<img src="one/5.jpg" >
-					<img src="one/3.jpg" >
-					<img src="one/3.jpg" >
-					<img src="one/4.jpg" >
-				</div>
-			</div>
-			<!-- 页面结构为
-				1 1
-				2 2
-				3 3 
-				4 4
-				一一对应，所以不应该增加column数量，如果确定只有两列，那么新增加的元素
-				就必须加进这两列其中之一！-->
+			
 		</div>
 		<script type="text/javascript">
-			var num=parseInt(3);//陷阱数
-			var num_x='5 4 3'.split(' ');//第i个陷阱的x坐标
-			var num_y='5 4 3'.split(' ');//第i个陷阱的y坐标
-			var min=100000;//记录最小步数
-			for(var i=0;i<num;i++){
-			    var len=parseInt(num_x[i])-1+parseInt(num_y[i])-1;//最小长度
-			    if(len<min){
-			        min=len
-			    }
+			var num=parseInt('15');
+			var arr='223434523423656'.split('');
+			var old_arr=arr.slice();//保存数组的值(深拷贝)
+			for(var i=0;i<arr.length;i++){
+				for(var j=0;j<arr.length-i-1;j++){
+					if(parseInt(arr[j])>parseInt(arr[j+1])){
+						var tem=arr[j];
+						arr[j]=arr[j+1];
+						arr[j+1]=tem;
+					}
+				}
 			}
-			console.log(min)
+			console.log(arr)
+			var num=0;
+			old_arr.forEach((item,i)=>{
+				if(parseInt(item)!=arr[i]){
+					num++;
+				}
+			})
+			console.log(num)
+			
 		</script>
 	</body>
 </html>
