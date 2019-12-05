@@ -10,35 +10,44 @@
 		}
 		html,body{
 			height: 100%;
+			filter: alp;
 		}
 		
 		</style>
 	</head>
 	<body>
 		<div class="one">
-			
+			<hr >
+			<br>
+			<img src="" >
+			<p></p>
 		</div>
 		<script type="text/javascript">
-			var num=parseInt('15');
-			var arr='223434523423656'.split('');
-			var old_arr=arr.slice();//保存数组的值(深拷贝)
-			for(var i=0;i<arr.length;i++){
-				for(var j=0;j<arr.length-i-1;j++){
-					if(parseInt(arr[j])>parseInt(arr[j+1])){
-						var tem=arr[j];
-						arr[j]=arr[j+1];
-						arr[j+1]=tem;
-					}
-				}
+			var obj={};
+			console.log(obj.__proto__)
+			var arr=[2,3];
+			console.log(arr.toString());
+			console.log(arr instanceof Array);//true
+			
+			console.log(Object.prototype.toString.call(arr));//数组对象有prototype
+			//[object Array]
+			function one(){
+				console.log('函数实例对象有prototype?')
 			}
-			console.log(arr)
-			var num=0;
-			old_arr.forEach((item,i)=>{
-				if(parseInt(item)!=arr[i]){
-					num++;
-				}
-			})
-			console.log(num)
+			console.log(Object.prototype.toString.call(one));//[object Function]
+			var child=new one();
+			console.log(Object.prototype.toString.call(child));//[object Object]
+			console.log(child.prototype);//undefined
+			// 需要注意的是，_proto_属性是所有对象都有的，而prototype属性是只有函数才有的，实例对象没有！
+			
+			
+			console.log(Object.__proto__)
+			console.log(Object.prototype);
+			console.log(Object.prototype.toString);//这就是一个函数！！
+			console.log(Object.prototype.toString());
+			//注意，上面之所以用Object.prototype.toString.call(child)有效
+			//是因为Object.prototype.toString就是被调用的函数，相当于 child.函数
+			// 所以这样的toString自然是没错的，因为不是像我之前想的那样改成child.prototype.toString
 			
 		</script>
 	</body>
