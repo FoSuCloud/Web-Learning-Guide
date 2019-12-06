@@ -23,32 +23,17 @@
 			<p></p>
 		</div>
 		<script type="text/javascript">
-			var obj={};
-			console.log(obj.__proto__)
-			var arr=[2,3];
-			console.log(arr.toString());
-			console.log(arr instanceof Array);//true
-			
-			console.log(Object.prototype.toString.call(arr));//数组对象有prototype
-			//[object Array]
-			function one(){
-				console.log('函数实例对象有prototype?')
-			}
-			console.log(Object.prototype.toString.call(one));//[object Function]
-			var child=new one();
-			console.log(Object.prototype.toString.call(child));//[object Object]
-			console.log(child.prototype);//undefined
-			// 需要注意的是，_proto_属性是所有对象都有的，而prototype属性是只有函数才有的，实例对象没有！
-			
-			
-			console.log(Object.__proto__)
-			console.log(Object.prototype);
-			console.log(Object.prototype.toString);//这就是一个函数！！
-			console.log(Object.prototype.toString());
-			//注意，上面之所以用Object.prototype.toString.call(child)有效
-			//是因为Object.prototype.toString就是被调用的函数，相当于 child.函数
-			// 所以这样的toString自然是没错的，因为不是像我之前想的那样改成child.prototype.toString
-			
+			var str='asdas';
+			console.log(str==true);
+			// 等于号两边先转为数字再比较
+			console.log(Number('sadsad'));//NaN 
+			console.log(Number('<div></div>'));//NaN 
+			console.log(Number(true));//1
+			console.log(Number('12'));//12
+			console.log('12'==true);//false ,因为12!=1
+			console.log('1'==true);//true,因为1==1
+			// 因为这种不纯是数字的字符串转为数字是NaN,而true布尔类型是转为1
+			// 所以不能直接通过 str==true 来判断字符串不为空！
 		</script>
 	</body>
 </html>
