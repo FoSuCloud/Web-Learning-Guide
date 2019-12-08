@@ -7,3 +7,18 @@
 6. `并且更新版本之后，Java 使用mysql的相关语法也需要改变！`
 7. [参考](https://www.cnblogs.com/alsf/p/9346921.html)
 8. 并且还尝试了修改MySQL，但是无效，先记录一下，以防以后出bug,`(https://blog.csdn.net/qq_31615049/article/details/80789884)`
+
+## eclipse没有server配置
+1. 根据教程添加[参考](https://www.cnblogs.com/xiaoxiaoweng/p/7298183.html)
+2. `但是需要注意，name为版本号，提前查看eclipe的版本`
+3. `一直停留在caculating进度条中？？？把Contact all update sites during install to find required software前面的√去掉！`
+
+## eclipse没有web配置
+1. [参考](https://blog.csdn.net/xiakexiaohu/article/details/75399735)
+2. `提示冲突？试试先disabled之前命名的4.8.0的那个software!`
+
+## 更改了eclipse的maven配置，记录一下
+1. 以防后来出bug。。`添加了maven的 User Setting，从c/user/.m2/.setting改为使用d盘新增的maven`
+
+
+
