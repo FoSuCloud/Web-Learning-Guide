@@ -34,3 +34,5 @@
 3. `每次run maven项目都要选择同一个run,不要一次生成一个()...`
 4. `targetProject填写为项目名称！！！`
 
+## SSM各类注解
+1. [参考](https://blog.csdn.net/yuexianchang/article/details/53352246)

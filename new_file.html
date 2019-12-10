@@ -17,23 +17,66 @@
 	</head>
 	<body>
 		<div class="one">
-			<hr >
-			<br>
-			<img src="" >
-			<p></p>
+			<input type="text"  id="inp" placeholder="请输入用户名~" />
+			<button type="button" id="btn">提交</button>
 		</div>
 		<script type="text/javascript">
-			var str='asdas';
-			console.log(str==true);
-			// 等于号两边先转为数字再比较
-			console.log(Number('sadsad'));//NaN 
-			console.log(Number('<div></div>'));//NaN 
-			console.log(Number(true));//1
-			console.log(Number('12'));//12
-			console.log('12'==true);//false ,因为12!=1
-			console.log('1'==true);//true,因为1==1
-			// 因为这种不纯是数字的字符串转为数字是NaN,而true布尔类型是转为1
-			// 所以不能直接通过 str==true 来判断字符串不为空！
+			window.onload=function(){
+				var btn=document.getElementById('btn');
+				var inp=document.getElementById('inp')
+				btn.onclick=function(e){
+					console.log(inp.value);//输入框内容
+					ajax({
+						url:'localhost:8080/user/test',
+						methods:'get',
+						async:false,
+						data:{
+							id:2,
+							name:'yiye'
+						}
+					})
+				}
+				
+				// 构造ajax请求函数
+				function ajax(options){
+					var url=options.url;
+					var methods=options.methods||'get';
+					var async=options.async||'false';
+					var data=options.data;//请求参数
+					var xhr=new XMLHttpRequest();
+					
+					//拼接url
+					var arr=[];
+					for(var key in data){
+						arr.push(encodeURIComponent(key)+'='+encodeURIComponent(data[key]))
+					}
+					var str=arr.join('&');
+					//判断url是否自带参数
+					var index=url.indexOf('?');
+					if(index==-1){
+						url=url+'?'+str;
+					}else{
+						url=url+'&'+str;
+					}
+					
+					return new Promise((res,rej)=>{
+						xhr.open(methods,url,async);//初始化请求
+						xhr.send();//发送请求
+						// 监听状态
+						xhr.onreadystatechange=()=>{
+							if(xhr.readyState==4){
+								if(xhr.status==200||xhr.status==304){
+									res(xhr.responseText);//返回数据
+								}
+							}
+						};
+						//监听错误
+						xhr.onerror=err => rej(err)
+					})
+				}
+				
+				
+			}
 		</script>
 	</body>
 </html>
