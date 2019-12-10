@@ -20,5 +20,17 @@
 ## 更改了eclipse的maven配置，记录一下
 1. 以防后来出bug。。`添加了maven的 User Setting，从c/user/.m2/.setting改为使用d盘新增的maven`
 
+## 不使用java web，改为用SSM框架
+1. 虽然javaweb可以用来做后端，但是前后端分离不好做，而且目标是小程序，所以应该前后端分离，所以改为用SSM
 
+## maven build下载失败
+1. No goals have been specified for this build. You must specify 
+2. `解决办法：在pom.xml的build标签里面加上<defaultGoal>compile</defaultGoal>`
+3. [参考](https://blog.csdn.net/huangbaokang/article/details/78621145)
+
+## SSM框架搭建成功！
+1. 注意以下几点:
+2. `数据库使用的包改为com.mysql.cj.jdbc.Driver`
+3. `每次run maven项目都要选择同一个run,不要一次生成一个()...`
+4. `targetProject填写为项目名称！！！`
 
