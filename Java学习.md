@@ -36,3 +36,125 @@
 
 ## SSM各类注解
 1. [参考](https://blog.csdn.net/yuexianchang/article/details/53352246)
+
+## eclipse文档注释(生成作者) 使用art shift j
+
+## 单独使用Mybatis
+1. 导入必须包
+* 导入mybatis.jar核心包，mysql8.0.13数据库包，还有lib包，导入到WEB-INF文件夹下面
+* 创建一个和src同级的文件夹config,放置log4j.properties配置文件(自己百度标准版配置)
+* 其中log4j.properties文件中的`log4j.appender.File.File是设置Log日志文件存放位置`
+* 配置日志路径参考`[参考](https://blog.csdn.net/rugaxm/article/details/17915371)`
+2. 建立数据库和表
+```
+首先打开navicat 新建库ssm
+然后在查询中输入
+create table t_customer(
+	id int primary key auto_increment,
+	name varchar(20),
+	gender char(1),
+	telephone varchar(20),
+	address varchar(50)
+);
+创建表
+```
+3. 建立实体类
+```
+首先在src目录下点击创建other,选择class,但是需要先写包名再写类名
+不要创建在resource目录下
+	private Integer id;
+	private String name;
+	private String gender;
+	private String telephone;
+	private String address;
+	
+	注意！在上方的source点击generate getter and setter可以生成get和set方法！
+```
+4. 建立Mapper接口
+```
+创建一个com.ssm.dao文件夹，创建一个CusomerMapper 接口文件！接口interface
+
+public interface CustomerMapper {
+//	添加客户
+	public void saveCustomer(Customer customer);
+}
+
+```
+5. 建立sql映射文件
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 该文件是给mybatis中的mapper接口编写方法的 ,也即是提供对应的sql语句-->
+<!--namespace表示的该xml sql映射文件所对应的接口路径，也就是包名+类名  -->
+<mapper namespace="com.ssm.dao.CustomerMapper">
+    <!-- 添加客户,方法名就是语句的id -->
+    <!-- parameterType也就是该sql语句所用到的条件，也就是对应的接口文件的对应的方法所用的参数实例的类 -->
+    <insert id="saveCustomer" parameterType="com.ssm.domain.Customer">
+        insert into t_customer(
+			id,
+			name,
+			gender,
+			telephone,
+			address
+		)values(
+			#{id},
+			#{name},
+			#{gender},
+			#{telephone},
+			#{address}
+		)
+    </insert>
+</mapper>
+```
+6. 建立sqlMapConfig.xml文件(mybatis核心配置)
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 引入约束 -->
+<!DOCTYPE configuration  
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+　　<properties/> <!--配置属性信息--->
+
+　　<setting/>      <!--设置-mybatis 运行参数-->
+
+　　<typeAliases /><!--类型命名 别名-->
+
+　　<typeHandlers/><!--类型处理器--->
+
+　　<objectFactory/><!--对象工厂-->
+
+　　<plugins/>          <!--插件--->
+<!-- 和spring整合后environments将被废置 -->
+　　<environments default="development">  <!--配置环境-->
+
+　　　　<environment id="development"><!--环境变量-->
+
+　　　　　　<transactionManager type="JDBC"/><!--事务管理器-->
+				
+			   <dataSource type="POOLED">
+				    <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+				    <prperty name="url" value="jdbc:mysql://localhost:3306/ssm?characterEncoding=utf-8" />
+				    <property name="username" value="root"/>
+				    <property name="password" value="123456"/>
+　　　　　　　　<dataSource /><!--数据源-->
+
+　　　　</environment>
+
+　　</environments>
+
+　　<databaseIdProvider/><!--数据库厂商标识-->
+
+<!-- 扫描sql映射文件 -->
+	<mappers>
+	    <mapper resource="mapper/CustomerMapper.xml"/>
+　　<mappers/><!--映射器-->
+</configuration>
+
+```
+* `注意:执行顺序是先执行sqlMapConfig.xml，在这里连接到数据库，扫描到CustomerMapper.xml sql映射文件`
+* `sql映射文件会指向所用到的类所在的路径，然后不同的语句也是指向该类的不同方法`
+* `当该方法执行了，那么就会逆着顺序去执行sql操作！`
+7. 编写测试类
