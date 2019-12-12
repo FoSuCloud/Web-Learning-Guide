@@ -3,32 +3,63 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				height: 100%;
+				filter: alp;
+			}
+			#progress{
+			    width: 200px; 
+			    height: 30px;
+			    border:1px solid #ccc;
+			    border-radius: 15px;
+			    overflow: hidden;
+			    box-shadow: 0 0 5px 0px #ddd inset;
+			}
+			
+			#progress span {
+			    display: inline-block;
+			    width: 0;
+			    height: 100%;
+			    background: #2989d8; /* Old browsers */
+			    background: -moz-linear-gradient(45deg, #2989d8 33%, #7db9e8 34%, #7db9e8 59%, #2989d8 60%); /* FF3.6+ */
+			    background: -webkit-gradient(linear, left bottom, right top, color-stop(33%,#2989d8), color-stop(34%,#7db9e8), color-stop(59%,#7db9e8), color-stop(60%,#2989d8)); /* Chrome,Safari4+ */
+			    background: -webkit-linear-gradient(45deg, #2989d8 33%,#7db9e8 34%,#7db9e8 59%,#2989d8 60%); /* Chrome10+,Safari5.1+ */
+			    background: -o-linear-gradient(45deg, #2989d8 33%,#7db9e8 34%,#7db9e8 59%,#2989d8 60%); /* Opera 11.10+ */
+			    background: -ms-linear-gradient(45deg, #2989d8 33%,#7db9e8 34%,#7db9e8 59%,#2989d8 60%); /* IE10+ */
+			    background: linear-gradient(45deg, #2989d8 33%,#7db9e8 34%,#7db9e8 59%,#2989d8 60%); /* W3C */
+			    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2989d8', endColorstr='#2989d8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+			    background-size: 60px 30px;
+			    text-align: center;
+			    color:#fff;
+				transform: all 1s;
+			}
+			#progress .change_width{
+				width:100%;
+				transition: width 2000ms ease 20ms;
+			}
+		</style>
 	</head>
 	<body>
-		<div id="two">
-			<a href="new_file.html#t">跳</a>
+		<div id="progress">
+		    <span class=""></span>
 		</div>
 		<script type="text/javascript">
-			var arr="4 1 5 4".split(" ");
-			for(var i=0;i<arr.length;i++){
-				for(var j=0;j<arr.length-i-1;j++){
-					if(arr[j]>arr[j+1]){
-						var tem=arr[j];
-						arr[j]=arr[j+1];
-						arr[j+1]=tem
-					}
+			var pro=document.getElementById('progress');
+			var spa=pro.children[0];//获取子节点，然后如果是childnodes,则是连文本节点都获取了
+			console.log(spa)
+			pro.onclick=function(){
+				var cla=spa.getAttribute('class');
+				if(cla.indexOf('change_width')==-1){
+					spa.setAttribute('class',cla+' change_width')
+				}else{
+					spa.setAttribute('class',cla.replace('change_width',''))
 				}
 			}
-			console.log(arr)
-			var mid=Math.round((parseInt(arr[1])+parseInt(arr[2]))/2);
-			console.log(mid)
-			var new_num=0;
-			arr.forEach((item)=>{
-			    if(parseInt(item)!=mid){
-			        new_num=new_num+Math.abs(mid-parseInt(item))
-			    }
-			})
-			console.log(new_num)
 		</script>
 	</body>
 </html>

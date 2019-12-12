@@ -158,3 +158,177 @@ public interface CustomerMapper {
 * `sql映射文件会指向所用到的类所在的路径，然后不同的语句也是指向该类的不同方法`
 * `当该方法执行了，那么就会逆着顺序去执行sql操作！`
 7. 编写测试类
+```
+package com.ssm.test;
+
+import java.io.InputStream;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.Test;
+import com.ssm.dao.CustomerMapper;
+import com.ssm.domain.Customer;
+
+public class Mybatis {
+	/**
+	 * 创建测试类
+	 */
+	@Test
+	public void test() throws Exception{
+//		创建sql工厂实例的构造器
+		SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
+//		加载sqlMapconfig.xml文件
+		InputStream is=Resources.getResourceAsStream("mapper/SqlMapConfig.xml");
+//		创建sql工厂实例
+		
+		SqlSessionFactory factory=builder.build(is);
+//		打开sqlSession
+		SqlSession sqlsession=factory.openSession();
+//		获取Mapper接口的对象
+		CustomerMapper customermapper= sqlsession.getMapper(CustomerMapper.class);
+//		操作
+		Customer customer=new Customer();
+
+		customer.setName("张三");
+		customer.setGender("男");
+		customer.setTelephone("134546865");
+		customer.setAddress("北京路");
+//		保存该customer对象
+		customermapper.saveCustomer(customer);
+		
+//		提交事务
+		sqlsession.commit();
+//		关闭资源
+		sqlsession.close();
+	}
+}
+需要注意的是，sqlMapConfig.xml配置文件
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- mybatis初始化环境的配置，可以配置多个环境 spring tools suit -->
+<environments default="development">
+<!-- 配置当前自己的运行环境 -->
+<environment id="development">
+<!-- jdbc事务，Mybatis负责管理 -->
+<transactionManager type="JDBC"/>
+<!-- jdbc数据源，Mybatis进行管理 -->
+<dataSource type="POOLED">
+<property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+<property name="url" value="jdbc:mysql://localhost:3306/ssm?characterEncoding=utf-8"/>
+<property name="username" value="root"/>
+<property name="password" value="123456"/>
+</dataSource>
+</environment>
+</environments>
+<mappers>
+<mapper resource="mapper/CustomerMapper.xml"/>
+</mappers>
+</configuration>
+
+```
+* `Error setting driver on UnpooledDataSource. Cause: java.lang.ClassNotFoundException: Cannot find class: com.mysql.cj.jdbc.driver`
+* `虽然在lib中导入了该包。。但是好像找不到，还是要通过library导入，在referenced library中显示才有效！`
+* `经过测试，不需要在webapp/WEB_INF中加入lib..这个文件夹的包并没有被用到，直接删除吧！`
+
+## Mybatis整合Spring
+1. `有Mapper实现类`
+2. 没有Mapper实现类
+3. `现在使用的，最好用的，就是去扫描类`
+4. 但是需要先从第一种开始做起
+
+## Mybatis整合Spring(有Mapper接口)
+1. 导入必须包
+* 把包导入到reference library中
+2. 编写mapper实现类
+* 首先创建一个包com.ssm.dao.impl,再创建一个类CustomerMapperimpl,继承接口CustomerMapper
+```
+package com.ssm.dao.impl;
+import com.ssm.dao.CustomerMapper;
+import com.ssm.domain.Customer;
+public class CustomerMapperImpl implements CustomerMapper {
+	public void saveCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+	}
+}
+```
+* 在创建的时候，选择好接口就出现上面的初始代码
+3. 编写applicationContext.xml
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    	http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        ">
+
+	<!-- 读取jdbc.properties -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<!-- 创建DataSource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	    <property name="url" value="${jdbc.url}"/>
+	    <property name="username" value="${jdbc.username}"/>
+	    <property name="password" value="${jdbc.password}"/>
+	    <property name="driverClassName" value="${jdbc.driverClass}"/>
+	     <property name="maxActive" value="10"/>
+	     <property name="maxIdle" value="5"/>
+	</bean>
+	<!-- 创建sqlSessionFactory对象 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	    <!-- 关联连接池 -->
+	    <property name="dataSource" ref="dataSource"/>
+	    <!-- 加载sql映射文件,注意classpath在此为src.main.java --> 
+	    <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+	</bean>
+	<!-- 创建CustomerMapperImpl对象，注入sqlSessionFactory -->
+	<bean id="customerMapper" class="com.ssm.dao.impl.CustomerMapperImpl">
+	    <!-- 关联sqlSessionFactory -->
+	    <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+</beans>
+```
+4. 编写测试类
+```
+package com.ssm.test;
+
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.ssm.dao.CustomerMapper;
+import com.ssm.domain.Customer;
+
+public class Mybatis_Spring {
+	@Test
+	public void test() {
+//		加载spring配置
+		ApplicationContext ac=new ClassPathXmlApplicationContext("config/applicationContext.xml");
+//		获取对象
+		CustomerMapper customermapper=(CustomerMapper)ac.getBean("customerMapper");
+		
+//		调用方法
+		Customer customer=new Customer();
+		customer.setName("李四");
+		customer.setGender("男");
+		customer.setTelephone("904546865");
+		customer.setAddress("天津路");
+		customermapper.saveCustomer(customer);
+	}
+}
+
+```
+
+## WARN No appenders could be found for logger 
+1. `解决方法，把log4j.prperties文件放到src/main/resource文件夹下`
