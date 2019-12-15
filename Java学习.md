@@ -332,3 +332,124 @@ public class Mybatis_Spring {
 
 ## WARN No appenders could be found for logger 
 1. `解决方法，把log4j.prperties文件放到src/main/resource文件夹下`
+
+## 近几天的错误总结。。
+1. `ssm框架有两种风格，用maven/javaweb,我选择了maven,便于jar包管理；但是如果用的IDE是idea的话，那么构建方式又不同了`
+2. `选择maven的话，首先就要理清步骤，两种方式乱了！以后不要再乱了`
+3. `首先new>maven project>设置group id和activity id最好保持一致！；然后finish`
+4. `maven项目的优点在于，需要导入的jar包都放在pom.xml中写好了依赖，然后会有一个maven libraries`
+5. `写好src文件夹下的代码后，如果有test类，就juit test一下，可以看看错误`
+6. `测试完了就要使用 maven build再次测试一下？或者直接maven install也可以，生成 .war文件`
+7. `把.war文件移动到tomcat的webapps目录下，然后解压，最后Tomcat输入startup.bat就可以运行项目了！`
+---
+* maven项目和javaweb项目是不一样的，`maven项目一开始是没有run server的maven项目一开始是没有run server的`
+
+## jdbc错误
+1. `jdbc:mysql://localhost:3306/ssm?useSSL=false&amp;serverTimezone = GMT&amp;useUnicode=true&amp;characterEncoding=UTF-8`
+2. 上面是一条比较好的数据库连接方式，考虑到了时区。ssl.`注意，amp; 不一定需要有，如果报错说缺少;才加`
+3. `PASSWORD YES???密码没错，但是还是提示错误？不要使用root用户，会提示密码错误。。新建一个用户`
+4. `还有可能是空格，使用向右箭头检查，或者没设置编码`
+5. 版本是8.0.11左右就要用`com.mysql.cj.jdbc.Driver而不是com.mysql.jdbc.Driver`
+
+## JRE错误
+1. `每次maven install失败都看看是不是用了jre,要使用jdk18!`
+
+## ibatis错误
+1. `ibatis和mybatis可能会有冲突，所以去掉了ibatis包`
+2. `如果不冲突还报错，可能就是版本不一致`
+
+## 设置跨域
+```
+pom.xml
+<!-- 跨域支持-->
+<dependency>
+    <groupId>com.thetransactioncompany</groupId>
+    <artifactId>cors-filter</artifactId>
+    <version>2.5</version>
+</dependency>
+
+web.xml
+<!--  提供跨域支持 -->
+<filter>
+    <filter-name>CORS</filter-name>
+    <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+    <init-param>
+        <param-name>cors.allowOrigin</param-name>   <!--配置授信的白名单的域名！ -->
+        <param-value>*</param-value>
+    </init-param>
+    <init-param>
+        <param-name>cors.supportedMethods</param-name>
+        <param-value>GET, POST, HEAD, PUT, DELETE</param-value>
+    </init-param>
+    <init-param>
+        <param-name>cors.supportedHeaders</param-name>
+        <param-value>Accept, Origin, X-Requested-With, Content-Type, Last-Modified</param-value>
+    </init-param>
+    <init-param>
+        <param-name>cors.exposedHeaders</param-name>
+        <param-value>Set-Cookie</param-value>
+    </init-param>
+    <init-param>
+        <param-name>cors.supportsCredentials</param-name>
+        <param-value>true</param-value>
+    </init-param>
+</filter>
+<filter-mapping>
+    <filter-name>CORS</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+```
+* [参考](https://blog.csdn.net/Hack_Different/article/details/88637281)
+* 如果还是有问题，那么可能是返回的数据不是json,而是html,jsp这种
+
+## json依赖配置
+```
+pom.xml
+	<!-- json依赖 -->
+	<dependency>
+		<groupId>net.sf.json-lib</groupId>
+		<artifactId>json-lib</artifactId>
+		<classifier>jdk15</classifier>
+		<version>2.4</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-lang3</artifactId>
+		<version>3.1</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>commons-beanutils</groupId>
+		<artifactId>commons-beanutils</artifactId>
+		<version>1.8.3</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.1.1</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>commons-collections</groupId>
+		<artifactId>commons-collections</artifactId>
+		<version>3.2.1</version>
+	</dependency>
+
+	<dependency>
+		<groupId>net.sf.ezmorph</groupId>
+		<artifactId>ezmorph</artifactId>
+		<version>1.0.6</version>
+	</dependency>
+```
+* `需要注意，第一个包的版本较低，不能被找到，提示missing,所以改为下面这样使用编译后的版本`
+```
+<dependency>
+		<groupId>net.sf.json-lib</groupId>
+		<artifactId>json-lib</artifactId>
+		<classifier>jdk15</classifier>
+		<version>2.4</version>
+	</dependency>
+```
+* [参考](https://blog.csdn.net/duanjw1988/article/details/53411458)
