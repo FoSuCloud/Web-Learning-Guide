@@ -453,3 +453,67 @@ pom.xml
 	</dependency>
 ```
 * [参考](https://blog.csdn.net/duanjw1988/article/details/53411458)
+
+## 本地编辑jsp出错？
+1. `javax.servlet.jsp.JspException cannot be resolved to a type`
+2. `这是因为缺少两个包，分别是一个是jsp-api.jar，一个是servlet-api.jar`
+3. 导入就好了，但是这两个包在tomcat的libs目录下同样存在，所以需要设置仅在测试和编译阶段使用
+4. [参考](https://blog.csdn.net/weisubao/article/details/72763249)
+
+## 项目在tomcat部署后包冲突
+1. `这是因为在本地测试和编译阶段有些包导入了，但是这些包在Tomcat的libs目录下同样存在`
+2. `然后发布到tomcat后就会因为包冲突导致出错！`
+3. 解决方法:`在pom.xml中设为`
+```
+<dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+```
+* `注意清除项目和更新项目（对于maven）`
+
+## 如果前端发送给服务器的数据乱码
+1. 这是因为使用了ISO编码的原因，可以在web.xml中配置编码过滤器！
+```
+<!-- utf8编码过滤器 -->
+	<filter>
+	    <filter-name>CharacterEncodingFilter</filter-name>
+	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	    <init-param>
+	        <param-name>encoding</param-name>   <!--配置授信的白名单的域名！ -->
+	        <param-value>utf-8</param-value>
+	    </init-param>
+	</filter>
+	<filter-mapping>
+	    <filter-name>CharacterEncodingFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+```
+
+## 404问题找到啦！！！(能访问tomcat首页，但是却访问不了项目)
+1. `极有可能是因为使用struts2错误`
+2. 使用方法：
+```
+1.首先在pom.xml导入
+	<!--struts2整合spring的插件包 -->  
+    <dependency>  
+        <groupId>org.apache.struts</groupId>  
+        <artifactId>struts2-spring-plugin</artifactId>  
+        <version>2.5-BETA3</version>  
+    </dependency> 
+	
+2. 在web.xml设置过滤器
+<!-- 去除.action后缀名 -->
+	<filter>  
+        <filter-name>struts2</filter-name>  
+        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>struts2</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>  
+
+```
+* [参考](https://blog.csdn.net/bwh0520/article/details/78786918)

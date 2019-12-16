@@ -27,14 +27,17 @@
 				btn.onclick=function(e){
 					console.log(inp.value);//输入框内容
 					ajax({
-						url:'http://localhost:8080/ssm/listCategory',
+						url:'http://localhost:8080/ssm/sub',
 						methods:'get',
 						async:false,
 						data:{
 							id:2,
 							name:'yiye'
 						}
-					})
+					}).then(
+						res => console.log(res.data),
+						err => console.log(err)
+					)
 				}
 				
 				// 构造ajax请求函数
