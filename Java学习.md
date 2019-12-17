@@ -517,3 +517,9 @@ pom.xml
 
 ```
 * [参考](https://blog.csdn.net/bwh0520/article/details/78786918)
+
+
+## 包冲突
+* `More than one fragment with the name [spring_web] was found. This is not legal `
+* `org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Catalina].StandardHost[localhost].Stan`
+* 这种错误很可能是因为包冲突！`也就是pom.xml中导入了，然后在WEB-INF中又创建lib导入了`
