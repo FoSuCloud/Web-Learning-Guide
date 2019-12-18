@@ -523,3 +523,139 @@ pom.xml
 * `More than one fragment with the name [spring_web] was found. This is not legal `
 * `org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Catalina].StandardHost[localhost].Stan`
 * 这种错误很可能是因为包冲突！`也就是pom.xml中导入了，然后在WEB-INF中又创建lib导入了`
+
+
+## 始终从index页面进入??
+1. `要在后台管理员那里设置进入页面，否则即使在app.json中去掉了index页面，也会从后台设置的index页面进入小程序！！！`
+
+## 漏了包？
+1. `dbcp.Exception这种错误一般是包冲突或者漏了包没有加到依赖中去`
+
+## 406错误
+1. [参考](https://www.cnblogs.com/zhaoyanhaoBlog/p/9359602.html)
+2. 自己的问题是没有导入json依赖
+```
+<!-- json依赖 -->
+	<dependency>
+		<groupId>net.sf.json-lib</groupId>
+		<artifactId>json-lib</artifactId>
+		<classifier>jdk15</classifier>
+		<version>2.4</version>
+	</dependency>
+	<dependency>
+  	   <groupId>com.fasterxml.jackson.core</groupId>
+ 	   <artifactId>jackson-core</artifactId>
+		<version>2.7.3</version>
+	</dependency>
+	<dependency>
+	  <groupId>com.fasterxml.jackson.core</groupId>
+	  <artifactId>jackson-databind</artifactId>
+	  <version>2.7.3</version>
+	</dependency>
+	<dependency>
+	  <groupId>com.fasterxml.jackson.core</groupId>
+	  <artifactId>jackson-annotations</artifactId>
+	  <version>2.7.3</version>
+	</dependency>
+```
+* `需要注意版本问题，spring4.1.x才对应jackson2.7.x 另外在代码中RequestBody可以加上`
+* `produces = "application/json;charset=UTF-8`
+
+## 数据分页实现
+1. 前端传递一个page参数，用来表示请求第几页
+2. 后端接收参数，然后使用mybatis插件来实现
+```
+pom.xml
+    <!-- mybatis分页插件 -->
+    <dependency>
+     <groupId>com.github.pagehelper</groupId>
+     <artifactId>pagehelper</artifactId>
+     <version>4.1.4</version>
+	</dependency>
+  </dependencies>
+```
+3. applicationContext.xml配置
+```
+<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="typeAliasesPackage" value="com.ssm.domain" />
+		<property name="dataSource" ref="dataSource"/>
+		<property name="mapperLocations" value="classpath:com/ssm/mapper/*.xml"/>
+		<!-- 引入插件 -->
+		<property name="plugins">
+		    <!-- 引入的插件是数组，可以有多个 -->
+		    <array>
+		      <bean class="com.github.pagehelper.PageInterceptor">
+		        <property name="properties">
+		          <!--使用下面的方式配置参数，一行配置一个
+		          	helperDialect表示连接数据库的类型
+		           -->
+		          <value>
+		              helperDialect=mysql
+		          </value>
+		        </property>
+		      </bean>
+		    </array>
+		  </property>		
+	</bean>
+```
+
+## 包引入了依旧是警告？
+1. 很可能是引入错了包，因为存在同名包，所以引入了其他的，检查一下是不是目标包的包。。
+
+## 更改了pom.xml但是没反应？
+1. `可能设置了<scope>provided</scope> /test 导致没有在打包中出现，但是有些包是tomcat自带的包就需要写providedd`
+2. `可能因为没有使用maven update project这个按钮，先点击update,然后点击 maven clean 最后才maven install,这样才会改变！！！`
+
+## 数据分页的java代码
+```
+//	设计Map集合存储需要给页面的对象数据
+	private Map<String,Object> result=new HashMap<String,Object>();
+	//在函数外部设置一个变量存储列表，注意左是Map,右是HashMap,<String,Object>表示键是字符串，值是对象！
+
+//	分页查询，使用mybatis插件pagehelper
+	@RequestMapping(value="/listByPage",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> listByPage(Integer page) {
+//		Integer page表示的是前端传入的参数，可以有多个接收，用,隔开
+		PageHelper.startPage(page,10);//表示传入页数与每页条数
+		
+//		查询所有数据
+		List<Customer> list=customerService.findAll();
+//		使用pageInfo封装查询到的数据
+		PageInfo<Customer> pageInfo=new PageInfo<Customer>(list);
+		
+//		从PageInfo中获取到数据的总数
+		long total=pageInfo.getTotal();
+		
+//		获取当前页的数据列表
+		List<Customer> cutlist=pageInfo.getList();
+		
+		result.put("total",total);
+		result.put("data",cutlist);
+		
+//		因为设置了@ResponseBody，所以会自动把map集合转换成json数据形式
+		return result;
+	}
+```
+* `前端请求http://localhost:8080/ssm_system/customer/listByPage?page=1 就可以得到一页10条数据！`
+
+## 接收post请求
+```
+//	保存客户信息,像这种规定是Customer customer形式对象的数据传入时，应该是post请求
+	@ResponseBody
+	@RequestMapping("/save")
+	public Map<String, Object> save(Customer customer){
+		customerService.saveCustomer(customer);//保存传入的用户数据
+		try {
+			result.put("code", 0);//表示成功
+			result.put("info", "保存成功！");
+		} catch (Exception e) {
+			// TODO: handle exception
+			result.put("code", 1);
+			result.put("info", e.getStackTrace());
+		}
+		return result;
+	}
+```
+* `需要注意的是前端使用post传递的是{}对象，后端会对对象进行处理`
+
