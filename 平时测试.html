@@ -11,7 +11,7 @@
 			html,body{
 				height: 100%;
 			}
-			.one{
+			#one{
 				-webkit-background-clip: text;
 				/* 背景色区域为文字,有兼容性，目前只支持谷歌 */
 				background-image:linear-gradient(to right,red,blue);
@@ -22,10 +22,21 @@
 		</style>
 	</head>
 	<body>
-		<span class="one">
+		<span id="one">
 		    文字渐变色
 		</span>
 		<script type="text/javascript">
+			var one_span=document.getElementById('one');
+			var id='wwwww'
+			one_span.onclick=function(){
+				document.write(this.id);//one
+				//此时还没有丢失绑定，所以this指向的是调用该函数的对象one_span，id指的也就是对象的id名
+				var callback=function(){
+					document.write(this.id);//wwwww
+				}
+				//此时由于绑定丢失了！！！所以被默认绑定到window对象
+				callback()
+			}
 			
 		</script>
 	</body>
