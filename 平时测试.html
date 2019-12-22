@@ -22,22 +22,25 @@
 		</style>
 	</head>
 	<body>
-		<span id="one">
-		    文字渐变色
-		</span>
+		<div>
+			<span id="one">
+			    文字渐变色
+			</span>
+			<!-- 此时会触发图片请求 -->
+			<div style="display: none;background-image: url(one/3.jpg);">
+			</div>
+			<!-- 此时不会触发图片请求，因为在textarea中，并且textarea元素没有指定行列，所以是显示为纯文字！
+			 该span元素并没有被解析为元素!-->
+			<textarea>
+				<span style="display: none;background-image: url(one/3.jpg);"></span>
+			</textarea>
+		</div>
 		<script type="text/javascript">
-			var one_span=document.getElementById('one');
-			var id='wwwww'
-			one_span.onclick=function(){
-				document.write(this.id);//one
-				//此时还没有丢失绑定，所以this指向的是调用该函数的对象one_span，id指的也就是对象的id名
-				var callback=function(){
-					document.write(this.id);//wwwww
-				}
-				//此时由于绑定丢失了！！！所以被默认绑定到window对象
-				callback()
-			}
-			
+			var a='12321dasdd';
+			console.log(a.substr(2,2));//32 第二个参数是切割的元素个数
+			console.log(a.slice(2,3));//3 slice的参数是start,end 
+			console.log(a.substring(2,3));// 3 substring的参数是start,end 
+			console.log(a.charAt(2));//3,返回索引处的字符
 		</script>
 	</body>
 </html>
