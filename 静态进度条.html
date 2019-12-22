@@ -11,8 +11,8 @@
 			        这里采用clip剪切了圆，实现左右两个半圆，右半圆在后面，因此在更上一层，
 			        clip的用法参考：http://www.w3school.com.cn/cssref/pr_pos_clip.asp
 			     */
-			    .circle-bar-right { clip:rect(0,auto,auto,.5em); }
-			    .circle-bar-left { clip:rect(0,.5em,auto,0); }
+			    .circle-bar-right { clip:rect(auto,auto,auto,.5em); }
+			    .circle-bar-left { clip:rect(auto,.5em,auto,auto); }
 			    
 			    .mask { width: 0.8em; height: 0.8em;  background-color: #fff;text-align: center;line-height: 0.2em; color:rgba(0,0,0,0.5); }
 			    .mask :first-child { font-size: 0.3em; height: 0.8em; line-height: 0.8em; display: block;  }
@@ -28,7 +28,7 @@
 		    <div class="circle-bar-right"></div>
 		    <!-- 遮罩层，显示百分比 -->
 		    <div class="mask">
-		        <span class="percent">80%</span>
+		        <span class="percent">0%</span>
 		    </div>
 		</div>
 		<script type="text/javascript">
@@ -40,6 +40,7 @@
 			        var left_circle  = circleBar.getElementsByClassName('circle-bar-left')[0];
 			        var right_circle = circleBar.getElementsByClassName('circle-bar-right')[0];
 			
+					//圆环的颜色是圆的颜色，由于两个半圆的存在才会导致透明，右圆旋转导致遮罩消失，圆环的颜色也就暴露出来了
 			        if( percent <= 50 ) {
 			            var rotate = 'rotate('+(percent*3.6)+'deg)';
 			            right_circle.css3('transform',rotate);
@@ -80,7 +81,6 @@
 			        }else{
 			            return window.getComputedStyle(this).getPropertyValue(
 			                    ('webkit'+property)||('Moz'+property)||('ms'+property)||('O'+property)||property);
-			                    //老实说，我不知道为什么要把不带浏览器标记的放在最后，既然都这么用，我也这么做吧。不过这样对现代浏览器来说可能并不好，判断次数变多了
 			        }
 			        
 			        //首字母大写
