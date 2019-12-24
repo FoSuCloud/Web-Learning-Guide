@@ -20,65 +20,60 @@
 			sss
 		</div>
 		<script type="text/javascript">
-			var num=parseInt("1");//数据组数
-			while(num>0){
-			    num--;//减小组数
-			    //每组有两行
-			    var r_one="10 4";//第一行
-			    var r_two="28228031 159422771 162154591 129440347 300937006 196970271 223481173 309517267 688052015 409690123";//第二行
-			    var n=parseInt(r_one.split(" ")[0]);//柱子数
-			    var k=parseInt(r_one.split(" ")[1]);//可跨越的柱子间隔数
-			    var h_arr=r_two.split(" ");//柱子的高度数组
-				h_arr.forEach((item,i)=>{
-					h_arr[i]=parseInt(item)
-				})
-			    var end=h_arr.length-1;//目的柱子的索引
-			    console.log(h_arr)
-			    // //跨越柱子的条件是1<=柱子间隔<=3,并且当前所处柱子高度>目的柱子高度
-			    // //那么可以遍历柱子间隔，如果在间隔范围内有高度小于等于当前柱子的目的柱子，那么就尝试跳一下
-			    var start=0;//当前所处柱子
-			    var j=k;//间隔
-				var max_h={height:0,index:0};//最大高度
-				var flag=false;//超能力记录
-				while(start<end){
-			        //中转柱子小于等于的话就可以跳,中转索引是start+j
-					//但是可能在柱子间隔中存在多个可以跳的选项，此时应该选择能跳的最高的柱子！
-			        for(var j=1;j<=k;j++){
-						if((start+j)<=end && h_arr[start+j]<=h_arr[start] && h_arr[start+j]>max_h.height){
-							max_h.index=j;//获取可以跳的最高柱子的索引
-							max_h.height=h_arr[start+j];
-							//console.log(max_h.index)
-						}
-					}
-					
-					// 不到万不得已(此时就设置是一步都过不去的时候，那么就使用超能力)
-					if(max_h.index==0){
-						//第一次使用超能路
-						if(!flag){
-							flag=true;//改变标记
-							var h_h_max=0;
-							var max_i=0;
-							for(var j=1;j<=k;j++){
-								if((start+j)<=end && h_arr[start+j]>h_h_max){
-									h_h_max=h_arr[start+j];
-									max_i=j;
-								}
-							}
-							start=start+max_i;//跳到最高峰
-						}else{
-							//使用过超能力还是需要再使用一次，那么就置为-1表示失败
-							start=-1;
-							end=-1;
-						}
-					}else{
-						start=start+max_h.index;//跳到别的柱子上
-						max_h.index=0;//恢复初始值
-						max_h.height=0;
-					}
-				}
-				console.log(start)
-			    // //跳到目的柱子上
-			    if(start==end && start!=-1){
+			// 有疑问！选择第一第二种情况可以一直停留吗？还是执行完就到下一堆了？
+			//通过测试可以知道。。可以一直停留的。。所以算法肯定要改
+			var g_num=parseInt(1);//组数
+			while(g_num>0){
+			    g_num--;
+			    var arr="10 2";
+			    var n=parseInt(arr.split(" ")[0]);//积木堆数
+			    var m=parseInt(arr.split(" ")[1]);//背包积木数
+			    var h_arr="0 1 0 78725133 2 240582799 3 175968590 0 63203273".split(" ");// 积木数组
+			    h_arr.forEach((item,i)=>{
+			        h_arr[i]=parseInt(item)
+			    })
+			    
+			    var t_h_arr=h_arr;//临时保存数组
+			    
+			    var min=0;//三种选择的依据之一，最小值
+			    for(var i=0;i<h_arr.length;i++){
+			        //第一种情况， min<arr[i]<arr[i+1]
+			        //此时要让arr[i]=min+1;
+			        
+			        if(i<n && h_arr[i]>min){
+			            //刚好不等于+1
+			            if(h_arr[i]!=min+1){
+			                //拿走积木
+			                var tem=min+1;
+			                m=m+(h_arr[i]-min-1);
+			                h_arr[i]=tem;//更改数组
+			            }
+			        }
+			        // 第二种情况,min<arr[i],arr[i]>arr[i+1]
+			        //此时让 min+1<=arr[i] arr[i]>=arr[i+1]-1;
+			        //但是本质和第一种一样。。
+			        
+			        //第三种情况,arr[i]<=min
+			        //此时 arr[i]=min+1;//判断m是否足够
+			        else if(i<n && h_arr[i]<=min){
+			            var tem=min+1-h_arr[i];//差值
+			            //m足够,(h_arr[i]!=0 || i!=0)是为了排除索引为0时0的干扰
+						if(tem<=m && (h_arr[i]!=0 || i!=0)){
+			                h_arr[i]=min+1;
+			                m=m-tem;
+			            }
+			        }
+					min=h_arr[i];//更新最小值
+					console.log(h_arr)
+			    }
+			    var r_num=0;
+			    for(var j=0;j<n;j++){
+			        if(j<n-1 && h_arr[j]<h_arr[1+j]){
+			            r_num++;//记录
+			        }
+			    }
+				// console.log(r_num)
+			    if(r_num==n-1){
 			        console.log("YES")
 			    }else{
 			        console.log("NO")

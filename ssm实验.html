@@ -27,12 +27,11 @@
 				btn.onclick=function(e){
 					console.log(inp.value);//输入框内容
 					ajax({
-						url:'http://localhost:8080/ssm/sub',
+						url:'http://localhost:8080/ssm_system/user/delete',
 						methods:'get',
 						async:false,
 						data:{
-							id:2,
-							name:'yiye'
+							id:2
 						}
 					}).then(
 						res => console.log(res.data),
@@ -50,21 +49,25 @@
 					
 					//拼接url
 					var arr=[];
+					var obj=[];
 					for(var key in data){
+						obj.push(key+'='+data[key])
 						arr.push(encodeURIComponent(key)+'='+encodeURIComponent(data[key]))
 					}
 					var str=arr.join('&');
 					//判断url是否自带参数
 					var index=url.indexOf('?');
-					if(index==-1){
-						url=url+'?'+str;
-					}else{
-						url=url+'&'+str;
+					if(methods=='get'){
+						if(index==-1){
+							url=url+'?'+str;
+						}else{
+							url=url+'&'+str;
+						}
 					}
 					
 					return new Promise((res,rej)=>{
 						xhr.open(methods,url,async);//初始化请求
-						xhr.send();//发送请求
+						xhr.send(obj.join('&'));//发送请求
 						// 监听状态
 						xhr.onreadystatechange=()=>{
 							if(xhr.readyState==4){
