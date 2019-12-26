@@ -27,11 +27,12 @@
 				btn.onclick=function(e){
 					console.log(inp.value);//输入框内容
 					ajax({
-						url:'http://localhost:8080/ssm_system/user/delete',
+						url:'http://localhost:8080/ssm_system/user/test',
 						methods:'get',
 						async:false,
 						data:{
-							id:2
+							id:1,
+							name:'sss'
 						}
 					}).then(
 						res => console.log(res.data),

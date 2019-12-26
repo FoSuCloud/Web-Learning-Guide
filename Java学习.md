@@ -659,3 +659,7 @@ pom.xml
 ```
 * `需要注意的是前端使用post传递的是{}对象，后端会对对象进行处理`
 
+
+## 疑问？SSM怎么解析带&多个参数的URL
+1. 解疑`public Map<String, Object> t_result(Integer id,String name)`
+2. `在SSM中的函数填入多个参数即可`
