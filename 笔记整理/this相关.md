@@ -187,3 +187,66 @@
 ```
 * 通过new绑定的方式把对象的this指向新创建的新对象
 5. [参考](https://www.jb51.net/article/121164.htm)
+
+## 默认绑定不一定所有方法都可以用
+```
+			// 为什么不推荐所有代码都用this默认调用？
+			var one=document.getElementById('id');
+			// 不报错
+			
+			// 使用默认调用，分两步
+			var two=document.getElementById;  //保存document对象的方法
+			two();//报错，因为此时是默认调用，window对象调用getElementById方法
+			//需要注意的是，此时是this指向的是window对象！
+```
+
+## 元素内部的this
+```
+			var id='window外部id'
+			// 在元素节点内部调用函数，函数默认指向的是元素
+			document.getElementById('one').onclick=function(){
+				console.log(this.id);//此时函数在document元素内部发生，那么相当于document元素触发了该函数
+				// 函数内部this自然指向指向document元素
+				
+				//但是使用赋值方式创建的变量存储函数，那么被调用时却是window对象
+				//是因为使用了变量来存储函数，但是发生了this丢失，所以使用默认对象window
+				var two=function(){
+					console.log(this.id);
+				}
+				two();//window外部id
+				//如果想把元素内部定义的函数绑定指向该元素，那么可以使用call/apply/bind
+				two.call(this);//此时two变量内部的this指向document
+			}
+```
+
+## 构造器调用存在return
+```
+			// new 构造器创建实例使用this指向的是函数内部的变量与方法
+			function func(){
+				this.name='函数内部this值'
+			}
+			var obj=new func();
+			console.log(obj.name);//函数内部this值
+			
+			// new构造器如果return返回的值被实例调用，那么即使使用了this.变量=''也是返回return中的变量
+			function fun(){
+				this.nid=33;
+				this.name='this里面的变量，没有被return返回'
+				return {
+					nid:'return返回的nid',
+				}
+			}
+			var two=new fun();
+			console.log(two.nid);
+			//如果函数返回return,但是内部的值没有被Return，那么使用的内部值就是undefined
+			console.log(two.name);
+```
+
+## apply绑定传递数组参数提高效率
+```
+			// apply绑定经常用来传递数组参数
+			console.log(Math.max(1,2,3,4));
+			// 例如Math.max()方法的参数经常是多个参数
+			// 而使用Math.max.apply()方法则可以传递一个参数数组，提高效率！
+			console.log(Math.max.apply(null,[1,2,3,4]))
+```

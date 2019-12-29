@@ -20,65 +20,11 @@
 			sss
 		</div>
 		<script type="text/javascript">
-			// 有疑问！选择第一第二种情况可以一直停留吗？还是执行完就到下一堆了？
-			//通过测试可以知道。。可以一直停留的。。所以算法肯定要改
-			var g_num=parseInt(1);//组数
-			while(g_num>0){
-			    g_num--;
-			    var arr="10 2";
-			    var n=parseInt(arr.split(" ")[0]);//积木堆数
-			    var m=parseInt(arr.split(" ")[1]);//背包积木数
-			    var h_arr="0 1 0 78725133 2 240582799 3 175968590 0 63203273".split(" ");// 积木数组
-			    h_arr.forEach((item,i)=>{
-			        h_arr[i]=parseInt(item)
-			    })
-			    
-			    var t_h_arr=h_arr;//临时保存数组
-			    
-			    var min=0;//三种选择的依据之一，最小值
-			    for(var i=0;i<h_arr.length;i++){
-			        //第一种情况， min<arr[i]<arr[i+1]
-			        //此时要让arr[i]=min+1;
-			        
-			        if(i<n && h_arr[i]>min){
-			            //刚好不等于+1
-			            if(h_arr[i]!=min+1){
-			                //拿走积木
-			                var tem=min+1;
-			                m=m+(h_arr[i]-min-1);
-			                h_arr[i]=tem;//更改数组
-			            }
-			        }
-			        // 第二种情况,min<arr[i],arr[i]>arr[i+1]
-			        //此时让 min+1<=arr[i] arr[i]>=arr[i+1]-1;
-			        //但是本质和第一种一样。。
-			        
-			        //第三种情况,arr[i]<=min
-			        //此时 arr[i]=min+1;//判断m是否足够
-			        else if(i<n && h_arr[i]<=min){
-			            var tem=min+1-h_arr[i];//差值
-			            //m足够,(h_arr[i]!=0 || i!=0)是为了排除索引为0时0的干扰
-						if(tem<=m && (h_arr[i]!=0 || i!=0)){
-			                h_arr[i]=min+1;
-			                m=m-tem;
-			            }
-			        }
-					min=h_arr[i];//更新最小值
-					console.log(h_arr)
-			    }
-			    var r_num=0;
-			    for(var j=0;j<n;j++){
-			        if(j<n-1 && h_arr[j]<h_arr[1+j]){
-			            r_num++;//记录
-			        }
-			    }
-				// console.log(r_num)
-			    if(r_num==n-1){
-			        console.log("YES")
-			    }else{
-			        console.log("NO")
-			    }
-			}
+			1. 进入消息站页面，接口是mars/api.member.center/messageIndex，不用给参数
+			2.点击进入官方通知，接口是mars/api.member.center/getMyMessage，参数是kind:0,不用给type?一次性可以返回其他所有小程序的通知？还是要给type,
+			3.进入点赞收藏、评论，粉丝页面，接口是mars/api.member.center/getMyMessage，参数是kind:2,1,4,
+			4. type1实践 2实习 3校企
+			
 			
 		</script>
 	</body>
