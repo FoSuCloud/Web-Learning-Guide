@@ -18,12 +18,28 @@
 		    
 		</div>
 		<script type="text/javascript">
-			// apply绑定经常用来传递数组参数
-			console.log(Math.max(1,2,3,4));
-			// 例如Math.max()方法的参数经常是多个参数
-			// 而使用Math.max.apply()方法则可以传递一个参数数组，提高效率！
-			console.log(Math.max.apply(null,[1,2,3,4]))
-			
+			function func(source) { 
+			    var target = {}; 
+			    for (var key in source) { 
+					// key==a1,
+			        if (Object.prototype.hasOwnProperty.call(source, key)) {
+						// 判断是否有a1该属性
+						// console.log(source[key]) 键的值
+						// console.log(typeof null);//object
+			             if (typeof source[key] === 'object') { 
+							 // 若有则键的值是对象，则返回函数之后的数据
+							 // 但是由于js的一个bug,typeof null==object,所以还会调用func(null)返回的是初始的target,{}
+			                target[key] = func(source[key]); 
+			             } else { 
+			                target[key] = source[key]; 
+			             }
+			        } 
+			    } 
+			    return target; 
+			}
+			var a = { a1: "a1", a2: { b1: "b1", b2: "b2" }, a3: undefined, a4: null, a5: 1 };
+			var b = func(a); 
+			console.log(b);
 		</script>
 	</body>
 </html>
