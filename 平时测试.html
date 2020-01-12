@@ -20,15 +20,33 @@
 			<div class="two"></div>
 		</div>
 		<script type="text/javascript">
-			var date=new Date();
-			// 存储cookie,参数为 键=值;expirationdate=过期时间(Date格式);path=可以访问的域名
-			document.cookie="name=yiye;expirationdate="+date+";path=/";
-			document.cookie="age=11;expirationdate="+date+";path=/";
-			document.cookie="sex=男;expirationdate="+date+";path=/";
-			var cookie=document.cookie;
-			console.log(cookie);//name=yiye;age=11; sex=男
-			var age=cookie.split('age')[1].split('=')[1].split(';')[0];
-			console.log(age);//11,取得cookie的值
+			var arr="([[{()]}])".split('');
+			var str_open=["(","[","{"];
+			var str_close=[")","]","}"];
+			var set=[];
+			function one(){
+				for(var i=0;i<arr.length;i++){
+					var o_index=str_open.indexOf(arr[i]);
+					var c_index=str_close.indexOf(arr[i+1]);
+					if(o_index!=-1){
+						if(c_index!=-1&&c_index!=o_index){
+							return 'false'
+						}
+					}
+					var s_i=set.indexOf(arr[i]);
+					if(s_i!=-1){
+						set[s_i]++;//数量+1
+					}else{
+						set[arr[i]]=1;//增加该键
+					}
+				}
+				if(set["("]==set[")"]&&set["["]==set["]"]&&set["{"]==set["}"]){
+					return 'true'
+				}else{
+					return 'false'
+				}
+			}
+			console.log(one())
 		</script>
 	</body>
 </html>
