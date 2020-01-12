@@ -11,40 +11,24 @@
 			html,body{
 				height: 100%;
 			}
-
+			
 		</style>
 	</head>
 	<body>
-		<div class="c_fresh">
-		  <p>星火教育成立于2003年，经过多年的发展，目前已成长为中国领先的中小学教育辅导机构，多年深耕个性化教育、学习能力的开发和培养、家庭教育和前沿教育技术，已帮助越来越多的学生取得成功。<br />↵<br />↵目前星火教育已在全国15个省，30多个城市产生业务，开设了超200个校区，员工人数超过8000人，曾荣获 腾讯教育中国好老师 明星教育品牌 、 品牌知名度教育机构 2016新浪全国五星金牌教师团队 、 2016中国品牌影响力课外辅导机构 、 2017五星金牌教师 全国金牌团队 、 2017品牌实力课外辅导机构 、 2017中国好老师 明星教师团队 新浪教育2018中国品牌影响力教育连锁机构等奖项。</p>↵↵<p>【需求岗位】<br />↵<br />↵<b>一对一学科教师（15人）</b><br />↵<br />↵【面向专业、岗位要求】<br />↵<br />↵<b>不限专业</b><br />↵<br />↵1、热爱教育行业，喜欢和孩子相处；<br />↵<br />↵2、有爱心、耐心和责任心；<br />↵<br />↵3、善于倾听和沟通，表达能力强。<br />↵<br />↵工作地点：湛江市<br />↵<br />↵<br />↵【简历投递方式】<br />↵<br />↵1、参加校园宣讲会<br />↵<br />↵2、简历投递邮箱：xinghuozj@163.com</p>↵↵<p><span style="background-color: rgb(221, 221, 221);">温馨提示：实际情况中，少数宣讲会场次可能临时改变时间、地点、甚至取消。对此提醒大家，宣讲会开始前，可与相关企业和承办学校联系确认。</span></p>
+		<div class="mar_top">
+			<div class="one"></div>
+			<div class="two"></div>
 		</div>
 		<script type="text/javascript">
-			// 前端查询元素类名，增删类名，改变元素样式
-			// 1. 寻找元素，使用document.getElementByClassName()
-			var one=document.getElementsByClassName('one')[0];
-			// 2.给元素绑定监听事件
-			one.onclick=function(){
-				console.log("元素监听事件触发");
-			}
-			// 3.通过元素.getAttribute()获取元素类名
-			var mine=document.getElementsByClassName('li')[1];
-			mine.onclick=function(){
-				var min_cla=mine.getAttribute('class');
-				console.log(min_cla);//li 
-				// 4.通过元素.setAttribute("xx属性","更改为xx");
-				mine.setAttribute('class',min_cla+' mine_cla');
-				// 5.通过元素.style.样式去修改元素样式
-				mine.style.backgroundColor="yellow";
-				
-				setTimeout(()=>{
-					// 6.通过className获取元素类名
-					console.log(mine.className);
-					// 7.通过classList.add()添加元素类名
-					mine.classList.add('cla_list_add')
-					// 8.通过classList.remove()删除元素类名
-					mine.classList.remove('li')
-				},1000)
-			}
+			var date=new Date();
+			// 存储cookie,参数为 键=值;expirationdate=过期时间(Date格式);path=可以访问的域名
+			document.cookie="name=yiye;expirationdate="+date+";path=/";
+			document.cookie="age=11;expirationdate="+date+";path=/";
+			document.cookie="sex=男;expirationdate="+date+";path=/";
+			var cookie=document.cookie;
+			console.log(cookie);//name=yiye;age=11; sex=男
+			var age=cookie.split('age')[1].split('=')[1].split(';')[0];
+			console.log(age);//11,取得cookie的值
 		</script>
 	</body>
 </html>
