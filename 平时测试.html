@@ -20,33 +20,43 @@
 			<div class="two"></div>
 		</div>
 		<script type="text/javascript">
-			var arr="([[{()]}])".split('');
-			var str_open=["(","[","{"];
-			var str_close=[")","]","}"];
-			var set=[];
-			function one(){
-				for(var i=0;i<arr.length;i++){
-					var o_index=str_open.indexOf(arr[i]);
-					var c_index=str_close.indexOf(arr[i+1]);
-					if(o_index!=-1){
-						if(c_index!=-1&&c_index!=o_index){
-							return 'false'
-						}
-					}
-					var s_i=set.indexOf(arr[i]);
-					if(s_i!=-1){
-						set[s_i]++;//数量+1
-					}else{
-						set[arr[i]]=1;//增加该键
-					}
-				}
-				if(set["("]==set[")"]&&set["["]==set["]"]&&set["{"]==set["}"]){
-					return 'true'
-				}else{
-					return 'false'
+
+			//思路:首先排序，然后根据arr.indexOf(new_arr[k])>arr.indexOf(new_arr[k+1])则改变,min=k+1,下次比较次小值
+			//否则 k+1;
+			var n=6;//数量
+			var arr='1 1 1 1 999 1'.split(' ').map(Number);//数字数组
+			var o_arr=arr.slice();//深拷贝
+			var sum=0;//改变次数
+			//排序(选择排序)
+			for(var i=0;i<n;i++){
+				var i_min=arr[i];
+				var index=null;
+			    for(var j=i+1;j<n;j++){
+			        if(arr[j]<i_min){
+			            i_min=arr[j];//记录当前最小值
+						index=j;
+			        }
+			    }
+				//交换数据
+				if(index!=null){
+					var tem=arr[index];
+					arr[index]=arr[i];
+					arr[i]=tem;
 				}
 			}
-			console.log(one())
+			console.log(arr,o_arr)
+			for(var i=0;i<n-1;i++){
+				// 如果最小值在次小值右边则改变
+				console.log(o_arr.lastIndexOf(arr[n-2]),o_arr.indexOf(arr[n-1]))
+				if(arr[i]!=arr[i+1]&&(o_arr.indexOf(arr[i])>o_arr.indexOf(arr[i+1])||
+					o_arr.lastIndexOf(arr[i])==-1)){
+					sum++;//次数加一
+					o_arr.push(arr[i+1]);//添加
+					o_arr.splice(o_arr.indexOf(arr[i+1]),1);//删除
+					console.log(o_arr)
+				}
+			}
+			console.log(sum);
 		</script>
 	</body>
 </html>
