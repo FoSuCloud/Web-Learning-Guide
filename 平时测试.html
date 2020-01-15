@@ -20,43 +20,35 @@
 			<div class="two"></div>
 		</div>
 		<script type="text/javascript">
-
-			//思路:首先排序，然后根据arr.indexOf(new_arr[k])>arr.indexOf(new_arr[k+1])则改变,min=k+1,下次比较次小值
-			//否则 k+1;
-			var n=6;//数量
-			var arr='1 1 1 1 999 1'.split(' ').map(Number);//数字数组
-			var o_arr=arr.slice();//深拷贝
-			var sum=0;//改变次数
-			//排序(选择排序)
-			for(var i=0;i<n;i++){
-				var i_min=arr[i];
-				var index=null;
-			    for(var j=i+1;j<n;j++){
-			        if(arr[j]<i_min){
-			            i_min=arr[j];//记录当前最小值
-						index=j;
-			        }
+			var arr='[11，18，12，18，18，12，13，18，18]';//输入的就是数字数组。。
+			// var arr=readline();//输入的就是数字数组?错！
+			arr=arr.replace('[','');
+			arr=arr.replace(']','');
+			arr=arr.split('，').map(Number)
+			console.log(arr)
+			var len=arr.length;
+			var set={};//对象存储键值
+			for(var i=0;i<len;i++){
+				var tem=arr[i];
+				// 判断是否存在该键
+			    if(set[tem]){
+			        set[tem]++;//该键的值加一
+			    }else{
+			        set[tem]=1;
 			    }
-				//交换数据
-				if(index!=null){
-					var tem=arr[index];
-					arr[index]=arr[i];
-					arr[i]=tem;
-				}
 			}
-			console.log(arr,o_arr)
-			for(var i=0;i<n-1;i++){
-				// 如果最小值在次小值右边则改变
-				console.log(o_arr.lastIndexOf(arr[n-2]),o_arr.indexOf(arr[n-1]))
-				if(arr[i]!=arr[i+1]&&(o_arr.indexOf(arr[i])>o_arr.indexOf(arr[i+1])||
-					o_arr.lastIndexOf(arr[i])==-1)){
-					sum++;//次数加一
-					o_arr.push(arr[i+1]);//添加
-					o_arr.splice(o_arr.indexOf(arr[i+1]),1);//删除
-					console.log(o_arr)
-				}
+			console.log(typeof 1)
+			var max=0;
+			var num=j;
+			// 遍历键
+			for(var j in set){
+				console.log(isNaN(Number(j)))
+			    if((!isNaN(Number(j))) && parseInt(set[j])>max){
+			        max=parseInt(set[j]);
+					num=j;
+			    }
 			}
-			console.log(sum);
+			console.log(num)
 		</script>
 	</body>
 </html>
