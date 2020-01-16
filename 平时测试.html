@@ -20,35 +20,25 @@
 			<div class="two"></div>
 		</div>
 		<script type="text/javascript">
-			var arr='[11，18，12，18，18，12，13，18，18]';//输入的就是数字数组。。
-			// var arr=readline();//输入的就是数字数组?错！
-			arr=arr.replace('[','');
-			arr=arr.replace(']','');
-			arr=arr.split('，').map(Number)
-			console.log(arr)
-			var len=arr.length;
-			var set={};//对象存储键值
-			for(var i=0;i<len;i++){
-				var tem=arr[i];
-				// 判断是否存在该键
-			    if(set[tem]){
-			        set[tem]++;//该键的值加一
-			    }else{
-			        set[tem]=1;
-			    }
-			}
-			console.log(typeof 1)
-			var max=0;
-			var num=j;
-			// 遍历键
-			for(var j in set){
-				console.log(isNaN(Number(j)))
-			    if((!isNaN(Number(j))) && parseInt(set[j])>max){
-			        max=parseInt(set[j]);
-					num=j;
-			    }
-			}
-			console.log(num)
+			// 1.对象的键可以为数字
+			console.log({1:3,5:33});//{1: 3, 5: 33}
+			
+			// 2.添加对象的数字键
+			var obj={3:33,4:44};
+			obj[55]=111111;//给对象添加数字键(所有键都一样) obj[key]=value
+			console.log(obj);//{3: 33, 4: 44, 55: 111111}
+			
+			// 3.对象中的键必须有值，不能有键无值，有值无键
+			// var obj_o={3,5};//错误！
+			// var obj_t={'a','b'};//错误！
+			
+			// 3.2但是如果给对象的键提前赋值，让对象的键指向一个变量，那么就可以！
+			const a = 1;
+			const b = 2;
+			const map = {a, b};
+			console.log(map);//{a:1,b:2}
+			// 3.3 提前赋值了的话，那么赋值的值就是对象的键的值，变量名就是键名
+			
 		</script>
 	</body>
 </html>
