@@ -250,3 +250,23 @@
 			// 而使用Math.max.apply()方法则可以传递一个参数数组，提高效率！
 			console.log(Math.max.apply(null,[1,2,3,4]))
 ```
+
+## 严格模式下的函数内部this默认是undefined 
+```
+			// 1. 在严格模式下，函数内部的this就是undefined...所以使用this.xx就是TypeError,因为undefined没有属性与方法
+			var a='外部变量'
+			function one(){
+				"use strict"
+				console.log(this);//undefined
+				console.log(this.a);// TypeError canot read undefined
+			}
+			// one();
+			
+			// 2.严格模式下的全局this没有改变，还是指代window
+			'use strict'
+			console.log(this);//window变量
+			console.log(this.b);//没有声明的变量属性默认是undefined 
+			console.log(b);//没有声明的变量默认是ReferenceError defined
+			console.log(a.name);//undefined,基本数据类型变量不存在属性，使用变量.xx属性返回undefined
+```
+

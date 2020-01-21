@@ -20,25 +20,42 @@
 			<div class="two"></div>
 		</div>
 		<script type="text/javascript">
-			// 1.对象的键可以为数字
-			console.log({1:3,5:33});//{1: 3, 5: 33}
-			
-			// 2.添加对象的数字键
-			var obj={3:33,4:44};
-			obj[55]=111111;//给对象添加数字键(所有键都一样) obj[key]=value
-			console.log(obj);//{3: 33, 4: 44, 55: 111111}
-			
-			// 3.对象中的键必须有值，不能有键无值，有值无键
-			// var obj_o={3,5};//错误！
-			// var obj_t={'a','b'};//错误！
-			
-			// 3.2但是如果给对象的键提前赋值，让对象的键指向一个变量，那么就可以！
-			const a = 1;
-			const b = 2;
-			const map = {a, b};
-			console.log(map);//{a:1,b:2}
-			// 3.3 提前赋值了的话，那么赋值的值就是对象的键的值，变量名就是键名
-			
+			function ajax(method,url,data,async){
+				var method=method?method:'get';
+				var async=async?async:'false'
+				
+				// 数据处理
+				var str=[];
+				for(var key in data){
+					str.push(key+'='+data[key])
+				}
+				str=str.join('&');
+				console.log(str)
+				if(method=='get'){
+					if(url.indexOf('?')!=-1){
+						url=url+'&'+str;
+					}else{
+						url=url+'?'+str
+					}
+				}
+				
+				var xhr=new XMLHttpRequest();
+				xhr.open(method,url,async);
+				
+				xhr.send(url);
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4){
+						if(xhr.status==200||xhr.status==304){
+							return xhr.responseText
+						}
+					}
+				}
+				
+				xhr.onerror=function(res){
+					return res
+				}
+			}
+			ajax('get','https://www.baidu.com/s',{wd:'yie'})
 		</script>
 	</body>
 </html>
