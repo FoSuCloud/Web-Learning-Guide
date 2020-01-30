@@ -248,12 +248,12 @@
 ## 可枚举属性
 1. 对象的属性分为可枚举和不可枚举，是否可枚举由属性的enumerable值来决定，可枚举性决定了该属性是否能被for in 循环遍历到
 ```
-			var n=new Number(4);
+			var n=new 。目标 Number(4);
 			for(var key in n){
 				console.log('可枚举属性:'+key);
 			}
 			//结果是空，也就是说明没有可枚举属性！
-```
+``` 
 2. `使用propertylsEnumerable()方法可以判断出属性是否可枚举`
 ```
 			function person(){

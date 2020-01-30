@@ -11,19 +11,48 @@
 			html,body{
 				height: 100%;
 			}
-			
+			.one{
+				width: 300px;
+				height: 300px;
+				border: 1px solid red;
+			}
 		</style>
 	</head>
 	<body>
+		<!-- 
+		 180 178 172 172 165 163 160 158 154 150
+		 154 160 165 172 ·180· 178 172 163 158
+		 
+		 22  23  
+		 
+		 321
+		 321
+		 -->
 		<div class="mar_top">
-			<div class="one"></div>
+			<input type="text" list="movie" value=""/>
+			<datalist id="movie">
+			    <option>人在囧途</option>
+			    <option>美人鱼</option>
+			    <option>让子弹飞</option>
+			</datalist>
+			<input type="text" class="one" />
 			<div class="two"></div>
 		</div>
 		<script type="text/javascript">
 			var arr=[1,2,3];//[1,2,3]
 			Object.assign(arr,[4,5]);//也就把1,2覆盖为4,5
 			console.log(arr);//[4,5,3]
-			
+			// 如果绑定的是onkeypress事件，那么e代之的是KeyboardEvent
+			// 如果绑定的是onclick事件，那么e代之的是MouseEvent
+			document.getElementsByClassName('one')[0].onkeypress=function(e){
+				//获取元素之后的this 指代的是元素的html代码
+				console.log(this); //<input type="text" class="one" />
+				//获取元素之后的e指代的是KeyboardEvent
+				console.log(e);  // KeyboardEvent
+				
+				console.log(e.charCode);//此时的charCode==keyCode
+				console.log(e.keyCode)
+			}
 
 		</script>
 	</body>

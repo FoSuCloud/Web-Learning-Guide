@@ -270,3 +270,17 @@
 			console.log(a.name);//undefined,基本数据类型变量不存在属性，使用变量.xx属性返回undefined
 ```
 
+## 获取元素之后的this指代html代码，e指代元素事件
+```
+// 如果绑定的是onkeypress事件，那么e代之的是KeyboardEvent
+			// 如果绑定的是onclick事件，那么e代之的是MouseEvent
+			document.getElementsByClassName('one')[0].onkeypress=function(e){
+				//获取元素之后的this 指代的是元素的html代码
+				console.log(this); //<input type="text" class="one" />
+				//获取元素之后的e指代的是KeyboardEvent
+				console.log(e);  // KeyboardEvent
+				
+				console.log(e.charCode);//此时的charCode==keyCode
+				console.log(e.keyCode)
+			}
+```
