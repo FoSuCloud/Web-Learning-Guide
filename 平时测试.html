@@ -39,20 +39,17 @@
 			<div class="two"></div>
 		</div>
 		<script type="text/javascript">
-			//循环里面包含闭包函数
-			function box(){
-			    var arr = [];
-			    for(let i=0;i<5;i++){
-			        arr[i] = function(){
-			            return i;                            //由于这个闭包的关系，他是循环完毕之后才返回，最终结果是4++是5
-			        }                                        //这个匿名函数里面根本没有i这个变量，所以匿名函数会从父级函数中去找i，
-			    }                                            //当找到这个i的时候，for循环已经循环完毕了，所以最终会返回5
-			    return arr;
+			// 显式调用toString会直接返回值
+			function str(){
+				var old={
+					toString:function(){
+						return '5'
+					}
+				}
+				return old.toString();
 			}
-			//alert(box());                                    //执行5次匿名函数本身
-			//alert(box()[1]);　　　　　　　　　　　　　　　　　　　//执行第2个匿名函数本身
-			//alert(box().length);                            //最终返回的是一个数组，数组的长度为5
-			alert(box()[0]());                                //数组中的第一个数返回的是5，这是为什么？
+			console.log(str());//5
+			
 		</script>
 	</body>
 </html>
