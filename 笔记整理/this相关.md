@@ -284,3 +284,46 @@
 				console.log(e.keyCode)
 			}
 ```
+
+## 箭头函数特性
+1. 箭头函数不可以被用来当做构造函数，也就是不可以new 对象
+2. `箭头函数没有arguments,也就是可以通过arguments获取形参`
+3. `箭头函数内部的this是箭头函数定义时所在作用域的this,例如点击事件内部使用了setTimeout,如果setTimeout的函数是普通函数，那么函数内部的this指的是window,但是如果是箭头函数，那么箭头函数内部的this指的是点击事件的元素`
+```
+			var one=document.getElementsByClassName('one')[0];
+			one.addEventListener('click',function(){
+				//1.箭头函数
+				setTimeout(()=>{
+					console.log(this);//one这个元素
+				},0)
+				// 2.普通函数
+				setTimeout(function(){
+					console.log(this);//window
+				},0)
+				// 3.箭头函数不可以使用arguments
+				var add=(a,b)=>{
+					console.log(a+b);
+					console.log([...arguments]);//MouseEvent,不是我们期待的a,b的值
+				}
+				add(1,2)
+			})
+```
+
+## 箭头函数当做函数属性时
+```
+function createModule(str1, str2) {
+			    return {
+			        greeting:str1,
+			        name:str2,
+			        sayIt:()=>{
+			            // 箭头函数内部的this指向的是函数所定义时作用域所在的this
+			            //也就是this指向createModule函数作用域，也就是window
+			            return this.greeting+', '+this.name
+			        }
+			    }
+			}
+			var greeting='g';
+			var name='n'
+			console.log(createModule('2','3').sayIt());//g,n
+```
+* 箭头函数当做对象属性来被使用时，箭头函数内部的this不是指向函数本身，而是函数所在的作用域，也就是window

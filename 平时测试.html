@@ -14,42 +14,21 @@
 			.one{
 				width: 300px;
 				height: 300px;
-				border: 1px solid red;
+				background-color: #FF0000;
 			}
+			
 		</style>
 	</head>
 	<body>
-		<!-- 
-		 180 178 172 172 165 163 160 158 154 150
-		 154 160 165 172 ·180· 178 172 163 158
-		 
-		 22  23  
-		 
-		 321
-		 321
-		 -->
-		<div class="mar_top">
-			<input type="text" list="movie" value=""/>
-			<datalist id="movie">
-			    <option>人在囧途</option>
-			    <option>美人鱼</option>
-			    <option>让子弹飞</option>
-			</datalist>
-			<input type="text" class="one" />
-			<div class="two"></div>
+		<div class="one">
+			
 		</div>
 		<script type="text/javascript">
-			// 显式调用toString会直接返回值
-			function str(){
-				var old={
-					toString:function(){
-						return '5'
-					}
-				}
-				return old.toString();
+			function matchesPattern(str) {
+			    var reg=new RegExp(/\d{3}-\d{3}-\d{4}/);
+			    return reg.test(str);
 			}
-			console.log(str());//5
-			
+			console.log(matchesPattern('80-555-1212'))
 		</script>
 	</body>
 </html>
