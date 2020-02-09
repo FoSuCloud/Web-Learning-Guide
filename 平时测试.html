@@ -16,19 +16,30 @@
 				height: 300px;
 				background-color: #FF0000;
 			}
-			
+			ul li.l.o{
+				color: green;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="one">
-			
+			<ul>
+				<li class="l o">点击的li</li>
+				<li>433</li>
+				<li>33</li>
+				<li>33</li>
+			</ul>
 		</div>
 		<script type="text/javascript">
-			function matchesPattern(str) {
-			    var reg=new RegExp(/\d{3}-\d{3}-\d{4}/);
-			    return reg.test(str);
+			var ul=document.getElementsByTagName('ul')[0];
+			ul.onclick=function(e){
+				//target表示的是事件触发的元素
+				var li=e.target;
+				//currentTarget表示的是事件绑定的元素
+				var m_ul=e.currentTarget;
+				console.log(li);//<li>
+				console.log(m_ul);//<ul>
 			}
-			console.log(matchesPattern('80-555-1212'))
 		</script>
 	</body>
 </html>

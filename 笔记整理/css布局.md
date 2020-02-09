@@ -291,3 +291,23 @@
 			console.log(Object.keys(obj));//es5
 ```
 9. `Object.keys()和Object.assign()都是遍历对象自身的可枚举属性，但是Object.keys是es5的，Object.assign()是es6的，而且没生效？`
+
+## 内联元素设置宽高
+1. `设置position:absolute;自动变为内联块元素`
+2. `设置float也是变为内联块元素了`
+3. `设置display:block块级元素`
+4. `设置display:flex(把元素改为内联块还是块？);flex布局元素自然也是可以设置内联元素的宽高的`
+5. `设置display:table;把内联元素改为表格块元素`
+6. `position:relative不能改变内联元素为内联块/块元素！！！`
+
+## 元素可以同时设置多个class类名样式
+```
+<div class="one two p">
+<p class="o"></p>
+</div>
+
+.one.two.p p.o{
+	color:green;
+}
+这样是生效的，并且权重是可以正确计算得！
+```
