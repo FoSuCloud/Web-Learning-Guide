@@ -31,15 +31,33 @@
 			</ul>
 		</div>
 		<script type="text/javascript">
-			var ul=document.getElementsByTagName('ul')[0];
-			ul.onclick=function(e){
-				//target表示的是事件触发的元素
-				var li=e.target;
-				//currentTarget表示的是事件绑定的元素
-				var m_ul=e.currentTarget;
-				console.log(li);//<li>
-				console.log(m_ul);//<ul>
+			// 1.for循环没有块级作用域，所以没有穿透一说！
+			function *gene(arr){
+				for(var i=0;i<arr.length;i++){
+					yield arr[i];
+				}
 			}
+			var arr=[1,2,4,7,55];
+			var obj=gene(arr);
+			console.log(obj.next().value);//1
+			console.log(obj.next().value);//2
+			
+			// 2.函数内部的嵌套函数使用yield会报错Unexpected，因为yield关键字不能穿透
+			// function *par(arr){
+			// 	arr.forEach((item)=>{
+			// 		yield item;
+			// 	})
+			// }
+			// var obj2=par(arr);
+			// console.log(obj2.next().value);//Unexpected identifier
+			
+			// 3.return关键字同样也是不能穿透的！不会直接返回内部函数的return 值
+			function ret(){
+				function one(){
+					return '内部函数的return'
+				}
+			}
+			console.log(ret());//undefined,不是内部函数的return！
 		</script>
 	</body>
 </html>
