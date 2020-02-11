@@ -11,53 +11,42 @@
 			html,body{
 				height: 100%;
 			}
-			.one{
-				width: 300px;
-				height: 300px;
-				background-color: #FF0000;
-			}
-			ul li.l.o{
-				color: green;
+			.fle div{
+				width: 100px;
+				height: 100px;
+				flex: 1;
+				border: 1px red solid;
 			}
 		</style>
 	</head>
 	<body>
 		<div class="one">
-			<ul>
-				<li class="l o">点击的li</li>
-				<li>433</li>
-				<li>33</li>
-				<li>33</li>
-			</ul>
+			<!-- 从这里可以看出，svg是通过xml标签来绘制的，而canvas是通过js来绘制的 -->
+			<!-- 需要注意的是，不设置fill填充白色的话，默认内部就是黑色的填充 -->
+			<svg xmlns="http://www.w3.org/2000/svg" style="height: 300px;">
+				<rect x="10" y="10" width="100" height="100"
+				style="stroke: yellow;fill: white;" onclick="clickone()"></rect>
+				<!-- 设置圆角矩形,rx圆角宽度,ry圆角高度 -->
+				<!-- 第二个矩形消失了？这是因为svg默认大小是300*150，高度太大了，自然消失了 -->
+				<rect rx="10" ry="10" x="10" y="150" width="100" height="100" 
+				style="stroke: red;fill: none;" onclick="clicktwo()"></rect>
+			</svg>
 		</div>
 		<script type="text/javascript">
-			// 1.for循环没有块级作用域，所以没有穿透一说！
-			function *gene(arr){
-				for(var i=0;i<arr.length;i++){
-					yield arr[i];
+			var num=parseInt('13');
+			// 通过 xx.toString(2)转换为二进制
+			num=num.toString(2);
+			console.log(num)
+			var reg=new RegExp(/1+/g);
+			var arr=String(num).match(reg);
+			var max=0;
+			arr.forEach((item)=>{
+				if(item.length>max){
+					max=item.length
 				}
-			}
-			var arr=[1,2,4,7,55];
-			var obj=gene(arr);
-			console.log(obj.next().value);//1
-			console.log(obj.next().value);//2
-			
-			// 2.函数内部的嵌套函数使用yield会报错Unexpected，因为yield关键字不能穿透
-			// function *par(arr){
-			// 	arr.forEach((item)=>{
-			// 		yield item;
-			// 	})
-			// }
-			// var obj2=par(arr);
-			// console.log(obj2.next().value);//Unexpected identifier
-			
-			// 3.return关键字同样也是不能穿透的！不会直接返回内部函数的return 值
-			function ret(){
-				function one(){
-					return '内部函数的return'
-				}
-			}
-			console.log(ret());//undefined,不是内部函数的return！
+			})
+			console.log(max)
+			console.log(arr)
 		</script>
 	</body>
 </html>

@@ -141,7 +141,7 @@ class Point {
 			var obj={'name':'1','age':44}
 			console.log([...obj]);//TypeError: obj is not iterable
 ```
-6. 手写一个数组的迭代器(`前提条件:也就是迭代器会保存之前调用next所改变的数据`)
+6. 手写一个数组的迭代器(`前提条件:也就是迭代器会保存之前调用next所改变的数据,可以，因为闭包`)
 ```
 // 创建一个数组的迭代器！
 			function iterator(arr){
@@ -235,6 +235,17 @@ console.log(status.next().value);//'B'
 console.log(status.next().value);//'C'
 console.log(status.next().value);//'A'
 console.log(status.next().value);//'B'
+```
+* 小应用
+```
+			// 生成器(生成迭代对象才能展开)和展开运算符配合使用实现数组对象修改
+			var arr=[4,56,3,7];
+			function *add(arr){
+				for(var i=0;i<arr.length;i++){
+					yield arr[i]+10;
+				}
+			}
+			console.log([...add(arr)]);//[14, 66, 13, 17]
 ```
 
 

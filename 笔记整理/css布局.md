@@ -296,9 +296,10 @@
 1. `设置position:absolute;自动变为内联块元素`
 2. `设置float也是变为内联块元素了`
 3. `设置display:block块级元素`
-4. `设置display:flex(把元素改为内联块还是块？);flex布局元素自然也是可以设置内联元素的宽高的`
+4. `设置display:flex(把元素改为块!!!占据一整行);flex布局元素自然也是可以设置内联元素的宽高的`
 5. `设置display:table;把内联元素改为表格块元素`
 6. `position:relative不能改变内联元素为内联块/块元素！！！`
+7. `position:fixed把元素也变为内联块元素，宽高可以设置！`
 
 ## 元素可以同时设置多个class类名样式
 ```
@@ -311,3 +312,26 @@
 }
 这样是生效的，并且权重是可以正确计算得！
 ```
+
+## svg
+```
+			<!-- 从这里可以看出，svg是通过xml标签来绘制的，而canvas是通过js来绘制的 -->
+			<!-- 需要注意的是，不设置fill填充白色的话，默认内部就是黑色的填充 -->
+			<svg xmlns="http://www.w3.org/2000/svg" style="height: 300px;">
+				<rect x="10" y="10" width="100" height="100"
+				style="stroke: yellow;fill: white;" onclick="clickone()"></rect>
+				<!-- 设置圆角矩形,rx圆角宽度,ry圆角高度 -->
+				<!-- 第二个矩形消失了？这是因为svg默认大小是300*150，高度太大了，自然消失了 -->
+				<rect rx="10" ry="10" x="10" y="150" width="100" height="100" 
+				style="stroke: red;fill: none;" onclick="clicktwo()"></rect>
+			</svg>
+			
+			function clickone(){
+				console.log("点击第一个svg图形")
+			}
+			function clicktwo(){
+				console.log("点击第二个svg图形")
+			}
+```
+* `svg可以给每一个图形添加事件，canvas不可以`
+* `svg的图形都是用xml标签画出来的，canvas是用js绘制的`
