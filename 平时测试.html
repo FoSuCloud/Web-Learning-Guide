@@ -11,37 +11,21 @@
 			html,body{
 				height: 100%;
 			}
-			.one{
-				height: 100px;
-				width: 50px;
-				background-color: red;
-			}
-			.two{
-				height: 30px;
-				width: 30px;
-				background-color: green;
-				/* padding-top,margin-top都是相对于父元素的width的！ */
-				/* 下面的50%都是25px */
-				padding-top: 50%; 
-				margin-bottom: 50%;
-				display: inline-block;
-			}
+			
 		</style>
 	</head>
 	<body>
 		<div class="one">
-			<div class="two"></div>
+			<div class="sector1"></div>
+			<div class="sector2"></div>
+			<div class="sector3"></div>
+			<div class="sector4"></div>
 		</div>
 		<script type="text/javascript">
-			var person = {
-			  age: 18,
-			  getAge: function() {
-			    return this.age;
-			  }
-			};
-			var getAge = person.getAge;
-			console.log(getAge())
-
+			var sector1=document.getElementsByClassName('sector1')[0];
+			console.log(sector1.nextElementSibling);//<div class="sector2"></div>
+			console.log(sector1.nextSibling);// 换行符
 		</script>
 	</body>
 </html>
+ 

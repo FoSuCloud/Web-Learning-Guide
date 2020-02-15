@@ -43,3 +43,12 @@ document.getElementById("myDiv2").addEventListener("click", function()
     alert("你点击了 DIV 元素!");
 }, true);
 ```
+
+## 获取下一个元素
+1. `使用nextSibling属性返回元素节点之后的兄弟节点(包括文本节点(文本或者换行符)，注释节点)`
+2. `使用nextElementSibling属性只返回元素节点之后的兄弟元素节点(不包括文本节点，注释节点)`
+```
+			var sector1=document.getElementsByClassName('sector1')[0];
+			console.log(sector1.nextElementSibling);//<div class="sector2"></div>
+			console.log(sector1.nextSibling);// 换行符
+```
