@@ -327,3 +327,5 @@ function createModule(str1, str2) {
 			console.log(createModule('2','3').sayIt());//g,n
 ```
 * 箭头函数当做对象属性来被使用时，箭头函数内部的this不是指向函数本身，而是函数所在的作用域，也就是window
+
+## Object.prototype. __proto__=== null，说明原型链到Object.prototype终止
