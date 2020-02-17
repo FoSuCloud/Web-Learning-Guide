@@ -335,3 +335,48 @@
 ```
 * `svg可以给每一个图形添加事件，canvas不可以`
 * `svg的图形都是用xml标签画出来的，canvas是用js绘制的`
+
+## 浮动元素重叠问题
+1. `块级元素与浮动元素重叠时，块级元素的内容在浮动元素之上，背景和边框在浮动元素之下`
+```
+			<div class="left">块级元素，背景和边框在浮动元素之下，内容在浮动元素之上</div>
+			<div class="right"></div>
+			
+			.left{
+				background-color: green;
+				border: blueviolet;
+				<!-- 当块级元素内容高度>设定高度时才能看出 -->
+				height: 30px;
+			}
+			.right{
+				background-color: red;
+				float: left;
+				height: 50px;
+				width: 100%;
+			}
+```
+2. `内联元素的内容，背景，边框都在浮动元素之上`
+```
+			<span class="left">内联元素的内容，背景和边框在浮动元素之上
+			内联元素的内容，背景和边框在浮动元素之上
+			内联元素的内容，背景和边框在浮动元素之上</span>
+			<div class="right"></div>
+			
+			.left{
+				background-color: green;
+				border: blueviolet;
+				display: inline-block;
+				width: 200px;
+			}
+			.right{
+				background-color: red;
+				float: left;
+				height: 50px;
+				width: 100%;
+				<!-- 浮动元素需要设置margin-top负 才能看到效果 -->
+				margin-top: -30px;
+			}
+```
+3. 如果有非浮动元素和浮动元素同时存在，并且非浮动元素在前，则浮动元素不会高于非浮动元素
+4. 浮动元素会尽可能地向顶端对齐、向左或向右对齐
+5. 如果有多个浮动元素，浮动元素会按顺序排下来而不会发生重叠的现象

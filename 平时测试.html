@@ -11,85 +11,64 @@
 			html,body{
 				height: 100%;
 			}
-			/* 清除浮动 */
-			/* 1. 父元素float,但是不可取，因为会影响到父元素这一层，不稳定 */
-			.one{
-				float: left;
-				background: red;
-				padding: 10px;
+			/* inline-block 和 white-space: nowrap; 实现 */
+			.nav{
+				white-space: nowrap;
+				overflow-x: scroll;
+				border: 1px solid red;
+				padding: 5px;
+				height: 30px;
 			}
-			.two{
-				float: left;
+			.item{
+				background-color: aliceblue;
+				font-size: 12px;
+				text-align: center;
+				line-height: 30px;
+				display: inline-block;
+				margin-right: 15px;
 				width: 100px;
-				height: 20px;
-				background-color: gainsboro;
 			}
-			/* 2.父元素设置overflow:hidden */
-			.three{
-				overflow: hidden;
-				padding: 10px;
-				background-color: black;
-			}
-			.four{
-				background-color: green;
-				width: 100px;
-				height: 20px;
-				float: left;
-			}
-			/* 3. 设置父元素伪元素after清除浮动 clear:both */
-			.five{
-				background-color: blue;
-				margin-top: 10px;
-				padding: 10px;
-			}
-			.six{
-				width: 100px;
-				height: 20px;
-				background-color: antiquewhite;
-				float: left;
-			}
-			.five::after{
-				clear: both;
-				display: block;
-				content: '';
-			}
-			/* 4.给子元素添加一个空标签设置clear:both */
-			.seven{
-				padding: 10px;
-				background-color: gray;
-				width: 300px;
-				margin-top: 10px;
-			}
-			.eight{
-				float: left;
-				width: 100px;
-				height: 20px;
-				background-color: yellow;
-			}
-			.eight +div{
-				clear: both;
-				-webkit-background-clip: -webkit-text;
+			/* 对于webkit内核的浏览器可以隐藏滚动条 */
+			.nav::-webkit-scrollbar {
+				display: none;
 			}
 		</style>
 	</head>
 	<body>
-		<div>
-			<div class="one">
-				<div class="two"></div>
-			</div>
-			<div class="three">
-				<div class="four"></div>
-			</div>
-			<div class="five">
-				<div class="six"></div>
-			</div>
-			<div class="seven">
-				<div class="eight"></div>
-				<div></div>
-			</div>
+		<div class="nav">
+			<div class="item">item1</div>
+			<div class="item">item2</div>
+			<div class="item">item3</div>
+			<div class="item">item4</div>
+			<div class="item">item5</div>
+			<div class="item">item6</div>
+			<div class="item">item7</div>
+			<div class="item">item8</div>
+			<div class="item">item9</div>
 		</div>
 		<script type="text/javascript">
-			console.log(new Array(17).join(0).split('').map(Number))
+			// js 的delete 操作符
+			function func(name){
+				this.name=name;
+			}
+			var obj=new func('对象');
+			console.log(obj.name);//对象
+			// 1.可以删除对象属性
+			// delete obj.name;
+			// console.log(obj.name);// undefined
+			
+			// 2. 不可以!!!删除变量
+			delete obj;
+			console.log(obj);//func {name: "对象"}
+			
+			// 3. 删除实例的属性(该属性是构造函数原型链上的)，那么删除失败！
+			func.prototype.age=18;
+			console.log(obj.age);//18
+			delete obj.age;
+			console.log(obj.age);//18
+			// 4.删除原型链上的属性，那么实例用到该属性也会失效！
+			delete func.prototype.age;
+			console.log(obj.age);//undefined
 		</script>
 	</body>
 </html>

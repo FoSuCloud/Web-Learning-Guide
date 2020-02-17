@@ -52,3 +52,29 @@ document.getElementById("myDiv2").addEventListener("click", function()
 			console.log(sector1.nextElementSibling);//<div class="sector2"></div>
 			console.log(sector1.nextSibling);// 换行符
 ```
+
+## js的delete操作符
+```
+			// js 的delete 操作符
+			function func(name){
+				this.name=name;
+			}
+			var obj=new func('对象');
+			console.log(obj.name);//对象
+			// 1.可以删除对象属性
+			// delete obj.name;
+			// console.log(obj.name);// undefined
+			
+			// 2. 不可以!!!删除变量
+			delete obj;
+			console.log(obj);//func {name: "对象"}
+			
+			// 3. 删除实例的属性(该属性是构造函数原型链上的)，那么删除失败！
+			func.prototype.age=18;
+			console.log(obj.age);//18
+			delete obj.age;
+			console.log(obj.age);//18
+			// 4.删除原型链上的属性，那么实例用到该属性也会失效！
+			delete func.prototype.age;
+			console.log(obj.age);//undefined
+```
