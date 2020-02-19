@@ -18,28 +18,36 @@
 		    
 		</div>
 		<script type="text/javascript">
-			function func(source) { 
-			    var target = {}; 
-			    for (var key in source) { 
-					// key==a1,
-			        if (Object.prototype.hasOwnProperty.call(source, key)) {
-						// 判断是否有a1该属性
-						// console.log(source[key]) 键的值
-						// console.log(typeof null);//object
-			             if (typeof source[key] === 'object') { 
-							 // 若有则键的值是对象，则返回函数之后的数据
-							 // 但是由于js的一个bug,typeof null==object,所以还会调用func(null)返回的是初始的target,{}
-			                target[key] = func(source[key]); 
-			             } else { 
-			                target[key] = source[key]; 
-			             }
-			        } 
-			    } 
-			    return target; 
+			Function.prototype.bind = function(context, ...bindArgs) {
+			  // func 为调用 bind 的原函数
+			  const func = this;
+			  context = context || window;
+			  
+			  if (typeof func !== 'function') {
+			    throw new TypeError('Bind must be called on a function');
+			  }
+			  // bind 返回一个绑定 this 的函数
+			  return function(...callArgs) {
+			    let args = bindArgs.concat(callArgs);
+			    if (this instanceof func) {
+			      // 意味着是通过 new 调用的 而 new 的优先级高于 bind
+			      return new func(...args);
+			    }
+			    return func.call(context, ...args);
+			  }
 			}
-			var a = { a1: "a1", a2: { b1: "b1", b2: "b2" }, a3: undefined, a4: null, a5: 1 };
-			var b = func(a); 
-			console.log(b);
+			// 构造函数
+			function three(a,b){
+				this.a=a
+				this.b=b
+				return this;
+			}
+			var obj={name:'yiyi',age:11}
+			var bindf=three.bind(obj,'b');
+			console.log(bindf)
+			bindf(22)
+			var four=new bindf(33);
+			console.log(four)
 		</script>
 	</body>
 </html>

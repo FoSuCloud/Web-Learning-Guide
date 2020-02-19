@@ -78,3 +78,37 @@ document.getElementById("myDiv2").addEventListener("click", function()
 			delete func.prototype.age;
 			console.log(obj.age);//undefined
 ```
+
+## js自定义事件触发和监听
+```
+function EventEmitter(element){
+    this.on=function(name,callback){
+        element.addEventListener(name,callback)
+    }
+    this.trigger=function(name){
+        // 创建事件
+        var eve=new Event(name)
+        // 触发事件
+        element.dispatchEvent(eve);
+    }
+}
+var ele=new EventEmitter(document.getElementById('one'));
+// 监听事件
+ele.on('test',function(){
+    console.log("自定义事件被触发了")
+})
+// 触发事件
+ele.trigger('test')
+```
+
+## 查找两个节点的共同父节点 ele.contains(ele2)用于判断ele元素中是否包含元素ele2
+```
+function commonParentNode(oNode1, oNode2) {
+    // 只要还存在oNode1就继续遍历
+    for(;oNode1;oNode1=oNode1.parentNode){
+        if(oNode1.contains(oNode2)){
+            return oNode1;
+        }
+    }
+}
+```
