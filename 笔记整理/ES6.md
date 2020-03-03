@@ -248,6 +248,7 @@ console.log(status.next().value);//'B'
 			console.log([...add(arr)]);//[14, 66, 13, 17]
 ```
 
+## let声明的变量不能被window取得
 
 ## 使用set完成数组去重
 ```

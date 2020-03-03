@@ -10,20 +10,27 @@
 			}
 			html,body{
 				height: 100%;
+				white-space: nowrap;
+				word-wrap: nowrap;
 			}
-			
+			.ten{
+				float: left;
+				background-color: #008000;
+				width: 100px;
+				height: 100px;
+			}
+			.ele{
+				clear: both;
+			}
 		</style>
 	</head>
 	<body>
-		<div id="one">
+		<div class="nine">
+			<div class="ten"></div>
 		</div>
+		<div class="ele"></div>
 		<script type="text/javascript">
-			console.log(typeof('434'))
-			console.log([3] instanceof Array)
-			console.log('dsd'.constructor==String)
-			console.log([1].constructor==Array);//true
-			console.log([1].constructor==Array);//false
-			console.log('sss'.length)
+			 console.log(1234567891011/3)
 		</script>
 	</body>
 </html>
