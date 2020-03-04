@@ -1,3 +1,5 @@
+## css命名规范有:BEM(block element modifier)
+
 ## iframe标签
 1. iframe默认会有白色边框，可以使用`frameborder,为0表示无边框，为1是默认状态，白色边框`
 2. 也可以通过设置iframe的border属性设置边框样式
