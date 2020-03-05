@@ -1,64 +1,9 @@
-## 正则的回溯引用 ()\1
-```
-function containsRepeatingLetter(str) {
-    //{2,}表示2个以上
-    //var reg=new RegExp(/[a-zA-Z]{2,}/)
-    //但是题目是要求有两个连续的相同的！！！字母
-    //所以需要用到 \1回溯引用，()\1 也就是和上一个括号内匹配内容相同
-    //也就是有两个相同的字母就可以为true
-    var reg=new RegExp(/([a-zA-Z])\1/);
-    return reg.test(str)
-}
-```
+## 会改变原有的字符串的方法
+1. replace替换
 
-## 正则的匹配 str.match,str.match(reg)[0]是返回符合条件的一个字符串
-```
-function captureThreeNumbers(str) {
-    //三个连续数字
-    var reg=new RegExp(/\d{3}/);
-    //返回匹配的第一个字符串， str.match(reg)[0]
-    return reg.test(str)?str.match(reg)[0]:false;
-}
-```
-
-## 正则匹配想返回数组就使用g全局匹配,然后用match返回的是符合条件的所有字符串
-```
-var num=parseInt(readline());
-// 通过 xx.toString(2)转换为二进制
-num=num.toString(2);
-//因为想匹配到一个数组，所以使用g全局匹配
-var reg=new RegExp(/1+/g);
-var arr=String(num).match(reg);//[],返回的是符合条件的所有字符串！！！
-var max=0;
-arr.forEach((item)=>{
-    if(item.length>max){
-        max=item.length
-    }
-})
-print(max);
-```
-
-
-## 正则匹配(依旧是93.33%)
-```
-给定字符串 str，检查其是否符合美元书写格式
-1、以 $ 开始
-2、整数部分，从个位起，满 3 个数字用 , 分隔
-3、如果为小数，则小数部分长度为 2
-4、正确的格式如：$1,023,032.03 或者 $2.03，错误的格式如：$3,432,12.12 或者 $34,344.3
-
-function isUSD(str) {
-    // []中括号是表示中括号中的任意一个
-    // ()括号表示括号中的一组
-    // .在正则是表示任意，所以需要加一个\
-    //另外还要判断一下首位不为0
-    //还要考虑个位为0的情况
-    var reg=new RegExp(/^\$((([1-9]\d{0,2})?(,\d{3})*)|0)(\.\d{2})?$/);
-	//网上的，借鉴一下，发现少了个括号，也就是默认可以不存在,  但是肯定个位是有的或者0
-	var reg = /^\$(([1-9]\d{0,2}(,\d{3})*)|0)(\.\d{2})?$/;
-    return reg.test(str)
-}
-```
+## 不会改变原有字符串的方法
+1. substr(长度)，substring,slice,indexOf,lastIndexOf,concat(新子串)，charAt,charCodeAt,
+2. split(分割出新数组，不会改变字符串)
 
 ## JSON.stringfy
 * `JSON.stringfy可以实现深拷贝，但是不能转换undefined/Symbol/function`
@@ -110,13 +55,11 @@ function isUSD(str) {
 			console.log(JSON.parse(data));// 报错
 ```
 
-
 ## 获取一个重复字符的字符串
 * `通过 new Array(xx).join(str);就可以生成一个重复字符串，如 new Array(3).join('a')  aaa`
 
 ## 获取一个全为0的数组
 * `new Array(17).join(0).split('').map(Number)`
-
 ## 正则表达式进行变量拼接
 ```
 	function getnum(str,sub){
@@ -167,45 +110,6 @@ function isUSD(str) {
 ```
 * `如果是多个字符，那么也是识别第一个字符，如: "abc".charCodeAt()  => 97`
 
-## 代表特殊含义的元字符
-1. \d `0-9之间的任意一个数字`
-2. \w 数字 字母 下划线
-3. \s 空格或者空白
-4. \D `除了数字`
-5. \W  `除了字母 数字 下划线`
-6. \S `除了空格`
-7. `. 表示除了 \n外的任意一个字符`
-8. \ 转义字符
-9. | 或者
-10. [] 选择中括号中某一个
-11. () 分组
-12. [^] `选择非分组里的任意一个`
-13. \b `匹配边界 字符串的开头`
-14. ^ 限定开始位置
-15. $ 限定结束位置
-16. * `0个至无数个`
-17. ? `0个或者1个`
-18. + `1个至多个`
-19. {n} `正好n个`
-20. {n,} `至少n个`
-21. {n,m} `n至m个`
-
-## str.split()方法里面可以使用正则对象
-```
-console.log('abc34df5df'.split(/d/));// ["abc34","df5","df"]
-```
-
-## instanceof只能用于引用类型！！！因为instanceof适用于判断对象的prototype所指向的对象是否在另一个对象所在的原型链上
-* console.log([3] instanceof Array);//true
-* console.log([3] instanceof Object);//true
-## 而typeof 用于判断变量`类型`
-## xx.construtor用于判断变量的`构造函数`
-* console.log([1].constructor==Array);//true
-* console.log([1].constructor==Object);//false
-* console.log('dsd'.constructor==String);//true
-
-## console.log(String('a')==='a');//true
-
 ## 虽然字符串有数组的大多数方法，但是没有splice方法
 
 ## 字符串长度
@@ -222,4 +126,30 @@ console.log('abc34df5df'.split(/d/));// ["abc34","df5","df"]
 			// 3. 对于逗号后面没有逗号及其他东西的。。不算数，所以这里是3
 			var three=[1,,,]
 			console.log(three.length);//3
+```
+
+## ''与""
+1. ''指的是字符，不是字符串！！！，`''不等于"",不是String,所以split('')是错误的！`
+2. `""指的是字符串，split("")就是即使遇到空格也要切分，而split(" ")则是以空格为分隔符`
+
+## parseInt,parseFloat,split都是对字符串进行处理
+```
+parseInt()会把字符串解析为整数(进制不一定，第二个参数是进制)，对，字符串！虽然也可以输入数字，但是数字也是被转为整数
+parseFloat()会把字符串解析为十进制的浮点数！注意，parseFloat()不能指定进制，默认是十进制！
+			console.log(parseInt(1.11));//1
+			console.log(parseInt(-1.11));//-1
+			console.log(parseFloat(1.11));//1.11
+			console.log(parseFloat(-1.11));//-1.11
+			
+			console.log(parseInt(1/4));//0  parseInt函数里面可以进行一些数值运算
+			console.log(parseInt(7/4));//1
+			console.log(parseInt(8/4));//2
+			
+			console.log(parseInt(11,8));//9
+			console.log(parseFloat(11,8));//11，parseFloat不能指定进制
+			console.log(parseFloat(11,4));//11,parseFloat只有一个参数，也就是字符串
+			
+split()方法是给字符串用的，给其他数据类型用会报错！
+			console.log('2.2'.split('.')[0]);//2
+			// console.log([2,2].split());//报错，不是字符串。。
 ```
