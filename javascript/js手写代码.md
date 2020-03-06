@@ -131,6 +131,7 @@ document.onmousemove=function(e){
 			// 手写call 
 			Function.prototype.call=function(context,...callargs){
 				context=context||window;
+				// 添加属性，隐式调用函数
 				context.func=this;
 				if(typeof context.func !=='function'){
 					throw new TypeError("必须是函数调用call");
@@ -156,4 +157,71 @@ document.onmousemove=function(e){
 				delete context.func;
 				return res
 			}
+```
+
+## 手写new运算符
+```
+			// 相当于 new func(...args)
+			function _new(func,...args){
+				if(typeof func !='function'){
+					throw new TypeError('必须是函数调用')
+				}
+				// 创建一个对象的原型指向函数的原型
+				let obj=Object.create(func.prototype)
+				console.log(obj);//{one}
+				// 该对象调用函数并且传参数,如果没有return的话，那么res就是undeifned
+				let res=func.call(obj,...args);// 函数调用没设置return就返回undefined
+				if(res&&(res instanceof Object)){
+					return res;
+				}
+				// 如果res==undefined,那么返回创建的对象，也就是obj
+				return obj;
+			}
+			function one(name,age){
+				this.name=name;
+				this.age=age;
+				return this;
+			}
+			console.log(_new(one,'yy',4))
+```
+
+
+## 手写instanceof
+```
+			// instance就是判断一个对象是否在另一个对象的原型链上
+			function _instanceof(obj1,obj2){
+				while(obj1){
+					if(obj1.__proto__==obj2.prototype){
+						return true;
+					}
+					a=a.__proto__;
+				}
+				return false
+			}
+			function one(){
+				
+			}
+			var t=new one();
+			console.log(t instanceof one)
+			// 一个实例的_proto_在 one构造函数>Object>null
+			console.log(t.__proto__.__proto__.__proto__);//null
+			console.log(t instanceof Function);//false,实例的原型链不在Function
+			console.log(t instanceof Object)
+```
+
+## 手写jsonp
+```
+// 手写jsonp,也就是在head标签处添加一个script标签，该标签的src能够返回一个js文件！
+			(function jsonp(){
+				let head=document.getElementsByTagName('head')[0]
+				let script=document.createElement('script');
+				script.src='https://res.wx.qq.com/open/libs/weuijs/1.2.1/weui.min.js'
+				// 给该元素挂载加载完成后的回调事件
+				script.addEventListener('load',(res)=>{
+					console.log(res)
+				})
+				head.appendChild(script)
+			})()
+			// 如果要获取jsonp加载之后的数据，那么需要和后台配合，让后台返回回调函数
+			
 ```
