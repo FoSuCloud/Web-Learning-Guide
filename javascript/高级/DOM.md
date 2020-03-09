@@ -3,6 +3,21 @@
 2. 浏览器对象模型的根元素是window
 3. document属于window的一个对象属性,window.document,因为文档对象模型其实就是一个页面，而页面处于浏览器中，也就是一个窗体中，也就是window
 
+## DOM内部插入
+* `element.append(content) ,前面是被插入的对象，后面是要在对象内插入的内容，例如ul.append(li),给无序列表添加一个子元素`
+* `element.appendTo(content),恰好相反，使用为 li.appendTo(ul),位置恰好相反，把li插入到ul中`
+* 注意:`append,appendTo都可以同时传入多个节点或者字符串，没有返回值`
+* `element.appendChild(content)只能传一个节点，且不支持传递字符串，返回值为追加的节点`
+* `并且如果element.appendChild(content),content这个参数是页面中之前存在过的节点的话，那么执行之后，该元素会被移除，然后再添加到element`
+
+* [记得写](https://blog.csdn.net/mr_orange_klj/article/details/81561163)
+
+## DOM第一个子节点是html
+* DOM(Document Object Model)简称文档对象模型，它是html和xml是文档编程的接口，
+* 它将文档解析为树结构，这个树的根部就是document,而document的第一个子节点(childeNodes[0])就是html，
+* 这才有了后面的一系列html元素。
+
+
 ## 元素内外文本及自身
 1. innerHTML:在读模式下，innerHTML返回元素的所有子节点(包括注释，文本，标签)，在写模式下会创建一个新的子节点代替原来的子节点
 2. outerHTML:在读模式下是获取该元素本身，在写模式下是创建一个新的节点代替原来的节点

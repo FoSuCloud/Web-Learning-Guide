@@ -13,54 +13,24 @@
 				white-space: nowrap;
 				word-wrap: nowrap;
 			}
-			.ten{
-				float: left;
-				background-color: #008000;
+			.two{
 				width: 100px;
 				height: 100px;
-			}
-			.ele{
-				clear: both;
+				background: green;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="nine">
-			<div class="ten"></div>
-			<form enctype="" onsubmit="return false;" autocomplete="off" >
-				<label for="one">name</label><input type="text" id="one"/>
-				<label for="two">age</label><input type="text" id="two"/>
-				<input type="submit"  value="提交" />
-			</form>
+		<div class="one">
+			<div class="two"></div>
 		</div>
-		<div class="ele"></div>
 		<script type="text/javascript">
-			var name = 'global';
-			var obj = {
-			    name: 'local',
-			    foo: function(){
-					console.log(this)
-			        this.name = 'foo';
-			    }.bind(window)
-			};
-			console.log(obj.foo());// 此时调用的this是window
-			// 由于new绑定的优先级大于bind绑定，所以函数内部this还是obj {}
-			var bar = new obj.foo();
-			console.log(bar);//{name：'foo'}
-			console.log(window.name);//global
-			
-			// 定时器任务，在最后放入任务队列，window对象没有被改变，所以输出 'global'
-			setTimeout(function() {
-			    console.log(window.name);
-			}, 0);
-			// 此时bar.name =foo,因为被赋值了
-			console.log(bar.name);
-			  
-			// 此时执行顺序是var bar3,bar2=bar,bar3=bar2, 所以bar3/bar2/bar都是指向同一个对象
-			var bar3 = bar2 = bar;
-			bar2.name = 'foo2';
-			// 所以bar2修改属性，bar3的也改变了，此时输出为'foo2'
-			console.log(bar3.name);
+			// var reg=^1[0-9]{10};
+			// console.log(reg.test('44444444444442'))
+			// console.log('333'.append('3'))
+			var tem=4
+			console.log(1+(tem--));//5
+			console.log(tem);//3
 		</script>
 	</body>
 </html>

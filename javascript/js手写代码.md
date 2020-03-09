@@ -225,3 +225,46 @@ document.onmousemove=function(e){
 			// 如果要获取jsonp加载之后的数据，那么需要和后台配合，让后台返回回调函数
 			
 ```
+
+## 手写防抖
+```
+			// 防抖(无论点击多少次，只要点击间隔时间小于设置时间则无效)
+			function debounce(func,wait){
+				var timer;
+				// 防抖第一次立即执行
+				var count=0;
+				// 产生闭包，每次执行都是执行返回的函数！
+				return function(){
+						if(count==0){count++;func();return;}
+						if(timer) clearTimeout(timer)
+						
+						timer=setTimeout(()=>{
+							func()
+						},wait)
+					}
+			}
+			var two=document.getElementsByClassName('two')[0]
+			two.addEventListener('click',debounce(function(){
+				console.log('点击')
+			},500))
+```
+
+## 节流
+```
+			// 节流(无论点击多少次，一定时间间隔内只触发一次)
+			function throttle(func,wait){
+				var timer;
+				return function(...args){
+					if(!timer){
+						func(...args);
+						timer=setTimeout(()=>{
+							timer=null;
+						},wait)
+					}
+				}
+			}
+			var two=document.getElementsByClassName('two')[0]
+			two.addEventListener('click',throttle(function(){
+				console.log('点击')
+			},5000))
+```
