@@ -12,9 +12,14 @@
 
 * [记得写](https://blog.csdn.net/mr_orange_klj/article/details/81561163)
 
+## Node
+* Node是一个基类，DOM中的element,text,comment都继承于它
+* `换句话说，element,text,comment都是特殊的node`
+* `分别叫做ELEMENT_NODE,TEXT_NODE,COMMENT_NODE`
+
 ## DOM第一个子节点是html
 * DOM(Document Object Model)简称文档对象模型，它是html和xml是文档编程的接口，
-* 它将文档解析为树结构，这个树的根部就是document,而document的第一个子节点(childeNodes[0])就是html，
+* 它将文档解析为树结构，这个树的根部就是document,而`document的第一个子节点(childeNodes[0])就是html`
 * 这才有了后面的一系列html元素。
 
 

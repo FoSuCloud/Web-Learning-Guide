@@ -25,12 +25,35 @@
 			<div class="two"></div>
 		</div>
 		<script type="text/javascript">
-			// var reg=^1[0-9]{10};
-			// console.log(reg.test('44444444444442'))
-			// console.log('333'.append('3'))
-			var tem=4
-			console.log(1+(tem--));//5
-			console.log(tem);//3
+			var a='window.a'
+			var obj={
+				a:'obj.a',
+				// 此时箭头函数是在对象内部，所以外层作用域就是window
+				foo:()=>{
+					return this.a;//window.a
+				},
+				foo2:function(){
+					console.log(this.a);// obj.a
+					// 此时的箭头函数的外层作用域是函数foo2
+					return ()=>{
+						return this.a;//obj.a
+					}
+				},
+				foo3:()=>{
+					// 由于是在对象内，所以外层作用域是window 
+					console.log(this.a);//window.a 
+					// 由于是在函数内，所以外层作用域是foo2
+					// 但是由于foo2是箭头函数，foo2定义时所在作用域是window
+					// 所以箭头函数内的箭头函数也是指向window
+					return ()=>{
+						return this.a;//window.a
+					}
+				}
+			}
+			console.log(obj.foo())
+			console.log(obj.foo2()(obj))
+			var obj2={a:2}
+			console.log(obj.foo2.call(obj2)())
 		</script>
 	</body>
 </html>

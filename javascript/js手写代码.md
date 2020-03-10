@@ -268,3 +268,20 @@ document.onmousemove=function(e){
 				console.log('点击')
 			},5000))
 ```
+
+## 对象数组去重
+```
+			function destinct(arr){
+				if(!(arr instanceof Array)){
+					throw new TypeError('必须是数组')
+				}
+				var newarr=arr.map((item)=>{
+					return JSON.stringify(item)
+				})
+				console.log(newarr)
+				return [...(new Set(newarr))].map((item)=>{
+					return JSON.parse(item)
+				})
+			}
+			console.log(destinct([{e:3},{e:3},{e:5}]))
+```
