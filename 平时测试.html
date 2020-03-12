@@ -13,47 +13,29 @@
 				white-space: nowrap;
 				word-wrap: nowrap;
 			}
-			.two{
-				width: 100px;
-				height: 100px;
-				background: green;
-			}
 		</style>
 	</head>
 	<body>
-		<div class="one">
-			<div class="two"></div>
-		</div>
+		<input type="text" id="circle">
 		<script type="text/javascript">
-			var a='window.a'
-			var obj={
-				a:'obj.a',
-				// 此时箭头函数是在对象内部，所以外层作用域就是window
-				foo:()=>{
-					return this.a;//window.a
-				},
-				foo2:function(){
-					console.log(this.a);// obj.a
-					// 此时的箭头函数的外层作用域是函数foo2
-					return ()=>{
-						return this.a;//obj.a
-					}
-				},
-				foo3:()=>{
-					// 由于是在对象内，所以外层作用域是window 
-					console.log(this.a);//window.a 
-					// 由于是在函数内，所以外层作用域是foo2
-					// 但是由于foo2是箭头函数，foo2定义时所在作用域是window
-					// 所以箭头函数内的箭头函数也是指向window
-					return ()=>{
-						return this.a;//window.a
+			function trottle(func,wait){
+				var timer;
+				return function(){
+					if(!timer){
+						timer=true;
+						func();
+						setTimeout(function(){
+							timer=null;
+						},wait)
 					}
 				}
 			}
-			console.log(obj.foo())
-			console.log(obj.foo2()(obj))
-			var obj2={a:2}
-			console.log(obj.foo2.call(obj2)())
+			
+			
+			var circle=document.getElementById('circle')
+			circle.onchange=trottle(function(){
+				console.log(circle.value)
+			},1000)
 		</script>
 	</body>
 </html>

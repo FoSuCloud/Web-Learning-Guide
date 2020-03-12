@@ -1,3 +1,22 @@
+## css驼峰格式
+```
+function cssStyle2DomStyle(sName) {
+    var arr=sName.split('-');
+    for(var i=0;i<arr.length;i++){
+        if(arr[0]==""){
+            arr.shift();
+            // 但是无论如何，第一个都不会大写，因此下一步直接判断下下个
+            continue;
+        }
+        if(arr[i]&&i!=0){
+            arr[i]=arr[i].slice(0,1).toUpperCase()+arr[i].slice(1)
+        }
+    }
+    return arr.join('')
+}
+```
+* 需要注意toUpperCase是对字符串整体都变大写，要实现首字母大写需要切割为只剩一个字母
+
 ## 生成圆形的点击区域
 1. `虽然使用border-radius后的元素占据宽高还是原来那么多，但是实际有效区域改变了`
 ```
@@ -284,4 +303,22 @@ document.onmousemove=function(e){
 				})
 			}
 			console.log(destinct([{e:3},{e:3},{e:5}]))
+```
+
+## promise实现红绿灯轮播
+```
+			// 使用promise实现一个圆(红绿灯) 红色1秒 绿色3秒 黄色5秒
+			 var circle=document.getElementById('circle');
+			 setInterval(function(){
+				 new Promise(()=>{
+					 circle.style.background='red'
+					 console.log(new Date())
+				 }).then(setTimeout(()=>{
+					 circle.style.background='green'
+					 console.log(new Date())
+				 },1000)).then(setTimeout(()=>{
+					 circle.style.background='yellow'
+					 console.log(new Date())
+				 },4000))
+			 },9000)
 ```

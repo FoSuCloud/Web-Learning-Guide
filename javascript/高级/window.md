@@ -30,3 +30,7 @@
 3. scrollTo(left,top)=> scroolTo({left:left,top:top})`scrollTo是绝对位置滚动，滚动到该位置`;
 4. scrollBy(left,top)=> scrollBy({left:left,top:top})`scrollBy是相对位置滚动，如果一直使用scrollBy(0,100)那就每次都向下滚动100px`
 5. `document.scrollingElement.scrollTop`也是绝对定位，但是一次只能设置一次x/y
+
+## window.history
+1. `禁止浏览器前进和后退的方法:1.window.history.go(0)  2.设置window.history.forward(1)禁止前进，window.history.forward(-1)禁止后退`
+2. 

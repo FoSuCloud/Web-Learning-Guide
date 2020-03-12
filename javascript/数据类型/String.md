@@ -2,7 +2,7 @@
 1. replace替换
 
 ## 不会改变原有字符串的方法
-1. substr(长度)，substring,slice,indexOf,lastIndexOf,concat(新子串)，charAt,charCodeAt,
+1. `substr(长度)，substring,slice`,indexOf,lastIndexOf,concat(新子串)，charAt,charCodeAt,
 2. split(分割出新数组，不会改变字符串)
 
 ## JSON.stringfy

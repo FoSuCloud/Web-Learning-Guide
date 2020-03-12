@@ -217,3 +217,8 @@ function commonParentNode(oNode1, oNode2) {
 
 ## 获取浏览器页面可用高度
 1. window.innerHeight
+
+## document.write
+1. document.write如果在页面加载完成(window.onload)之前执行，那么就在文档流中绘制内容
+2. document.write如果在页面加载完成之后执行，那么就会冲刷整个页面，内容重写
+3. 

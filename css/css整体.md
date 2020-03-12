@@ -1,3 +1,9 @@
+## sass
+* Sass包括两种类型的扩展名：.scss和.sass。
+* “.scss”文件扩展名完全符合CSS语法，而.sass不完全符合CSS语法，但写入速度更快
+* `在firebox中打开f12,可以看到scss变成了css文件`
+* `虽然sass是css预处理器，但是需要使用的时候，也要经过编译才行`
+
 ## 37.link和@import的区别
 1.link是xhtml标签，没有兼容性问题，而@import是css2.1才被提出的，低版本的浏览器不支持
 2.link支持加载css,js，而@import只能加载css
