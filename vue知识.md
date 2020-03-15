@@ -6,6 +6,31 @@
 ## vue首页白屏时间过长
 1. `使用分包的方法，每个组件都按需加载，通过require.ensure方法实现`
 2. `在页面中使用keep-alive,把用过的组件缓存，便于快速切换组件`
+3. `打包后存在.map文件，在config/index.js文件中设置productionSourceMap为false`
+4. `打包启动gzip压缩，也就是在config/index.js中设置productionGzip为true`
+* `另外启动gzip压缩还需要安装依赖(老版本不会出错)cnpm install --save-dev compression-webpack-plugin@1.12.0`
+* `然后由于我的webpack是3版本的，警告必须4版本，因此输入cnpm install webpack@^4.3.0`
+* `但是升级后还是报错，所以降回3.12.0版本`
+* `此外还需要在服务器中开启gzip压缩才行，我的是tomcat,所以在conf/server.xml中设置`
+```
+<Connector port="8080" protocol="HTTP/1.1" 
+    connectionTimeout="20000"
+    redirectPort="8443" 
+    compression="on"
+    compressionMinSize="2048"  // 大于2k才压缩
+    compressableMimeType="text/html,text/xml,image/png,image/jpeg,text/css,application/javascript" />
+```
+* `注意；如果体积很大却没压缩的话，可能那个文件类型没有添加进去compressableMimeType`
+5. 清除console.log打印语句，在webpack.prod.conf.js中设置
+```
+uglifyOptions: {
+        compress: {
+          warnings: false,
+          drop_debugger: true,  //后来添加的
+          drop_console: true  //后来添加的
+        }
+      },
+```
 
 ## vue中给data中的一个对象添加属性，视图没有更新
 * `虽然vue是响应式更新数据的，但是刚开始的vue实例中没有该属性，所以该属性就不会响应式更新`
@@ -53,6 +78,8 @@ change(){
 * 虚拟DOM(vdom)就是为了解决浏览器性能问题而提出来的
 * 假如有一个dom操作修改了10个dom节点，那么根据虚拟dom就可以把这10个修改的dom节点保存到本地的js对象中
 * 然后再把这个js对象一次性提交到dom树上，减少不必要的计算
+
+## vue-router实现原理
 
 1. 工作遇到什么问题？怎么解决的？
 * 经常遇到的问题就是视图没更新或者方法放错生命周期，解决方法就是先沿着出错的代码找到原因，如果以前没有遇到过这种错误，那就百度一下或者看一下文档

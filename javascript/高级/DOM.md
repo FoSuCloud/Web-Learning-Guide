@@ -22,6 +22,21 @@
 * 它将文档解析为树结构，这个树的根部就是document,而`document的第一个子节点(childeNodes[0])就是html`
 * 这才有了后面的一系列html元素。
 
+## 获取元素子节点
+```
+		<input type="text" list="data">
+		<datalist id="data">
+			<option value="one"></option>
+			<option value="two"></option>
+			<option value="three"></option>
+			<option>four</option>
+		</datalist>
+			var data=document.getElementById('data');
+			console.log(data.children[0]);// 子节点 one
+			console.log(data.childNodes[0]);// 换行符
+```
+* `childNodes[0]获取到的是元素第一个子节点，可能是换行符。。`
+* `children[0]获取到的是第一个子元素，不会是注释节点Comment,文本节点Text`
 
 ## 元素内外文本及自身
 1. innerHTML:在读模式下，innerHTML返回元素的所有子节点(包括注释，文本，标签)，在写模式下会创建一个新的子节点代替原来的子节点

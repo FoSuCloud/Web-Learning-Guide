@@ -18,34 +18,19 @@
 				height: 100px;
 				background-color: #008000;
 			}
-			.active{
-				color: red;
-			}
 		</style>
 	</head>
 	<body>
 		<div class="two"></div>
-		<input type="text" id="circle">
-		<label for="man">男</label><input type="radio" id="man" name="one" />
-		<label for="woman">女</label><input type="radio" id="woman" name="one" />
+		<input type="text" list="data">
+		<datalist id="data">
+			<option value="one"></option>
+			<option value="two"></option>
+			<option value="three"></option>
+			<option>four</option>
+		</datalist>
 		<script type="text/javascript">
-			var arrmethod=Object.create(Array.prototype);
-			['pop','push'].forEach(function(method){
-			Object.defineProperty(arrmethod,method,{
-				value:function(){
-					var origin=Array.prototype[method];
-					var res=origin.apply(this,arguments);
-					console.log(res,'劫持了')
-					return res;
-				}
-			})	
-			})
-			var arr=[4,3,22];
-			console.log(arrmethod.__proto__==Array.prototype);// true
-			arr.__proto__=arrmethod;  // 原型链绑定了
-			console.log(arr.__proto__.__proto__==arrmethod.__proto__);//true
-			arr.pop();
-			console.log(arr)
+
 		</script>
 	</body>
 </html>
