@@ -1,3 +1,18 @@
+## str的方法
+```
+			var str='4324324';
+			console.log(str.charAt(1));// 返回字符
+			
+			console.log(str.charCodeAt(1));// 返回字符编码
+			console.log(String.fromCharCode(33));// !,把编码转为字符
+			
+			console.log(str.indexOf('3',2));// 寻找3，从索引2开始查找,返回索引
+```
+* `indexOf有量噶参数，第二个参数可以设置，含义是开始查找的索引`
+* `charAt返回某个索引的字符`
+* `charCodeAt返回某个索引处的字符的编码`
+
+
 ## 会改变原有的字符串的方法
 1. replace替换
 

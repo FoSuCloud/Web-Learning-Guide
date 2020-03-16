@@ -38,6 +38,9 @@
 * `childNodes[0]获取到的是元素第一个子节点，可能是换行符。。`
 * `children[0]获取到的是第一个子元素，不会是注释节点Comment,文本节点Text`
 
+## 根据元素属性获取元素
+* 对于label标签，属性for为range，那么可以`document.querySelector('[for='range']')`
+
 ## 元素内外文本及自身
 1. innerHTML:在读模式下，innerHTML返回元素的所有子节点(包括注释，文本，标签)，在写模式下会创建一个新的子节点代替原来的子节点
 2. outerHTML:在读模式下是获取该元素本身，在写模式下是创建一个新的节点代替原来的节点

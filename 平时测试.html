@@ -13,24 +13,20 @@
 				white-space: nowrap;
 				word-wrap: nowrap;
 			}
-			.two{
-				width: 100px;
-				height: 100px;
-				background-color: #008000;
+			li{
+				padding: 10px;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="two"></div>
-		<input type="text" list="data">
-		<datalist id="data">
-			<option value="one"></option>
-			<option value="two"></option>
-			<option value="three"></option>
-			<option>four</option>
-		</datalist>
+		<div class="one">
+			
+		</div>
 		<script type="text/javascript">
-
+			var str='3213';
+			var reg=/d+/;
+			console.log(str.match(reg))
+			console.log(reg.test(str))
 		</script>
 	</body>
 </html>
