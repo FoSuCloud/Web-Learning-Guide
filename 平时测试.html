@@ -54,46 +54,73 @@
 			// }
 			// console.log(max)
 			
-			var arr='aaaaabbbbaaacccddefdasfdsafdsafdshfkdslfhdlsakhfieosoafhiwolasfhioelsahfioelshfoialewjafdhisoafhiehaflsdhifhealsdhfieohalfdhsaiofhealskhdfiehighalfdjasioehiohfeioafhsdf'.split('');
-			var len=arr.length;
-			var max=0;
-			for(var i=0;i<len;i++){
-				// 中心点分别为空格/元素时
-				// 注意，一定是左边元素小于右边元素，函数针对的是该种情况，所以需要变动下
-				if(i<=(len/2)){
-					getmax(arr.slice(0,i),arr.slice(i))
-					getmax(arr.slice(0,i),arr.slice(i+1),true)
-				}else{
-					getmax(arr.slice(i).reverse(),arr.slice(0,i).reverse())
-					getmax(arr.slice(i+1).reverse(),arr.slice(0,i).reverse(),true)
-				}
-			}
+			// var arr='aaaaabbbbaaacccddefdasfdsafdsafdshfkdslfhdlsakhfieosoafhiwolasfhioelsahfioelshfoialewjafdhisoafhiehaflsdhifhealsdhfieohalfdhsaiofhealskhdfiehighalfdjasioehiohfeioafhsdf'.split('');
+			// var len=arr.length;
+			// var max=0;
+			// for(var i=0;i<len;i++){
+			// 	// 中心点分别为空格/元素时
+			// 	// 注意，一定是左边元素小于右边元素，函数针对的是该种情况，所以需要变动下
+			// 	if(i<=(len/2)){
+			// 		getmax(arr.slice(0,i),arr.slice(i))
+			// 		getmax(arr.slice(0,i),arr.slice(i+1),true)
+			// 	}else{
+			// 		getmax(arr.slice(i).reverse(),arr.slice(0,i).reverse())
+			// 		getmax(arr.slice(i+1).reverse(),arr.slice(0,i).reverse(),true)
+			// 	}
+			// }
 			
-			function getmax(left,right,flag){
-				// console.log(left,right,flag)
-				var mymax=0;
-				// 选中元素为中心点时+1
-				if(flag){
-					mymax++;
-				}
-				var leftLen=left.length;
-				var rightIndex=0
-				for(var i=leftLen-1;i>=0;i--){
-				    for(var j=rightIndex;j<right.length;j++){
-				        if(left[i]==right[j]){
-				            mymax+=2;
-				            // 右边元素开始遍历的起点为当前索引+1
-				            rightIndex=j+1;
-				            break;
-				        }
-				    }
-				}
-				// 替换max
-				if(mymax>max){
-					max=mymax;
-				}
+			// function getmax(left,right,flag){
+			// 	// console.log(left,right,flag)
+			// 	var mymax=0;
+			// 	// 选中元素为中心点时+1
+			// 	if(flag){
+			// 		mymax++;
+			// 	}
+			// 	var leftLen=left.length;
+			// 	var rightIndex=0
+			// 	for(var i=leftLen-1;i>=0;i--){
+			// 	    for(var j=rightIndex;j<right.length;j++){
+			// 	        if(left[i]==right[j]){
+			// 	            mymax+=2;
+			// 	            // 右边元素开始遍历的起点为当前索引+1
+			// 	            rightIndex=j+1;
+			// 	            break;
+			// 	        }
+			// 	    }
+			// 	}
+			// 	// 替换max
+			// 	if(mymax>max){
+			// 		max=mymax;
+			// 	}
+			// }
+			
+			// console.log(max)
+			
+			var arr='abab'.split('')
+			
+			
+			while(arr.length<7){
+			    var len=arr.length;//4 5 
+			    var mid=Math.floor(len/2);//2 2
+			
+			    for(var i=mid-1;i>=0;i--){
+					// arr[1] arr[2]; arr[1] arr[3]; arr[0] arr[4]
+			        if(arr[i]!=arr[len-i-1]){
+			            if(arr[len-i-1]==''){
+			                arr[len-i-1]=arr[i];
+			                break;
+			            }
+			            arr.push('')
+			            break;
+			        }
+			    }
+			    // 判断是否是回文
+				var old=arr.slice()
+			    if(old.join('')==old.reverse().join('')){
+			        console.log(arr.length);
+			        break;
+			    }
 			}
-			console.log(max)
 		</script>
 	</body>
 </html>
