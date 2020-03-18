@@ -283,4 +283,106 @@ Promise.resolve()
 * `此时打印 fail2 error!`
 
 ## promise的finally
+* 1. finally方法不管promise对象最后的状态如何都会执行
+* 2. finally方法的回调函数不接受任何参数，`也就无法在finally中获知最终状态是resolved还是rejected`
+* 3. finally最终默认返回的是一个`原来的promise对象值`，`如果抛出异常则返回异常的promise对象`
 * [22](https://mp.weixin.qq.com/s/9Xk-HBQFaIEpyH8FqxBi6g)
+```
+Promise.resolve('1')
+  .then(res => {
+    console.log(res)
+  })
+  .finally(() => {
+    console.log('finally')
+  })
+Promise.resolve('2')
+  .finally(() => {
+    console.log('finally2')
+  	return'我是finally2返回的值'
+  })
+  .then(res => {
+    console.log('finally2后面的then函数', res)
+  })
+```
+* `第二个promise先执行finally再执行then`
+* `由于finally没有抛出错误，所以返回的依旧是原来的promise对象`
+* `所以第二个promise的then打印2`
+* `'1''finally2''finally''finally2后面的then函数' '2'`
+---
+* `如果finally抛出了错误，那么下一个then接收的就不是原来的promise对象而是错误`
+```
+Promise.resolve('1')
+  .finally(() => {
+    console.log('finally1')
+    thrownewError('我是finally中抛出的异常')
+  })
+  .then(res => {
+    console.log('finally后面的then函数', res)
+  })
+  .catch(err => {
+    console.log('捕获错误', err)
+  })
+```
+* 'finally1'
+* '捕获错误' Error: 我是finally中抛出的异常
+* `由于finally抛出了错误，然后then没有reject函数，所以直接到catch方法中，然后finally返回的是错误的对象，所以打印抛出异常`
+
+## 链式调用后面的内容需要等前一个调用完才会放入微任务队列(也就是不会立马把下一个任务加入微任务队列，需要等当前任务执行完毕！)
+
+## promise.all
+* `all方法的作用是接收一组异步任务，然后并行执行异步任务，在所有的操作执行完毕后才回调！`
+* `参数是一个数组！`
+
+## promise.race
+* `race方法也是接收一组异步任务，然后并行执行异步任务，但是只保留第一个执行结果，剩下的异步任务仍在执行，但是执行结果无法获取`
+
+* promise.all()的应用(多个异步任务同时执行完毕才回调)
+```
+			function add(x){
+				var p=new Promise(r => setTimeout(r(x,console.log(x),1000)));
+				return p;
+			}
+			Promise.all([add(1),add(2),add(3)]).then(res => console.log(res))
+```
+* `此处的r指的是resolve,然后r(x,console.log(x))其实就是resolve(x,console.log(x)),因为console.log执行完就消失了，所以依旧是一个参数`
+* `all方法后的then接收的是异步任务数组返回的结果，就是结果数组`
+
+## 使用promise.all是存在多个异步任务异常，catch只捕获最早的那个错误
+```
+			function runAsync (x) {
+			  const p = new Promise(r => setTimeout(() => r(x, console.log(x)), 1000))
+			  return p
+			}
+			function runReject (x) {
+			  const p = new Promise((res, rej) => setTimeout(() => rej(`Error: ${x}`, console.log(x)), 1000 * x))
+			  return p
+			}
+			Promise.all([runAsync(1), runReject(4), runAsync(3), runReject(2)])
+			  .then(res =>console.log(res))
+			  .then(res =>console.log(res),rej=> console.log('error:',rej))
+			  .catch(err =>console.log(err))
+```
+* `多个异步任务是并行执行的，哪个先执行完毕不一定`
+* `当all方法出现异常时，all之后的then接收的是reject函数，参数就是第一个异常返回的参数`
+* `当all方法之后的then不存在reject函数时，则catch接受异常参数`
+* `即使不是all之后的第一个then存在reject函数，只要之后的then存在reject函数，就不会轮到catch去接收异常`
+
+## promise.race虽然只会接收第一个任务的结果，但是其他异步任务依旧会执行
+```
+function runAsync(x) {
+  const p = newPromise(r =>
+    setTimeout(() => r(x, console.log(x)), 1000)
+  );
+  return p;
+}
+function runReject(x) {
+  const p = newPromise((res, rej) =>
+    setTimeout(() => rej(`Error: ${x}`, console.log(x)), 1000 * x)
+  );
+  return p;
+}
+Promise.race([runReject(0), runAsync(1), runAsync(2), runAsync(3)])
+  .then(res =>console.log("result: ", res))
+  .catch(err =>console.log(err));
+```
+* `0 'Error: 0'1 2 3`

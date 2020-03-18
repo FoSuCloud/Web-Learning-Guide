@@ -12,6 +12,8 @@
 * `charAt返回某个索引的字符`
 * `charCodeAt返回某个索引处的字符的编码`
 
+## 注意:`直接替换str[1]=xxx,并不会生效！！并且字符串不存在splice方法，只能使用replace/substring/slice方法进行组合`
+
 ## 会改变原有的字符串的方法
 1. replace替换
 
