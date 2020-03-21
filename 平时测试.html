@@ -16,25 +16,19 @@
 			li{
 				padding: 10px;
 			}
+			
 		</style>
 	</head>
 	<body>
 		<div class="one">
-			<img src="笔记整理/one/3.jpg" width="200" height="100">
+			<label for="1">1</label><input type="checkbox" name="one" id="1"  />
+			<label for="2">2</label><input type="checkbox" name="one" id="2"  />
+			<label for="3">3</label><input type="checkbox" name="one" id="3"  />
 		</div>
 		<script type="text/javascript">
-			function runAsync (x) {
-			  const p = new Promise(r => setTimeout(() => r(x, console.log(x)), 1000))
-			  return p
-			}
-			function runReject (x) {
-			  const p = new Promise((res, rej) => setTimeout(() => rej(`Error: ${x}`, console.log(x)), 1000 * x))
-			  return p
-			}
-			Promise.all([runAsync(1), runReject(4), runAsync(3), runReject(2)])
-			  .then(res =>console.log(res))
-			  .then(res =>console.log(res),rej=> console.log('error:',rej))
-			  .catch(err =>console.log(err))
+			var obj={a:3,b:4,e:54,c:1}
+			obj.d=5
+			console.log(Object.keys(obj))
 		</script>
 	</body>
 </html>

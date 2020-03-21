@@ -4,6 +4,21 @@
 3. `onpropertychange事件会在输入框内容改变时触发，即使是通过js改变的`
 4. `但是onpropertychange事件只支持IE11 以下！！！以下`
 
+## 多选框
+```
+		<div class="one">
+			<label for="1">1</label><input type="checkbox" name="one" id="1"  />
+			<label for="2">2</label><input type="checkbox" name="one" id="2"  />
+			<label for="3">3</label><input type="checkbox" name="one" id="3"  />
+		</div>
+		
+		var one=document.getElementsByClassName('one')[0];
+		one.onclick=function(){
+			// 获取第n个多选框是否选中
+			console.log(one.children[1].checked);
+		}
+```
+
 ## html5支持的属性
 ```
 			<li>

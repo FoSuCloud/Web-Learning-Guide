@@ -3,6 +3,16 @@
 2. 浏览器对象模型的根元素是window
 3. document属于window的一个对象属性,window.document,因为文档对象模型其实就是一个页面，而页面处于浏览器中，也就是一个窗体中，也就是window
 
+## innerHTML直接插入html代码。。
+```
+			.active{
+				color: red;
+				font-size: 30px;
+			}
+			var one=document.getElementsByClassName('one')[0];
+			one.innerHTML="<span class='active'>使用innerHTML可以插入元素。。</span>"
+```
+
 ## DOM内部插入
 * `element.append(content) ,前面是被插入的对象，后面是要在对象内插入的内容，例如ul.append(li),给无序列表添加一个子元素`
 * `element.appendTo(content),恰好相反，使用为 li.appendTo(ul),位置恰好相反，把li插入到ul中`
