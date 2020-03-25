@@ -1,3 +1,10 @@
+## 子网掩码
+
+## 广播地址
+
+## 计算
+* [参考](https://blog.csdn.net/u014465934/article/details/81146443?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task)
+
 ## cn域名是中国的意思，是顶级域名
 1. 正确的域名是 edu.cn, youyou.com ,net.jp
 2. `cn.edu错误！顶级域名应该在最后`
@@ -8,6 +15,15 @@
 * A类:10.0.0.0——10.255.255.255
 * B类:172.16.0.0——172.31.255.255
 * C类:192.168.0.0——192.168.255.255
+
+## ipv4,ipv6区别
+1. `ipv4地址长度为32位，ipv6地址长度为128位`
+
+## 顶级域名
+1. com公司企业
+2. net网络服务机构
+3. org非盈利组织
+4. edu教育机构
 
 ## ABC类地址
 1. A类地址的网络地址有7位，主机地址为24位

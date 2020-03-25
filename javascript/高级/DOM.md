@@ -3,6 +3,26 @@
 2. 浏览器对象模型的根元素是window
 3. document属于window的一个对象属性,window.document,因为文档对象模型其实就是一个页面，而页面处于浏览器中，也就是一个窗体中，也就是window
 
+## 获取元素的附近元素
+```
+			// 1. 获取某个元素
+			var child1=document.getElementsByClassName('child1')[0];
+			// 2.获取某个元素的父元素
+			var father=child1.parentElement;
+			console.log(father);//<div class="father">
+			// 3. 获取某个元素下一个兄弟元素
+			var nextbother=child1.nextElementSibling;
+			console.log(nextbother);//<div class="child2"></div>
+			// 4.获取某个元素的上一个兄弟元素
+			var prebiewbother=nextbother.previousElementSibling;
+			console.log(prebiewbother);//<div class="child1"></div>
+			// 5.获取元素的第一个子元素，注意不是节点！
+			console.log(father.children[0]);//<div class="child1"></div>
+			// 5.1 如果是childNodes则是子节点集合，另外firstChild,lastChild都是子节点
+			console.log(father.childNodes);//NodeList(9) [text, div.child1, text, div.child2, text, div.child3, text, div.child4, text]
+			console.log(father.firstChild);//#text
+```
+
 ## innerHTML直接插入html代码。。
 ```
 			.active{
