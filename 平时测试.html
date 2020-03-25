@@ -25,81 +25,19 @@
 			
 		</div>
 		<script type="text/javascript">
-			var origin='ATTTAA'.split('');
-			var target='TTAATT'.split('');
-			
-			// 存储初始索引
-			var start=-1;
-			var len=origin.length;
-			var num=0;
-			for(var i=0;i<len;i++){
-				for(var j=i;j<len;j++){
-					if(origin[i]==target[i]){
-						break;
-					}
-					// 比较数组
-					if(origin[j]!=target[j]){
-						console.log(i,origin)
-						// 第一个不同的位置索引
-						if(start==-1){
-							start=i;
-							// 如果是最后一个。那就修改
-							if(i==len-1){
-								origin[i]=target[j];
-								start=-1;
-								num++;
-							}
-							continue;
-						}else if(start!=-1&&origin[start]!=origin[j]){
-							// 第二个不同的位置索引(此时都是选择交换)
-							var tem=origin[j];
-							origin[j]=origin[start];
-							origin[start]=tem;
-							start=-1;
-							num++;
-							break;
-						}else if(start!=-1&&origin[start]==origin[j]){
-							// 找不到不同的，那继续寻找下一个
-							if(j==len-1){
-								// 实在没有相同的就修改
-								origin[i]=target[j];
-								num++;
-								start=-1;
-							}
-						}
-					}
+			function clone(obj){
+				if(obj instanceof Date){
+					return new Date(obj.valueOf())
+				}else if(obj instanceof RegExp){
+					return new RegExp(obj.valueOf())
 				}
 			}
-			console.log(num,origin);
-			
-			// var line='2 3'.split(' ').map(Number);
-			// var n=line[0];
-			// var m=line[1];
-			// var sum=n+m;
-			// // 保留4位小数
-			// var num=0;
-			// // 保存上一轮b同学抽不中的概率
-			// var nob=1;
-			// while(n<=sum){
-			// 	// 首先计算a同学本轮获胜的概率
-			// 	var a=nob*(n/sum);
-			// 	sum--;
-			// 	// m--;
-				
-			// 	// 假设b同学本轮抽不中
-			// 	nob=nob*(1-a)*((sum-n)/(sum))*((n)/(sum-1))
-			// 	sum-=2;  //减两张
-				
-			// 	// 加上本轮a同学获胜的概率
-			// 	num=num+a;
-				
-				
-			// 	// 抽完之后n<=0则退出
-			// 	if(n<=0||sum<1){
-			// 		break;
-			// 	}
-			// }
-			// console.log(num.toFixed(4));
+			var a=new Date();
+			console.log(a===clone(a));// false
+			console.log(clone(a))
+			var b=new RegExp(/\d/);
+			console.log(b===clone(b));// false
+			console.log(b)
 		</script>
 	</body>
 </html>
