@@ -322,3 +322,35 @@ document.onmousemove=function(e){
 				 },4000))
 			 },9000)
 ```
+
+## setTimeout实现setInterval
+```
+			class myinterval{
+				constructor(){
+					this.stop=false
+				}
+				on(func,wait){
+					var that=this;
+					var timer=setTimeout(function(){
+						if(that.stop){
+							clearTimeout(timer)
+						}else{
+							func();
+							that.on(func,wait);	
+						}
+					},wait)
+				}
+				off(){
+					console.log('关闭')
+					this.stop=true;
+				}
+			}
+			var left=document.getElementsByClassName('left')[0]
+			var two=new myinterval()
+			two.on(function(){
+				console.log('使用setTimeout实现setInterval')
+			},1000)
+			setTimeout(function(){
+				two.off();
+			},3000)
+```

@@ -3,6 +3,15 @@
 2. 浏览器对象模型的根元素是window
 3. document属于window的一个对象属性,window.document,因为文档对象模型其实就是一个页面，而页面处于浏览器中，也就是一个窗体中，也就是window
 
+## BOM(浏览器对象模型)
+1. window:`window是窗口对象，表示整个浏览器窗口，属于es中的global对象，也就是所有的全局变量和函数都是它的属性，包括document,location`
+* `window对象是BOM对象和核心！！！但是BOM对象包括window,location,navigation,screen,history六个，而其余五个都是window的属性`
+2. document:`是window对象的一个属性，用于处理页面文档`
+3. location:`获取当前页面的地址url,并把浏览器重定向到新的页面`
+4. navigator:`提供了浏览器有关的信息，例如userAgent`
+5. screen:`用于获取用户的屏幕信息`
+6. history:`根据浏览器访问历史进行翻页，上一页，下一页，或者几页`
+
 ## 获取元素的附近元素
 ```
 			// 1. 获取某个元素

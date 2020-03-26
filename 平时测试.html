@@ -17,27 +17,48 @@
 			li{
 				padding: 10px;
 			}
-			
+			.left{
+				float: left;
+				width: 100px;
+				height: 100px;
+				background-color: #008000;
+			}
+			.right{
+				margin-left: 100px;
+				height: 100px;
+				background-color: #FF0000;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="one">
-			
+			<div class="left"></div>
+			<a href="#name">哈希</a>
+			<a href="#age">哈希</a>
+			<a href="#who">哈希</a>
+			<input type="text" name="" id="mytext" value="" />
 		</div>
 		<script type="text/javascript">
-			function clone(obj){
-				if(obj instanceof Date){
-					return new Date(obj.valueOf())
-				}else if(obj instanceof RegExp){
-					return new RegExp(obj.valueOf())
-				}
+			function Mirror(root)
+			{
+			    // write code here
+			    var num=root.length;
+			    var tem=num;
+			    var arr=[]
+			    for(var i=0;i<tem;i++){
+			        if(Math.pow(2,i)<=num){
+			            var my=root.splice(0,Math.pow(2,i));
+			            arr.push(my);
+			            num=root.length;
+						console.log(root,my,arr)
+			        }else{
+			            return arr.reduce((a,b)=>{
+			                return a.reverse().concat(b.reverse());
+			            })
+			        }
+			    }
 			}
-			var a=new Date();
-			console.log(a===clone(a));// false
-			console.log(clone(a))
-			var b=new RegExp(/\d/);
-			console.log(b===clone(b));// false
-			console.log(b)
+			console.log(Mirror([8,6,10,5,7,9,11]))
 		</script>
 	</body>
 </html>
