@@ -15,6 +15,7 @@
 2. iframe的内容无法被搜索引擎找到，SEO不好
 3. 移动设备无法完全显示iframe,兼容性差
 4. iframe会增加服务器的http请求。
+5. iframe会阻塞页面的onload事件(因为window.onload事件要等到页面所有资源加载完成才会执行)
 ```
 7. `所以现在很多都是用ajax请求来代替iframe`
 
