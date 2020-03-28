@@ -50,6 +50,11 @@ change(){
 * `解决方法:通过this.$set(obj,'key',value)来添加一个响应式的属性`
 `this.$set(obj,'b','value')`
 
+## 为什么使用$set可以解决新增的对象属性不是响应式的问题？
+* `如果对数组对象使用$set方法，那么就是监听数组对象的splice/push/pop这些方法，因为数组对象的改变不只是监听setter`
+* `如果目标是对象，那么如果属性之前不存在，那么就会调用defineReactive方法进行响应式处理`
+* `defineReactive方法就是在vue初始化对象时，给对象属性采用Object.definedProperty，动态添加getter和setter的功能所调用的方法`
+
 2、说说Vuex的作用以及应用场景
 * vuex使用集中式存储管理所有组件的状态，并以相应的规则保证状态可以被改变
 * 我觉得vuex主要是在复杂的项目中需要用到，在小型项目中，为了少下载一个插件，减少体积，可以直接使用props,emit完成父子组件传值就足够了
@@ -92,12 +97,23 @@ change(){
 ```
 export default new Router({
 	routes,
-  mode:'history',  // 使用history模式
+    mode:'history',  // 使用history模式
 	strict: process.env.NODE_ENV !== 'production'
 })
 ```
 * `此时部署到服务器后，可以加载到页面文件，但是无法显示内容`
 * `后端部分暂时不理解。。`
+
+## vue-router的hash模式和history模式的实现原理
+1. hash模式的实现原理
+* url中的hash值只是客户端的一种状态，也就是向服务器端发出请求时，`hash部分不会被发送`
+* hash值的改变，都会在浏览器的访问历史中增加一个记录，所以我们能够通过浏览器进行回退，前进，以及控制hash的切换
+* 可以通过a标签设置href属性，当用户点击之后，url的hash值发生改变，或者通过hsitory.hash进行赋值改变
+* 也可以监听`hashchange事件来监听hash值的变化，从而对页面进行跳转`
+2. history模式的实现原理
+* h5提供了history api来实现url的变化，`history.pushState,history.replaceState`
+* `可以监听popstate事件来监听url的变化，从而对页面进行跳转(渲染)`
+* `需要注意的是history.pushState和history.replaceSate不会触发popstate事件，此时就需要我们手动触发页面跳转`
 
 1. 工作遇到什么问题？怎么解决的？
 * 经常遇到的问题就是视图没更新或者方法放错生命周期，解决方法就是先沿着出错的代码找到原因，如果以前没有遇到过这种错误，那就百度一下或者看一下文档

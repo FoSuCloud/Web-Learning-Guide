@@ -35,7 +35,51 @@
 			
 		</div>
 		<script type="text/javascript">
-			
+			function mypromise(func){
+				var that=this;
+				// 回调函数集
+				that.funclist=[];
+				// resolve方法
+				function resolve(value){
+					// 微任务
+					setTimeout(()=>{
+						that.data=value
+						that.funclist.forEach((callback)=>{
+							callback(value)
+						})
+					})
+				}
+				// 执行用户传入的函数
+				func(resolve.bind(that))
+			}
+			mypromise.prototype.then=function(onResolved){
+				var that=this;
+				return new mypromise(resolve => {
+					that.funclist.push(function(){
+						var res=onResolved(that.data);
+						if(res instanceof mypromise){
+							res.then(resolve)
+						}else{
+							resolve(res);
+						}
+					})
+				})
+			}
+			const func=resolve => {
+				setTimeout(()=>{
+					resolve(1)
+				},1000)
+			}
+			var promise1 = new mypromise(func)
+			promise1.then(res => {
+			  console.log(res)
+			  return new mypromise(resolve => {
+			    setTimeout(() => {
+			      resolve(2)
+			    }, 500)
+			  })
+			})
+			console.log(promise1);
 		</script>
 	</body>
 </html>

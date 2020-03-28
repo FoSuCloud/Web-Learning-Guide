@@ -1,3 +1,52 @@
+## 手写promise
+```
+			function mypromise(func){
+				var that=this;
+				// 回调函数集
+				that.funclist=[];
+				// resolve方法
+				function resolve(value){
+					// 微任务
+					setTimeout(()=>{
+						that.data=value
+						that.funclist.forEach((callback)=>{
+							callback(value)
+						})
+					})
+				}
+				// 执行用户传入的函数
+				func(resolve.bind(that))
+			}
+			mypromise.prototype.then=function(onResolved){
+				var that=this;
+				return new mypromise(resolve => {
+					that.funclist.push(function(){
+						var res=onResolved(that.data);
+						if(res instanceof mypromise){
+							res.then(resolve)
+						}else{
+							resolve(res);
+						}
+					})
+				})
+			}
+			const func=resolve => {
+				setTimeout(()=>{
+					resolve(1)
+				},1000)
+			}
+			var promise1 = new mypromise(func)
+			promise1.then(res => {
+			  console.log(res)
+			  return new mypromise(resolve => {
+			    setTimeout(() => {
+			      resolve(2)
+			    }, 500)
+			  })
+			})
+			console.log(promise1);
+```
+
 ## 例题1
 ```
 			const pro=new Promise((res,rej)=>{
@@ -14,7 +63,7 @@
 
 ## promise内部执行resolve只是改变状态，不会立即执行resolve对应的函数
 ```
-const promise = newPromise((resolve, reject) => {
+const promise = new Promise((resolve, reject) => {
   console.log(1);
   resolve('success');// 改变promise的状态为resolved并且保存参数
   console.log(2);
@@ -229,7 +278,7 @@ promise.then(res => {
 ```
 * `最后输出timer,success,1001;success,1001`
 * `两个then任务都是在同一个宏任务队列周期触发的，所以时间应该差不多`
-* `即使调用第二次，promise的状态依旧是{resolved success}`
+* `即使调用第二次，promise的状态依旧是{resolved success}(非链式调用时)`
 
 ## promise特性五：不能返回自身，否则会陷入死循环
 ```
@@ -314,7 +363,7 @@ Promise.resolve('2')
 Promise.resolve('1')
   .finally(() => {
     console.log('finally1')
-    thrownewError('我是finally中抛出的异常')
+    throw new Error('我是finally中抛出的异常')
   })
   .then(res => {
     console.log('finally后面的then函数', res)
