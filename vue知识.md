@@ -62,6 +62,36 @@ change(){
 
 3、说说Vue组件的数据通信方式
 
+## 子组件触发父组件方法通信方式:attrs/listeners
+1. 首先创建一个父组件a,然后创建子组件b,b组件的子组件为c
+2. a组件通过v-bind给子组件b传递数据，`1. foo字段被组件b的props获取，所以不出现在attrs`
+3. `1.2 除了foo字段，其他字段都出现在b组件的attrs中`
+4. 然后a组件不需要设置listeners,b组件就可以直接向a组件触发a组件的绑定函数，通过this.$emit
+5. `2. 但是c组件想触发a组件的绑定函数该怎么办？首先b组件给c组件设置$listners`
+6. `2.1 c组件被绑定listners之后，通过this.$emit就可以触发a组件的函数了`
+
+## 但是父组件怎么触发子组件方法？使用on
+```
+        // 1.emit调用$on绑定的事件
+        this.$refs.child.$emit('child1','父组件触发子组件方法')
+        // 2.直接调用函数(不是事件，而是函数)
+        this.$refs.child.getdata("直接调用")
+
+        // 子组件
+        // 这是个被父组件触发的子组件函数
+        getdata(res){
+          console.log(res)
+        }
+        created() {
+          // 监听事件
+          this.$on('child1',function(res){
+            console.log(res)
+          })
+          console.log(this.$attrs); // { "boo": "Html", "coo": "CSS", "doo": "Vue", "title": "前端工匠" }
+        },
+```
+
+
 4、Vue的源码有看过吗？说说vuex工作原理
 * `首先需要说一下vue中的computed属性的原理`
 * vue中的computed属性可以监听data中的数据变化其实也是依赖于发布者订阅者模式
