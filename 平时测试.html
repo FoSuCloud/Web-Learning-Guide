@@ -32,44 +32,27 @@
 	</head>
 	<body>
 		<div class="one">
-			
+			<a href="vue知识.md">修改a标签</a>
 		</div>
 		<script type="text/javascript">
-			var line='7 0'.split(' ').map(Number)
-			var n=line[0]
-			var sum=line[1]
-			var arr=new Array(n+1).join('0').split('');
-			arr.map((item,i)=>{
-			    arr[i]=i+1
-			});
-			// 两层遍历
-			var num=0;
-			var label=['+','-',''];
-			function dfs(arr){
-			   var myarr=[]
-			   if(arr.length==2){
-			      for(var j=0;j<3;j++){
-			        myarr.push(arr[0]+label[j]+arr[1])
-			      }
-			       return myarr;
-			   }
-			   // 否则
-			   for(var j=0;j<3;j++){
-				   var tem=dfs(arr.slice(1));
-				   for(var k=0;k<tem.length;k++){
-					   myarr.push(arr[0]+label[j]+tem[k])
-				   }
-			   }
-			   return myarr;
-			}
-			var myarr=dfs(arr)
-			// console.log(myarr)
-			for(var item in myarr){
-			    if(eval(myarr[item])==sum){
-			        num++;
+			var arr='-5,-6,2,-8,-10'.split(',').map(Number);
+			var len=arr.length;
+			var max=0;
+			// 第一层是窗口大小，第二层是起始索引
+			for(var i=1;i<=len;i++){
+			    for(var j=0;j<=len-i;j++){
+			        if(i>1){
+			            var tem=arr.slice(j,j+i).reduce((a,b)=>{
+			                return a+b
+			            })
+			        }else{
+			            var tem=arr[j]
+						console.log(tem)
+			        }
+			        max=tem>max?tem:max;
 			    }
 			}
-			console.log(num)
+			console.log(max)
 		</script>
 	</body>
 </html>

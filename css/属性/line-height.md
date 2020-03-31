@@ -50,3 +50,7 @@
 ---
 * `对于一行文本来说，存在四线三格(英文中的)，从顶部到底部分别是顶线，中线，基线，底线`
 * `content area内容区域也就是顶线和底线之间的区域`
+
+## 行高继承例子
+1. `父元素line-height:1.5,那么子元素的行高就是子元素自身的font-size*1.5,例如子元素font-size=16px,那么line-height=116*1.5`
+2. `如果父元素line-height:150%,font-size:16px,那么子元素继承的行高就是16px*1.6px=24px,即使子元素的font-size=32px,lineh-height依旧是24px`

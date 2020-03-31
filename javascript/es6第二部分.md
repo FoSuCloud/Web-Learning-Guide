@@ -31,3 +31,18 @@
 			let {bar:foo,bar='f'}={bar:'bar',foo:'foo'}
 			console.log(foo,bar);//bar bar 
 ```
+
+## Symbol数据类型
+* Symbol数据类型是es6中新增的基本数据类型，`最大特点就是 独一无二！`
+* 例如:`两个基本数据的值使用了Symbol()就不会==了`
+```
+			let s1=Symbol("one")
+			let s2=Symbol("one");
+			console.log(s1==s2);//false
+```
+* `注意:Symbol()括号里面的参数不可以是Symbol实例！(除此之外，对象和基本数据类型都可以)`
+```
+			console.log(Symbol(s1));//Cannot convert a Symbol value to a string
+```
+* `注意:Symbol属于基本数据类型的一种，所以在函数中作为参数也只是传递值！没有引用地址的！`
+* `即使Symbol(obj),生成的依旧是基本数据类型`
