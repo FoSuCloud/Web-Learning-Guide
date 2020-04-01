@@ -7,7 +7,7 @@
 ## 37.link和@import的区别
 1.link是xhtml标签，没有兼容性问题，而@import是css2.1才被提出的，低版本的浏览器不支持
 2.link支持加载css,js，而@import只能加载css
-3.link加载的内容是和页面一起加载的，而@import加载的内容要页面加载之后才被加载
+3.link加载的内容是`和页面一起加载,所以是异步的`的，而`@import加载的内容要页面加载之后才被加载`
 
 ## css默认值
 * border-width,outline-width默认值为medium，默认为中等的边框，轮廓

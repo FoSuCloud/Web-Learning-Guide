@@ -35,24 +35,11 @@
 			<a href="vue知识.md">修改a标签</a>
 		</div>
 		<script type="text/javascript">
-			var arr='-5,-6,2,-8,-10'.split(',').map(Number);
-			var len=arr.length;
-			var max=0;
-			// 第一层是窗口大小，第二层是起始索引
-			for(var i=1;i<=len;i++){
-			    for(var j=0;j<=len-i;j++){
-			        if(i>1){
-			            var tem=arr.slice(j,j+i).reduce((a,b)=>{
-			                return a+b
-			            })
-			        }else{
-			            var tem=arr[j]
-						console.log(tem)
-			        }
-			        max=tem>max?tem:max;
-			    }
-			}
-			console.log(max)
+			let arr1 = [0, 1, 2];
+			let arr2 = [3, 4, 5];
+			arr1.push(...arr2);
+			console.log(arr1)
+			console.log(Object.prototype.toString.call(arr1)==='[object Array]')
 		</script>
 	</body>
 </html>

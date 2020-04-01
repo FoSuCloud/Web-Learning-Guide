@@ -33,4 +33,3 @@
 
 ## window.history
 1. `禁止浏览器前进和后退的方法:1.window.history.go(0)  2.设置window.history.forward(1)禁止前进，window.history.forward(-1)禁止后退`
-2. 
