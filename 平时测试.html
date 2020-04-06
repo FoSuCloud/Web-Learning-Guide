@@ -35,11 +35,10 @@
 			<a href="vue知识.md">修改a标签</a>
 		</div>
 		<script type="text/javascript">
-			let arr1 = [0, 1, 2];
-			let arr2 = [3, 4, 5];
-			arr1.push(...arr2);
-			console.log(arr1)
-			console.log(Object.prototype.toString.call(arr1)==='[object Array]')
+			var str='bbb[img]ccc[img]ddd[\img]eee[\img]'.replace("\","/")
+			console.log(str)
+			console.log(str.lastIndexOf('[\img]'))
+			console.log(str.slice(27))
 		</script>
 	</body>
 </html>

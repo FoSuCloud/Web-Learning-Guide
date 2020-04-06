@@ -1,3 +1,7 @@
+## 对于数组和字符串，尽量少使用indexOf方法
+* `因为该方法每次都会逐个去查找元素，返回索引，所以时间复杂度每次都是O(n)`
+* `当存在一个很长的字符串时怎么优化？使用一个字典去存储，然后就不用使用indexOf(方法)了`
+
 ## str的方法
 ```
 			var str='4324324';
@@ -13,6 +17,19 @@
 * `charCodeAt返回某个索引处的字符的编码`
 
 ## 注意:`直接替换str[1]=xxx,并不会生效！！并且字符串不存在splice方法，只能使用replace/substring/slice方法进行组合`
+
+## 对于字符串来说，使用split('*')
+1. `使用split('*')得到的数组长度=字符串中*字符的个数+1  `
+2. 看例题
+```
+给定一个字符串chas[],其中只含有字母字符和“*”字符，现在想把所有“*”全部挪到chas的左边，字母字符移到chas的右边。完成调整函数。
+// 注意: 对于字符串来说，存在n个字符*，那么使用split('*)就必定会切割为长度=n+1的数组
+// 切割后的数组可能存在多个''的元素，这是正常的
+var arr=readline().split('*');
+var left=new Array(arr.length).join('*');
+var right=arr.join('');
+console.log(left+right)
+```
 
 ## 会改变原有的字符串的方法
 1. replace替换
@@ -168,4 +185,19 @@ parseFloat()会把字符串解析为十进制的浮点数！注意，parseFloat(
 split()方法是给字符串用的，给其他数据类型用会报错！
 			console.log('2.2'.split('.')[0]);//2
 			// console.log([2,2].split());//报错，不是字符串。。
+```
+
+## 字符串中如何表现反斜杠
+```
+var str=readline();
+//console.log(str)
+// 需要使用双反斜杠才能表现出 \
+var start=str.lastIndexOf("[img]");
+var end=str.lastIndexOf("[\\img]")
+if(end>start&&end>-1&&start>-1){
+    console.log(str.slice(start,end)+"[\\img]")
+}else{
+    console.log('null')
+}
+
 ```
