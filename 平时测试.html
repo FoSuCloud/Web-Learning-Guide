@@ -14,31 +14,30 @@
 				white-space: nowrap;
 				word-wrap: nowrap;
 			}
-			li{
-				padding: 10px;
-			}
-			.left{
-				float: left;
+			.one{
 				width: 100px;
 				height: 100px;
-				background-color: #008000;
+				background: red;
 			}
-			.right{
-				margin-left: 100px;
-				height: 100px;
-				background-color: #FF0000;
+			p{
+				letter-spacing: 10px;
 			}
 		</style>
 	</head>
 	<body>
 		<div class="one">
-			<a href="vue知识.md">修改a标签</a>
+			<p>i am word</p>
+			<p>如果是英文，每个英文字符之间都存在字间距</p>
+			<p>如果是中文的话，那么每个中文之间都有字间距</p>
 		</div>
 		<script type="text/javascript">
-			var str='bbb[img]ccc[img]ddd[\img]eee[\img]'.replace("\","/")
-			console.log(str)
-			console.log(str.lastIndexOf('[\img]'))
-			console.log(str.slice(27))
+			setTimeout(function(){
+				console.log('setTimeout')
+			},0)
+			setImmediate(function(){
+				console.log('immediate')
+			})
+			
 		</script>
 	</body>
 </html>
