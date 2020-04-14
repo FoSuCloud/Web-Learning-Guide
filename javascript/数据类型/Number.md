@@ -83,6 +83,15 @@ var arr='1 3 4 6 8'.split(' ').map(Number)
 6. 在逻辑运算中，`NaN/null/undefined相当于false`
 7. [参考](https://blog.csdn.net/zhang918784312/article/details/82873485)
 
+## 负数在计算机中表示
+```
+			// 负数在计算机中以原码的补码形式存在
+			// 如-1表示为 1111110； -5(原码是 0000101)表示为11111010
+			console.log(-1&2);//2,必须两个都为1
+			console.log(-1^2);// -3,因为结果为 111100,然后补码转为计算机表示也就是 -000011,也就是-1
+			console.log((-1&2)<<1);//2左移一位为4
+```
+
 ## 按位运算符
 1. `^按位异或(都为1的话就是0，都是0也还是0，只有01,10才是1)`
 ```
@@ -324,4 +333,116 @@ for(var i=0;i<99;i++){
 			var tem=4
 			console.log(1+(tem--));//5
 			console.log(tem);//3
+```
+
+## 求整数之和（多种方法）
+```
+写一个函数，求两个整数之和，要求在函数体内不得使用+、-、*、/四则运算符号。
+function Add(num1, num2)
+{
+    // 第一种方式，也使用了加号，但是在eval函数内
+    // return eval(`num1+num2`)
+    // 第二种方式，通过把数字转换为二进制，然后切割成数组，把数组遍历进行计算
+    // 但是第二种方式遇到负数就抓瞎了。。
+    var str1=num1.toString(2).split('');
+    var str2=num2.toString(2).split('');
+    var max;
+    var strflag;
+    // 补零
+    if(str1.length>str2.length){
+        var len=str1.length;
+        var tem=str1.length-str2.length;
+        for(var j=0;j<tem;j++){
+            str2.unshift("0")
+        }
+    }else{
+        var len=str2.length;
+        var tem=str2.length-str1.length
+        for(var j=0;j<tem;j++){
+            str1.unshift("0")
+        }
+    }
+    var mystr=[];
+    var flag=false;
+    // console.log(str1,str2)
+    for(var i=len-1;i>=0;i--){
+        // 为1进一位
+        if(flag){
+            if(str1[i]==1&&str2[i]==1){
+                mystr.unshift(1)
+                flag=true;
+            }else if(str1[i]==1||str2[i]==1){
+                mystr.unshift(0)
+                flag=true;
+            }else{
+                mystr.unshift(1)
+                flag=false;
+            }
+        }else{
+            if(str1[i]==1&&str2[i]==1){
+                mystr.unshift(0)
+                flag=true;
+            }else if(str1[i]==1||str2[i]==1){
+                mystr.unshift(1)
+                flag=false;
+            }else{
+                mystr.unshift(0)
+                flag=false;
+            }
+        }
+        // 判断最后一位
+        if(flag&&i==0){
+            mystr.unshift(1)
+        }
+    }
+    // console.log(mystr)
+    return parseInt(mystr.join(''),2)
+}
+
+// 第三种方式:使用异或，与进行判断每一位的数字
+// 前提知识:
+// 负数在计算机中以原码的补码形式存在
+// 如-1表示为 1111110； -5(原码是 0000101)表示为11111010
+console.log(-1&2);//2,必须两个都为1
+console.log(-1^2);// -3
+console.log((-1&2)<<1);//2左移一位为4
+
+			function Add(num1,num2){
+				while (num2!=0) {
+					// -1^2 => -3; -7;-15,-31
+					// 按位异或用于保留不需要进位的后面的数
+					var temp = num1^num2;
+					// -1&2 => 2, 2<<1 =>4 ;8;16;32
+					// 按位与+左移一位就是为了在有两个1的时候可以进一位，也就是进位之后的2进制幂数
+					num2 = (num1&num2)<<1;
+					num1 = temp;
+				}
+				return num1;
+			}
+			console.log(Add(-1,2))
+			// （5,4），第一次异或就是确定后三位是001，然后第一次与就是确定进一位，1000
+			// 然后1000和1继续第二次异或，变成1001，然后第二次与就是0,0就可以退出了
+
+// 第四种方式：通过++，--
+function Add(num1, num2)
+{
+    // 第四种方式:判断数的正负，如果是正则++，如果是负则--，缺点在于时间复杂度太大了！
+    if(Math.abs(num1)<Math.abs(num2)){
+        var tem=num2;
+        num2=num1;
+        num1=tem;
+    }
+    // 对绝对值小的数进行循环 
+    while(num2!=0){
+        if(num2>0){
+            num2--;
+            num1++
+        }else{
+            // 如果num2是负数
+            num2++;
+            num1--;
+        }
+    }
+    return num1
+}
 ```

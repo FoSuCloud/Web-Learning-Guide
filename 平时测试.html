@@ -18,26 +18,53 @@
 				width: 100px;
 				height: 100px;
 				background: red;
+				margin: 0 auto;
 			}
 			p{
-				letter-spacing: 10px;
+				margin: 0 auto;
+			}
+			a{
+				display: inline-block;
+				margin: 0 auto;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="one">
-			<p>i am word</p>
-			<p>如果是英文，每个英文字符之间都存在字间距</p>
-			<p>如果是中文的话，那么每个中文之间都有字间距</p>
-		</div>
+			<div class="one">
+				<a href={{message}}></a>
+			</div>
+			<a href="">ddds</a>
+			<p>hhhh</p>
 		<script type="text/javascript">
-			setTimeout(function(){
-				console.log('setTimeout')
-			},0)
-			setImmediate(function(){
-				console.log('immediate')
-			})
-			
+			function Add(num1, num2)
+			{
+			    // 第四种方式:判断数的正负，如果是正则++，如果是负则--，缺点在于时间复杂度太大了！
+			    if(Math.abs(num1)<Math.abs(num2)){
+			        var tem=num2;
+			        num2=num1;
+			        num1=tem;
+			    }
+			    // 对绝对值小的数进行循环 
+			    while(num2!=0){
+			        if(num2>0){
+			            num2--;
+			            num1++
+			        }else{
+			            // 如果num2是负数
+			            num2++;
+			            num1--;
+			        }
+			    }
+			    return num1
+			}
+			console.log(Add(-3,5))
+			// console.log((-10).toString(2))
+			// console.log(my(2,2))
+			// 负数在计算机中以原码的补码形式存在
+			// 如-1表示为 1111110； -5(原码是 0000101)表示为11111010
+			console.log(-1&2);//2,必须两个都为1
+			console.log(-1^2);// -3
+			console.log((-1&2)<<1);//2左移一位为4
 		</script>
 	</body>
 </html>
