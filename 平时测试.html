@@ -31,40 +31,36 @@
 	</head>
 	<body>
 			<div class="one">
-				<a href={{message}}></a>
+				
 			</div>
 			<a href="">ddds</a>
 			<p>hhhh</p>
 		<script type="text/javascript">
-			function Add(num1, num2)
-			{
-			    // 第四种方式:判断数的正负，如果是正则++，如果是负则--，缺点在于时间复杂度太大了！
-			    if(Math.abs(num1)<Math.abs(num2)){
-			        var tem=num2;
-			        num2=num1;
-			        num1=tem;
-			    }
-			    // 对绝对值小的数进行循环 
-			    while(num2!=0){
-			        if(num2>0){
-			            num2--;
-			            num1++
-			        }else{
-			            // 如果num2是负数
-			            num2++;
-			            num1--;
-			        }
-			    }
-			    return num1
+			/* 打印元素结构 */
+			var txt='<div id="test" class="myDiv"><div><p id="testP"></p><span></span></div><input type="text"/></div>'
+			var mydiv=document.createElement('div')
+			mydiv.id='root';// 设置元素id 
+			mydiv.innerHTML=txt; // 设置元素内部元素
+			document.body.append(mydiv);// 在body添加子元素
+			
+			function domTree(tree){
+				var childs=tree.children;
+				var obj={};
+				obj.label=tree.tagName.toLowerCase();
+				obj.child=[];
+				// 如果存在子元素
+				if(childs){
+					// for of遍历是获取元素的value,而in是获取键key 
+					for(item of childs){
+						obj.child.push(domTree(item));
+					}
+				}
+				return obj;
 			}
-			console.log(Add(-3,5))
-			// console.log((-10).toString(2))
-			// console.log(my(2,2))
-			// 负数在计算机中以原码的补码形式存在
-			// 如-1表示为 1111110； -5(原码是 0000101)表示为11111010
-			console.log(-1&2);//2,必须两个都为1
-			console.log(-1^2);// -3
-			console.log((-1&2)<<1);//2左移一位为4
+			var div=document.querySelector('#root').firstChild;
+			// 转换为字符串
+			var str='['+JSON.stringify(domTree(div))+']';
+			console.log(str)
 		</script>
 	</body>
 </html>

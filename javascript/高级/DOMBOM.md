@@ -32,6 +32,9 @@
 			console.log(father.firstChild);//#text
 ```
 
+## 通过element.tagName可以获取元素的标签名
+## 通过element.id来设置元素的id名字
+
 ## innerHTML直接插入html代码。。
 ```
 			.active{
@@ -289,4 +292,30 @@ function commonParentNode(oNode1, oNode2) {
 ## document.write
 1. document.write如果在页面加载完成(window.onload)之前执行，那么就在文档流中绘制内容
 2. document.write如果在页面加载完成之后执行，那么就会冲刷整个页面，内容重写
-3. 
+
+## 打印元素结构
+```
+			var txt='<div id="test" class="myDiv"><div><p id="testP"></p><span></span></div><input type="text"/></div>'
+			var mydiv=document.createElement('div')
+			mydiv.id='root';// 设置元素id 
+			mydiv.innerHTML=txt; // 设置元素内部元素
+			document.body.append(mydiv);// 在body添加子元素
+			
+			function domTree(tree){
+				var childs=tree.children;
+				var obj={};
+				obj.label=tree.tagName.toLowerCase();
+				obj.child=[];
+				// 如果存在子元素
+				if(childs){
+					// for of遍历是获取元素的value,而in是获取键key 
+					for(item of childs){
+						obj.child.push(domTree(item));
+					}
+				}
+				return obj;
+			}
+			var div=document.querySelector('#root').firstChild;
+			// 转换为字符串
+			var str='['+JSON.stringify(domTree(div))+']';
+```
