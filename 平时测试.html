@@ -36,31 +36,19 @@
 			<a href="">ddds</a>
 			<p>hhhh</p>
 		<script type="text/javascript">
-			/* 打印元素结构 */
-			var txt='<div id="test" class="myDiv"><div><p id="testP"></p><span></span></div><input type="text"/></div>'
-			var mydiv=document.createElement('div')
-			mydiv.id='root';// 设置元素id 
-			mydiv.innerHTML=txt; // 设置元素内部元素
-			document.body.append(mydiv);// 在body添加子元素
-			
-			function domTree(tree){
-				var childs=tree.children;
-				var obj={};
-				obj.label=tree.tagName.toLowerCase();
-				obj.child=[];
-				// 如果存在子元素
-				if(childs){
-					// for of遍历是获取元素的value,而in是获取键key 
-					for(item of childs){
-						obj.child.push(domTree(item));
-					}
-				}
-				return obj;
+			function NumberOf1Between1AndN_Solution(n)
+			{
+			    // write code here
+			    var num=0;
+			    for(var i=0;i<=n;i++){
+			        num+=String(i).split('1').length-1
+			    }
+				console.log(new Date().getTime())
+			    return num
 			}
-			var div=document.querySelector('#root').firstChild;
-			// 转换为字符串
-			var str='['+JSON.stringify(domTree(div))+']';
-			console.log(str)
+			console.log(new Date().getTime())
+			console.log(NumberOf1Between1AndN_Solution(1000000))
+			console.log(0%2)
 		</script>
 	</body>
 </html>
