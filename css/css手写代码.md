@@ -550,7 +550,7 @@
 			height: 20px;
 			float: left;
 		}
-		/* 3. 设置父元素伪元素after清除浮动 clear:both */
+		/* 3. 设置父元素伪元素after(相当于添加了一个类名为clearfix的元素，该元素设置after)清除浮动 clear:both */
 		.five{
 			background-color: blue;
 			margin-top: 10px;
@@ -567,7 +567,7 @@
 			display: block;
 			content: '';
 		}
-		/* 4.给子元素添加一个空标签设置clear:both */
+		/* 4.给子元素后面加一个兄弟元素，该兄弟元素设置clear:both */
 		.seven{
 			padding: 10px;
 			background-color: gray;
@@ -584,7 +584,6 @@
 			clear: both;
 		}
 ```
-
 * `注意，如果是让浮动元素的父元素的兄弟元素不被浮动影响，那么就给兄弟元素添加clear:both;`
 
 ## 横向滚动

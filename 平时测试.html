@@ -17,38 +17,31 @@
 			.one{
 				width: 100px;
 				height: 100px;
+				margin: 0 auto;
+			}
+			/* 同时使用两个伪类，那就中间不要有空格！ */
+			a:first-child:hover{
+				color: red;
+			}
+			/* 只能同时使用一个伪元素，不能同时使用多个伪元素！ */
+			a:after{
+				content: '';
+				position: absolute;
+				top: 0;
+				height: 10px;
+				width: 10px;
+				border-radius: 50%;
 				background: red;
-				margin: 0 auto;
-			}
-			p{
-				margin: 0 auto;
-			}
-			a{
-				display: inline-block;
-				margin: 0 auto;
 			}
 		</style>
 	</head>
 	<body>
-			<div class="one">
-				
-			</div>
-			<a href="">ddds</a>
-			<p>hhhh</p>
+		<div class="one">
+			<a href="">sdasasd</a>
+			<a href="">第二个a不会有效果</a>
+		</div>
 		<script type="text/javascript">
-			function NumberOf1Between1AndN_Solution(n)
-			{
-			    // write code here
-			    var num=0;
-			    for(var i=0;i<=n;i++){
-			        num+=String(i).split('1').length-1
-			    }
-				console.log(new Date().getTime())
-			    return num
-			}
-			console.log(new Date().getTime())
-			console.log(NumberOf1Between1AndN_Solution(1000000))
-			console.log(0%2)
+			
 		</script>
 	</body>
 </html>
