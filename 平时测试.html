@@ -19,29 +19,42 @@
 				height: 100px;
 				margin: 0 auto;
 			}
-			/* 同时使用两个伪类，那就中间不要有空格！ */
-			a:first-child:hover{
-				color: red;
-			}
-			/* 只能同时使用一个伪元素，不能同时使用多个伪元素！ */
-			a:after{
-				content: '';
-				position: absolute;
-				top: 0;
-				height: 10px;
-				width: 10px;
-				border-radius: 50%;
-				background: red;
-			}
 		</style>
 	</head>
 	<body>
 		<div class="one">
-			<a href="">sdasasd</a>
-			<a href="">第二个a不会有效果</a>
+			<ul>
+				<li data-id="1">
+					<input type="text" value="i am text"/>
+					<img src="a" >
+				</li>
+				<li data-id="2">
+					<input type="text" name="" id="my" value="" />
+				</li>
+				<li data-id="3"></li>
+			</ul>
 		</div>
 		<script type="text/javascript">
-			
+			var ul=document.getElementsByTagName('ul')[0]
+			ul.onclick=function(e){
+				// 1.首先取得id
+				console.log(e.target.dataset.id)
+				// 2. 方法一:然后通过id去请求该条数据(后端)
+				// 得到{id:'',name:''}
+				// 方法二:获取到list[id],这也就是数据了。
+				// 3. 然后弹出修改框，在修改框中填数据，例如:
+				// 3.1 首先获取元素
+				var ele=document.getElementById('my')
+				// 3.2 填数据。。
+				ele.value='haha'
+				
+			}		
+			// 4. 填完数据，修改好数据，点击提交按钮
+			var btn=document.getElementById('btn')
+			btn.onclick=function(){
+				// 4.1 点击之后。。发起请求呗
+				// 4.2 请求成功后就刷新主页不就好了？
+			}
 		</script>
 	</body>
 </html>

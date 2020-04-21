@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 1. 使用已声明的变量进行解构赋值
+			let a;
+			// SyntaxError: Unexpected token =
+			// {a}={a:1}
+			// 此时会有语法错误，提示=等号不合法
+			// 因为在花括号{}处于行首的时候({}前面为空)，js引擎会把{}解析为块级作用域！！！
+			
+			// 但是如果还是想使用已声明的变量怎么办？
+			({a}={a:1})
+			console.log(a);//1
+			// 可以使用括号包裹，此时行首就是括号了！js引擎就不会把这语句识别为块级作用域了
+			// 而括号就是就是起到一个限定的作用，类似if/for/while
+			
+			// 2. 等号左边的对象可以为空
+			let {}={c:1};// 没报错
+			// 2.1 此时等号右边不为对象也没问题！
+			let {}=false;
+			let {}=0;
+			let {}='11';
+			// 3. 等号右边不是对象也可以！(虽然会解构失败，但是不报错)
+			let {y}='11';
+			let {yy}=[1];
+			let {yyy}=[3,4,2];
+			console.log(y,yy,yyy);//undefined undefined undefined
+			// 3.1 但是需要注意，数组本身也是对象，只是数组的值的键是0,1
+			// 所以如果等号左边的属性是0,1...那就可以解构赋值成功！
+			var arr=[0,1,2,3,4,5555]
+			// 注意，[arr.length-3]:mid这种中括号为属性的表达方式请看对象的拓展
+			let {0:bar,[arr.length-3]:mid,5:num}=arr
+			console.log(bar,mid,num);//0 3 5555
+			
+		</script>
+	</body>
+</html>
