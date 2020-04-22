@@ -35,26 +35,18 @@
 			</ul>
 		</div>
 		<script type="text/javascript">
-			var ul=document.getElementsByTagName('ul')[0]
-			ul.onclick=function(e){
-				// 1.首先取得id
-				console.log(e.target.dataset.id)
-				// 2. 方法一:然后通过id去请求该条数据(后端)
-				// 得到{id:'',name:''}
-				// 方法二:获取到list[id],这也就是数据了。
-				// 3. 然后弹出修改框，在修改框中填数据，例如:
-				// 3.1 首先获取元素
-				var ele=document.getElementById('my')
-				// 3.2 填数据。。
-				ele.value='haha'
-				
-			}		
-			// 4. 填完数据，修改好数据，点击提交按钮
-			var btn=document.getElementById('btn')
-			btn.onclick=function(){
-				// 4.1 点击之后。。发起请求呗
-				// 4.2 请求成功后就刷新主页不就好了？
-			}
+			var reverse = function(x) {
+				// 因为数字可能超出范围，所以转换为字符串
+				let sign=Math.sign(x)
+				// 注意:字符串*数字，也就转换为字符串了
+				let num=(x*sign).toString().split('').reverse().join('')*sign;
+				if((num>(Math.pow(2,31)-1)||num<-Math.pow(2,31))) num=0
+				return num;
+			};
+			console.log(reverse(-234321123))
+			var res=('2324324324324324322')*1
+			console.log(res)
+			console.log(typeof res)
 		</script>
 	</body>
 </html>
