@@ -1,3 +1,39 @@
+## css选择器从右向左解析
+* `为了说使用css要少层级才好呢?`
+* `简单来说是为了减少选择器匹配次数，但是选择器是从右向左解析的！`
+* [浏览器渲染进程及优化](http://jinlong.github.io/2017/05/08/optimising-the-front-end-for-the-browser/)
+* `DOM树和css模型树结合生成的渲染树其实就是包含了dom对象以及计算好的样式规则，提供了布局以及显示方法`
+* `注意，如果从左往右匹配，那么可能存在许多重复的公用样式，同时每个DOM节点需要走遍渲染树的每一个path`
+* [选择器解析顺序](https://blog.csdn.net/jinboker/article/details/52126021)
+* `如果从有向左匹配，那么节点树肯定减少了，因为不存在重复的公用样式！`
+---
+* `所以不建议使用通配符，因为所有节点都会匹配一遍通配符`
+* `优点1.从右向左匹配时，匹配数量会减少很多，所以渲染速度加快`
+* `优点2.从右向左匹配时，首先寻找的是子元素，那么父元素肯定存在！而从左向右匹配时，父元素生成了，但是子元素不一定生成，避免由于html文件还没加载完导致的错误`
+```
+			/* css在所有浏览器中都是从右向左渲染的，例如 div div .b,那么会先寻找.b，然后慢慢往左 */
+			for(var i=0;i<30;i++){
+				var root=document.createElement('div');
+				if(i==5) root.className='a';
+				var tem=root;// 保存
+				
+				for(var j=0;j<2000;j++){
+					tem.appendChild(document.createElement('div'));
+					tem=tem.firstChild;// 设置a为a的第一个孩子
+					if(i==5&&j==1950) tem.className='b'
+				}
+				
+				document.body.appendChild(root);
+			}
+			// 2. 如果选择器使用 .a div div 那么消耗多少时间？
+			// 使用Chrome浏览器的performance查看rendering时间为9000+ms
+			// document.getElementById('style').innerHTML=".a "+new Array(1900).join('div ')+' {background:red;width:100px;height:100px;position:fixed;top:0;left:0}'
+			// 3. 如果选择器使用  div div .b那么消耗多少时间？
+			// rendering时间为5000+ms
+			document.getElementById('style').innerHTML=new Array(1900).join('div ')+' .b{background:red;width:100px;height:100px}'
+```
+* `可以给style标签添加id选择器，document也是可以获取到该标签的，想要添加内部样式就使用innerHTML`
+
 ## sass
 * Sass包括两种类型的扩展名：.scss和.sass。
 * “.scss”文件扩展名完全符合CSS语法，而.sass不完全符合CSS语法，但写入速度更快

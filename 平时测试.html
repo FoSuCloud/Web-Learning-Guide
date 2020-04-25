@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
-		<style type="text/css">
+		<style type="text/css" id="style">
 			*{
 				margin: 0;
 				padding: 0;
@@ -14,39 +14,12 @@
 				white-space: nowrap;
 				word-wrap: nowrap;
 			}
-			.one{
-				width: 100px;
-				height: 100px;
-				margin: 0 auto;
-			}
 		</style>
 	</head>
 	<body>
-		<div class="one">
-			<ul>
-				<li data-id="1">
-					<input type="text" value="i am text"/>
-					<img src="a" >
-				</li>
-				<li data-id="2">
-					<input type="text" name="" id="my" value="" />
-				</li>
-				<li data-id="3"></li>
-			</ul>
-		</div>
+		
 		<script type="text/javascript">
-			var reverse = function(x) {
-				// 因为数字可能超出范围，所以转换为字符串
-				let sign=Math.sign(x)
-				// 注意:字符串*数字，也就转换为字符串了
-				let num=(x*sign).toString().split('').reverse().join('')*sign;
-				if((num>(Math.pow(2,31)-1)||num<-Math.pow(2,31))) num=0
-				return num;
-			};
-			console.log(reverse(-234321123))
-			var res=('2324324324324324322')*1
-			console.log(res)
-			console.log(typeof res)
+			
 		</script>
 	</body>
 </html>

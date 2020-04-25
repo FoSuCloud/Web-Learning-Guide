@@ -415,6 +415,9 @@ Promise.resolve('1')
 * `当all方法出现异常时，all之后的then接收的是reject函数，参数就是第一个异常返回的参数`
 * `当all方法之后的then不存在reject函数时，则catch接受异常参数`
 * `即使不是all之后的第一个then存在reject函数，只要之后的then存在reject函数，就不会轮到catch去接收异常`
+---
+* `如果异步任务中存在报错，那么res不会执行，rej才会执行，也就是报错`
+* `如果不存在报错，那么就会执行res`
 
 ## promise.race虽然只会接收第一个任务的结果，但是其他异步任务依旧会执行
 ```
