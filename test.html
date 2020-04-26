@@ -6,37 +6,99 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			// 1. 使用已声明的变量进行解构赋值
-			let a;
-			// SyntaxError: Unexpected token =
-			// {a}={a:1}
-			// 此时会有语法错误，提示=等号不合法
-			// 因为在花括号{}处于行首的时候({}前面为空)，js引擎会把{}解析为块级作用域！！！
+			// 循环单链表
+			function CircleList(){
+				let Node=function(element){
+					this.element=element;
+					this.next=null;
+				}
+				this.head=null;
+				
+				// 1.插入
+				this.insert=function (position,element){
+					if(position<0) return null;
+					let tem=this.head;
+					let node=new Node(element);
+					if(position==0){
+						node.next=tem;
+						this.head=node;
+						tem=this.head;
+						// 改变尾节点指向
+						while(true){
+							//如果还没有循环
+							if(tem.next==null){
+								tem.next=this.head;
+								return this.head
+							}
+							tem=tem.next;
+							// 在插入0之前，之前的循环在当前的索引1
+							if(tem.next===this.head.next){
+								tem.next=this.head;
+								return this.head
+							}
+						}
+					}else{
+						let len=0;
+						while(true){
+							// 此时position至少为1
+							if(len==position-1){
+								// 如果是最后一个
+								if(tem.next==this.head){
+									tem.next=node;
+									node.next=this.head;// 循环指向头结点
+								}else{
+									node.next=tem.next;
+									tem.next=node;
+								}
+								return this.head;
+							}
+							if(tem.next===this.head) return null;
+							tem=tem.next;
+							len++;
+						}
+					}
+				}
+				// 2. 删除
+				this.delete=function(element){
+					let tem=this.head;
+					if(tem==null) return false
+					// 为了不搞混节点顺序，需要针对头节点
+					if(tem.element==element){
+						while(true){
+							if(tem.next===this.head){
+								tem.next=this.head.next;
+								this.head=this.head.next;
+								return this.head;
+							}
+							tem=tem.next;
+						}
+					}
+					
+					tem=tem.next;
+					while(tem!==this.head){
+						if(tem.next.element==element){
+							let a=tem.next;//3
+							tem.next=tem.next.next;// 88->9
+							a.next=null;
+							return this.head;
+						}
+						tem=tem.next;
+					}
+					return false
+				}
+			}
+			let list=new CircleList();
+			console.log(list.insert(0,1))
+			console.log(list.insert(0,2))
+			console.log(list.insert(0,3))
+			console.log(list.insert(1,9))
+			console.log(list.insert(4,88));// 3,9,2,1,88
+			// console.log(list.insert(14,88));//null
 			
-			// 但是如果还是想使用已声明的变量怎么办？
-			({a}={a:1})
-			console.log(a);//1
-			// 可以使用括号包裹，此时行首就是括号了！js引擎就不会把这语句识别为块级作用域了
-			// 而括号就是就是起到一个限定的作用，类似if/for/while
-			
-			// 2. 等号左边的对象可以为空
-			let {}={c:1};// 没报错
-			// 2.1 此时等号右边不为对象也没问题！
-			let {}=false;
-			let {}=0;
-			let {}='11';
-			// 3. 等号右边不是对象也可以！(虽然会解构失败，但是不报错)
-			let {y}='11';
-			let {yy}=[1];
-			let {yyy}=[3,4,2];
-			console.log(y,yy,yyy);//undefined undefined undefined
-			// 3.1 但是需要注意，数组本身也是对象，只是数组的值的键是0,1
-			// 所以如果等号左边的属性是0,1...那就可以解构赋值成功！
-			var arr=[0,1,2,3,4,5555]
-			// 注意，[arr.length-3]:mid这种中括号为属性的表达方式请看对象的拓展
-			let {0:bar,[arr.length-3]:mid,5:num}=arr
-			console.log(bar,mid,num);//0 3 5555
-			
+			// 删除
+			// console.log(list.delete(1));//3 9 2 88
+			// console.log(list.delete(88));//3 9 2 1 
+			console.log(list.delete(3));//9 2 1 88
 		</script>
 	</body>
 </html>

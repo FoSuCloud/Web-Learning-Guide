@@ -17,9 +17,124 @@
 		</style>
 	</head>
 	<body>
-		
 		<script type="text/javascript">
-			
+			function List(){
+				// 创建一个节点
+				let Node=function(element){
+					this.prev=null;
+					this.element=element;
+					this.next=null;
+				}
+				// 初始化头结点为null 
+				this.head=null;
+				// 初始化尾节点为null 
+				this.tail=null;
+				// 操作函数
+				this.insert=function (position,element){
+					// 如果索引为0
+					let node=new Node(element)
+					if(position==0){
+						node.next=this.head;
+						this.head=node;
+						return this.head;
+					}else if(position<0){
+						return null;
+					}else{
+						// 遍历
+						let len=0;
+						let tem=this.head;
+						while(true){
+							// 插入
+							if(len==position-1){
+								// 如果到了链表的末尾
+								if(tem.next==null){
+									tem.next=node;
+									node.prev=tem;
+									return  this.head;
+								}else{
+									tem.next.prev=node;
+									let a=tem.next; // 保存下一个节点
+									tem.next=node;
+									node.prev=tem;
+									node.next=a;
+									return this.head;
+								}
+							}
+							tem=tem.next;
+							len++;
+							// 超出长度范围
+							if(tem==null){
+								return null;
+							}
+						}
+					}
+				}
+				
+				this.delete=function (position){
+					let tem=this.head;
+					if(position==0){
+						// 如果只有一个节点
+						if(tem.next==null){
+							this.head=null;
+						}else{
+							tem.next.prev=null;
+							this.head=tem.next;
+						}
+						return this.head;
+					}else{
+						let len=0;
+						while(true){
+							// 超出范围
+							if(tem.next==null&&len<position){
+								return null;
+							}else if(len==position){
+								// 存在节点
+								let a=tem.prev;
+								// 如果不是最后一个节点
+								if(a.next.next){
+									a.next=a.next.next;
+									a.next.prev=a;
+								}else{
+									a.next.prev=null;
+									a.next=null;
+								}
+								return this.head;
+							}else if(tem.next){
+								tem=tem.next;
+								len++;
+							}
+						}
+					}
+				}
+				
+				this.search=function(element){
+					let tem=this.head;
+					while(true){
+						if(tem==null){
+							return false;
+						}
+						
+						if(tem.element==element){
+							return true;
+						}
+						tem=tem.next;
+					}
+				}
+			}
+			let list=new List();
+			// 1. 插入O(1)
+			console.log(list.insert(0,0))
+			console.log(list.insert(1,1))
+			console.log(list.insert(1,2))
+			console.log(list.insert(10,2));// null;
+			console.log(list.insert(3,3));// 0 2 1 3
+			// 2. 删除O(1)
+			// console.log(list.delete(0));// 2 1 3
+			// console.log(list.delete(1));// 0 1 3
+			// console.log(list.delete(2));// 0 2 3
+			// console.log(list.delete(3));// 0 2 1
+			// 3. 查找O(n)
+			console.log(list.search(22));//false
 		</script>
 	</body>
 </html>
