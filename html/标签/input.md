@@ -4,6 +4,10 @@
 3. `onpropertychange事件会在输入框内容改变时触发，即使是通过js改变的`
 4. `但是onpropertychange事件只支持IE11 以下！！！以下`
 
+## label
+* label的for属性可以对应input的id属性，`也就是一一对应，效果就是选中label,input也可以聚焦`
+* `如果不使用for-id对应方式，那么可以直接把input标签包裹在label标签中！`
+
 ## 多选框
 ```
 		<div class="one">
