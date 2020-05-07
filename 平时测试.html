@@ -85,8 +85,52 @@
 			
 		</script>
 		<script type="text/javascript">
-			console.log(window.bad);//undefined
-			console.log(bad);// bad is not undefined
+			var isSymmetric = function(root) {
+			    if(!root) return false
+			    let arr=[]; // 保存每一层的值
+			    let len=0;
+			    let nodes=[root]; // 保存每一层的节点
+			    while(nodes.length>0){
+			        let tem=[]
+			        for(let i=0;i<nodes.length;i++){
+			            let {val,left,right}=nodes[i]
+			            // 为了保存顺序，所以即使null也添加进入
+			            arr.push(left==null?'null':left.val)
+			            arr.push(right==null?'null':right.val)
+			            if(left) tem.push(left)
+			            if(right) tem.push(right)
+			        }
+			        let mid=arr.length/2;// 中间索引
+					// console.log(arr,arr.slice(0,mid).join(''),arr.slice(mid).reverse().join(''))
+			        if(arr.slice(0,mid).join('')!=arr.slice(mid).reverse().join('')) return false
+					nodes=tem;
+			        arr=[];
+					len++;
+			    }
+			    return true
+			};
+			let data={
+				val:1,
+				left:{
+					val:2,
+					left:null,
+					right:{
+						val:3,
+						left:null,
+						right:null
+					}
+				},
+				right:{
+					val:2,
+					left:null,
+					right:{
+						val:3,
+						left:null,
+						right:null
+					}
+				}
+			}
+			console.log(isSymmetric(data))
 		</script>
 	</body>
 </html>
