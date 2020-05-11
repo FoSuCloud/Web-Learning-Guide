@@ -242,7 +242,6 @@
 2. 伪元素本质上是创建了一个有内容的虚拟容器，也就是多了一个dom节点(元素)
 3. CSS3中伪类和伪元素的语法不同，伪元素一般是:: , 伪类是:
 4. 可以同时使用多个伪类，而只能同时使用一个伪元素；
-
 			<a href="">sdasasd</a>
 			<a href="">第二个a不会有效果</a>
 			/* 同时使用两个伪类，那就中间不要有空格！ */
@@ -259,4 +258,76 @@
 				border-radius: 50%;
 				background: red;
 			}
+```
+
+## 媒体类型的引用方法
+1. link标签引入法:在link标签引用样式的时候，通过link标签的media属性来指定不同的媒体类型
+```
+		<link rel="stylesheet" href="base.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="base.css" type="text/css" media="print">
+		<link rel="stylesheet" href="base.css" type="text/css" media="all">
+```
+2. @import方法:分为两种方式，第一种是在样式文件xxx.css中调用另外一个样式文件
+* `第二种是在head标签的style标签中引入`
+```
+1. @import url('base.css') all
+1. @import url('base.css') screen
+
+2. style标签引入
+<style>
+	@import url('style.css') all
+</style>
+```
+3. 第三种是:@media方法:@media是`css3引入的一个方法，也有两种引入方式:1.在样式文件中引用`
+* 第二种是在head标签的style标签中引用
+```
+1. 在base.css中
+@media scree{
+	id{}
+}
+2. 在style标签里面
+<style>
+@media all{
+	#one{
+		color:red;
+	}
+}
+</style>
+```
+
+## 对于@media媒体查询(最大特点是不需要像其他css3属性一样在不同浏览器中加前缀)
+1. @media方法的媒体查询存在10种媒体类型和13种媒体特性，形式为:@media 媒体类型 and (媒体特性){  样式 }
+2. 最常用的媒体特性是max-width,指的是媒体类型小于或者等于指定的宽度时，样式生效，如:
+```
+@media screen and (max-width:480px){
+    body{
+        color:red;
+    }
+}
+@media screen and (max-width:720px){
+    body{
+        color:green;
+    }
+}
+```
+3. 多个媒体特性一起使用，那么就加多一个and
+```
+@media screen and (min-width:600px) and (max-width:720px){
+    body{
+        background:black
+    }
+}
+```
+4. 有一个特性需要特别注意:device-width表示屏幕设备的尺寸，也就是设备实际分辨率，也就是可视面积分辨率
+```
+<link rel="stylesheet" type="text/css" href="base.css" media="screen and (max-device-width:720px)" />
+```
+5. not关键词，用于排除某种媒体类型
+```
+@media not print and (max-width:720px){}
+```
+* 表示除了打印机之外的其他最大宽度为720px的媒体设备
+6. 另外可以在样式中，使用一条语句将一个样式应用于多种媒体类型和媒体特性中，如:
+```
+@media print and (max-width:720px),screen and (min-width:375px){}
 ```

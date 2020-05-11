@@ -71,5 +71,93 @@
 		<div class="main">
 			<div class="wave"></div>
 		</div>
+		<script type="text/javascript">
+			var serialize = function(root) {
+			        if (root === null) return [];
+			        let res = [];
+			        let node = root,
+			            queue = [node];
+			        while (queue.length > 0) {
+			            node = queue.shift();
+			            if (node === null) {
+			                res.push(null);
+			            } else {
+			                res.push(node.val);
+			                queue.push(node.left);
+			                queue.push(node.right);
+			            }
+			        }
+					console.log(res)
+			        return res;
+			};
+			
+			var deserialize = function(data) {
+			    let arr=JSON.parse(data)
+			    var len=1;
+			    var nodes=[]
+			    let end=0
+			    if(arr==null) return null
+			    if(arr[0]==='null') return null
+			    arr[0]=new TreeNode(arr[0])
+			    while(true){
+			        if(arr.length==0) break;
+			        let tem=arr.splice(0,len);// 切割
+			        let a=tem.filter((item)=>{
+			            return item!=null
+			        })
+			        len=a.length*2;
+					console.log(tem,len)
+			        for(var i=0;i<tem.length;i++){
+			            if(tem[i]==null||tem[i].val==null) continue;
+			            if(arr[i*2]===undefined) break;
+			            arr[i*2]=arr[i*2]=="null"?null:new TreeNode(arr[i*2])
+			            tem[i].left=arr[i*2]
+			            
+			            if(arr[i*2+1]===undefined) break;
+			            arr[i*2+1]=arr[i*2+1]=="null"?null:new TreeNode(arr[i*2+1])
+			            tem[i].right=arr[i*2+1]
+			        }
+			        nodes.push(tem);
+			    }
+			    return nodes[0][0]
+			};
+			 function TreeNode(val) {
+			     this.val = val;
+			     this.left = this.right = null;
+			  }
+			// [3,5,1,6,2,0,8,null,null,7,4],5,1
+			let data={
+				val:5,
+				left:{
+					val:2,
+					left:null,
+					right:null
+				},
+				right:{
+					val:3,
+					left:{
+						val:2,
+						left:{
+							val:3,
+							left:null,
+							right:null
+						},
+						right:{
+							val:1,
+							left:null,
+							right:null
+						}
+					},
+					right:{
+						val:4,
+						left:null,
+						right:null
+					}
+				}
+			}
+			console.log(serialize(data))
+			data=serialize(data)
+			// console.log(deserialize(data))
+		</script>
 	</body>
 </html>
