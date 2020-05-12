@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>消息提醒~</title>
 		<style type="text/css" id="style">
 			*{
 				margin: 0;
@@ -31,83 +31,23 @@
 				border-radius: 18px;
 				background: white;
 			}
-			.m-c-f{
-				text-align: center;
-				font-weight: bold;
-				font-size: 30px;
-				line-height: 150px;
-			}
-			.form-login{
-				display: block;
-				margin-bottom: 20px;
-				width: 100%;
-				outline: none;
-				border: none;
-				height: 30px;
-				line-height: 30px;
-				border-bottom: 1px solid lightgray;
-			}
-			.form-login::placeholder{
-				text-transform: uppercase;
-			}
-			.btn{
-				width: 100%;
-				height: 40px;
-				border: none;
-				font-size: 24px;
-				margin-top: 20px;
-				color: white;
-				outline: none;
-				background-image: linear-gradient(to right,#a6c1ee,#fbc2eb);
-			}
-			.m-c-l{
-				text-align: center;
-				line-height: 80px;
-			}
-			.m-c-l a{
-				text-decoration: none;
-				color: #a6c1ee;
-			}
+
 		</style>
 	</head>
 	<body>
 		<div class="main-container">
-			<p class="m-c-f">Login</p>
-			<form id="myform" action="面经.md" method="post">
-				<input type="text" name="username" placeholder="username" class="form-login">
-				<input type="password" name="password" placeholder="password" class="form-login">
-			</form>
-			<!-- 通过form属性将表单元素input与form表单的id对应起来 -->
-			<input type="submit" class="btn" value="Login" form="myform"/>
-			<p class="m-c-l">Don't has account? <a href="javascript:void(0);">Sign Up</a></p>
+			<div class="one">
+			</div>
 		</div>
 		<script type="text/javascript" src="jquery-3.1.1.min.js">
-			
 		</script>
 		<script type="text/javascript">
-			var mySqrt = function(x) {
-			    // 使用二分查找法,如果Math.pow(mid,2)<x,那么就返回mid
-			    let [l,r,mid]=[1,x,Math.floor((1+x)/2)]
-			    while(true){
-			        let tem=Math.pow(mid,2)
-			        // 可能二分跨度过大，导致mid过小，所以结束条件应该是指针大小相反
-			        if(tem<=x){
-			            l=mid+1;
-			        }else{
-			            r=mid-1;
-			        }
-					mid=Math.floor((r+l)/2)
-					if(l>r) return mid
-			    }
-			};
-			console.log(mySqrt(5))
-			var a=[1,2,3]
-			for(let item of a){
-				item+=3
-			}
-			console.log(a)
-			var s='hello world'
-			console.log(s.split(' ')[-1])
+			let i=1
+			let timer=setInterval(()=>{
+				if(i==5) clearInterval(timer)
+				if(i>0) document.title=`消息提醒(${i})页面`
+				i++;
+			},2000)
 		</script>
 	</body>
 </html>

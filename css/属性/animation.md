@@ -1,3 +1,55 @@
+## animation的属性
+* 和transition一样，有`animation-duration持续时间，animation-delay推迟多久再执行`
+* `animation-timing-function使用的函数，还有动画名称animation-name`
+* 此外还可以设置动画播放次数:`animation-iteration-count(默认infinite无数次):infinite/0/1/...`
+* `还可以设置动画播放方向(逆向！):animation-direction:alternate(正向播放一次，逆向播放一次)；还可以设置normal(一直正向)`
+* `还可以设置动画的播放和暂停:animation-play-state:paused/running暂停或者播放`
+```
+			<div class="one">
+				<div class="square"></div>
+			</div>
+			.one{
+				border: 2px red solid;
+				width: 200px;
+				height: 200px;
+				margin: 0 auto;
+				position: relative;
+			}
+			.square{
+				background-color: #0000FF;
+				position: absolute;
+				left: 0;
+				top: 50%;
+				animation: one 5s ease .2s infinite;
+				animation-direction:alternate;
+				animation-play-state: running;
+				width: 10px;
+				height: 10px;
+			}
+			@keyframes one{
+				0%{
+					transform:translateX(0px);
+				}
+				10%{
+					transform:translateX(20px);
+				}
+				50%{
+					transform:translateX(50px);
+				}
+				80%{
+					transform:translateX(120px);
+				}
+				100%{
+					transform:translateX(200px);
+				}
+			}
+			.one:hover .square{
+				animation-play-state:paused;
+			}
+```
+* `还可以指定动画结束停留在最后一帧处还是第一帧处:animation-fill-mode:none表示动画按照预期进行，结束后反转回初始帧`
+* `forwards表示动画结束后继续在最后一帧；backwards表示回到第一帧；both表示动画同时具有forwards和backwards的特点`
+
 ## 暂停动画，设置animationPlayState="paused"
 ## 重新开启动画，设置animationPlayState="running"
 
