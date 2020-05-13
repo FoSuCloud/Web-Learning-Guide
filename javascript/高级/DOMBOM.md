@@ -3,6 +3,65 @@
 2. 浏览器对象模型的根元素是window
 3. document属于window的一个对象属性,window.document,因为文档对象模型其实就是一个页面，而页面处于浏览器中，也就是一个窗体中，也就是window
 
+## DOM操作导致性能损耗
+```
+			// 测试次数：一百万次
+			const times = 1000000
+			// 1. 获取一次body元素，赋值10000次的时间
+			console.time('object')
+			// 仅获取一次DOM对象，也就是DOM操作数为1
+			let body = document.body;
+			for(let i=0;i<times;i++) {
+			  let tmp = body;// 虽然是赋值，但是没有读取DOM对象，所以操作次数依旧是1
+			}
+			console.timeEnd('object')// object: 2.304931640625ms
+			
+			// 2. 获取10000次DOM元素的时间
+			console.time('dom')
+			// 循环读取body元素引发线程切换
+			for(let i=0;i<times;i++) {
+			  let tmp = document.body
+			}
+			console.timeEnd('dom')// dom:38.77880859375ms
+			
+			// 另外读取JSON对象的时间花费也是小于读取DOM对象的时间(约两倍)
+			var body = JSON.stringify(document.body)
+			// var body = document.body
+			console.time('batch')
+			for (let i = 0; i < times; i++) {
+			  body === 1 ? console.log(1) : void 0;
+			}
+			console.timeEnd('batch') // 0.846923828125ms
+```
+* 浏览器是单线程异步的，同一时间，只能使用js引擎或者渲染引擎，另一个引擎会被阻塞！
+* `因为本来线程使用js引擎中，但是因为获取DOM对象，导致需要线程切换到渲染引擎`
+* `所以出现了线程的上下文切换，次数多了就很消耗性能！`
+
+## 重绘回流性能问题
+```
+			const times = 100000
+			let html = ''
+			for(let i=0;i<times;i++) {
+			  html+= `<div>${i}</div>`
+			}
+			document.body.innerHTML += html
+			const divs = document.querySelectorAll('div')
+			Array.prototype.forEach.call(divs, (div, i) => {
+			  div.style.margin = i % 2 ? '10px' : 0;
+			})
+			// rendering:4572ms,painting:37ms；
+```
+* `在修改10000次元素的值的时候就是触发了10000次回流，最后在Chrome浏览器的performance中查看渲染时间`
+* `此时把rendering和painting的时间，渲染时间和绘制时间当成渲染引擎执行时间`
+---
+* 如果把Array内部的修改语句改为
+`div.style.color = i % 2 ? 'red' : 'green';`
+* `那么只触发重绘，没有触发回流`
+* `虽然很奇怪，在Chrome浏览器的渲染时间记录中，修改为重绘之后，只减少了100ms左右`
+* `大概是因为重绘和回流都获取了10000次DOM元素，这才是最主要的时间来源`
+* `另外重绘和回流的绘制时间painting都差不多，这是因为回流也会导致重绘，但是重绘不会导致回流`
+
+
 ## BOM(浏览器对象模型)
 1. window:`window是窗口对象，表示整个浏览器窗口，属于es中的global对象，也就是所有的全局变量和函数都是它的属性，包括document,location`
 * `window对象是BOM对象和核心！！！但是BOM对象包括window,location,navigation,screen,history六个，而其余五个都是window的属性`
