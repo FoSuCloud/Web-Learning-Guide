@@ -1,11 +1,20 @@
+## css3
+* css3在css2.1的基础上增加了许多功能，目前主流浏览器都支持css3的大部分功能，例如`IE10之后也开始全面支持css3了`
+* 在css3的样式中，不同的浏览器·有不同的前缀，表示这些样式是浏览器的私有属性
+* -webkit-:Chrome/Safari
+* -moz-:firefox
+* -ms-:IE
+* -o-:opera
+
 ## css3新增属性
-1. text-shadow
-2. box-shadow
+1. text-shadow:`设置文本阴影，参数为x轴的偏移量，y轴偏移量，模糊尺寸，模糊颜色`
+2. box-shadow:盒子边框阴影
 3. animation
-4. border-radius
+4. border-radius:`如果是border-radius:50px 0 0 50px;那么只有左上角和左下角使用半径为50px的圆角`
 5. rgba
 6. outline
 7. opacity
+8. border-image(边框图片)
 
 ## css3中的变形与动画
 1. rotate旋转
