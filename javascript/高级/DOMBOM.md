@@ -1,3 +1,79 @@
+## 防抖节流
+```
+			// 代码2
+			const debounce = (func, wait = 0) => {
+			  let timeout = null
+			  let args
+			  function debounced(...arg) {
+			    args = arg
+			    if(timeout) {
+			      clearTimeout(timeout)
+			      timeout = null
+			    }
+			    // 以Promise的形式返回函数执行结果
+			    return new Promise((res, rej) => {
+			      timeout = setTimeout(async () => {
+			        try {
+			          const result = await func.apply(this, args)
+					  res(result)
+			        } catch(e) {
+			          rej(e)
+			        }
+			      }, wait)
+			    })
+			  }
+			  // 允许取消
+			  function cancel() {
+			    clearTimeout(timeout)
+			    timeout = null
+			  }
+			  // 允许立即执行
+			  function flush(...args) {
+			      cancel()
+			      return func.apply(this,args)
+			  }
+			  debounced.cancel = cancel
+			  debounced.flush = flush
+			  return debounced
+			}
+			// 请求搜索框内容的函数
+			var btn=document.querySelector('#btn')
+			var ul=document.getElementsByTagName('ul')[0]
+			function search(...args){
+				/* 发起ajax请求，返回数据 */
+				return [...args]
+			}
+			var res=debounce(search,500)
+			btn.addEventListener('keyup',(e)=>{
+				/* 1.使用flush立即执行 */
+				// ul.innerHTML=res.flush(e.target.value)
+				
+				/* 2.防抖，然后才执行 */
+				res(e.target.value).then(data => {
+					ul.innerHTML=data;
+				});
+			})
+```
+* 如果是节流则修改函数内部一点代码
+```
+					/* 还在上段时间范围内则不执行 */
+					if(timeout) {
+					  return 
+					}
+			        timeout = setTimeout(async () => {
+						try {
+						  const result = await func.apply(this, args)
+						  clearTimeout(timeout)
+						  timeout=null;
+						  res(result)
+						} catch(e) {
+						  rej(e)
+						}
+			        }, wait)
+```
+---
+* `防抖常用于搜索框中请求搜索相关内容；节流用于左侧是章节大纲，右侧是文字的情况下，避免右侧持续滚动造成左侧一直修改高亮类名`
+
 ## BOM,DOM
 1. 文档对象模型DOM的根元素是document
 2. 浏览器对象模型的根元素是window
