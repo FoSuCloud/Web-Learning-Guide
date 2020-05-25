@@ -16,68 +16,32 @@
 			body{
 				background: lightgrey;
 			}
+			/* 旋转 */
+			.one{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin-top: 100px;
+				perspective: 200px;
+			}
+			.child{
+				width: 200px;
+				height: 200px;
+				background-color: red;
+				transform: rotateX(90deg);
+				transition: all 2s ease;
+			}
+			.one:hover .child{
+				transform: rotateX(0deg);
+			}
 		</style>
 	</head>
 	<body>
-		<input type="search" id="btn">
-		<ul></ul>
+		<div class="one">
+			<div class="child"></div>
+		</div>
 		<script type="text/javascript">
-			// 代码2
-			const debounce = (func, wait = 0) => {
-			  let timeout = null
-			  let args
-			  function debounced(...arg) {
-			    args = arg
-			    
-			    // 以Promise的形式返回函数执行结果
-			    return new Promise((res, rej) => {
-					/* 还在上段时间范围内则不执行 */
-					if(timeout) {
-					  return 
-					}
-			        timeout = setTimeout(async () => {
-						try {
-						  const result = await func.apply(this, args)
-						  clearTimeout(timeout)
-						  timeout=null;
-						  res(result)
-						} catch(e) {
-						  rej(e)
-						}
-			        }, wait)
-			    })
-			  }
-			  // 允许取消
-			  function cancel() {
-			    clearTimeout(timeout)
-			    timeout = null
-			  }
-			  // 允许立即执行
-			  function flush(...args) {
-			      cancel()
-			      return func.apply(this,args)
-			  }
-			  debounced.cancel = cancel
-			  debounced.flush = flush
-			  return debounced
-			}
-			// 请求搜索框内容的函数
-			var word=document.querySelector('#word')
-			var a=document.getElementsByTagName('a')
-			function search(...args){
-				/* 发起ajax请求，返回数据 */
-				return [...args]
-			}
-			var res=debounce(search,500)
-			word.addEventListener('scroll',(e)=>{
-				/* 1.使用flush立即执行 */
-				a.className='active'
-				
-				/* 2.节流，然后才执行 */
-				// res().then(data => {
-				// 	a.className='active'
-				// });
-			})
+			
 		</script>
     </body>
 </html>

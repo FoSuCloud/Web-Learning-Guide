@@ -37,7 +37,6 @@
         	margin: 0 auto;
         	width: 1024px;
         }
-        	
         .wrapper {
             display: inline-block;
         	width: 310px;
@@ -47,16 +46,12 @@
         	cursor: pointer;
         	position: relative;
         	font-family: Tahoma, Arial;
-/*        	-webkit-perspective: 4000px;
-        	-moz-perspective: 4000px;
-        	-ms-perspective: 4000px;
-        	-o-perspective: 4000px;
-        	perspective: 4000px; */
+        	perspective: 4000px;
         }
-        
         .item {
             height: 100px;
-			/* preserve-3d使被转换的子元素保持3d转换 */
+			/* 给父元素设置该属性让子元素具有3d效果，但是子元素可以溢出范围
+			 如果设置了overflow:hidden，那么该属性就无效*/
         	-webkit-transform-style: preserve-3d;
         	-moz-transform-style: preserve-3d;
         	-ms-transform-style: preserve-3d;
@@ -69,16 +64,10 @@
         	-o-transition: transform .6s;
         	transition: transform .6s;
         }
-        
         .item:hover {
         /* 任务四、悬浮状态改变每个列表项的transform效果 */
-			/* -webkit-transform: translateZ(-50px) rotateX(95deg);
-			-moz-transform: translateZ(-50px) rotateX(95deg);
-			-ms-transform: translateZ(-50px) rotateX(95deg);
-			-o-transform: translateZ(-50px) rotateX(95deg); */
 			transform: translateZ(-50px) rotateX(95deg);
         }
-        
         .item img {
             display: block;
             position: absolute;
@@ -86,20 +75,11 @@
             /* 任务五、设置列表项图片的圆角和阴影效果 */
             border-radius: 3px;
             box-shadow: 0px 3px 8px rgba(0,0,0,0.3);
-		   /* -webkit-transform: translateZ(50px);
-           -moz-transform: translateZ(50px);
-           -ms-transform: translateZ(50px);
-           -o-transform: translateZ(50px); */
            transform: translateZ(50px);
-           -webkit-transition: all .6s;
-           -moz-transition: all .6s;
-           -ms-transition: all .6s;
-           -o-transition: all .6s;
            transition: all .6s;
            width: 310px; 
            height: 100px;
          }
-        
         .item .information {
            display: block;
            position: absolute;
@@ -116,19 +96,10 @@
 			background: -webkit-linear-gradient(to bottom,  rgba(236,241,244,1) 0%,rgba(190,202,217,1) 100%);
 			background: -ms-linear-gradient(to bottom,  rgba(236,241,244,1) 0%,rgba(190,202,217,1) 100%);
 			background: linear-gradient(to bottom,  rgba(236,241,244,1) 0%,rgba(190,202,217,1) 100%);
-           /* -webkit-transform: rotateX(-90deg) translateZ(50px);
-            -moz-transform: rotateX(-90deg) translateZ(50px);
-            -ms-transform: rotateX(-90deg) translateZ(50px);
-            -o-transform: rotateX(-90deg) translateZ(50px); */
 			/* rotateX翻转之后漏出的部分的宽度为1px，所以不会挡住图片 */
             transform: rotateX(-90deg) translateZ(50px);
-            -webkit-transition: all .6s;
-            -moz-transition: all .6s;
-            -ms-transition: all .6s;
-            -o-transition: all .6s;
             transition: all .6s;
          }
-        
         .information a {
            display: block;
            margin: .2em 0 .5em 0;

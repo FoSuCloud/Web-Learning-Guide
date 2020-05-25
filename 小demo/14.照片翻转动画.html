@@ -33,7 +33,6 @@
 		/* 如果不设置变换的中心点，那么默认为中心位置，那么旋转动画会出现重叠
 		 所以应该设置为中心点在底部！*/
 		/* transform-origin: bottom; */
-		transform: translateZ(200px);
         border-radius: 3px;
         box-shadow: 0px 3px 8px rgba(0,0,0,0.3);
 	}
@@ -49,11 +48,17 @@
 		transform: rotateX(-90deg) ;
 		background: url(images/01bg.png) 100% 100%;
 	}
+	/* 
+	 此时显示的是正方体的背面，另外一面是正方体的下面
+	 然后翻转90度，下面变为正面，背面变为下面！
+	 最后恢复！
+	 (不使用正面和下面的原因为直接rotate:90deg，那么继续翻转90度，显示的是反面！看文字)
+	 另外直接给父元素设置translateZ:100%，那么也就相当于变为正面和下面了
+	 */
 	/* 整体翻转！不改变原有的子元素位置 */
 	.container .parent:hover{
 		/* 由于是针对中心翻转，所以翻转之后的位置变化了！只显示下半部分，所以需要位移一半位置 */
-		transform: translateY(100px) rotateX(90deg) ;
-		transform-origin: center;
+		transform: rotateX(90deg) ;
 	}
   </style>
 </head>
@@ -69,25 +74,6 @@
 		</div>
 	</div>
   <script>
-	/* 注意安全范围是不包含端点的 */
-	var {log}=console;
-	log(Number.MAX_SAFE_INTEGER===Math.pow(2,53));//false
-	log(Number.MAX_SAFE_INTEGER===Math.pow(2,53)-1);//true
-	
-	/* Number.isSafeInteger() */
-	log(Number.isSafeInteger(3));true
-	log(Number.isSafeInteger(9007199254740991));//true
-	log(Number.isSafeInteger(9007199254740992));//false
-	
-	/* 对于非Number数据类型及非整数，都返回false */
-	log(Number.isSafeInteger(3.222));//false
-	log(Number.isSafeInteger(NaN));//false
-	log(Number.isSafeInteger(Infinity));//false
-	log(Number.isSafeInteger(null));//false
-	log(Number.isSafeInteger(undefined));//false
-	log(Number.isSafeInteger('2'));//false
-	log(Number.isSafeInteger(true));//false
-	
   </script>
 </body>
 

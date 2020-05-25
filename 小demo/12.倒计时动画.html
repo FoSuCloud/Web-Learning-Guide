@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>倒计时动画</title>
+  <style type="text/css">
+  	.container{
+		overflow: hidden;
+		/* 设置3d视角多远 */
+		perspective: 800px;
+	}
+	.parent{
+		/* 给父元素设置该属性让子元素具有3d效果，但是子元素可以溢出范围
+		 如果设置了overflow:hidden，那么该属性就无效*/
+		transform-style: preserve-3d;
+		position: relative;
+		width: 400px;
+		height: 400px;
+		margin: 0 auto;
+		perspective-origin: 50% 50%;
+	}
+	.page{
+		width: 360px;
+		height: 360px;
+		padding: 20px;
+		background-color: black;
+		color: white;
+		font-size: 360px;
+		font-weight: bold;
+		text-align: center;
+		line-height: 360px;
+		position: absolute;
+		transition: all 2s ease;
+		/* 如果不设置变换的中心点，那么默认为中心位置，那么旋转动画会出现重叠
+		 所以应该设置为中心点在底部！*/
+		transform-origin: bottom;
+	}
+	/* not选择器和nth-child选择器一起使用 */
+	.page:not(:nth-child(1)){
+		transform: rotateX(90deg);
+	}
+	.btn{
+		margin: 50px auto;
+		text-align: center;
+	}
+  </style>
+</head>
+<body>
+	<div class="container">
+		<div class="parent">
+			<div class="page">1</div>
+			<div class="page">2</div>
+			<div class="page">3</div>
+			<div class="page">4</div>
+			<div class="page">5</div>
+			<div class="page">6</div>
+		</div>
+	</div>
+	<div class="btn">
+		<a href="javascript:void(0);" onclick="next()">next</a>
+		<a href="javascript:void(0);" onclick="preview()">previous</a>
+	</div>
+  <script>
+	/* 维护一个页数的变量*/
+	var page=0;  // 初始位置
+	var pages=document.getElementsByClassName('page');
+	function next(){
+		if(page<pages.length-1){
+			pages[page].style.transform="rotateX(-90deg)";
+			pages[++page].style.transform="rotateX(0deg)";
+		}
+	}
+	function preview(){
+		if(page>0){
+			pages[page].style.transform="rotateX(90deg)";
+			pages[--page].style.transform="rotateX(0deg)";
+		}
+	}
+  </script>
+</body>
+
+</html>

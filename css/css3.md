@@ -17,8 +17,9 @@
 8. border-image(边框图片)
 
 ## css3中的变形与动画
+* `Z轴指的是浏览器距离用户的方向！`
 1. rotate旋转
-* rotate()默认指的是x轴旋转`2d旋转`
+* rotate()默认指的是z轴旋转`2d旋转,默认是z轴旋转！所以沿着z轴旋转就是相对中心点2d旋转！`
 * rotate3d(x,y,z,angle)`定义3d旋转`
 * rotateX/rotateY/rotateZ`定义沿着x轴/y轴/z轴旋转`
 * `默认是顺时针旋转，正值时表示顺时针，负值表示逆时针`
