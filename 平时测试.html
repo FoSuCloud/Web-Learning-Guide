@@ -69,25 +69,15 @@
 		</div>
 	</div>
   <script>
-	/* 注意安全范围是不包含端点的 */
-	var {log}=console;
-	log(Number.MAX_SAFE_INTEGER===Math.pow(2,53));//false
-	log(Number.MAX_SAFE_INTEGER===Math.pow(2,53)-1);//true
+	var {log}=console
+	log(10n+'');//10
+	log(10n+'1');//101
 	
-	/* Number.isSafeInteger() */
-	log(Number.isSafeInteger(3));true
-	log(Number.isSafeInteger(9007199254740991));//true
-	log(Number.isSafeInteger(9007199254740992));//false
-	
-	/* 对于非Number数据类型及非整数，都返回false */
-	log(Number.isSafeInteger(3.222));//false
-	log(Number.isSafeInteger(NaN));//false
-	log(Number.isSafeInteger(Infinity));//false
-	log(Number.isSafeInteger(null));//false
-	log(Number.isSafeInteger(undefined));//false
-	log(Number.isSafeInteger('2'));//false
-	log(Number.isSafeInteger(true));//false
-	
+	log(10n?1:0);//1
+	log(10n>true);//true
+	log(0n==true);//false
+	log(0n==undefined);//false
+	log(0n==null);//false
   </script>
 </body>
 
