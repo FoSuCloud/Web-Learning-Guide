@@ -1,8 +1,0 @@
-function add(a,b){
-	// console.log(a,b,this);//函数位于window作用于，内部this就是window
-	return ()=>{
-		return this.a+this.b;//NaN
-	}
-}
-console.log(add(3,4)())
-console.log(undefined+0);//NaN
