@@ -70,9 +70,20 @@
 	</div>
   <script>
 	var {log}=console
-	/* Rest parameter must be last formal parameter */
-	function func(a,...b,c){}
-	/* 也就是rest参数必须是最后一个参数！ */
+	/* 错误做法，存在O(n)级别的调用帧
+	 因为在最后依旧保存a在每个调用帧 */
+	function add(a){
+		if(a==1) return 1
+		return a*add(a-1)
+	}
+	console.log(add(5));//120
+	
+	/* 正确做法 */
+	function myadd(a,total){
+		if(a==1) return total
+		return myadd(a-1,a*total)
+	}
+	console.log(myadd(5,1))
   </script>
 </body>
 
