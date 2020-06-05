@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.warp{
+				width: 60%;
+				height: 200px;
+				border: 1px solid black;
+			}
+			img{
+				width: 33%;
+				height: 90px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="warp">
+			<img src="../logo.png" >
+			<img src="../logo.png" >
+			<img src="../logo.png" >
+			<img src="../logo.png" >
+			<img src="../logo.png" >
+			<img src="../logo.png" >
+		</div>
+		<script src="../jquery-3.1.1.js"></script>
+		<script type="text/javascript">
+			// 使用 siblillngs()来获取相邻元素
+			$(function(){
+				// 设置变亮
+				$('.warp>img').mouseenter(function(){
+					$(this).css('opacity','1').siblings('img').css('opacity','0.4');
+				})
+				// 退出则恢复
+				$('.warp').mouseleave(function(){
+					$(this).children('img').css('opacity',1);
+				})
+			})
+		</script>
+	</body>
+</html>

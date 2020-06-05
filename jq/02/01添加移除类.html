@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.active{
+				color: red;
+			}
+			.bigger{
+				font-size: 30px;
+			}
+			.all{
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="one">
+			<span>231231231</span>
+			<span>231231231</span>
+			<span class="all">231231231</span>
+		</div>
+		<script src="../jquery-3.1.1.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				// 1.1添加类
+				$('.one').children('span:nth-child(1)').addClass('active')
+				
+				// 1.2添加多个类
+				$('.one').children('span:nth-child(3)').addClass('active bigger')
+				
+				// 2.移除类(可以移除多个类)
+				$('.one').children('span:nth-child(3)').removeClass('active bigger')
+				
+				// 2.2 如果removeClass没有参数就是移除所有类
+				$('.one').children('span:nth-child(3)').removeClass();// 内联样式的类也会被移除
+				
+				// 3.判断类
+				// alert($('.one').children('span:nth-child(1)').hasClass('active'));//true
+				
+				// 4.toggleClass,如果元素不存在该类就添加该类，存在则移除
+				$('.one').children('span:nth-child(3)').toggleClass('active bigger')
+			})
+		</script>
+	</body>
+</html>

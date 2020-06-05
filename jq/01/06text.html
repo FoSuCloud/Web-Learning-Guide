@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="one">
+			父元素.one
+			<div class="child">one</div>
+			<div class="child">two</div>
+			<div class="child">three</div>
+			<div class="child">four</div>
+		</div>
+		<script src="../jquery-3.1.1.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				/* 
+				 1. 获取text，text()方法不加参数
+				 */
+				// 1.1 获取到的dom元素如果有后代子元素，且子元素也有文本，那么子元素文本也会获取到
+				console.log($('.one').text());
+				/* 
+							父元素.one
+							one
+							two
+							three
+							four
+				*/
+			   // 也就是获取父元素文本会隐式迭代获取子元素文本
+			   
+			   // 1.2 获取多个元素时，会获取到多个元素的文本
+			   console.log($('div').text());
+			   /* 
+			   			父元素.one
+			   			one
+			   			two
+			   			three
+			   			four
+			   		onetwothreefour
+			   */
+			  // 可以看到获取到的文本有.one父元素的文本，也就是和1.1一模一样
+			  // 然后还有单个div本身的文本，所以最后一行是onetwothreefour
+			  
+			  // 2. 设置元素文本，text()方法加参数
+			  // 2.1 获取到多个元素时，设置文本会默认迭代设置多个元素
+			  $('.one div').text('设置.one元素的子元素的文本');// 所有子元素都改变了文本
+			  
+			  // 2.2 给元素设置的文本包含标签时，不会识别标签！
+			  $('.one .child:first-child').text('<a href="#">设置的标签依旧识别为字符串</a>');
+			  
+			  // 2.3 当获取到的元素存在子元素时，设置text会导致子元素都被覆盖了
+			  // $('.one').text('新设置的文本')
+			  
+			})
+		</script>
+	</body>
+</html>

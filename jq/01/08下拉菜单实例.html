@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			ul,li{
+				list-style-type: none;
+				text-align: center;
+			}
+			.one>ul>li{
+				display: inline-block;
+				background: blue;
+				position: relative;
+				height: 30px;
+				line-height: 30px;
+			}
+			.one>ul>li>ul{
+				display: none;
+			}
+			.one>ul>li>ul{
+				position: absolute;
+				top: 30px;
+				left: 0;
+				background: lightblue;
+				right: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="one">
+			<ul>
+				<li>
+					一级菜单
+					<ul>
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+					</ul>
+				</li>
+				<li>
+					一级菜单
+					<ul>
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+					</ul>
+				</li>
+				<li>
+					一级菜单
+					<ul>
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<script src="../jquery-3.1.1.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				// 使用children方法寻找到子元素
+				var cai=$('.one>ul>li');
+				// 除此之外，mouseenter/mouseleave(ie才支持，其他浏览器不支持)方法不会因为子元素触发该事件而触发
+				// 也就是this只会打印一次！
+				// 但是mouseover/mouseout(ie也支持)会因为子元素触发事件而触发(子元素没绑定)
+				// 也就是this会打印n次
+				cai.mouseenter(function(){
+					console.log(this);// this指的是触发事件的子元素
+					$(this).children('ul').css('display','inline-block')
+				})
+				
+				cai.mouseleave(function(){
+					$(this).children('ul').css('display','none')
+				})
+			})
+		</script>
+	</body>
+</html>

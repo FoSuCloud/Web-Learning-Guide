@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 300px;
+				height: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" value="填充文本" id="text">
+		<input type="button" value="填充边框" id="border">
+		<div class="one"></div>
+		<div class="two"></div>
+		<div class="three"></div>
+		<script src="../jquery-3.1.1.min.js"></script>
+		<script type="text/javascript">
+			// jquery的document.ready是在dom加载完毕之后，而window.onload是在所有页面资源加载之后
+			// 所以ready在onload之前
+			$(document).ready(function(){
+				// 设置文本
+				$('#text').click(function(){
+					$('div').text('填充文本')
+				})
+				
+				// 设置css
+				$('#border').click(function(){
+					$('div').css('border','1px solid black')
+					// 注意:可以通过css设置宽高，也可以直接设置
+					$('.one').height('300px')
+				})
+			})
+			
+			$(document).ready(function(){
+				console.log("jQuery可以设置多个入口函数")
+			})
+			
+			// jq入口函数第二种写法
+			$(function(){
+				console.log("这是jq的入口函数的第二种写法")
+			})
+			
+			// 与原生js相比，jq的优势有:
+			/* 
+			 1. 可以设置多个入口函数
+			 2. 自己就可以兼容浏览器，不需要js写那么多函数
+			 3. jq其实也就是用的是链式编程
+			 */
+			// 注意:jq的版本主要有1.x,2.x,3.x，其中只有3.x还更新，但是3.x已经不支持ie6/7/8了
+			// 另外 jquery.js 和jquery.min.js的区别在于 min.js文件是压缩过的，没有空格换行
+			// 由于压缩的小很多，所以生产环境一般使用min.js,(虽然js的方便阅读)
+			// 开发环境就是用.js,因为方便调试
+		</script>
+	</body>
+</html>

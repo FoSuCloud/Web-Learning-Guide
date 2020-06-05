@@ -46,7 +46,8 @@
 		/* 如果不设置变换的中心点，那么默认为中心位置，那么旋转动画会出现重叠
 		 所以应该设置为中心点在底部！*/
 		transform-origin: bottom;
-		transform: rotateX(-90deg) ;
+		transform: rotateX(-90deg);
+		justify-content: sp;
 		background: url(images/01bg.png) 100% 100%;
 	}
 	/* 整体翻转！不改变原有的子元素位置 */
@@ -70,25 +71,44 @@
 	</div>
   <script>
 	var {log}=console
-	/* 1.二维数组 */
-	var a=[1,2,[3]]
-	var res_a=a.flatMap((val)=> val*2)
-	console.log(res_a);//[2, 4, 6]
-	
-	/* 2.只能展开一层
-	 注意先执行map函数，再执行flat*/
-	var b=[1,[2,3,[4,5]]]
-	var res_b=b.flatMap((val)=> val*2)
-	console.log(res_b);//[2, NaN]
-	/* 所以第二个参数为二维数组时，使用*，返回NaN */
-
-	/* 3.绑定this */
-	var obj={age:10}
-	var c=[3,4,5]
-	var res_c=c.flatMap(function(val){
-		return val+this.age
-	},obj)
-	console.log(res_c);//[13, 14, 15]
+	var threeSum = function(nums) {
+	    if(nums.length<=2) return []
+	    nums.sort((a,b)=> a-b)
+	    var arr=[]
+	    // 改变第一个数,m为二，r为三
+	    var m,r;
+	    var sum;
+		console.log(nums)
+		/* i不一定每次加一 */
+	    for(var i=0;i<nums.length-2;){
+			m=i+1;
+			r=nums.length-1;
+			if(nums[i]>0) break;
+	        while(m<r){
+	            sum=nums[i]+nums[m]+nums[r];
+	            if(sum>0){
+	                r--;
+	            }else if(sum==0){
+	                arr.push([nums[i],nums[m],nums[r]])
+					r--;
+					m++;
+					// 去重
+					console.log(i,m,r)
+					while(nums[r]==nums[r+1]) r--;
+					while(nums[m]==nums[m-1]) m++;
+					console.log(i,m,r)
+	            }else{
+	                m++;
+	            }
+	        }
+			// 比较最左边是否相等,相等则不要
+			while(nums[i]==nums[++i]){}
+	    }
+	    return arr
+	};
+	console.log(threeSum([-1, 0, 1, 2, -1, -4]))
+	// console.log(threeSum([0,0,0,0]))
+	// console.log(threeSum([-2,0,1,1,2]))
   </script>
 </body>
 </html>

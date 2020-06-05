@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.one{
+				width: 100px;
+				height: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="one"></div>
+		<div class="one two"></div>
+		<script src="../jquery-3.1.1.js"></script>
+		<script type="text/javascript">
+			/* 
+			1. dom对象就是通过原生js方法获取到的文档元素 
+			 */
+			var one=document.getElementsByClassName('one')[0];
+			// 1.2 dom对象不可以使用jquery方法/属性
+			// one.css('backgroundColor','green');// 会报错，因为原生dom对象不存在该方法
+			
+			/* 
+			 2. jquery对象也就是通过jquery获取到的dom对象，可以使用jq方法/属性
+			 
+			 */
+			$(function(){
+				$('.one').css('background','green')
+			})
+			// 2.2 jq对象不可以使用dom对象的方法/属性
+			$('.one').onclick=function(){
+				console.log("jq对象不可以使用dom对象的方法/属性")
+			};// 点击无反应
+			
+			// 2.3 jQuery对象是一个伪数组，当获取到的元素有多个时，存在属性为0,1,2...的属性
+			// 那些属性存储元素，但是也有prevObject等其他属性，所以jquery就是dom对象的封装集
+			console.log($('.one'))
+			/* 
+			 0: div.one
+			 length: 1
+			 prevObject
+			 */
+			
+			
+			// 3.可以通过$(dom) 的方式把dom对象转换为jquery对象
+			var my=$(one);
+			console.log(my);//jQuery.fn.init [div.one]
+			/* 
+			 0: div.one
+			 length: 1
+			 */
+			// 注意，dom对象转换为jquery对象后没有prevObject属性
+			
+			// 4. jq对象转为dom对象
+			// 4.1 直接通过索引取得
+			console.log($('.one')[0]);//div.one
+			
+			// 4.2 通过$().get(n),方法取得，n指的是属性，在伪数组中也就是索引
+			console.log($('.one').get(1)); //div.one.two
+		</script>
+	</body>
+</html>

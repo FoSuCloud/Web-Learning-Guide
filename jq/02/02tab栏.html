@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			ul{
+				display: inline-block;
+				width: 200px;
+				border: 1px solid black;
+			}
+			li{
+				display: inline-block;
+				width: 20%;
+				background: #ADD8E6;
+				height: 30px;
+			}
+			/* 通过改变最大高度实现下拉菜单下滑效果 */
+			@keyframes  enter{
+				0%{
+					opacity: 0.5;
+					max-height: 50px;
+				}
+				100%{
+					opacity: 1;
+					max-height: 100px;
+				}
+			}
+			/* 移除 */
+			@keyframes  leave{
+				0%{
+					opacity: 1;
+					max-height: 100px;
+				}
+				100%{
+					opacity: 0.5;
+					max-height: 0;
+				}
+			}
+			.myimg div{
+				display: none;
+				animation: enter .5s ease-in-out;
+				height: 100px;
+				background:black;
+				overflow: hidden;
+			}
+			.myimg>div:first-child{
+				display: block;
+				background: aliceblue;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>
+				1
+			</li>
+			<li>
+				2
+			</li>
+			<li>
+				3
+			</li>
+			<li>
+				4
+			</li>
+			<div class="myimg">
+				<div>111111111</div>
+				<div>2222222222</div>
+				<div>333333333333</div>
+				<div>555555555555</div>
+			</div>
+		</ul>
+		<script src="../jquery-3.1.1.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				// 首先默认显示第一个div ,移入其他div则切换
+				$('ul li').mouseenter(function(){
+					// 1.通过 index方法获取当前元素在父元素中的索引
+					var i=$(this).index();
+					// 2.通过eq方法获取第n个元素
+						$('.myimg').css('display','block')
+						$('.myimg').children().eq(i).siblings().css('display','none');
+						$('.myimg').children().eq(i).css('display','block');
+				})
+				$('ul li').mouseleave(function(){
+					var i=$(this).index();
+					// 设置离开动画
+					$('.myimg').children().eq(i).css('animation','leave .5s ease-in-out')
+					setTimeout(function(){
+						// 离开之后就消失
+						$('.myimg').children().eq(i).css('display','none')
+						$('.myimg').children().eq(i).css('animation','enter .5s ease-in-out')
+					},500)
+				})
+			})
+		</script>
+	</body>
+</html>
