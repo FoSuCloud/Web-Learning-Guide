@@ -71,44 +71,13 @@
 	</div>
   <script>
 	var {log}=console
-	var threeSum = function(nums) {
-	    if(nums.length<=2) return []
-	    nums.sort((a,b)=> a-b)
-	    var arr=[]
-	    // 改变第一个数,m为二，r为三
-	    var m,r;
-	    var sum;
-		console.log(nums)
-		/* i不一定每次加一 */
-	    for(var i=0;i<nums.length-2;){
-			m=i+1;
-			r=nums.length-1;
-			if(nums[i]>0) break;
-	        while(m<r){
-	            sum=nums[i]+nums[m]+nums[r];
-	            if(sum>0){
-	                r--;
-	            }else if(sum==0){
-	                arr.push([nums[i],nums[m],nums[r]])
-					r--;
-					m++;
-					// 去重
-					console.log(i,m,r)
-					while(nums[r]==nums[r+1]) r--;
-					while(nums[m]==nums[m-1]) m++;
-					console.log(i,m,r)
-	            }else{
-	                m++;
-	            }
-	        }
-			// 比较最左边是否相等,相等则不要
-			while(nums[i]==nums[++i]){}
-	    }
-	    return arr
-	};
-	console.log(threeSum([-1, 0, 1, 2, -1, -4]))
-	// console.log(threeSum([0,0,0,0]))
-	// console.log(threeSum([-2,0,1,1,2]))
+	console.log(1e2);// 1 * e^2 =1*100=100
+	console.log(1e+2);// 1 * e^2 =1*100=100
+	console.log(1e3);// 1* e^3=1*1000=1000
+	console.log(1e+3);// 1* e^3=1*1000=1000
+	console.log(2e2);// 2* e^2=2*100=200
+	console.log(2e+2);// 2* e^2=2*100=200
+	console.log(10e2);//1000
   </script>
 </body>
 </html>
