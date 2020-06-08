@@ -72,55 +72,7 @@
 
   <script>
 	var {log}=console
-	// 首先创建一个对象,加入数值键
-	var obj={
-		0:1,
-		11:12,
-		2:5
-	}
-	// 添加一个不可枚举属性
-	Object.defineProperty(obj,'d',{
-		enumerable:false,
-		value:'dog'
-	})
-	Object.defineProperty(obj,'e',{
-		enumerable:false,
-		value:'egg'
-	})
-	console.log(obj);//{0: 1, 2: 5, 11: 12, d: "dog", e: "egg"}
-	// 然后加入Symbol属性
-	Object.defineProperty(obj,Symbol('y'),{
-		enumerable:false,
-		value:'i am symbol'
-	})
-	Object.defineProperty(obj,Symbol('x'),{
-		enumerable:false,
-		value:'i am symbol x'
-	})
-	console.log(obj);//{0: 1, 2: 5, 11: 12, d: "dog", e: "egg", Symbol(y): "i am symbol", Symbol(x): "i am symbol x"}
-	
-	// 最后加入继承
-	var father={
-		child:'我是原型对象'
-	}
-	Object.setPrototypeOf(obj,father);
-	
-	// 1. for...in循环 (包含继承)(不遍历不可枚举，Symbol属性)
-	for(var item in obj){
-		console.log(item);// 0 2 11 child 
-	}
-    
-	// 2. Object.keys() (不包含继承)(不遍历不可枚举，Symbol属性)
-	console.log(Object.keys(obj));//["0", "2", "11"]
-	
-	// 3. Object.getOwnPropertyNames()(不包括继承) (不包括Symbol)
-	console.log(Object.getOwnPropertyNames(obj));//["0", "2", "11", "d", "e"]
-  
-	// 4. Object.getOwnPropertySymbols(不继承)(只有Symbol属性)
-	console.log(Object.getOwnPropertySymbols(obj));//[Symbol(y), Symbol(x)]
-	
-	// 5. Reflect.ownKeys() (对象自身所有属性，除了继承的)
-	console.log(Reflect.ownKeys(obj));
+
   </script>
 </body>
 </html>
