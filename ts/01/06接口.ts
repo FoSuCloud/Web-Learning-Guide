@@ -17,11 +17,13 @@ console.log(printLabel({label:'i am'}));//i am
  如何进行批量约束？
  */
 /* 方法:使用接口对对象属性进行约束 */
-/* 定义一个属性接口 */
+/* 定义一个属性接口
+继承接口的对象必须具有接口的所有属性，不能少不能多，除非使用的是可选属性 */
 interface Fullname{
 	first:string; // 注意此时在内部必须使用;结尾！
 	end:string;
 }
+
 
 /* 使用对象 属性约束 */
 function func(name:Fullname):string{
@@ -36,6 +38,20 @@ function func(name:Fullname):string{
 // Object literal may only specify known properties, and 'age' does not exist in type 'Fullname'.
 /* 使用直接传入对象的方法时，对象不可以含有除属性接口外的属性 */
 // console.log(func({age:20,first:'qiqi',end:'yiye'}));//qiqi is yiye son
+
+
+// 也可以设置任意属性，不限定属性名
+interface AnyIn{
+	a:string;
+	c:number;
+	// 注意，此时的propName相当于所有属性，中括号后面的冒号后面是所有可能的数据类型
+	[propName:string]:number|string;
+}
+function AnyInFunc(name:AnyIn){
+    console.log("新增的");
+	console.log(name)
+}
+AnyInFunc({a:"a",c:2,d:"33",e:"1"});// 此时没问题，即使多出了属性d,e
 
 /* 2.传递一个对象变量到函数 */
 var myobj={age:20,first:'ww',end:'w'}

@@ -20,6 +20,15 @@ var flag:boolean=false;
 // flag='str';//error TS2011: Cannot convert 'string' to 'boolean'.
 flag=true
 
+// 注意:如果使用的是包装对象，那么要变一下
+// var flag_b:boolean=new Boolean(true);//报错,Type 'Boolean' is not assignable to type 'boolean'.
+var flag_b:Boolean=new Boolean(true);//[Boolean: true]
+console.log(flag_b)
+
+// 直接调用Boolean()获得的是类型转换为布尔的值，不是布尔包装对象！
+var flag_c:boolean=Boolean(2);
+console.log(flag_c);//true
+
 /* 如果设置了数据类型，那么不能直接赋值为其他数据类型，否则会报错 */
 
 /*  2.数值类型*/
@@ -76,8 +85,8 @@ log(who);//true,上面都不会报错！
 /* 7.1 ts中any类型的用法，因为ts中没有object类型
  所以设置DOM节点需要设置any数据类型，否则即使可以执行，也会有报错的！*/
  // var box=document.getElementById('box')
- var box:any=document.getElementById('box')
- box.style.color='red'
+ // var box:any=document.getElementById('box')
+ // box.style.color='red'
  /* 但是高版本的ts不需要设置any也不会报错了*/
  
  /* 8.null/undefined属于never数据类型的子类型*/
@@ -106,6 +115,11 @@ log(who);//true,上面都不会报错！
 	 return a-b;
  }
  log(del(30,1));//29
+ // void类型如果用于变量中，那么只能被赋值为undefined/null
+ var void_a:void=undefined
+ var void_b:void=null;
+ console.log("void:")
+ console.log(void_a,void_b);//undefined null
  
  /* 10.never类型，null和undefined属于它的子类型
  never类型的值只能被never类型所赋值*/
@@ -136,6 +150,12 @@ function infiniteLoop():never {
 // func();//编译的时候就会报错
 /* A function returning 'never' cannot have a reachable end point. */
 
+// undefined/null其实所有所有类型的子类型，就是说你可以把 null和undefined赋值给其他类型的变量。
+var num_n:number=undefined;
+var num_nn:number=null;
+var str_n:string=undefined;
+var str_nn:string=null;
+
 /* 
 11. object类型
  object表示非原始类型，也就是除number，string，boolean，symbol，null或undefined之外的类型。
@@ -147,3 +167,16 @@ foo={name:'yiye'}
 var obj_arr:object=[4,3,1]
 console.log(foo);//{name: "yiye"}
 console.log(obj_arr);//[4, 3, 1]
+
+// 类型推论
+// 1. 如果定义变量时赋值了，那么会被默认设置为设置值的类型
+var str_t='str';// 此时没有设置类型，但是会默认设置为设置值的类型
+// 所以改变类型会报错
+// str_t=1;//Type '1' is not assignable to type 'string'.
+
+// 2.如果定义变量时没有赋值，那么默认设置为any
+var any_a;
+any_a=1;
+any_a='dd';// 此时赋值为其他数据类型没错，因为变量是any数据类型
+
+

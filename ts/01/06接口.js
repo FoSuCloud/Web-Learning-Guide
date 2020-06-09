@@ -5,9 +5,12 @@
   (其实接口就是用于定义标准的)
  */
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -28,11 +31,11 @@ function func(name) {
     // Property 'age' does not exist on type 'Fullname'.
     // return `${name.first} is ${name.end} son ${name.age}`
 }
-// 1.直接使用func(obj)传入对象
-// console.log(func({first:'qiqi',end:'yiye'}));//qiqi is yiye son
-// Object literal may only specify known properties, and 'age' does not exist in type 'Fullname'.
-/* 使用直接传入对象的方法时，对象不可以含有除属性接口外的属性 */
-// console.log(func({age:20,first:'qiqi',end:'yiye'}));//qiqi is yiye son
+function AnyInFunc(name) {
+    console.log(name);
+}
+console.log("ds我是ddd");
+AnyInFunc({ a: "a", c: 2, d: "33", e: "1" });
 /* 2.传递一个对象变量到函数 */
 var myobj = { age: 20, first: 'ww', end: 'w' };
 console.log(func(myobj)); //ww is w son

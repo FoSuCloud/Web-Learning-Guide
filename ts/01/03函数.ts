@@ -23,7 +23,7 @@ console.log(add(4,3));//7
 console.log(add(4,null));//4，相当于执行了隐式类型转换为number
 /* 如果设置类型为字母字符串，无法转换为number,那么编译时会报错 */
 /* Argument of type '"a"' is not assignable to parameter of type 'number'. */
-console.log(add(4,'a'));//4a
+// console.log(add(4,'a'));//4a
 /* 
 	根据上面的例子可以知道，ts几乎不限制js中的隐式类型转换！
  */
@@ -34,9 +34,13 @@ console.log(x+y);//5，但是结果依旧是正确的
 
 /* 
  
- es6和ts中都可以设置默认参数*/
- function one(a:number,name:string='张三'):string{
-	 return `${name}--${a}岁`
+ es6和ts中都可以设置默认参数(ts中函数的默认参数具有可选参数的性质，不一定需要传递)*/
+//  function one(a:number,name:string='张三'):string{
+// 	 return `${name}--${a}岁`
+//  }
+ // 也可以使用可选函数参数
+ function one(a:number,name?:string):string{
+	return `${name}--${a}岁`
  }
  console.log(one(30,'yiye'));//yiye--30岁
  console.log(one(30));//张三--30岁
@@ -77,3 +81,4 @@ function four(name:string,age?:number):string{
 console.log(four('张三',30));//张三 is 30 years age
 console.log(four('张三'));//i am 张三
 
+export default {};

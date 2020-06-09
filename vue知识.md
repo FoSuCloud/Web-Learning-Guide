@@ -33,20 +33,23 @@ uglifyOptions: {
 ```
 
 ## vue中给data中的一个对象添加属性，视图没有更新
+
 * `虽然vue是响应式更新数据的，但是刚开始的vue实例中没有该属性，所以该属性就不会响应式更新`
-```
+
+```javascript
 <span>{{obj}}</span>
 data(){
-	return{
-		obj:{
-			a:1
-		}
-	}
+ return{
+  obj:{
+   a:1
+  }
+ }
 }
 change(){
-	this.obj.b='444';// 即使添加了属性，可以看到页面中用到的对象还是没有该属性
+ this.obj.b='444';// 即使添加了属性，可以看到页面中用到的对象还是没有该属性
 }
 ```
+
 * `解决方法:通过this.$set(obj,'key',value)来添加一个响应式的属性`
 `this.$set(obj,'b','value')`
 
