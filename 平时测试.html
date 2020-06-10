@@ -73,6 +73,22 @@
 
   <script>
 	var {log}=console
+	var reconstructQueue = function(people) {
+	    people.sort((a,b) => {
+			// 身高相等时个数升序,身高不等时升高降序
+	        return a[0]==b[0]?a[1]-b[1]:b[0]-a[0]
+	    });
+		console.log(people);//[7,0],[7,1],[6,1],[5,0],[5,2],[4,4]
+		people.forEach((item,i)=>{
+			if(item[1]<i){
+				people.splice(item[1],0,...people.splice(i,1))
+			}
+		})
+		return people
+	};
+	// var arr=[[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]
+	var arr=[[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]
+	console.log(reconstructQueue(arr))
   </script>
 </body>
 </html>

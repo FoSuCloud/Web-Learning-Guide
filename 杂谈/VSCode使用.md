@@ -12,3 +12,11 @@
 
 ## 将下一个查找匹配项添加到选择(选择了abc,然后选择本文的下一个abc)
 * `修改为crtl+l`
+
+## 同步VSCode设置
+* `使用了setting sync插件`
+* 同步方法[参考](https://www.cnblogs.com/kenz520/p/7416836.html)
+
+## 自定义代码片段
+* [参考](https://www.jianshu.com/p/d874ba464df3)
+* `以后直接在vue文件输入vuetemplate就会提示该代码片段了`
