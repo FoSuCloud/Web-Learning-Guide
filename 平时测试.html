@@ -73,21 +73,7 @@
 
   <script>
 	var {log}=console
-	// 使用方法一:使用类的实例
-	class MyClass{
-		[Symbol.match](str){
-			return '字符串'
-		}
-	}
-	console.log("hello blog".match(new MyClass()));//字符串
 
-	// 方法二；使用对象属性
-	var obj={
-		[Symbol.match](str){
-			return str;
-		}
-	}
-	console.log('hhha'.match(obj))
   </script>
 </body>
 </html>
