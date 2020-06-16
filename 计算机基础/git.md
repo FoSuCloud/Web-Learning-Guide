@@ -1,3 +1,25 @@
+## 分支
+1. master分支，`一般不在这个分支上开发项目`
+2. dev开发分支(`master分支的子分支`)，`一般在该分支上开发项目`
+3. feature版本分支(`dev开发分支的子分支`)，在这个分支进行版本管理
+* `例如:feature-vueAdmin-v1.0.0-20190919,feature表示分支名称`
+* vueAdmin表示项目名称，v1.0.0表示版本号，20190919表示分支日期
+4. bug分支(`feature开发分支的子分支`),在该版本进行bug管理
+* `例如:bug-101241-20191020`
+* bug表示分支名称，101241是bug的id,20191020是建立分支的日期
+
+## 拷贝一个git项目的命令
+1. git clone "http://xxx" 复制远程仓库到本地
+2. git branch --list 查看项目的所有分支,`高亮的是当前分支`
+3. `创建dev开发分支 git branch dev`
+4. `git checkout dev,切换到dev分支`
+5. `把新增的分支提交到远程仓库  git push --set-upstream origin <name>`,此处的"<name>"替换为dev
+6. `git branch -a查看分支(包括远程分支)`
+7. `在dev开发分支下面创建一个版本分支，使用git checkout -b feature-vueAdmin-v1.0.0-20190919`,表示创建分支，并且切换到该分支
+8. `把新增的分支提交到远程仓库，git push --set-upstream origin <name>`
+9. `由于之前已经把远程仓库下载下来了，所以创建项目之后会弹出选项，不要选overwrite重写，选择merge合并！`
+* `在git软件好像没法移动，可以在vscode移动`
+
 ## git的分支指令
 1. [参考](https://www.cnblogs.com/printN/p/6259115.html)
 2. `git branch -a查看远程分支和本地分支;git branch -r查看远程分支(服务器);git branch查看所有分支(包含master主支)`
