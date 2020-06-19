@@ -29,6 +29,13 @@
 6. `添加本地要上传的文件git add one.js;文件夹 git add img;添加本地所有文件 git add .`
 7. `删除分支 git branch -d test;删除test分支`
 
+## 代码提交的步骤
+1. git add . `把代码提交到暂存区`
+2. git commit -m "描述"  `把暂存区代码提交到本地仓库区`
+3. git pull `拉取远程仓库，提前发现冲突`
+4. git push `把本地仓库的代码提交到远程仓库`
+
+
 ## git add (将变化提交到暂存区)
 ## git commit (将暂存区里面的改动提交到本地的版本库)
 
