@@ -9,72 +9,109 @@
 	  {
 	      margin:0;padding:0;border:0;outline:0;
 	  }
-  	.container{
-		/* overflow: hidden; */
-		/* 设置3d视角多远 */
-		perspective: 60000px;
-		margin: 200px auto;
-	}
-	.parent{
-		/* 给父元素设置该属性让子元素具有3d效果，但是子元素可以溢出范围
-		 如果设置了overflow:hidden，那么该属性就无效*/
-		 /* 注意，由于变成立体的了，那么翻转的时候必须使用该属性！*/
-		transform-style: preserve-3d;
-		position: relative;
-		width: 200px;
-		height: 200px;
-		margin: 0 auto;
-		transition: all 1s ease;
-	}
-	.imgbox{
-		width: 200px;
-		height: 200px;
-		position: absolute;
-		/* 如果不设置变换的中心点，那么默认为中心位置，那么旋转动画会出现重叠
-		 所以应该设置为中心点在底部！*/
-		/* transform-origin: bottom; */
-		transform: translateZ(200px);
-        border-radius: 3px;
-        box-shadow: 0px 3px 8px rgba(0,0,0,0.3);
-	}
-	.zp-cover{
-		width: 200px;
-		height: 200px;
-		position: absolute;
-        border-radius: 3px;
-        box-shadow: 0px 3px 8px rgba(0,0,0,0.3);
-		/* 如果不设置变换的中心点，那么默认为中心位置，那么旋转动画会出现重叠
-		 所以应该设置为中心点在底部！*/
-		transform-origin: bottom;
-		transform: rotateX(-90deg);
-		justify-content: sp;
-		background: url(images/01bg.png) 100% 100%;
-	}
-	/* 整体翻转！不改变原有的子元素位置 */
-	.container .parent:hover{
-		/* 由于是针对中心翻转，所以翻转之后的位置变化了！只显示下半部分，所以需要位移一半位置 */
-		transform: translateY(100px) rotateX(90deg) ;
-		transform-origin: center;
-	}
-  </style>
+	  ul, li{
+		  list-style-type: none;
+	  }
+	  #dd{
+		  
+	  }
+	  .header{
+		  position: fixed;
+		  width: 80%;
+		  height: 4rem;
+		  background-color: #D9E8F5;
+		  color: #304269;
+		  box-shadow: 42px 0 42px #D9E8F5;
+		  display: flex;
+		  padding:0 10%;
+		  left: 0;
+		  top: 0;
+		   z-index:1;
+	  }
+	  .home-name{
+		  display: inline-block;
+		  font-size: 36px;
+		  line-height: 4rem;
+	  }
+	  .header-ul{
+		  display: flex;
+		  flex: 1;
+		  margin-left: 8rem;
+	  }
+	  .header-ul li{
+		  flex: 1;
+		  line-height: 4rem;
+		  text-align: center;
+		  font-weight: 200;
+		  transition: 1s ease;
+	  }
+	  .header-ul li:hover{
+		  font-weight: 500;
+		  transform: scale(1.2);
+		  transition: 1s ease;
+	  }
+	  /* 内容 */
+	  .home-body{
+		  margin-top: 2rem;
+		  width: 80%;
+		  margin: 0 auto 0;
+	  }
+	  .body-ul{
+		  padding: 10px;
+		  display: flex;
+		  flex-wrap: wrap;
+	  }
+	  .img-li{
+		  width: 33%;
+		  display: inline-block;
+		  text-align: center;
+		  margin-bottom: 20px;
+	  }
+	  .img-li img{
+		  display: block;
+		  width: 90%;
+		  height: 200px;
+		  margin: 0 auto 10px;
+		  overflow: hidden;
+		  transition: 1s ease;
+	  }
+	  .img-li img:hover{
+		  transform: scale(1.1);
+	  }
+	  .img-li span{
+		  display: block;
+		  color: black;
+		  font-size: 18px;
+	  }
+	  /* 目录名称 */
+	  .category{
+		  font-size: 30px;
+		  line-height:60px;
+		  font-weight: bold;
+		  margin: 6rem auto 0;
+		  width: 80%;
+		  display: block;
+	  }
+   </style>
 </head>
 <body>
-	
 	<div class="container">
-		<div class="parent">
-			<img class="imgbox" src="http://yiyeblog.com/imgs/index/06.jpg" alt="作品配图">
-			<div class="zp-cover">
-				<h4>我的博客</h4>
-				<p>这个项目是大三第一学期的时候使用django框架+jq完成的，主要是参考b站的一个视频来完成</p>
-				<img src="http://yiyeblog.com/imgs/index/search.png" alt="查看">
-			</div>
+		<div class="header">
+			<span class="home-name">新闻网站</span>
+			<ul class="header-ul">
+				<li>时事新闻</li>
+				<li>娱乐新闻</li>
+				<li>财经新闻</li>
+				<li>体育新闻</li>
+				<li>个人简介</li>
+			</ul>
+		</div>
+		<p class="category"></p>
+		<div class="home-body">
 		</div>
 	</div>
+	<script>
 
-  <script>
-	var {log}=console
-
-
-  </script>
+	</script>
 </body>
 </html>
