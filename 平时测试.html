@@ -111,14 +111,21 @@
 		</div>
 	</div>
 	<script>
-		new Promise((res,rej)=>{
-			res(1)
-		}).then(2).then((data)=>{
-			console.log(data);
-			return 3;
-		}).then((data)=>{
-			console.log(data)
+		// 1. then处于catch之前，则在catch之前就不活了错误
+		new Promise(function(res,rej){
+			throw new Error("err")
+		}).then(()=>{},(err)=>{
+			console.log("reject:",err)
+		}).catch(function(data){
+			console.log('catch:',data)
 		})
+		/* 
+		 reject: Error: err
+		     at 平时测试.html:116
+		     at new Promise (<anonymous>)
+		     at 平时测试.html:115
+		 */
+		
 	</script>
 </body>
 </html>
