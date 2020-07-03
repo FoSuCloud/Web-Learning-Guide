@@ -95,37 +95,12 @@
    </style>
 </head>
 <body>
-	<div class="container">
-		<div class="header">
-			<span class="home-name">新闻网站</span>
-			<ul class="header-ul">
-				<li>时事新闻</li>
-				<li>娱乐新闻</li>
-				<li>财经新闻</li>
-				<li>体育新闻</li>
-				<li>个人简介</li>
-			</ul>
-		</div>
-		<p class="category"></p>
-		<div class="home-body">
-		</div>
-	</div>
+	<div class="one"></div>
+	<div class="one"></div>
 	<script>
-		// 1. then处于catch之前，则在catch之前就不活了错误
-		new Promise(function(res,rej){
-			throw new Error("err")
-		}).then(()=>{},(err)=>{
-			console.log("reject:",err)
-		}).catch(function(data){
-			console.log('catch:',data)
-		})
-		/* 
-		 reject: Error: err
-		     at 平时测试.html:116
-		     at new Promise (<anonymous>)
-		     at 平时测试.html:115
-		 */
-		
+		var obj={}
+		obj[obj[0]="foo"]="iam";
+		console.log(obj)
 	</script>
 </body>
 </html>

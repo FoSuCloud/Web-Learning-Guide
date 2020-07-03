@@ -1,3 +1,10 @@
+## 一次声明两个属性
+```javascript
+		// 一次声明两个属性的写法.
+		var obj={}
+		obj[obj[0]="foo"]="iam";
+		console.log(obj);//{0: "foo", foo: "iam"}
+```
 ## 数组的对象劫持
 * `Object.defineProperty()方法主要用于对象监听，有6个属性`
 1. value:`属性的值`

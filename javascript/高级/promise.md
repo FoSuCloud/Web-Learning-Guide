@@ -396,7 +396,7 @@ Promise.resolve('1')
 * `此处的r指的是resolve,然后r(x,console.log(x))其实就是resolve(x,console.log(x)),因为console.log执行完就消失了，所以依旧是一个参数`
 * `all方法后的then接收的是异步任务数组返回的结果，就是结果数组`
 
-## 使用promise.all是存在多个异步任务异常，catch只捕获最早的那个错误
+## 使用promise.all时存在多个异步任务异常，catch只捕获最早的那个错误
 ```
 			function runAsync (x) {
 			  const p = new Promise(r => setTimeout(() => r(x, console.log(x)), 1000))
@@ -420,21 +420,25 @@ Promise.resolve('1')
 * `如果不存在报错，那么就会执行res`
 
 ## promise.race虽然只会接收第一个任务的结果，但是其他异步任务依旧会执行
+```javascript
+	function runAsync(x) {
+	  const p = new Promise(r =>
+	    setTimeout(() => r(x, console.log(x)), 1000)
+	  );
+	  return p;
+	}
+	function runReject(x) {
+	  const p = new Promise((res, rej) =>
+	    setTimeout(() => rej(`Error: ${x}`, console.log(x)), 1000 * x)
+	  );
+	  return p;
+	}
+	/* 
+	 首先打印0，然后返回rej('Error:0')
+	 该rej被Promise.race的catch捕获，但是剩下的成员依旧执行
+	 所以runAsync还会打印 1 2 3
+	 */
+	Promise.race([runReject(0), runAsync(1), runAsync(2), runAsync(3)])
+	  .then(res =>console.log("result: ", res))
+	  .catch(err =>console.log(err));// Error:0
 ```
-function runAsync(x) {
-  const p = newPromise(r =>
-    setTimeout(() => r(x, console.log(x)), 1000)
-  );
-  return p;
-}
-function runReject(x) {
-  const p = newPromise((res, rej) =>
-    setTimeout(() => rej(`Error: ${x}`, console.log(x)), 1000 * x)
-  );
-  return p;
-}
-Promise.race([runReject(0), runAsync(1), runAsync(2), runAsync(3)])
-  .then(res =>console.log("result: ", res))
-  .catch(err =>console.log(err));
-```
-* `0 'Error: 0'1 2 3`
