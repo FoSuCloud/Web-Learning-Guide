@@ -98,9 +98,33 @@
 	<div class="one"></div>
 	<div class="one"></div>
 	<script>
-		var obj={}
-		obj[obj[0]="foo"]="iam";
-		console.log(obj)
-	</script>
+	// 1.next参数会作为上一个yield表达式的值
+	function * g(){
+		for(var i=0;true;i++){
+			var res=yield i;
+			if(res) {
+				console.log(res)
+				i=-1;
+			}
+		}
+	}
+	var res=g()
+	console.log(res.next());//{value: 0, done: false}
+	console.log(res.next());//{value: 1, done: false}
+	console.log(res.next());//{value: 2, done: false}
+	// 重点:上个yield表达式的返回值是变量res,所以此时变量res=-6
+	// 执行的代码为:
+	/* 
+	 if(res) {
+	 	console.log(res)
+	 	i=-1;
+	 }
+	 // 然后还有下一轮的代码
+	 for(...),
+	 i++;所以i为0，然后执行到yield语句，返回0！
+	 */
+	console.log(res.next(-6))
+	console.log(res.next())
+ 	</script>
 </body>
 </html>
