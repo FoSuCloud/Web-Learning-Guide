@@ -191,8 +191,8 @@
 ```
 
 ## 二.next方法的参数
-
-
+* yield表达式本身没有返回值，`但是可以使用一个变量保存该返回值`
+* `而next方法一般没有参数，但是可以设置一个参数，这个参数会被当做上一次的yield表达式的返回值`
 ```javascript
 	// 1.next参数会作为上一个yield表达式的值
 	function * g(){
@@ -221,21 +221,392 @@
 	 */
 	console.log(res.next(-6))
 	console.log(res.next())
+```
 
+#### 不使用变量保存yield xx
+* `如果不使用一个变量保存yield xx,那么默认返回值就是undefined`
+```javascript
+	// 1. 不使用变量保存yield表达式，返回值默认是undefined
+	function * foo(x){
+		var y=10+(yield x+3);
+		var z=5+(yield y-2)
+		return x+y+z
+	}
+	// 1.1 此时传递参数x=3
+	var a=foo(3);
+	// 1.2 此时执行yield x+3;  结果为6
+	console.log(a.next());//{value: 6, done: false}
+	// 1.3 此时执行代码为:
+	/* 
+	 参数为10,10代替上次yield表达式返回值，所以y=10+10;
+	 然后执行yield y-2;  所以返回 20-2 =18 
+	 */
+	console.log(a.next(10));//{value: 18, done: false}
+	/* 
+	 1.4 此时上次yield表达式yield y-2的结果为100，所以z=5+100，
+	 返回的是x+y+z,所以是3+20+105=128
+	 20指的是y=10+10, x依旧是参数不变
+	 */
+	console.log(a.next(100));//{value: 18, done: false}
+
+	// 2. 不使用变量保存，next不传递参数
+	function * d(){
+		return 10+(yield 9)
+	}
+	var res2=d()
+	console.log(res2.next());//{value: 9, done: false}
+	// 此时执行的是 10+undefind,所以结果为NaN
+	console.log(res2.next());//{value: NaN, done: true}
+```
+
+#### 第一个next具有参数
+* 由于next的参数表示的是上一个yield表达式的返回值，而第一个next方法前面没有返回值
+* 所以`js引擎会直接忽略第一次使用next方法的参数`
+```javascript
+	function* dataConsumer() {
+	  console.log(`Started ${yield 9}`);
+	  console.log(`1. ${yield}`);
+	  console.log(`2. ${yield}`);
+	}
+	
+	let genObj = dataConsumer();
+	// 第一个next方法传递参数，但是依旧没用
+	console.log(genObj.next('开始'));//{value: 9, done: false}
+	// 设置上一个yield表达式返回值为a 
+	genObj.next('a')// Started a
+	genObj.next('b')// 1.b
+```
+* 如果希望第一个next方法就可以接受参数，设置第一个yield表达式的值
+* 解决方法:
+```javascript
+	// 思路:执行掉第一个next()
+	function wrapper(generatorFunction) {
+	  return function () {
+	    let generatorObject = generatorFunction();
+		generatorObject.next()
+	    return generatorObject;
+	  };
+	}
+	
+	const wrapped = wrapper(function* () {
+	  var a=yield 1;
+	  var b=yield 11;
+	  var c=yield 111;
+	  console.log(a,b,c);//hello! ddd! rr!
+	});
+	var res=wrapped();
+	console.log(res.next('hello!'));//{value: 11, done: false}
+	console.log(res.next('ddd!'));//{value: 111, done: false}
+	console.log(res.next('rr!'));//{value: undefined, done: true}
+	
+```
+
+### 三. for...of循环
+* for...of循环`可以自动遍历generator函数运行时生成的Iterator对象，且此时不需要再次调用next方法`
+```javascript
+		function * foo(){
+			yield 5;
+			yield 15;
+			yield 25;
+			yield 55;
+		}
+		for(var item of foo()){
+			console.log(item);//5,15,25,55
+		}
+```
+* `for...of循环不会遍历done为true的部分`
+```javascript
+	// 1. return返回的遍历器对象的done为true
+	function *a (){
+		yield 5;
+		return 99;
+		yield 8 // 在return 语句之后的yield语句不会被for...of循环遍历到
+	}
+	for(var item of a()){
+		console.log(item);//5
+	}
+	// ...运算符得到的也只有return之前的值
+	console.log([...a()]);//[5]
+	
+	// 2. 遍历结束
+	function * b(){
+		yield 6;
+		yield 16;
+	}
+	for(var item of b()){
+		console.log(item);//6,16
+	}
+```
+* `让对象遍历的方法:1. 通过调用generator函数增加接口 2. 设置对象的Symbol.iterator属性`
+```javascript
+	// 1. 增加generator函数作为接口
+	function * gene(obj){
+		var keys=Reflect.ownKeys(obj);
+		for(var item of keys){
+			yield [item,obj[item]]
+		}
+	}
+	var obj={a:'w',g:'rrr'}
+	for(var [key,val] of gene(obj)){
+		console.log(key,val)
+		/* a w 
+		g rrr */
+	}
+	
+	// 2. 增加到对象的Symbol.iterator属性上面
+	var one={'b':5555,c:1001}
+		
+	function * f(){
+		var keys=Object.keys(this);
+		for(var item of keys){
+			yield this[item]
+		}
+	}
+	one[Symbol.iterator]=f;
+	// ...运算符和Arry.from调用的都是iterator接口
+	console.log([...one]);//[5555, 1001]
+	console.log(Array.from(one));//[5555, 1001]
+	// 解构赋值
+	var [x,y]=one
+	console.log(x,y);//5555 1001
+```
+
+## 四.throw()
+* generator生成器函数会返回一个遍历器对象，该对象具有一个throw方法
+* `调用throw方法可以在函数体外抛出错误，然后在generaor函数体内捕获`
+* `但是如果抛出错误过多，那么无法全部捕获，就可能被外部的try-catch捕获掉`
+```javascript
+	// 1. 多个语句
+	function *g(){
+		try{
+			yield;
+		}catch(e){
+			console.log("err:",e);//err: a
+		}
+	}
+	var res=g()
+	console.log(res.next());//{value: undefined, done: false}
+	
+	try{
+		res.throw("a")
+		res.throw("b")
+		// 执行到此处不再执行(已经触发了catch),不会再打印了~
+		// 所以本语句不会捕获到错误c
+		console.log("执行到此处不再执行")
+		res.throw("c");
+	}catch(e){
+		console.log("外部捕获",e);//外部捕获 b
+	}
+	console.log("ddd");//ddd
+	
+	// 2. 遍历器对象内部catch所在部分throw错误被外部接收
+	function * a(){
+		while(true){
+			try{
+				yield;
+			}catch(e){
+				throw e;
+			}
+		}
+	}
+	var res2=a()
+	res2.next()
+	
+	try{
+		res2.throw("a");// 该错误被外部捕获。因为遍历器内部重新抛出了该错误
+		res2.throw("b")
+	}catch(e){
+		console.log("2外部捕获",e);//2外部捕获 a
+	}
+	
+	// 3. 生成器函数没有在内部捕获错误，那么直接被外部捕获
+	function * b(){
+		yield ;
+	}
+	var res3=b()
+	res3.next()
+	try{
+		throw 4  // 该错误直接被外部捕获
+	}catch(e){
+		console.log("err3:"+e);//err3:4
+	}
+	
+	// 4. 没有部署catch捕获错误
+	function * c(){
+		yield 44;
+	}
+	var res4=c()
+	res4.next()
+	// 此时抛出错误，没有被捕获，导致程序报错，中断执行
+	// res4.throw("err");//平时测试.html:158 Uncaught err
+	// console.log("不再继续执行剩余代码")
+	
+	// 5. 没有执行过next直接抛出错误
+	function * d(){
+		try{
+			yield 5;
+		}catch(e){
+			console.log(e)
+		}
+	}
+	var res5=d()
+	// 因为还没有执行过next方法，所以没法绕过yield捕获错误！
+	res5.throw("eeee");//报错，但没捕获到Uncaught eeee
+```
+
+#### throw()不会影响到下次遍历
+* `throw方法被捕获以后，会附带执行下一条语句(相当于执行一次next方法)`
+```javascript
+	function * a(){
+		try{
+			yield ;
+		}catch(e){
+			console.log('err',e)
+		}
+		yield 'b'
+		yield 3
+	}
+	var res=a()
+	console.log(res.next());//{value: undefined, done: false}
+	// 此时抛出错误，被捕获，最后附带执行一次next方法
+	console.log(res.throw())
+	/* 
+	 err undefined
+	 {value: "b", done: false}
+	 */
+	console.log(res.next());//{value: 3, done: false}
+	console.log(res.next());//{value: undefined, done: true}
+```
+
+#### gnerator函数体内错误影响到函数体外
+```javascript
+	// generator函数体内抛出错误，在函数体外可以被捕获到
+	function * g(){
+		var a=yield 'a'; // 变量a表示yield 'a'表达式的结果
+		// 由于第二个next传递了参数33，类型是Number,没有toUpperCase方法
+		// 所以会报错
+		var y=yield a.toUpperCase()
+	}
+	var res=g()
+	console.log(res.next());//{value: "a", done: false}
+	try{
+		res.next(33)
+	}catch(e){
+		// 可以捕获到函数体外的错误
+		// err TypeError: a.toUpperCase is not a function
+		console.log('err',e);
+	}
+```
+
+#### generator内部和外部捕获错误
+```javascript
+	// 1.外部捕获到错误
+	function * a(){
+		yield 3;
+		throw new Error("eee");//Uncaught eee
+		yield 5;
+		yield 15;
+	}
+	var res=a()
+	console.log(res.next());//{value: 3, done: false}
+	try{
+		console.log(res.next())
+	}catch(e){
+		console.log("捕获到外部错误",e)
+	}
+	// 由于错误被外部捕获了，相当于函数内部崩溃了。所以接下来的next方法都不能执行yield表达式
+	console.log(res.next());//{value: undefined, done: true}
+	console.log(res.next())
+	
+	// 2. 内部捕获到错误(不会崩溃)
+	function * b(){
+		yield 7;
+		try{
+			throw new Error("eee")
+		}catch(e){
+			console.log("err",e)
+		}
+		yield 8;
+		yield 18;
+	}
+	var res2=b()
+	console.log(res2.next());//{value: 7, done: false}
+	console.log(res2.next());//此时不会崩溃
+	/* 
+	 err Error: eee
+	 {value: 8, done: false}
+	 */
+	console.log(res2.next());//{value: 18, done: false}
+	console.log(res2.next())//{value: undefined, done: true}
+```
+
+## 五.return()
+* return 方法可以返回给定的值，并且终结遍历generator函数
+* `return方法可以有一个参数，作为返回的遍历器对象的value属性`
+* `并且即使return之后调用next方法，依旧有yield表达式，done属性总是返回true`
+* 因为到那个时候，generator函数的遍历就终结了
+```javascript
+	function * g(){
+		yield 1;
+		yield 2;
+		yield 3;
+		yield 4;
+	}
+	var res=g()
+	console.log(res.next());//{value: 1, done: false}
+	// 传递的数据a作为属性value的值
+	console.log(res.return('a'));//{value: "a", done: true}
+	// return方法之后的next方法返回的done属性为true
+	console.log(res.next());//{value: undefined, done: true}
+	// return不传递数据，那么value属性为undefined
+	console.log(res.return());//{value: undefined, done: true}
+```
+
+#### return对应的yield语句在finally语句中
+* `如果return对应的语句在try-finally代码块中，并且还在try语句块中`
+* `那么return传递的数据无效，返回的遍历器对象是finally代码块的第一个yield语句执行之后的结果`
+* `finally语句块最后的yield表达式执行完毕,继续执行next(),得到的value属性为return传递的数据`
+```javascript
+	function* numbers () {
+	  yield 1;
+	  try {
+	    yield 2;
+	    yield 3;
+	  } finally {
+	    yield 4;
+	    yield 5;
+	  }
+	  yield 6;
+	}
+	var g = numbers();
+	console.log(g.next()) // { value: 1, done: false }
+	console.log(g.next()) // { value: 2, done: false }
+	// 1. return传递的数据 此时对应于try-finally代码块中的try部分
+	// 此时返回的是finally后第一个yield表达式的数据
+	console.log(g.return(7)) // { value: 4, done: false }
+	console.log(g.next()) // { value: 5, done: false }
+	// 2. 此时finally语句块最后的yield表达式执行完毕
+	// 所以继续执行next(),得到的value属性为return传递的数据
+	console.log(g.next()) // { value: 7, done: true }
+	// 3. finally语句执行完毕，此时generaor遍历结束
+	console.log(g.next()) // {value: undefined, done: true}
 ```
 
 
-
-yield和return 的区别
-yield表达式与return语句既有相似之处，也有区别。相似之处在于，都能返回紧跟在语句后面的那个表达式的值。区别在于每次遇到yield，函数暂停执行，下一次再从该位置继续向后执行，而return语句不具备位置记忆的功能。一个函数里面，只能执行一次（或者说一个）return语句，但是可以执行多次（或者说多个）yield表达式。正常函数只能返回一个值，因为只能执行一次return；Generator 函数可以返回一系列的值，因为可以有任意多个yield。从另一个角度看，也可以说 Generator 生成了一系列的值，这也就是它的名称的来历（英语中，generator 这个词是“生成器”的意思）。
-*  返回一个对象
+#### yield和return 的区别
+* yield表达式与return语句既有相似之处，也有区别。
+* 相似之处在于，都能返回紧跟在语句后面的那个表达式的值。
+* 区别在于每次遇到yield，函数暂停执行，下一次再从该位置继续向后执行，`而return语句不具备位置记忆的功能`。一个函数里面，只能执行一次（或者说一个）return语句，但是可以执行多次（或者说多个）yield表达式。正常函数只能返回一个值，因为只能执行一次return；Generator 函数可以返回一系列的值，因为可以有任意多个yield。从另一个角度看，也可以说 Generator 生成了一系列的值，这也就是它的名称的来历（英语中，generator 这个词是“生成器”的意思）。
 ```javascript
 	function * func(){
 		yield 1+3;
 		return {value:1,done:true}
+		yield 4;
 	}
 	var res=func();
 	console.log(res.next());//{value: 4, done: false}
 	console.log(res.next());//{done: true,value: {value: 1, done: true}}
+	// return执行完毕，并不会记录generator状态，相当于generator遍历结束
 	console.log(res.next());//{done: true,value: undefined}
 ```
+
