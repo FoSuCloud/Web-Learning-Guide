@@ -610,3 +610,220 @@
 	console.log(res.next());//{done: true,value: undefined}
 ```
 
+## 六.next/return/throw区别
+* next(),return(),throw()这三个方法`本质上都是让generator函数恢复执行，并且使用不同的语句替换yield表达式`
+* 区别:
+1. next()是将yield表达式替换成一个值
+2. throw()是将yield表达式替换成一个throw语句
+3. return()是将yield表达式替换成return语句
+```javascript
+	function * g(){
+		yield 4;
+		try{
+			yield 14;
+		}catch(e){
+			console.log(e);//throw
+		}
+		yield 24;
+		yield 34;
+	}
+	var res=g()
+	// next
+	console.log(res.next());//{value: 4, done: false}
+	// throw
+	res.next();// 目的是为了进入try-caych语句块中
+	console.log(res.throw("throw"));//{value: 24, done: false}
+	// return 
+	console.log(res.return("return"));//{value: "return", done: true}
+```
+
+## 七.yield*表达式
+* 如果在gnerator函数内部，调用另一个generator函数，需要在前者的函数体内部，手动完成遍历
+* `而ES6中提供了yield*表达式，作为解决方法，可以在一个generator函数里面执行另一个generator函数`
+```javascript
+		function * foo(){
+			yield 2;
+			yield 12;
+			yield 22;
+		}
+	// 1. for...of循环
+	function * g(){
+		yield 1;
+		for(var item of foo()){
+			console.log('内',item)
+			yield item;
+		}
+		yield 7;
+	}
+	var res1=g()
+	console.log([...res1]);//[1, 2, 12, 22, 7]
+	
+	// 2. yield*表达式
+	function* b(){
+		yield 1;
+		yield* foo();
+		yield 7;
+	}
+	console.log([...b()]);//[1, 2, 12, 22, 7]
+```
+
+#### yield*表达式可以遍历所有遍历器对象
+* 只有有iterator接口，都可以被yield*表达式遍历
+```javascript
+	function * foo(){
+		yield 2;
+		yield 12;
+		yield 22;
+	}
+	// 1.yield*表达式后面只能接遍历器对象
+	function* b(){
+		yield 1;
+		// 1.1 字符串
+		// yield* "hello";//[1, "h", "e", "l", "l", "o", 7]
+		// 1.2 遍历器函数
+		// yield*  foo();// [1, 2, 12, 22, 7]
+		// 1.3 返回未执行的遍历器函数
+		// yield*  foo;// TypeError: undefined is not a function
+		// 1.4 数组
+		// yield* [4,5,6];//[1, 4, 5, 6, 7]
+		// 1.5 Set 
+		yield* new Set([5,4,5,2]);//[1, 5, 4, 2, 7]
+		yield 7;
+	}
+	console.log([...b()]);
+```
+
+#### yield*表达式的generator函数有return语句
+```javascript
+	function *f(){
+		yield 4;
+		return 'f'
+		yield 8; // 不会继续执行
+	}
+	function * bar(){
+		yield 9;
+		var name=yield* f()
+		console.log("name:",name)
+		yield 5;
+	}
+	var res=bar()
+	console.log(res.next());//{value: 9, done: false}
+	console.log(res.next());//{value: 4, done: false}
+	console.log(res.next());
+	/*如果yield*表达式return返回了数据，那么该数据就是返回值！
+	 name: f
+	 {value: 5, done: false}
+	 */
+	console.log(res.next());//{value: undefined, done: true}
+	
+	// 例子2
+	function  * a(){
+		yield 'a';
+		yield 'b';
+		return 'res'
+	}
+	function * b(){
+		var r=yield* a()
+		console.log('结果:',r)
+	}
+	var res2=b()
+	console.log(res2.next());//{value: "a", done: false}
+	console.log(res2.next());//{value: "b", done: false}
+	console.log(res2.next())
+	/* 
+	 结果: res
+	 {value: undefined, done: true}
+	 */
+```
+
+## 八.generator函数作为对象属性
+```javascript
+	// 形式1
+	var obj={
+		* ge(){
+			yield 3;
+		}
+	}
+	var res=obj.ge()
+	console.log(res.next())
+	
+	// 形式2
+	var o={
+		g:function* (){
+			yield 6
+		}
+	}
+	var res2=o.g()
+	console.log(res2.next());//{value: 6, done: false}
+```
+
+## 九.generator函数的this
+* generator函数总是返回一个遍历器，ES6规定这个遍历器是generator函数的实例
+* 继承了generator函数的prototype对象上的方法。
+* `generator函数在this对象上面可以添加属性，但是实例对象拿不到属性`
+* `generator函数不能作为构造函数，不能使用new创建实例对象`
+```javascript
+	// 1. generator函数返回的遍历器对象是函数的实例
+	function * g(){}
+	g.prototype.func=function(){
+		return '实例'
+	}
+	var res=g()
+	// 返回的遍历器对象属于生成器函数的实例
+	console.log(res instanceof g);//true
+	console.log(res.func());//实例
+	
+	// 2. 注意返回的是遍历器对象，而不是this对象
+	function * a(){
+		this.f="fff"
+	}
+	var res2=a()
+	console.log(res2.f);//undefined
+	
+	// 3. generator函数没有构造器，不能new对象
+	// new a();// 报错Uncaught TypeError: a is not a constructor
+```
+* `如果想要generator函数返回一个正常的对象实例，既可以使用next方法又可以使用this`
+* 那么可以使用`call来绑定generator函数内部的this到一个空对象`
+```javascript
+	// 1. 空对象
+	var obj={}
+	function * f(){
+		this.a='a'
+		yield this.b=4;
+		yield this.c='s';
+	}
+	// 2.使用call把generator函数内部的this绑定到空对象
+	var res=f.call(obj);
+	console.log(res.next());//{value: 4, done: false}
+	console.log(res.next());//{value: "s", done: false}
+	console.log(obj);//{a: "a", b: 4, c: "s"}
+```
+* `如果不想创建一个空对象来承接this对象，那么就使用call来绑定gnerator函数的原型`
+```javascript
+	function * f(){
+		this.a=1;
+		yield this.b=6;
+		yield this.c=65;
+	}
+	// 使用call来绑定generator函数的原型
+	var res=f.call(f.prototype)
+	console.log(res.next());//{value: 6, done: false}
+	console.log(res.next());//{value: 65, done: false}
+	console.log(res.a,res.b,res.c);//1 6 65
+	
+	// 2. 如果想要通过new实例化对象
+	// 那么加多一个函数来间接实现
+	function * a(){
+		this.a=1;
+		yield this.b=6;
+		yield this.c=65;
+	}
+	function father(){
+		return a.call(a.prototype)
+	}
+	var res2=new father()
+	console.log(res2.next())
+	console.log(res2.next())
+	console.log(res2.a,res2.b,res2.c);//1 6 65
+```
