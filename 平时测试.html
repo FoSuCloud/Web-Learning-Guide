@@ -98,31 +98,11 @@
 	<div class="one"></div>
 	<div class="one"></div>
 	<script>
-	function * f(){
-		this.a=1;
-		yield this.b=6;
-		yield this.c=65;
-	}
-	// 使用call来绑定generator函数的原型
-	var res=f.call(f.prototype)
-	console.log(res.next());//{value: 6, done: false}
-	console.log(res.next());//{value: 65, done: false}
-	console.log(res.a,res.b,res.c);//1 6 65
-	
-	// 2. 如果想要通过new实例化对象
-	// 那么加多一个函数来间接实现
-	function * a(){
-		this.a=1;
-		yield this.b=6;
-		yield this.c=65;
-	}
-	function father(){
-		return a.call(a.prototype)
-	}
-	var res2=new father()
-	console.log(res2.next())
-	console.log(res2.next())
-	console.log(res2.a,res2.b,res2.c)
+		var a=0;
+		if(a++){
+			console.log('a:',a)
+		}
+		console.log(++a)
 	</script>
 </body>
 </html>

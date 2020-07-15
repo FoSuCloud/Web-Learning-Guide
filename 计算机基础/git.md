@@ -1,3 +1,12 @@
+## svn和git的区别
+1. svn是`集中式`,每次存的都是差异，需要的硬盘空间相对小一点，`但是回滚速度很慢`
+* 优点:`代码存放在单一的服务器上，便于项目的管理`
+* 缺点:`服务器宕机的话，员工写的代码得不到保障；服务器炸了：整个项目的历史记录都会丢失`
+2. git是`分布式`:`每次存的都是项目的完整快照，需要的硬盘空间相对大一点`
+* 但是git团队对代码做了极致的压缩，最终需要的实际空间比svn大不了多少，可是git回滚的速度极快！
+* 优点:完全的分布式
+* 缺点:学习起来比svn陡峭
+
 ## 分支
 1. master分支，`一般不在这个分支上开发项目`
 2. dev开发分支(`master分支的子分支`)，`一般在该分支上开发项目`
@@ -44,3 +53,71 @@
 
 ## git blame
 * 查看文件`每一行`的`SHA串，作者，修改时间`
+
+<!-- git底层命令 -->
+## git底层命令
+#### 1.git对象
+1. git hash-object -w fileUrl :生成一个key(hash值):val键值对(压缩后的文件内容)存到.git/objects
+
+#### 2.tree对象
+1. git update-index --add --cacheinfo 100644 hash test.txt :往暂存区添加一条记录(让git对象对应上文件名) 存到.git/index
+2. git write-tree:生成树对象存到.git/objects
+
+#### 3.commit对象
+1. echo 'first commit' | git commit-tree treehash:生成一个提交对象存到.git/objects
+ 
+#### 4. 对以上对象的查询
+1. git cat-file -p hash: 拿对应对象的内容
+2. git cat-file -t hash: 拿对应对象的类型
+
+#### 查看暂存区
+ git ls-files -s
+ 
+ 
+<!-- git高层命令 -->
+## git高层命令
+#### 1.安装
+1. git --version 查看版本
+
+#### 2.初始化配置
+1. git config --global user.name 'yiye'
+2. git config --global user.email 'yiye@163.com'
+3. git config --list
+
+#### 3.初始化仓库
+1. git init 
+
+#### 4. 新增/修改文件
+1. `注意是在工作目录中新增或者修改文件`
+git status
+git add ./
+git commit -m "msg"
+
+#### 5. 删除或者重命名文件
+1. 删除`git rm 要删除的文件名`
+2. 重命名`git mv 老文件名 新文件名`
+3. git status
+4. git commit -m "msg"
+
+#### 6.查询
+1. git status:`查看工作目录中文件的状态(已跟踪(已提交 已暂存 已修改)   未跟踪)`
+2. git diff:`查看未暂存的修改`
+3. git diff --cache:`查看未提交的暂存`
+4. git log --oneline:`查看提交记录`
+5. git log --oneline --decorate --all:`查看整个项目的分支图`
+ 
+#### 7.分支
+`分支的本质就是一个提交对象`
+```
+HEAD:
+	是一个指针，默认指向master分支，切换分支时其实就是让HEAD指向不同的分支
+	每次有新的提交时 HEAD都会带着当前指向的分支 一起往前移动
+```
+1. git log --oneline --decorate --graph --all:查看整个项目的分支图
+2. git branch:查看分支列表
+*  git branch:查看分支指向的最新的提交！
+3. git branch name:在当前提交对象上创建新的分支
+4. git branch name commithash:在指定的提交对象上创建新的分支
+5. git checkout name:切换分支
+6. git branch -d name:删除空的分支 删除已经被合并的分支
+

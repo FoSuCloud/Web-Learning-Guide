@@ -6,7 +6,7 @@
 * Generator和其他函数的形式上的区别:`1.function关键字和函数名之间有一个星号*; 2.函数体内部使用yield表达式定义不同的内部状态(yield就是产出的意思)`
 * 在调用方法上，Generator函数被调用后，函数并不执行，而是`返回一个指向内部状态的指针对象(遍历器对象)`
 * 必须调用遍历器对象的next方法，使得指针指向下一状态，也就是每次调用next方法，内部指针就从函数头部或者上次停下来的地方开始执行
-* 直到遇到yiled表达式或者return语句。也就是Generator函数是分段执行的，`yield表达式是暂停执行的，next方法是恢复执行`
+* 直到遇到yield表达式或者return语句。也就是Generator函数是分段执行的，`yield表达式是暂停执行的，next方法是恢复执行`
 * 看一个例子:
 ```javascript
 		function* gene(){
@@ -191,7 +191,7 @@
 ```
 
 ## 二.next方法的参数
-* yield表达式本身没有返回值，`但是可以使用一个变量保存该返回值`
+* yield表达式本身没有返回值，`虽然可以使用变量接收yield表达式的值，但是yield表达式的返回值是undefined`
 * `而next方法一般没有参数，但是可以设置一个参数，这个参数会被当做上一次的yield表达式的返回值`
 ```javascript
 	// 1.next参数会作为上一个yield表达式的值
@@ -205,6 +205,7 @@
 		}
 	}
 	var res=g()
+	// 虽然可以使用变量接收yield表达式的值，但是yield表达式的返回值是undefined
 	console.log(res.next());//{value: 0, done: false}
 	console.log(res.next());//{value: 1, done: false}
 	console.log(res.next());//{value: 2, done: false}
@@ -219,14 +220,14 @@
 	 for(...),
 	 i++;所以i为0，然后执行到yield语句，返回0！
 	 */
-	console.log(res.next(-6))
-	console.log(res.next())
+	console.log(res.next(-6));//0
+	console.log(res.next());// 1
 ```
 
-#### 不使用变量保存yield xx
-* `如果不使用一个变量保存yield xx,那么默认返回值就是undefined`
+#### 使用next设置上一个yield表达式的值
+* `如果不使用next设置上一个yield表达式的值,那么默认yield表达式的返回值就是undefined`
 ```javascript
-	// 1. 不使用变量保存yield表达式，返回值默认是undefined
+	// 1. 如果不使用next传递上个yield表达式的值，返回值默认是undefined
 	function * foo(x){
 		var y=10+(yield x+3);
 		var z=5+(yield y-2)
@@ -373,7 +374,7 @@
 
 ## 四.throw()
 * generator生成器函数会返回一个遍历器对象，该对象具有一个throw方法
-* `调用throw方法可以在函数体外抛出错误，然后在generaor函数体内捕获`
+* `调用throw方法可以在函数体外抛出错误，然后在generator函数体内捕获`
 * `但是如果抛出错误过多，那么无法全部捕获，就可能被外部的try-catch捕获掉`
 ```javascript
 	// 1. 多个语句
@@ -638,7 +639,7 @@
 ```
 
 ## 七.yield*表达式
-* 如果在gnerator函数内部，调用另一个generator函数，需要在前者的函数体内部，手动完成遍历
+* 如果在generator函数内部，调用另一个generator函数，需要在前者的函数体内部，手动完成遍历
 * `而ES6中提供了yield*表达式，作为解决方法，可以在一个generator函数里面执行另一个generator函数`
 ```javascript
 		function * foo(){
@@ -668,7 +669,7 @@
 ```
 
 #### yield*表达式可以遍历所有遍历器对象
-* 只有有iterator接口，都可以被yield*表达式遍历
+* 只要有iterator接口，都可以被yield*表达式遍历
 ```javascript
 	function * foo(){
 		yield 2;
