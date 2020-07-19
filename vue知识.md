@@ -198,6 +198,11 @@ export default new Router({
 [参考链接](https://blog.csdn.net/qq_33576343/article/details/82793894)
 [参考链接](https://www.cnblogs.com/wangjiachen666/p/9876266.html)
 
+## Vue.use和Vue.component的区别
+1. 首先区分插件和组件的区别:`组件就是在软件开发中可以被复用的部分；而插件属于组件的一种，凡是在应用程序中预留了接口的组件就是插件`
+2. `Vue.use(插件名)`:表示注册的是一个插件，该插件中必须有一个install方法，并且进行方法调用
+3. `Vue.component('使用时的名称',组件名)`:用于注册全局组件
+4. `另外在vue文件中import导入的是局部的组件`
 
 6、请你详细介绍一些 package.json 里面的配置
 

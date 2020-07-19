@@ -98,11 +98,29 @@
 	<div class="one"></div>
 	<div class="one"></div>
 	<script>
-		var a=0;
-		if(a++){
-			console.log('a:',a)
-		}
-		console.log(++a)
+	var maxNumOfSubstrings = function(s) {
+	    var obj={}
+	    var tem=s[0]  // 字符串
+	    if(s.length==1) return [s[0]]
+		// =length是为了得到最后一个数
+	    for(var i=1;i<=s.length;i++){
+	        if(s[i]==tem[0]){
+	            tem+=s[i]
+	        }else{
+	            if(obj[tem[0]]){
+	                obj[tem[0]]=true; //过滤条件
+	            }else{
+	                obj[tem[0]]=tem;
+	            }
+				tem=s[i] // 重置
+	        }
+	    }
+		var res=Object.values(obj).filter(item => item!==true)
+	    return res.length==0?[s]:res
+	};
+	console.log(maxNumOfSubstrings('abab'))
+	console.log(maxNumOfSubstrings('abbaccd'))
+	console.log(maxNumOfSubstrings('adefaddaccc'))
 	</script>
 </body>
 </html>
