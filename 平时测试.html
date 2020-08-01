@@ -12,115 +12,51 @@
 	  ul, li{
 		  list-style-type: none;
 	  }
-	  #dd{
-		  
-	  }
-	  .header{
-		  position: fixed;
-		  width: 80%;
-		  height: 4rem;
-		  background-color: #D9E8F5;
-		  color: #304269;
-		  box-shadow: 42px 0 42px #D9E8F5;
-		  display: flex;
-		  padding:0 10%;
-		  left: 0;
-		  top: 0;
-		   z-index:1;
-	  }
-	  .home-name{
-		  display: inline-block;
-		  font-size: 36px;
-		  line-height: 4rem;
-	  }
-	  .header-ul{
-		  display: flex;
-		  flex: 1;
-		  margin-left: 8rem;
-	  }
-	  .header-ul li{
-		  flex: 1;
-		  line-height: 4rem;
-		  text-align: center;
-		  font-weight: 200;
-		  transition: 1s ease;
-	  }
-	  .header-ul li:hover{
-		  font-weight: 500;
-		  transform: scale(1.2);
-		  transition: 1s ease;
-	  }
-	  /* 内容 */
-	  .home-body{
-		  margin-top: 2rem;
-		  width: 80%;
-		  margin: 0 auto 0;
-	  }
-	  .body-ul{
-		  padding: 10px;
-		  display: flex;
-		  flex-wrap: wrap;
-	  }
-	  .img-li{
-		  width: 33%;
-		  display: inline-block;
-		  text-align: center;
-		  margin-bottom: 20px;
-	  }
-	  .img-li img{
-		  display: block;
-		  width: 90%;
-		  height: 200px;
-		  margin: 0 auto 10px;
-		  overflow: hidden;
-		  transition: 1s ease;
-	  }
-	  .img-li img:hover{
-		  transform: scale(1.1);
-	  }
-	  .img-li span{
-		  display: block;
-		  color: black;
-		  font-size: 18px;
-	  }
-	  /* 目录名称 */
-	  .category{
-		  font-size: 30px;
-		  line-height:60px;
-		  font-weight: bold;
-		  margin: 6rem auto 0;
-		  width: 80%;
-		  display: block;
-	  }
    </style>
 </head>
 <body>
 	<div class="one"></div>
 	<div class="one"></div>
 	<script>
-	var maxNumOfSubstrings = function(s) {
-	    var obj={}
-	    var tem=s[0]  // 字符串
-	    if(s.length==1) return [s[0]]
-		// =length是为了得到最后一个数
-	    for(var i=1;i<=s.length;i++){
-	        if(s[i]==tem[0]){
-	            tem+=s[i]
-	        }else{
-	            if(obj[tem[0]]){
-	                obj[tem[0]]=true; //过滤条件
-	            }else{
-	                obj[tem[0]]=tem;
-	            }
-				tem=s[i] // 重置
-	        }
-	    }
-		var res=Object.values(obj).filter(item => item!==true)
-	    return res.length==0?[s]:res
-	};
-	console.log(maxNumOfSubstrings('abab'))
-	console.log(maxNumOfSubstrings('abbaccd'))
-	console.log(maxNumOfSubstrings('adefaddaccc'))
+    // 1. 对于函数来说
+	function person(name){
+		if(new.target!==undefined){
+			this.name=name;
+		}else{
+			throw new Error('必须使用new命令来生成实例')
+		}
+	}
+	var per=new person('yiye')
+	console.log(per.name) //yiye
+	// 2. 对于func.call(xxx,'')来说
+	// Error: 必须使用new命令来生成实例
+	// var b=person.call(per,'yiye')
+	
+	// 3.类使用new.target返回的是自身
+	class one{
+		constructor(name) {
+		    if(new.target===one){
+				console.log(name)
+			}else{
+				console.log(new.target)
+				throw new Error('必须使用new命令生成类的实例')
+			}
+		}
+	}
+	new one('hh') // hh 
+	
+	// 4.子类继承父类，但是父类此时内部的new.target是子类
+	class c extends one{
+		constructor() {
+		    super('bb')
+		}
+	}
+	new c() //Error: 必须使用new命令生成类的实例
+	/* class c extends one{
+		constructor() {
+		    super('bb')
+		}
+	} */
 	</script>
 </body>
 </html>
