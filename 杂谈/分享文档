@@ -1,0 +1,10 @@
+## 新增页面流程
+1. 新增路由：在YabRouter文件中的动态路由dynamicRoutes增加一条测试路由。
+* 权限使用某一个权限就可以。（尝试过使用新增权限，在app/permission页面新增模块，但是freshProfile请求返回的权限列表没有改权限的！所以使用新增权限是没用的）
+* 在RouterPathConstant中增加一条路由常量public  static readonly TEST = '/test'; 在YabRouter文件的测试路由中的path使用该常量，表示url地址。
+
+
+## 登录流程
+1. 项目启动，App.vue的created阶段就触发refreshProfile方法，触发initUser，获取cookie中的 YAB_AUTH_TOKEN字段
+2. 权限校验
+* 触发Actions文件的REQUEST_SERVER_USER_INFO方法，通过YAB.$API.api<>()发起一个请求
