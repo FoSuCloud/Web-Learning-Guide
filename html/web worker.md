@@ -42,7 +42,7 @@
 			console.log('app.vue文件接收到:',e);
 		}
     
-  // web.worker.js
+    // web.worker.js
     // self表示的是子线程自身，也就是当前worker的全局对象
     // 所以可以把self替换成this,或者直接onmessage,不需要xxx.onmessage
     onmessage=function(e){
