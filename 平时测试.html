@@ -18,45 +18,30 @@
 	<div class="one"></div>
 	<div class="one"></div>
 	<script>
-    // 1. 对于函数来说
-	function person(name){
-		if(new.target!==undefined){
-			this.name=name;
-		}else{
-			throw new Error('必须使用new命令来生成实例')
+	var getWinner = function(arr, k) {
+		var len=arr.length;
+		if(k>len){
+			k=len; // 太大没意义
 		}
-	}
-	var per=new person('yiye')
-	console.log(per.name) //yiye
-	// 2. 对于func.call(xxx,'')来说
-	// Error: 必须使用new命令来生成实例
-	// var b=person.call(per,'yiye')
-	
-	// 3.类使用new.target返回的是自身
-	class one{
-		constructor(name) {
-		    if(new.target===one){
-				console.log(name)
+        var tem=arr.slice(1,1+k).sort((a,b)=> b-a);
+        var max=tem[0]
+		console.log(tem,max)
+		while(true){
+            // 有可能相等
+			if(arr[0]>=max){
+				console.log(arr)
+				return arr[0]
 			}else{
-				console.log(new.target)
-				throw new Error('必须使用new命令生成类的实例')
+                if(arr[k]>max){
+                    max=arr[k]
+                }
+				arr.push(arr.shift())
 			}
 		}
-	}
-	new one('hh') // hh 
-	
-	// 4.子类继承父类，但是父类此时内部的new.target是子类
-	class c extends one{
-		constructor() {
-		    super('bb')
-		}
-	}
-	new c() //Error: 必须使用new命令生成类的实例
-	/* class c extends one{
-		constructor() {
-		    super('bb')
-		}
-	} */
+	};
+	console.log(getWinner([2,1,3,5,4,6,7],2))
+	console.log(getWinner([1,9,8,2,3,7,6,4,5],7))
+	console.log(getWinner([1,11,22,33,44,55,66,77,88,99],10000))
 	</script>
 </body>
 </html>

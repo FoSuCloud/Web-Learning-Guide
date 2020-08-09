@@ -3,33 +3,83 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="" />
 		<style type="text/css" id="style">
-			* {
+			*{
 				margin: 0;
 				padding: 0;
 			}
-			ul,li {
+			ul,li{
 				list-style-type: none;
 			}
-			html,body {
+			html,body{
 				height: 100%;
 				white-space: nowrap;
 				word-wrap: nowrap;
 			}
-			input{
+			body{
+				background: linear-gradient(to right,#fbc2eb,#a6c1ee);
+			}
+			.main-container{
+				width: 260px;
+				padding: 0 20px;
+				height: 400px;
+				position: relative;
+				left: 50%;
+				top: 50%;
+				/* 设置translate的百分比是相对于元素自身的宽度/高度的 */
+				transform: translate(-50%,-50%);
+				border-radius: 18px;
+				background: white;
+			}
+			.m-c-f{
+				text-align: center;
+				font-weight: bold;
+				font-size: 30px;
+				line-height: 150px;
+			}
+			.form-login{
+				display: block;
+				margin-bottom: 20px;
+				width: 100%;
 				outline: none;
 				border: none;
+				height: 30px;
+				line-height: 30px;
+				border-bottom: 1px solid lightgray;
 			}
-			
+			.form-login::placeholder{
+				text-transform: uppercase;
+			}
+			.btn{
+				width: 100%;
+				height: 40px;
+				border: none;
+				font-size: 24px;
+				margin-top: 20px;
+				color: white;
+				outline: none;
+				background-image: linear-gradient(to right,#a6c1ee,#fbc2eb);
+			}
+			.m-c-l{
+				text-align: center;
+				line-height: 80px;
+			}
+			.m-c-l a{
+				text-decoration: none;
+				color: #a6c1ee;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="main-container">
-			
+			<p class="m-c-f">Login</p>
+			<form id="myform" action="面经.md" method="post">
+				<input type="text" name="username" placeholder="username" class="form-login">
+				<input type="password" name="password" placeholder="password" class="form-login">
+			</form>
+			<!-- 通过form属性将表单元素input与form表单的id对应起来 -->
+			<input type="submit" class="btn" value="Login" form="myform"/>
+			<p class="m-c-l">Don't has account? <a href="javascript:void(0);">Sign Up</a></p>
 		</div>
-		<script type="text/javascript">
-
-		</script>
 	</body>
 </html>
