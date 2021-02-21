@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			String.prototype.trim=function(){
+				// 实现1，匹配两次
+				// return this.replace(/^\s+/,'').replace(/\s+$/,'')
+				// 实现2 使用| 或语法  使用g全局匹配(否则前后都有空格时只会匹配一次)
+				return this.replace(/^\s+|\s+$/,'')
+				// 参考 https://www.cnblogs.com/rubylouvre/archive/2009/09/18/1568794.html
+			}
+			let str='   abc  ' 
+			console.log('old'+str+'old')
+			str=str.trim()
+			console.log('new'+str+'new')
+		</script>
+	</body>
+</html>

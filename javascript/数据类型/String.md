@@ -234,3 +234,60 @@ if(end>start&&end>-1&&start>-1){
 }
 
 ```
+
+## 包装对象
+```javascript
+let str = 'abcd';
+/* 1.获取字符串的属性length */
+//  4
+console.log(str.length) 
+/* 2.设置字符串的属性length */
+str.length=11;
+// 结果还是4，并没有改变
+console.log(str.length)
+
+/**
+ * 这是因为引用字符串的属性的时候
+ * js就会通过调用new String()临时生成一个字符串对象，获取的是这个临时字符串对象的属性length
+ * 获取完之后就会销毁这个临时对象，所以下次获取会再次生成一个临时对象；Boolean,Number也是一样的，所以说包装对象
+   * */
+
+// 尝试添加属性
+str.len=22;
+// undefined????
+console.log(str.len);
+/**
+ * 结果是undefined
+ * 这是因为str不是对象，也不是包装对象
+ * 能够获取到str的length属性是因为临时通过new String生成了包装对象
+ * 但是获取完之后，该对象就会销毁，所以给str添加/修改属性是没用的
+ * 因为起到作用的临时对象已经被销毁了，下一次获取的str的属性又是另外一个临时对象的属性
+ * 而新生成的临时对象的len属性并没有定义，所以是undefined
+   * */
+
+```
+
+```javascript
+		/* 那么如果一开始就是包装对象呢？ */
+		let str=new String('ddccbbaa')
+		// 8
+		console.log(str.length)
+		str.length=80;
+		// 8
+		console.log(str.length)
+		// {value: 8, writable: false, enumerable: false, configurable: false}
+		console.log(Object.getOwnPropertyDescriptor(str,'length'))
+		/**
+		 * 但是包装对象内部属性如length是只读的
+		 * */
+		
+		/* 尝试添加属性(可写的) */
+		str.len=22;
+		// 22
+		console.log(str.len)
+		str.len=1;
+		// 1
+		console.log(str.len);
+		// {value: 8, writable: false, enumerable: false, configurable: false}
+		console.log(Object.getOwnPropertyDescriptor(str,'len'))
+```

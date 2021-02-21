@@ -51,4 +51,4 @@
 ```
 * 但是会报错，提示 _worker_web_worker__WEBPACK_IMPORTED_MODULE_9___default.a is not a constructor"
 * 解决方法：（1）npm install worker-loader -D 安装worker.loader插件
-（2）
+（2）[](https://www.cnblogs.com/gerry2019/p/11456035.html)
