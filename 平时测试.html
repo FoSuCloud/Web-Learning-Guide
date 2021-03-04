@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-09 09:50:39
- * @LastEditTime: 2021-02-02 21:32:17
+ * @LastEditTime: 2021-03-05 00:06:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \MyHxsj\平时测试.html
@@ -40,45 +40,29 @@
 <body>
     <div id="panel">
         <svg viewBox="0 0 30 30" class="panel-svg">
-			<defs>
-				<linearGradient id="linear">
-					<stop offset="0%" stop-color="rgba(255,255,255,1)"></stop>
-					<stop offset="50%" stop-color="rgba(255,255,255,0.5)"></stop>
-					<stop offset="100%" stop-color="rgba(255,255,255,0.2)"></stop>
-				</linearGradient>
-			</defs>	
-			<circle 
-			id="circle"
-			stroke-width="2"
-			 r="13" cx="15" cy="15" 
-			 fill="none" stroke="url(#linear)"
-			 stroke-dasharray="60,81"
-			 ></circle>	
-		</svg>
+            <defs>
+                <linearGradient id="linear">
+                    <stop offset="0%" stop-color="rgba(255,255,255,1)"></stop>
+                    <stop offset="50%" stop-color="rgba(255,255,255,0.5)"></stop>
+                    <stop offset="100%" stop-color="rgba(255,255,255,0.2)"></stop>
+                </linearGradient>
+            </defs>
+            <circle id="circle" stroke-width="2" r="13" cx="15" cy="15" fill="none" stroke="url(#linear)"
+                stroke-dasharray="60,81"></circle>
+        </svg>
     </div>
     <script>
-        var validateStackSequences = function(pushed, popped) {
-    let stack=[];
-    for(let i=0;i<popped.length;i++){
-        let index=pushed.indexOf(popped[i])
-        if(index>-1){
-            stack=stack.concat(pushed.splice(0,index+1))
-            stack.pop()
-        }else if(stack.pop()===popped[i]){
-            continue;
-        }else{
-            return false;
-        }
-    }
-    return !stack.length;
-};
-console.log(validateStackSequences([1,2,3,4,5],[4,5,3,2,1]))
-console.log(validateStackSequences([1,2,3,4,5],[4,5,3,1,2]))
-console.log(validateStackSequences([1],[1]))
-console.log(validateStackSequences([1],[2]))
-console.log(validateStackSequences([1],[]))
-console.log(validateStackSequences([],[]))
+        var a = "window a"
 
+        function foo() {
+            console.log(a)
+        }
+
+        function bar() {
+            var a = "bar a"
+            foo();
+        }
+        bar()
     </script>
 </body>
 
