@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-09 09:50:39
- * @LastEditTime: 2021-03-05 00:06:40
+ * @LastEditTime: 2021-03-06 11:38:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \MyHxsj\平时测试.html
@@ -39,7 +39,7 @@
 
 <body>
     <div id="panel">
-        <svg viewBox="0 0 30 30" class="panel-svg">
+        <!-- <svg viewBox="0 0 30 30" class="panel-svg">
             <defs>
                 <linearGradient id="linear">
                     <stop offset="0%" stop-color="rgba(255,255,255,1)"></stop>
@@ -49,20 +49,20 @@
             </defs>
             <circle id="circle" stroke-width="2" r="13" cx="15" cy="15" fill="none" stroke="url(#linear)"
                 stroke-dasharray="60,81"></circle>
-        </svg>
+        </svg> -->
     </div>
     <script>
-        var a = "window a"
-
-        function foo() {
-            console.log(a)
+        // 函数表达式
+        var f = function() {
+            console.log(1);
         }
 
-        function bar() {
-            var a = "bar a"
-            foo();
+        // 直接声明
+        function f() {
+            console.log(2);
         }
-        bar()
+
+        f(); // 1
     </script>
 </body>
 
