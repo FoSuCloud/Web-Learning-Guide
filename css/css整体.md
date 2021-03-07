@@ -220,7 +220,7 @@
 3. 在浮动元素同级兄弟元素添加一个空元素，设置样式clear:both;clear:both只能影响自身，效果是指定该元素周围不可出现浮动元素
 
 
-## css命名规范有:BEM(block element modifier)
+## css命名规范有:BEM(block element modifier) OOCSS
 
 ## color属性可以继承，background-color不可以继承(但是背景颜色默认是transparent也就是透明，所以可以看到父元素的背景色)
 

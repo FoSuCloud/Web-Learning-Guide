@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-09 09:50:39
- * @LastEditTime: 2021-03-06 11:38:08
+ * @LastEditTime: 2021-03-07 22:20:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \MyHxsj\平时测试.html
@@ -15,54 +15,33 @@
     <link rel="stylesheet" type="text/css" href="小demo/PC七夕动画/style.css" />
     <style type="text/css">
         #panel {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            height: 100vh;
-            background-color: gray;
+            color: red;
+            border: 1px solid blue;
         }
         
-        .panel-svg {
-            width: 300px;
-            height: 300px;
-            margin: auto;
-            animation: svgRotate infinite 2s linear;
+        .initial {
+            color: green;
+            border: 1px solid yellow;
         }
         
-        @keyframes svgRotate {
-            100% {
-                transform: rotate(360deg);
-            }
+        .initial {
+            color: unset;
+            border: unset;
         }
     </style>
 </head>
 
 <body>
     <div id="panel">
-        <!-- <svg viewBox="0 0 30 30" class="panel-svg">
-            <defs>
-                <linearGradient id="linear">
-                    <stop offset="0%" stop-color="rgba(255,255,255,1)"></stop>
-                    <stop offset="50%" stop-color="rgba(255,255,255,0.5)"></stop>
-                    <stop offset="100%" stop-color="rgba(255,255,255,0.2)"></stop>
-                </linearGradient>
-            </defs>
-            <circle id="circle" stroke-width="2" r="13" cx="15" cy="15" fill="none" stroke="url(#linear)"
-                stroke-dasharray="60,81"></circle>
-        </svg> -->
+        panel
+        <span class="initial">initial</span>
     </div>
     <script>
-        // 函数表达式
-        var f = function() {
-            console.log(1);
+        function add() {
+            console.log(arguments.callee)
+                // return arguments.callee()
         }
-
-        // 直接声明
-        function f() {
-            console.log(2);
-        }
-
-        f(); // 1
+        add();
     </script>
 </body>
 
