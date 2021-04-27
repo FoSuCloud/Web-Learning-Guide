@@ -1,47 +1,36 @@
-<!--
- * @Author: your name
- * @Date: 2019-11-09 09:50:39
- * @LastEditTime: 2021-03-07 22:20:59
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \MyHxsj\平时测试.html
--->
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<meta charset="utf-8" />
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>测试</title>
-    <link rel="stylesheet" type="text/css" href="小demo/PC七夕动画/style.css" />
     <style type="text/css">
-        #panel {
-            color: red;
-            border: 1px solid blue;
+        body,html{
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
         }
-        
-        .initial {
-            color: green;
-            border: 1px solid yellow;
-        }
-        
-        .initial {
-            color: unset;
-            border: unset;
+        .outer{
+            width: 100px;
+            height: 100px;
+            position: relative;
+            background: red;
+            transition: 1s ease all;
         }
     </style>
 </head>
 
 <body>
-    <div id="panel">
-        panel
-        <span class="initial">initial</span>
+    <div class="outer">
+        <div>
+            <input type="text" value="">
+        </div>
     </div>
     <script>
-        function add() {
-            console.log(arguments.callee)
-                // return arguments.callee()
-        }
-        add();
+
     </script>
 </body>
 

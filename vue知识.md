@@ -38,14 +38,14 @@ uglifyOptions: {
 
 ```javascript
 <span>{{obj}}</span>
-data(){
+data() {
  return{
   obj:{
    a:1
   }
  }
 }
-change(){
+change() {
  this.obj.b='444';// 即使添加了属性，可以看到页面中用到的对象还是没有该属性
 }
 ```
