@@ -354,3 +354,62 @@ document.onmousemove=function(e){
 				two.off();
 			},3000)
 ```
+
+
+## 手写map
+```javascript
+Array.prototype.map1=function (func){
+            if(!Array.isArray(this)){
+                throw  new Error('不是数组')
+            }
+            let arr=this;
+            let newArr=[]
+             arr.forEach((item,i)=>{
+                newArr.push(func(item,i))
+            })
+            return newArr
+        }
+        let arr=[3,2,1]
+        function pow(item){
+            return Math.pow(item,2)
+        }
+        console.log(arr.map1(pow))
+```
+
+## 手写reduce
+```javascript
+/**
+         * @param arr {Array<T>} 数组
+         * @param func {Function(a,b)} 函数
+         * @param initValue {Number} 初始值
+         * */
+        Array.prototype.reduce1=function (func,initValue){
+            let arr = this;
+            if(arr.length===0){
+                if(!isNaN(initValue)){
+                    return initValue;
+                }else{
+                    throw  new Error('Uncaught TypeError: Reduce of empty array with no initial value')
+                }
+            }
+            if(arr.length === 1 && initValue === undefined){
+                return arr[0]
+            }
+            let result=0;
+            for(let i=0;i<arr.length;i++){
+                if(i===0){
+                    if(initValue === undefined){
+                        result = arr[0]
+                    }else{
+                        result = func.call(this,arr[0],initValue)
+                    }
+                    continue;
+                }
+                result=func.call(this,result,arr[i])
+            }
+            return result
+        }
+        let arr=[]
+        console.log(arr.reduce1((a,b)=> a*b))
+        console.log(arr.reduce1((a,b)=> a*b,10))
+```
