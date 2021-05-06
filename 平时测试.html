@@ -13,57 +13,75 @@
             padding: 0;
             margin: 0;
         }
-        .outer{
+        .text {
+            width: 200px;
+            height: 60px;
+            border: 1px solid lightgrey;
+            margin: 100px auto;
+            font-size: 30px;
+            display: grid;
+            place-content: center;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .btn {
+            display: block;
+            margin: 0 auto;
+            width: 80px;
+            height: 40px;
+        }
+
+        #box{
             width: 100px;
             height: 100px;
-            position: relative;
-            background: red;
-            transition: 1s ease all;
+            background: black;
         }
     </style>
 </head>
 
 <body>
-    <div class="outer">
         <div>
-            <input type="text" value="">
+            <div class="text">Hello World!</div>
+            <button class="btn">start</button>
+            <div id="box"></div>
         </div>
-    </div>
     <script>
         /**
-         * @param arr {Array<T>} 数组
-         * @param func {Function(a,b)} 函数
-         * @param initValue {Number} 初始值
-         * */
-        Array.prototype.reduce1=function (func,initValue){
-            let arr = this;
-            if(arr.length===0){
-                if(!isNaN(initValue)){
-                    return initValue;
-                }else{
-                    throw  new Error('Uncaught TypeError: Reduce of empty array with no initial value')
-                }
+         * @param {string} s
+         * @return {number}
+         */
+        /**
+         * @param {string} s
+         * @return {number}
+         */
+        var countSubstrings = function(s) {
+            let num=0
+            for(let i=0;i<s.length;i++){
+                pailNum(i,i)
+                pailNum(i,i+1)
             }
-            if(arr.length === 1 && initValue === undefined){
-                return arr[0]
-            }
-            let result=0;
-            for(let i=0;i<arr.length;i++){
-                if(i===0){
-                    if(initValue === undefined){
-                        result = arr[0]
+
+            function pailNum(l,r){
+                while(l<=r && l>=0 && r<s.length){
+                    if(s[l]!==s[r]){
+                        break;
                     }else{
-                        result = func.call(this,arr[0],initValue)
+                        num++;
                     }
-                    continue;
+                    l--;
+                    r++;
                 }
-                result=func.call(this,result,arr[i])
             }
-            return result
-        }
-        let arr=[2,3,1]
-        console.log(arr.reduce1((a,b)=> a*b))
-        console.log(arr.reduce1((a,b)=> a+b,10))
+            return num;
+        };
+
+
+        console.log(countSubstrings("adb"))
+        console.log(countSubstrings("abba")); // 4+1+1
+        console.log(countSubstrings("abcba")) // 5+1+1
+        console.log(countSubstrings("abcbadde"))
+        console.log(countSubstrings("abcdedcba"))
+
     </script>
 </body>
 

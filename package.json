@@ -1,0 +1,18 @@
+{
+  "name": "mybook",
+  "version": "1.0.0",
+  "description": "前端知识网络",
+  "main": "draggable.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://hub.fastgit.org/FoSuCloud/Myhxsj.git"
+  },
+  "keywords": [
+    "前端"
+  ],
+  "author": "一叶",
+  "license": "ISC"
+}
