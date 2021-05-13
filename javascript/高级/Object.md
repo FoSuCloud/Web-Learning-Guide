@@ -34,3 +34,8 @@
 			arr.pop();
 			console.log(arr)
 ```
+
+## Object.getPrototypeOf()
+* 获取对象的原型(内部[[Prototype]]的值)
+* params : obj
+* return : obj的原型对象

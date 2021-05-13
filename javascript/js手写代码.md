@@ -149,59 +149,80 @@ document.onmousemove=function(e){
 ```
 			// 手写call 
 			Function.prototype.call=function(context,...callargs){
-				context=context||window;
+				if(!(this instanceof Function)){
+                    throw new TypeError("必须是函数调用call");
+                }
+                context=context||window;
 				// 添加属性，隐式调用函数
-				context.func=this;
-				if(typeof context.func !=='function'){
-					throw new TypeError("必须是函数调用call");
-				}
+				let fnName = Symbol('fn')
+				context[fnName]=this;
 				// 使用绑定的对象去调用方法
-				let res=context.func(...callargs);
+				let res=context[fnName](...callargs);
 				// 因为绑定的时候算是给对象添加了属性func,所以需要删除该属性
 				// 因为该属性不会再被用到
-				delete context.func;
+				delete context[fnName];
 				return res
 			}
 ```
 
 ## 手写apply
 ```
-			Function.prototype.apply=function(context,arr){
-				context=context||window;
-				context.func=this;
-				if(typeof context.func !=='function'){
-					throw new TypeError("必须是函数调用apply");
-				}
-				let res=context.func(...arr);
-				delete context.func;
-				return res
-			}
+		Function.prototype.apply=function(context,args){
+            if(!(this instanceof Function)){
+                return new TypeError('不是函数')
+            }
+            context = context || window;
+            args = args || []
+            let fn = this;
+            let fnName = Symbol('fn')
+            context[fnName] = fn;
+            let res= context[fnName](...args)
+            delete context[fnName];
+            return res;
+        }
 ```
 
 ## 手写new运算符
 ```
-			// 相当于 new func(...args)
-			function _new(func,...args){
-				if(typeof func !='function'){
-					throw new TypeError('必须是函数调用')
-				}
-				// 创建一个对象的原型指向函数的原型
-				let obj=Object.create(func.prototype)
-				console.log(obj);//{one}
-				// 该对象调用函数并且传参数,如果没有return的话，那么res就是undeifned
-				let res=func.call(obj,...args);// 函数调用没设置return就返回undefined
-				if(res&&(res instanceof Object)){
-					return res;
-				}
-				// 如果res==undefined,那么返回创建的对象，也就是obj
-				return obj;
-			}
-			function one(name,age){
-				this.name=name;
-				this.age=age;
-				return this;
-			}
-			console.log(_new(one,'yy',4))
+			function newObj(){
+            let args = Array.from(arguments) || [];
+            if(!args.length){
+                throw new Error('请传入构造函数')
+            }
+            if(!(args[0] instanceof Function)){
+                throw new TypeError('类型错误，请传递构造函数')
+            }
+            let constructor=args.shift();
+            let obj=Object.create(constructor.prototype)
+            let res=constructor.apply(obj, args);
+            // constructor构造函数return值不为对象则返回构造函数实例
+            if(typeof res !== 'object'){
+                return obj;
+            }
+            // 返回构造函数实际return值
+            return res;
+        }
+        function fn(a,b){
+            return {
+                a:a,
+                b:b
+            }
+        }
+        let obj=newObj(fn,3,2)
+        console.log(obj); // {a:3,b:2}
+        
+        function fn2(){
+            return 2;
+        }
+        let obj2=newObj(fn2)
+        console.log(obj2); // fn2{}
+        
+        function fn3(a,b){
+            this.a=a;
+            this.b=b;
+        }
+        let obj3=newObj(fn3,3,5)
+        console.log(obj3); // fn3{a: 3, b: 5}
 ```
 
 
@@ -246,46 +267,95 @@ document.onmousemove=function(e){
 ```
 
 ## 手写防抖
+* 防抖就是不管事件触发多少次多久。上次事件触发完必须要要经过一段等待时间
+* 如果低于等待时间，那么一定不触发防抖函数。必须在这段等待时间内不触发该事件！
 ```
-			// 防抖(无论点击多少次，只要点击间隔时间小于设置时间则无效)
-			function debounce(func,wait){
-				var timer;
-				// 防抖第一次立即执行
-				var count=0;
-				// 产生闭包，每次执行都是执行返回的函数！
-				return function(){
-						if(count==0){count++;func();return;}
-						if(timer) clearTimeout(timer)
-						
-						timer=setTimeout(()=>{
-							func()
-						},wait)
-					}
-			}
-			var two=document.getElementsByClassName('two')[0]
-			two.addEventListener('click',debounce(function(){
-				console.log('点击')
-			},500))
+			/**
+         * @param fn {Function} 函数
+         * @param time {number} 等待时间
+         * @param immediate {Boolean} 是否立即触发函数
+         * */
+        function debounce(fn,time,immediate){
+            let context=this;
+            let timer;
+            let func= function (){
+                let args=arguments;
+                if(timer){
+                    clearTimeout(timer)
+                }
+                if(immediate){
+                    // 等待时间已过！
+                    if(!timer){
+                        fn.apply(context,args);
+                    }
+                    timer = setTimeout(()=>{
+                        timer=null;
+                    },time)
+                }else{
+                    timer = setTimeout(()=>{
+                        fn.apply(context,args)
+                        timer = null;
+                    },time)
+                }
+            }
+            // 取消等待
+            func.cancel = ()=>{
+                if(timer){
+                    clearTimeout(timer); // 不触发上个事件对应的函数
+                    timer = null; // 等待时间设置为已过！
+                }
+            }
+            return func;
+        }
+        let box=document.getElementById('box')
+        function f(e){
+            console.log(e,'click')
+        }
+        let res = debounce(f,1000,true)
+        box.onclick = res;
+        let btn=document.getElementById('btn');
+        btn.onclick = res.cancel
 ```
 
 ## 节流
 ```
 			// 节流(无论点击多少次，一定时间间隔内只触发一次)
-			function throttle(func,wait){
-				var timer;
-				return function(...args){
-					if(!timer){
-						func(...args);
-						timer=setTimeout(()=>{
-							timer=null;
-						},wait)
-					}
-				}
-			}
-			var two=document.getElementsByClassName('two')[0]
-			two.addEventListener('click',throttle(function(){
-				console.log('点击')
-			},5000))
+			function throttle(fn,time,immediate){
+            let context = this;
+            let timer;
+            let throttled=function (){
+                if(timer){
+                    return;
+                }
+                let args = arguments
+                if(immediate){
+                    fn.apply(context,arguments);
+                    timer = setTimeout(()=>{
+                        timer = null
+                    },time)
+                }else{
+                    timer = setTimeout(()=>{
+                        fn.apply(context,args);
+                        timer=null;
+                    },time)
+                }
+            }
+            throttled.cancel=function (){
+                if(timer){
+                    clearTimeout(timer)
+                    timer=null;
+                }
+            }
+            return throttled
+        }
+        let box=document.getElementById('box')
+        function f(e){
+            console.log(e,'click')
+        }
+        let res = throttle(f,10000,true)
+        box.onclick = res;
+        let btn=document.getElementById('btn');
+        btn.onclick = res.cancel
 ```
 
 ## 对象数组去重
@@ -383,7 +453,7 @@ Array.prototype.map1=function (func){
          * @param func {Function(a,b)} 函数
          * @param initValue {Number} 初始值
          * */
-        Array.prototype.reduce1=function (func,initValue){
+        Array.prototype.reduce=function (func,initValue){
             let arr = this;
             if(arr.length===0){
                 if(!isNaN(initValue)){
