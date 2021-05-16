@@ -291,3 +291,45 @@ console.log(str.len);
 		// {value: 8, writable: false, enumerable: false, configurable: false}
 		console.log(Object.getOwnPropertyDescriptor(str,'len'))
 ```
+
+## 手写trim
+```javascript
+let str="   dssd  44 s   "
+        String.prototype.trim=function (){
+            if(!(this instanceof String)){
+                throw new TypeError('不是字符串类型')
+            }
+            if(!this){
+                return ''
+            }
+            return this.replace(/\s/g,'')
+        }
+        console.log(str.trim())
+```
+
+## 版本号比较
+```javascript
+var compareVersion = function(version1, version2) {
+    let arr1=version1.split('.').map((item)=> Number(item))
+    let arr2=version2.split('.').map((item)=> Number(item))
+    for(var i=0;i<arr1.length;i++){
+        if(arr2[i] === undefined){
+            if(Number(arr1.slice(i).join('')) === 0){
+                return 0;
+            }
+            return 1;
+        }else if(arr1[i]<arr2[i]){
+            return -1;
+        }else if(arr1[i]>arr2[i]){
+            return 1;
+        }
+    }
+    if(arr2.length>=i){
+        if(Number(arr2.slice(i).join('')) === 0){
+            return 0;
+        }
+        return -1;
+    }
+    return 0
+};
+```
