@@ -292,6 +292,10 @@ console.log(str.len);
 		console.log(Object.getOwnPropertyDescriptor(str,'len'))
 ```
 
+## toString和valueOf的区别
+1. toString获取的是内容文本值；valueOf获取的是原始值（例如函数就是函数，数组就是数组）
+2. valueOf一般只在使用数学运算符或者关系运算符针对数字文本的时候才会自动调用；其他情况都是会调用toString方法来自动获取内容文本值
+
 ## 手写trim
 ```javascript
 let str="   dssd  44 s   "
@@ -305,31 +309,4 @@ let str="   dssd  44 s   "
             return this.replace(/\s/g,'')
         }
         console.log(str.trim())
-```
-
-## 版本号比较
-```javascript
-var compareVersion = function(version1, version2) {
-    let arr1=version1.split('.').map((item)=> Number(item))
-    let arr2=version2.split('.').map((item)=> Number(item))
-    for(var i=0;i<arr1.length;i++){
-        if(arr2[i] === undefined){
-            if(Number(arr1.slice(i).join('')) === 0){
-                return 0;
-            }
-            return 1;
-        }else if(arr1[i]<arr2[i]){
-            return -1;
-        }else if(arr1[i]>arr2[i]){
-            return 1;
-        }
-    }
-    if(arr2.length>=i){
-        if(Number(arr2.slice(i).join('')) === 0){
-            return 0;
-        }
-        return -1;
-    }
-    return 0
-};
 ```

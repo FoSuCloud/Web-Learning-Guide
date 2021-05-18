@@ -6,3 +6,4 @@ worker.postMessage('hello world!')
 worker.onmessage=function(e){
 	console.log('test文件接收到:',e);
 }
+
