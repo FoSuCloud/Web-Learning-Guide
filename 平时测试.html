@@ -15,22 +15,18 @@
         }
         .outer{
             height: 100%;
+            width: 100px;
+            background: gray;
             margin-left: 100px;
+        }
+        .outer:focus{
+            background: red;
         }
     </style>
 </head>
 
 <body>
-    <div class="outer">
-        <svg width="300" height="300"  xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <g id="popover" stroke="gray" stroke-width="2">
-                    <circle cx="60" cy="60" r="10" fill="none"></circle>
-                    <path d="M 60 70 V 100"></path>
-                </g>
-            </defs>
-            <use href="#popover"></use>
-        </svg>
+    <div class="outer" tabindex="1">
     </div>
     <script>
 
