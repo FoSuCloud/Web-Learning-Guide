@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="LeetcodeEditor">
+    <option name="projectConfig">
+      <map>
+        <entry key="$PROJECT_DIR$/../../leetcode-tmp/leetcode/editor/cn/[1]两数之和.js">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/../../leetcode-tmp/leetcode/editor/cn/[1]两数之和.js" />
+              <option name="questionId" value="1" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../leetcode-tmp/leetcode/editor/cn/[242]有效的字母异位词.js">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/../../leetcode-tmp/leetcode/editor/cn/[242]有效的字母异位词.js" />
+              <option name="questionId" value="242" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../leetcode-tmp/leetcode/editor/cn/[922]按奇偶排序数组 II.js">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/../../leetcode-tmp/leetcode/editor/cn/[922]按奇偶排序数组 II.js" />
+              <option name="questionId" value="958" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

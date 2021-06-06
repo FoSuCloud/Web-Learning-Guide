@@ -497,3 +497,15 @@
 		}
 	})
 ```
+
+## 给对象添加Symbol.iterator接口
+```javascript
+        const obj={
+            name:'hahah',
+            age:444,
+            [Symbol.iterator]:function *(){
+                yield *Object.values(this)
+            }
+        }
+        console.log([...obj]) // ["hahah", 444]
+```

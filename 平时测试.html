@@ -7,26 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>测试</title>
     <style type="text/css">
-        body,html{
+        body,html,div{
             height: 100%;
             width: 100%;
             padding: 0;
             margin: 0;
         }
         .outer{
-            height: 100%;
-            width: 100px;
-            background: gray;
-            margin-left: 100px;
+            display: flex;
+            height: 400px;
+            /*解决css行内元素间隙问题*/
         }
-        .outer:focus{
+        .left{
+            flex-shrink: 0;
+            /*不可以缩小*/
+            width: 200px;
             background: red;
+        }
+        .right{
+            /*最小宽度为300px*/
+            flex: 1 0 300px;
+            background: green;
         }
     </style>
 </head>
 
 <body>
-    <div class="outer" tabindex="1">
+    <div class="outer">
+        <div class="left"></div>
+        <div class="right"></div>
     </div>
     <script>
 

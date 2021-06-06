@@ -121,7 +121,7 @@ var color = ['green', 'red', 'blue', 'yellow'];
 * 但是没法设置时间小于屏幕刷新率。因为requestAnimationFrame函数的调用时机是浏览器控制的
 * 下面是设置时间大于16.7ms的例子。（由于requestAnimationFrame函数的调用时机是浏览器控制的，所以设置的时间只是大于时间，并不是刚刚好的时间）
 ```javascript
-var color = ['green', 'red', 'blue', 'yellow'];
+        var color = ['green', 'red', 'blue', 'yellow'];
         var element = document.getElementById('box');
         var index = 0;
         let old=0;

@@ -331,3 +331,9 @@
 ```
 @media print and (max-width:720px),screen and (min-width:375px){}
 ```
+
+## 父元素设置min-height子元素设置100%显示0的问题
+* 这是因为父元素设置min-height:100%,虽然父元素的高度可以设置，但是不会触发浏览器的高度继承机制
+* 所以子元素设置为height;100%无法获取到高度，所以得到的是0！
+* 注意，就算父元素设置了min-height:100%和height:100%，那么也还是拿不到height
+

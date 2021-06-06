@@ -828,3 +828,17 @@
 	console.log(res2.next())
 	console.log(res2.a,res2.b,res2.c);//1 6 65
 ```
+
+## yield * 数组
+* 对数组使用`yield *`，那么会逐个返回数组元素(注意是yield * ,而不是yield)
+````javascript
+let arr=[3,4,6]
+    function *f(arr){
+        yield *arr;
+    }
+    let res=f(arr);
+    console.log(res.next().value) // 3
+    console.log(res.next().value) // 4
+    console.log(res.next().value) // 6
+    console.log(res.next().value) // undefined
+````

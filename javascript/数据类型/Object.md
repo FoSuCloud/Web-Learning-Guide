@@ -40,3 +40,9 @@
         const colors = ["pink", "red", "blue"]
         console.log(colorConfig[colors[1]]) // true
 ```
+
+## Object.seal和Object.freeze
+* Object.freeze是冻结一个对象，对象不能新增属性，不能删除属性，不能更改属性值
+* Object.seal是封闭一个对象，不能新增属性，不能删除属性，但是可以更高属性值！
+* `注意，Object.freeze是浅冻结，对象属性如果也是一个引用数据类型，那么属性的值还是可以更改`
+
