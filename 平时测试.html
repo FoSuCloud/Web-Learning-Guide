@@ -13,32 +13,20 @@
             padding: 0;
             margin: 0;
         }
-        .outer{
-            display: flex;
-            height: 400px;
-            /*解决css行内元素间隙问题*/
-        }
-        .left{
-            flex-shrink: 0;
-            /*不可以缩小*/
-            width: 200px;
-            background: red;
-        }
-        .right{
-            /*最小宽度为300px*/
-            flex: 1 0 300px;
-            background: green;
-        }
     </style>
 </head>
 
 <body>
-    <div class="outer">
-        <div class="left"></div>
-        <div class="right"></div>
+    <div>
+        <iframe src="iframe.html">
+        </iframe>
     </div>
     <script>
-
+        window.onload=function (){
+            let arr=[3,2,1]
+            console.log(arr instanceof Array);
+            window.frames[0].fn(arr,window)
+        }
     </script>
 </body>
 

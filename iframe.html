@@ -1,0 +1,20 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function fn(arr,context){
+        console.log('window',context===window) // false
+        console.log('iframe')
+        console.log(arr)
+        console.log(arr instanceof Array) // true
+        // 因为传递进来的arr的构造函数和当前iframe所在的全局环境的构造函数引用地址不一致
+    }
+</script>
+</body>
+</html>
