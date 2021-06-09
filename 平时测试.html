@@ -13,28 +13,21 @@
             padding: 0;
             margin: 0;
         }
+
     </style>
 </head>
 
 <body>
-    <div>
-        <iframe src="iframe.html">
-        </iframe>
-    </div>
+    <ul onclick="fn()">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
     <script>
-        console.log(document.cookie) // null
-        document.cookie=`testName="cookieName";expires=${new Date('2022-9-10')}`
-        let name=document.cookie.split('testName=')
-        if(name.length===2){
-            console.log(name[1]) // cookieName
+        function fn(){
+            console.log(event.target.innerText)
         }
-        // 通过修改时间来销毁cookie
-        document.cookie=`testName="cookieName";expires=${new Date('2020-9-10')}`
-        console.log(document.cookie) // null
-
-        // localStorage.removeItem('name')
-        // console.log(localStorage.getItem('name')) // null
-
 
     </script>
 </body>
