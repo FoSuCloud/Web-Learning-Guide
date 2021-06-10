@@ -1,3 +1,27 @@
+## Number.xxx和xxx的区别
+* 例如Number.isNaN()和NaN()的区别就在于:`NaN()不会把值认为是Number，而是进行判断，如果不是Number会进行转换为Number类型`
+* 而Number.NaN()方法:`默认值就是Number类型，不会进行类型转换`
+* 所以会有以下区别：
+```javascript
+isNaN('NaN'); // true
+Number.isNaN('NaN');// false,因为没把字符串转换为Number
+```
+
+## parseInt
+* parseInt函数用于解析一个字符串并返回指定基数的`十进制整数或者NaN`
+* 参数：第一个参数value需要一个字符串，如果不是字符串则会被转换为字符串
+* 第二个参数radix是2-36之间的整数，表示被解析的字符串的基数，也就是是几进制的
+1. 返回的是十进制整数或者NaN，所以需要精确的小数不要使用parseInt函数
+`console.log(parseInt('5.3e22'))//5`
+2. parseInt可以识别+,-符号并进行保留
+`    console.log(parseInt('-3.22')) // -3
+   console.log(parseInt('+3.22')) // 3`
+3. radix参数如果是`undefined,0,或者未指定`，会有以下情况
+* 字符串为'0x'或者'0X'开头，那么radix并认定为16进制，并且字符串的其余部分并当作16进制去解析
+* 如果字符串为'0'开头，那么取决于实现方式，es5会认为是十进制，但是别的地方可能认为是8进制
+* `radix最好还是要传递！避免识别错误`
+* 如果是其他情况，那么`默认是10进制`
+
 ## 特点:两个相同的数求异或就是0！ 2^2=0
 
 ## e(科学计数法)

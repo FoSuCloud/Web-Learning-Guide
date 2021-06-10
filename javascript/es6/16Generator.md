@@ -1,3 +1,6 @@
+## 协程
+* generator函数其实就是协程在es6的一种实现。
+* [http://www.ruanyifeng.com/blog/2015/04/generator.html]('异步')
 
 ## 一.简介
 ### 1. 基本概念

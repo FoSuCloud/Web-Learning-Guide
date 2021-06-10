@@ -14,5 +14,9 @@
     "前端"
   ],
   "author": "一叶",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "core-js": "^3.12.1",
+    "regenerator-runtime": "^0.13.7"
+  }
 }
