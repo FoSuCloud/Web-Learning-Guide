@@ -13,43 +13,35 @@
             padding: 0;
             margin: 0;
         }
-
+        .content{
+            width: 300px;
+            height: 300px;
+            padding: 20px;
+            border: 1px solid yellow;
+            margin: 10px;
+            background-color: red;
+            box-sizing: content-box;
+        }
+        .border{
+            width: 300px;
+            height: 300px;
+            padding: 20px;
+            border: 1px solid yellow;
+            margin: 10px;
+            background-color: red;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 
 <body>
-    <ul onclick="fn()">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-    </ul>
+    <div>
+        <div class="content">
+        </div>
+        <div class="border">
+        </div>
+    </div>
     <script>
-        // 你的⽬标是实现⼀个⽅法
-        // 输⼊是⼀个 "数字 n (有⼏个台阶)"
-        // 输出是⼀个 "数字 ( 代表总共有⼏种⾛法)"
-        /*
-        例如,
-         n = 1, return 1 (⽅法1: 1台阶)
-         n = 2, return 2 (⽅法1: 1台阶&1台阶, ⽅法2: 2台阶)
-         n = 3, return 3 (⽅法1: 1台阶*3次, ⽅法2: 1台阶&2台阶, ⽅法3: 2台阶&1台阶)
-        */
-        function step(n) {
-            let arr=[1,2]
-            if(n<3){
-                return arr[n-1]
-            }
-            for(let i=2;i<n;i++){
-                [arr[1],arr[0]]=[arr[0]+arr[1],arr[1]]
-            }
-            return arr[1]
-        }
-        console.log(step(1)) // 1
-        console.log(step(2)) // 2
-        console.log(step(3)) // 3
-        console.log(step(4)) // 2+3=5
-        console.log(step(5)) // 3+5=8
-        console.log(step(30)) // 1346269
 
     </script>
 </body>
