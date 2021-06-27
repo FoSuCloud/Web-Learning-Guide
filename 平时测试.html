@@ -13,36 +13,73 @@
             padding: 0;
             margin: 0;
         }
-        .content{
-            width: 300px;
-            height: 300px;
-            padding: 20px;
-            border: 1px solid yellow;
-            margin: 10px;
-            background-color: red;
-            box-sizing: content-box;
-        }
-        .border{
-            width: 300px;
-            height: 300px;
-            padding: 20px;
-            border: 1px solid yellow;
-            margin: 10px;
-            background-color: red;
-            box-sizing: border-box;
-        }
     </style>
 </head>
 
 <body>
-    <div>
-        <div class="content">
-        </div>
-        <div class="border">
-        </div>
-    </div>
+<div>
+    <input id="drop" draggable="true" type="button" value="拖拽" style="width:300px;height: 300px;border: 1px solid red" />
+</div>
     <script>
-
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val, next) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.next = (next===undefined ? null : next)
+         * }
+         */
+        /**
+         * @param {ListNode} l1
+         * @param {ListNode} l2
+         * @return {ListNode}
+         */
+        var addTwoNumbers = function(l1, l2) {
+            let arr1=l1,arr2=l2;
+            // while(l1){
+            //     arr1.push(l1.val);
+            //     l1=l1.next;
+            // }
+            // while(l2){
+            //     arr2.push(l2.val);
+            //     l2=l2.next;
+            // }
+            let str1=arr1.reverse().join('')
+            let str2=arr2.reverse().join('');
+            let res='';
+            let tmp=0;
+            if(str1.length<str2.length){
+                str1=str1.padStart(str2.length,'0')
+            }else{
+                str2=str2.padStart(str1.length,'0')
+            }
+            for(let i=str1.length-1;i>=0;i--){
+                let sum=Number(str1[i])+Number(str2[i])+tmp
+                if(sum>9){
+                    res=(sum-10)+res;
+                    tmp=1;
+                }else{
+                    res=sum+res;
+                    tmp=0;
+                }
+            }
+            if(tmp){
+                res='1'+res
+            }
+            // 返回结果
+            // let head=new ListNode();
+            // let list=head;
+            // for(let i=res.length-1;i>=0;i--){
+            //     head.val=res[i];
+            //     if(i>0){
+            //         head.next=new ListNode();
+            //         head=head.next;
+            //     }
+            // }
+            return res;
+        };
+        console.log(addTwoNumbers([2,4,9],[5,6,4,9]))
+        console.log(addTwoNumbers([2,4,3],[5,6,4]))
+        console.log(addTwoNumbers([2,4,3],[5,6,4]))
     </script>
 </body>
 
