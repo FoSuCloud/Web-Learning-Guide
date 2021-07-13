@@ -11,7 +11,10 @@
 ```
 
 ## 重启服务 进入/etc/init.d 输入 service apache2 restart
-## 查看端口 Isof -i:80
+
+## 查看端口 lsof -i:80
+## kill -x (x表示PID，进程的id，杀死进程)
+
 ## 删除文件/目录 rm -r  xxx 即使该文件/文件夹下面还有文件，还是会递归删除
 ## 修改文件名 mv oldname newname
 
