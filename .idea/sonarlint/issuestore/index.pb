@@ -34,8 +34,6 @@ P
  react/react-create-app/配置.md,e/9/e964911929c308a8ebd5c5c22229dacc56ab11e4
 T
 $javascript/其他/正则表达式.md,4/2/4206054303f1c16012602440c5faa0bd7e21b57d
-G
-react/hook/useEffect.md,d/d/dd90bbee11c31ee1ac07d8ab3ce94baf9548f612
 E
 react/hook/useMemo.md,0/f/0f3bb67cceba82d4e7df0dcd7ac104ea4f06d608
 I
@@ -44,8 +42,6 @@ F
 react/hook/useState.md,0/e/0efbca8990e1c11dee215b5e4de7759a50b84ad0
 D
 react/hook/useRef.md,8/2/829aaea097b8827aee08385af576e590286f1bd0
-K
-react/hook/自定义hook.md,d/4/d41b9de1733e375130cc6985741f6cd0ac49d300
 G
 ts/01/02数据类型.ts,d/1/d1d6d112bdf8ab625c9b1e7c87a565938d409bf8
 B
@@ -60,3 +56,7 @@ K
 node/工程化/初始化.md,3/3/331f04b0e88a056162667bd1997a13d47e7ad1b9
 C
 node/api/process.md,d/7/d7b4042f00936d1eff3c9ce22a877bc9eefe06e6
+B
+每日三题/02.md,b/2/b2c1bbdf1fd8c95afbd163e718057e883ff187e4
+T
+$javascript/es6/6. 数值的拓展.md,a/9/a9e94e23b724399f748c82edab3a4069b5fb59d4
