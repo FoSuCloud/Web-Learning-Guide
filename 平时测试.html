@@ -12,39 +12,30 @@
             width: 100%;
             padding: 0;
             margin: 0;
-            color: red;
-        }
-        .container{
-            display: flex;
-            width: 200px;
-            height: 100px;
-            border: 2px dashed crimson;
-        }
-        .inner{
-            background-color: green;
-        }
-        .other{
-            flex: 1;
-        /*    优先缩小*/
-        }
-        .other{
-            flex: auto;
-        /*    优先扩大(扩大的比例和其他元素的内容有关，其他内容的内容少，那么该元素就变大的多)*/
         }
     </style>
 </head>
 
 <body>
-        <div class="container">
-            <div class="other">大山大水大的撒的撒的撒的撒上的</div>
-            <div class="inner">大山大水大的</div>
-            <div class="inner">大山大水大的</div>
-            <div class="inner">大山大水大的</div>
-            <div class="inner">大山大水大的</div>
-        </div>
+
+    <div>
+        <button onclick="toUrl()">点击</button>
+    </div>
     <script>
-
-
+        function toUrl(){
+            let xhr=new XMLHttpRequest();
+            xhr.open('post','http://localhost:3000/')
+            //发送合适的请求头信息
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onload=function (res){
+                if(xhr.readyState === 4){
+                    if(xhr.status === 200){
+                        console.log(xhr.response)
+                    }
+                }
+            }
+            xhr.send("name=测试&age=11")
+        }
     </script>
 </body>
 
