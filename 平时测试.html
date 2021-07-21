@@ -17,26 +17,19 @@
 </head>
 
 <body>
-
-    <div>
-        <button onclick="toUrl()">点击</button>
-    </div>
-    <script>
-        function toUrl(){
-            let xhr=new XMLHttpRequest();
-            xhr.open('post','http://localhost:3000/')
-            //发送合适的请求头信息
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.onload=function (res){
-                if(xhr.readyState === 4){
-                    if(xhr.status === 200){
-                        console.log(xhr.response)
-                    }
-                }
-            }
-            xhr.send("name=测试&age=11")
+<script>
+    function b(){
+        console.log('b')
+    }
+    function a(){
+        let p=b;
+        function c(){
+            p()
         }
-    </script>
+        c()
+    }
+    a()
+</script>
 </body>
 
 </html>

@@ -30,3 +30,79 @@
 2. 在相同域名下，内嵌的 IFrame 可以获取外层网页的对象
 3. 在相同域名下，外层网页脚本可以获取 IFrame 网页内的对象
 4. 可以通过脚本调整 IFrame 的大小
+
+## iframe标签学习
+* [https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/iframe]("参考")
+* 内联的框架，`就像iframe一样会被包含在window.frames伪数组对象中`
+```javascript
+<body>
+    <iframe src="./iframe.html" frameborder="0"></iframe>
+    <iframe src="./iframe1.html" frameborder="0"></iframe>
+    <script>
+    for(let i in Array.from(window.frames)){
+        console.log(window.frames[i]) // 两个window对象
+    }
+    </script>
+</body>
+```
+* 注意是伪数组，也是对象！
+* `另外我们通过contentWindow也可以获取到iframe对象的window对象`
+```javascript
+    <iframe src="./iframe.html" frameborder="0"></iframe>
+    <iframe src="./iframe1.html" frameborder="0"></iframe>
+    <script>
+        let arr=[]
+    for(let i in Array.from(window.frames)){
+        arr.push(window.frames[i])
+    }
+    let iframes=document.getElementsByTagName('iframe');
+    Array.from(iframes).forEach((cell,i)=>{
+        console.log(cell.contentWindow === arr[i])//true,true
+    })
+    </script>
+```
+
+* `window.parent用于返回当前窗口的父窗口对象，如果没有父窗口，那么就返回自身窗口`
+```javascript
+// iframe.html
+<script>
+    console.log('parent',window.parent);// 打印得到index.html的窗口对象
+</script>
+// index.html
+<iframe src="./iframe.html" frameborder="0"></iframe>
+<script>
+    console.log(window.parent); // 由于不存在父窗口，所以得到的是自身窗口对象
+</script>
+```
+
+## iframe跨域实例
+* iframe跨域一般用在创建一个iframe元素，或者改变元素的src属性
+```javascript
+// node.js 返回一个静态文件，文件路径为root/static/index.html
+http.createServer((req,res)=>{
+    if(req.url === '/html'){
+        fs.readFile('static/index.html',(err,data)=>{
+            if(data){
+                res.write(data)
+            }
+        })
+    }
+})
+```
+* 然后前端创建一个iframe就可以获取对应的数据
+```javascript
+<iframe src="http://localhost:3000/html" frameborder="0"></iframe>
+<div>客户端</div>
+```
+
+#### iframe可以让父页面重定向
+* iframe可以通过window.parent.location去改变父页面的地址，实现重定向
+```javascript
+// index.html
+<iframe src="./iframe.html" frameborder="0"></iframe>
+// iframe.html
+<script>
+    window.parent.location='https://blog.csdn.net/kiddingstreet/article/details/80112303'
+</script>
+```
+* 结果就是父页面初始化结束重定向到新页面
