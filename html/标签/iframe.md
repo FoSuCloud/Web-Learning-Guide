@@ -106,3 +106,5 @@ http.createServer((req,res)=>{
 </script>
 ```
 * 结果就是父页面初始化结束重定向到新页面
+
+### contentDocument获取iframe元素的document对象

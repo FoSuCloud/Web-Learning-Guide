@@ -13,37 +13,22 @@
             padding: 0;
             margin: 0;
         }
+        :root{
+            --div-background-color: yellow;
+        }
+        .outer{
+            background-color: var(--div-background-color);
+        }
+        .outer::selection{
+            color: red;
+            background-color: green;
+        }
     </style>
 
 <body>
-<svg  x="0px" y="0px" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 100 100">
-    <defs>
-        <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="rgba(37,84,216,1)"></stop>
-            <stop offset="25%" stop-color="rgba(37,84,216,0.7)"></stop>
-            <stop offset="50%" stop-color="rgba(37,84,216,0.4)"></stop>
-            <stop offset="75%" stop-color="rgba(37,84,216,0.1)"></stop>
-            <stop offset="100%" stop-color="rgba(37,84,216,0)"></stop>
-        </linearGradient>
-    </defs>
-    <path
-        d="M 50,50 m -13,0 a 13,13 0 1 ,1, 26,0"
-        fill="none"
-        stroke="url(#linear)"
-        stroke-width="2"
-        stroke-dasharray="(57.148, 81.64)"
-        stroke-dashoffset="20.41"
-    />
-    <path
-            d="M 50,50 m -13,0 a 13,13 0 1 ,0, 26,0"
-            fill="none"
-            stroke="url(#linear)"
-            stroke-width="2"
-            stroke-dasharray="(57.148, 81.64)"
-            stroke-dashoffset="20.41"
-    />
-</svg>
-
+    <div class="outer">
+        文本
+    </div>
 <script>
 
 </script>

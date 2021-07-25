@@ -64,3 +64,32 @@ function ajax(options){
 
 * ajax请求有同步和异步的区别
 * 区别在于open方法，`第三个参数为true或者不填表示异步，为false表示同步`    
+
+## 设置请求头字段
+* 使用xhr.setRequestHeader可以设置请求头字段，但是注意有些字段只能由浏览器添加，如果手动添加会提示CORS错误
+* 并且要在open方法和send方法之间调用
+```javascript
+function  ajax(method,url,data){
+        let xhr=new XMLHttpRequest()
+        xhr.open(method,url)
+        // xhr.setRequestHeader('Accept','*') // 错误
+    xhr.setRequestHeader('Content-Type','text/plain');// 成功，因为可以设置content-type
+    xhr.send(data)
+        return new Promise((resolve, reject)=>{
+            xhr.onload=(res)=>{
+                if(xhr.readyState === 4){
+                    if(xhr.status >=200 || xhr.status<=304){
+                        resolve(xhr.responseText)
+                    }
+                }
+            }
+            xhr.onerror=(err)=>{
+                reject(err)
+            }
+        })
+    }
+    ajax('get','http://localhost:3000','name=aaa').then((res)=>{
+        console.log(res)
+    })
+```
+* [https://developer.mozilla.org/zh-CN/docs/Glossary/Forbidden_header_name]("禁止的请求头字段")
