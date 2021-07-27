@@ -61,6 +61,40 @@ function ajax(options){
         console.log(res)
     })
 ```
+* `但是在跨域请求中，只能获取到以下几个响应头字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma`
+```javascript
+function ajax({method,url,data=''}){
+        const xhr=new XMLHttpRequest();
+        xhr.open(method,url)
+        xhr.send(data)
+        return new Promise((resolve,reject)=>{
+            xhr.onload=()=>{
+                if(xhr.readyState === 4){
+                    if(xhr.status >= 200 && xhr.status <= 304){
+                        console.log(xhr.getResponseHeader('Date')) // null
+                        console.log(xhr.getResponseHeader('Content-Type')) // text/html; charset=utf-8
+                        resolve(xhr.response)
+                    }
+                }
+            }
+            xhr.onerror=(e)=>{
+                reject(e)
+            }
+        })
+    }
+    ajax({method:'get',url:'http://localhost:3000/a'}).then((res)=>{
+        console.log('res',res)
+    })
+```
+* `然后我们的node后端跑在3000端口`
+* 我们输入http://localhost:3000/，在控制台输入上面的代码，发现 `在同源的页面可以拿到Date响应头字段`
+---
+* 那么我们想在前端获取到对应的响应头字段该怎么做？
+```javascript
+// node添加
+res.setHeader('Access-Control-Expose-Headers','Date,Connection')
+// 然后我们就可以拿到对应的字段了
+```
 
 * ajax请求有同步和异步的区别
 * 区别在于open方法，`第三个参数为true或者不填表示异步，为false表示同步`    

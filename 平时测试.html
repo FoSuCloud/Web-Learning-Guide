@@ -13,24 +13,33 @@
             padding: 0;
             margin: 0;
         }
-        :root{
-            --div-background-color: yellow;
-        }
-        .outer{
-            background-color: var(--div-background-color);
-        }
-        .outer::selection{
-            color: red;
-            background-color: green;
-        }
     </style>
 
 <body>
-    <div class="outer">
-        文本
-    </div>
-<script>
 
+<script>
+    function ajax({method,url,data=''}){
+        const xhr=new XMLHttpRequest();
+        xhr.open(method,url)
+        xhr.send(data)
+        return new Promise((resolve,reject)=>{
+            xhr.onload=()=>{
+                if(xhr.readyState === 4){
+                    if(xhr.status >= 200 && xhr.status <= 304){
+                        console.log(xhr.getResponseHeader('Date')) // null
+                        console.log(xhr.getResponseHeader('Content-Type')) // text/html; charset=utf-8
+                        resolve(xhr.response)
+                    }
+                }
+            }
+            xhr.onerror=(e)=>{
+                reject(e)
+            }
+        })
+    }
+    ajax({method:'get',url:'http://localhost:3000/a'}).then((res)=>{
+        console.log('res',res)
+    })
 </script>
 </body>
 
