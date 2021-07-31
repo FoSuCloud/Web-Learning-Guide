@@ -137,9 +137,5 @@ I
 前端工程/浏览器.md,8/c/8cd2e34f1d819dc45e813740b252a0f319904af4
 I
 浏览器/同源策略.md,d/d/dd60c8ffeaf4a7d4e6abd7b5f7689539c90887ad
-I
-javascript/其他/ajax.md,e/2/e27c09801e8a6923d3be4f1345f29a19cdc602d5
-A
-平时测试.html,3/8/3821de9fb9dd89c2c4c8e76827af6a8a8ebfd9ba
-C
-浏览器/字段.md,b/9/b90242a626fb3f59a9eb88fc06740cef04c2a110
+K
+javascript/高级/任务.md,7/d/7d5383724e9ddac0e293218aaf258860993866dc
