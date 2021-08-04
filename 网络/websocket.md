@@ -162,4 +162,56 @@ ws.on('connection', function connection(ws) {
 ---
 
 * 服务器端使用ws可以和http一起协作使用，具体的使用方法参考 [https://github.com/websockets/ws]("ws")
+* 例子：
+```javascript
+// node后端
+const parse= require('url').parse
+const createServer=require('http').createServer
+const Server= require('ws').Server
+
+const server = createServer((req,res)=>{
+  console.log('server start')
+  res.end('server')
+});
+// noServe,因为serve服务监听由http来完成
+const wss1 = new Server({ noServer: true });
+const wss2 = new Server({ noServer: true });
+
+wss1.on('connection', function connection(ws) {
+  ws.send('wss1');
+  setTimeout(()=>{
+    ws.send("服务器主动推送的数据")
+    let buf=new Buffer("buffer数据")
+    ws.send(buf)
+  },1000)
+});
+
+wss2.on('connection', function connection(ws) {
+  ws.send('wss2');
+});
+
+server.on('upgrade', function upgrade(request, socket, head) {
+  const { pathname } = parse(request.url);
+  let origins=['http://localhost:63342/']
+  if (pathname === '/upgrade') {
+    if(origins.includes(request.headers.origin)){
+        // 处理upgrade升级协议请求，在服务器模式不需要处理
+      // 但是在noserve模式必须要手动处理，否则会连接失败
+      wss1.handleUpgrade(request, socket, head, function done(ws) {
+        wss1.emit('connection', ws, request); // 通知websocket连接
+      });
+    }else{
+      socket.destroy();
+    }
+  } else {
+    socket.destroy();
+  }
+});
+
+server.listen(3000);
+```
+* `如果来源地址不在数组中，那么使用socket.destroy来关闭连接`，前端报错：WebSocket connection to 'ws://localhost:3000/upgrade' failed:
+* `如果来源地址在数组中，那么就不调用socket.destory，而是发送数据给客户端`，浏览器得到："buffer数据"
+* `所以虽然websocket原生支持跨域，但是也可以限制不跨域，根据来源来设置`
+
 * 参考：[http://www.ruanyifeng.com/blog/2017/05/websocket.html]("webSocket")

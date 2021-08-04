@@ -26,8 +26,6 @@ html/h5.md,4/e/4e936e5f501ede46b5f4d340a9ecd5ede373d68c
 vue知识.md,e/e/ee1750fd3d66629c887450fcab8e32bd9c8ff403
 >
 html/标签.md,d/c/dcd2437dc274e83b4f820072dd01fbfbf510f0ed
-P
- react/react-create-app/配置.md,e/9/e964911929c308a8ebd5c5c22229dacc56ab11e4
 T
 $javascript/其他/正则表达式.md,4/2/4206054303f1c16012602440c5faa0bd7e21b57d
 E
@@ -46,8 +44,6 @@ G
 python/命令/命令.md,c/7/c7409f7068558bca5dd4720a0dd3991b92c53c0c
 N
 数据结构与算法/linux.md,7/a/7a1cafa1b809fe7bf08386bfeb8721e18c1f212e
-H
-计算机基础/Linux.md,1/9/19626bf82e820a3926d14c4c154d49f05646e636
 K
 node/工程化/初始化.md,3/3/331f04b0e88a056162667bd1997a13d47e7ad1b9
 C
@@ -74,8 +70,6 @@ B
 每日三题/04.md,e/8/e87536a0af89663a328a1f9ac1e339fc40256cd2
 S
 #javascript/es6/8.数组的拓展.md,5/2/52e563e2908ac6402f8dcedc1fb1d20d567e228d
->
-网络/http.md,8/8/88ce0a6f4b03d9000cf7c8ce85d6d25551114a4d
 B
 网络/get_post.md,d/f/df1f9ac9c0142c3f29578e2bea6d37860b1bbc7f
 @
@@ -90,10 +84,6 @@ N
 javascript/其他/url编码.md,a/2/a25337f7e10d450fb3b0809091a630d26d59fd02
 K
 react/hook/自定义hook.md,d/4/d41b9de1733e375130cc6985741f6cd0ac49d300
-F
-前端工程/模块.md,d/7/d78ca094d93c4778a5385f879a48ec0579ae47b6
-G
-react/hook/useEffect.md,d/d/dd90bbee11c31ee1ac07d8ab3ce94baf9548f612
 :
 
 .gitingnoe,f/3/f357b53ee0f6203116f1a200f645864571c8cd57
@@ -105,8 +95,6 @@ B
 html/web worker.md,8/b/8b7d16e9967e24a5e4c98d74ccd3c663aa1f9a46
 W
 'javascript/数据类型/类型判断.md,8/7/877d7ef1e0c9dca3cd9ac2288ae162b2b1740f91
-L
-前端工程/前端工程.md,6/e/6e4bd1829c874d414aa140a0be126c9ba910d445
 E
 html/标签/iframe.md,d/d/ddbf2b36936aba05550ae3c8736034d56ac83cef
 ;
@@ -139,3 +127,23 @@ I
 浏览器/同源策略.md,d/d/dd60c8ffeaf4a7d4e6abd7b5f7689539c90887ad
 K
 javascript/高级/任务.md,7/d/7d5383724e9ddac0e293218aaf258860993866dc
+I
+javascript/其他/ajax.md,e/2/e27c09801e8a6923d3be4f1345f29a19cdc602d5
+C
+浏览器/字段.md,b/9/b90242a626fb3f59a9eb88fc06740cef04c2a110
+A
+浏览器/CORS.md,d/b/db57baadb4a6ebc24c5c4ac1a90f203a5f7262eb
+@
+网络/综合.md,d/d/ddebc8bd947a254248a55ed3406f3e9726994ed2
+H
+浏览器/2.TCP协议.md,3/5/3570db9416702d1bd9e9a767efc3d1fd06b933bf
+A
+网络/tcp_udp.md,6/5/65bec70ab075b57268dd39fb05035fb5b67e3273
+G
+react/hook/useEffect.md,d/d/dd90bbee11c31ee1ac07d8ab3ce94baf9548f612
+C
+css/属性/style.md,3/c/3ce203d817d580a7147327f2e9eb33044750732c
+P
+ react/react-create-app/配置.md,e/9/e964911929c308a8ebd5c5c22229dacc56ab11e4
+>
+网络/curl.md,8/5/85649590ec19e8e5e7e1937a19c9dd9e411b822b

@@ -18,29 +18,9 @@
 <body>
 
 <script>
-    // 使用WebSocket对象新建一个websocket连接
-    var ws = new WebSocket("ws://localhost:3000/foo");
-    // websocket连接开启后
-    ws.onopen = function(evt) {
-        console.log("Connection open ...");
-        ws.send("Hello WebSockets!"); // 发送数据给服务器端
-    };
-    // 拿到websocket的响应后
-    ws.onmessage = function(evt) {
-        if(evt.data instanceof Blob){
-            let reader = new FileReader();
-            reader.onload = function(event){
-                console.log(reader.result)
-            };
-            reader.readAsText(evt.data);
-        }
-        // ws.close(); // 前端主动去结束请求
-    };
-
-    // websocket请求的关闭后
-    ws.onclose = function(evt) {
-        console.log("Connection closed.");
-    };
+    for(let i=0;i<100;i++) {
+        fetch('http://localhost:3000');
+    }
 </script>
 </body>
 

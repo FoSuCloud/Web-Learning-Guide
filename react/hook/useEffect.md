@@ -4,6 +4,10 @@
 * `useEffect函数会在DOM更新之后触发,每次渲染都会触发！`
 * `useEffect有第二个参数，可选。表示是否在数组中的值变化时才触发函数`
 * (因为包括了componentDidMount，所以初始渲染DOM完成后，也会触发该函数)
+  
+### useEffect的第二个参数为空和[]的区别
+* `如果第二个参数deps为空数组[]，那么useEffect只会在mounted的时候触发一次！不会在组件更新的时候触发，因为没有监听组件变量的变更`
+*  `如果是空，useEffect(func),那么就是默认情况下，那么每次渲染都会触发！`
 
 * `有时候我们会在useEffect执行一些副作用操作，例如setTimeout`
 `那么可以在最后return一个函数，然后在执行完useEffect之后就会调用这个函数`
