@@ -82,10 +82,15 @@
         <div class="images-container">
             <div class="container-run">
                 <img src="../images/6.jpg" alt="">
+<!--                这是页面显示的第一个图片-->
                 <img src="../images/3.jpg" alt="">
+<!--                这是页面显示的第二个图片-->
                 <img src="../images/4.jpg" alt="">
+<!--                这是页面显示的第三个图片-->
                 <img src="../images/5.jpg" alt="">
+<!--                这是页面显示的最后一个图片-->
                 <img src="../images/6.jpg" alt="">
+
                 <img src="../images/3.jpg" alt="">
             </div>
         </div>
@@ -100,10 +105,11 @@
     </div>
 
     <script>
-        const imgList = ['../images/3.jpg','../images/4.jpg','../images/5.jpg','../images/6.jpg']
         /**
          * https://juejin.cn/post/6844903863426744334#heading-1
          * */
+        // 关键点：前后都要有一个假的图片；第一个图；最后一个图片其实是第一个
+        //
         let currentIndex = 0; // 当前播放的是第几个图
         let dotList = document.getElementsByClassName('images-dots');
         let run = document.getElementsByClassName('container-run');
@@ -123,7 +129,7 @@
                 run.style.transform=`translateX(-${4*300}px)`
                 currentIndex=3; // 最后一个
                 updateDot()
-
+                // 下一帧动画
                 requestAnimationFrame(()=>{
                     run.style.transition = 'transform 0.3s ease-in-out'
                     run.style.transform=`translateX(-${currentIndex*300}px)`

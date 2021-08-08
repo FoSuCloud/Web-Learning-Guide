@@ -61,16 +61,16 @@ ws.on('connection', function connection(ws) {
 
 ### 例子
 1. 首先我们按照上面的简单例子，可以在network控制台可以看到请求头和响应头都有一个字段`Connection:Upgrade,表示http协议需要升级！`
-* 此外`响应头还有一个字段是Upgrade:websocket，表示服务器把协议升级为websocket协议！`
+* 此外`响应头和请求头都还有一个字段是Upgrade:websocket，表示需要服务器把协议升级为websocket协议！`
 2. `通过binaryType指定接收到数据格式，也就是接收到的二进制数据都会被解析为对应的格式(buffer或者arrayBuffer)`
 ```javascript
 // 前端
 ws.binaryType = 'arraybuffer' // 获取的二进制数据被解析为对应的类型(blob或者arrayBuffer)
-    ws.onmessage=function (evt){
-        if(evt.data instanceof ArrayBuffer){
-            console.log(String.fromCharCode.apply(null, new Int8Array(evt.data)))
-        }
+ws.onmessage=function (evt){
+    if(evt.data instanceof ArrayBuffer){
+        console.log(String.fromCharCode.apply(null, new Int8Array(evt.data)))
     }
+}
     
 // 后端
 ws.on('connection', function connection(ws) {
@@ -213,5 +213,9 @@ server.listen(3000);
 * `如果来源地址不在数组中，那么使用socket.destroy来关闭连接`，前端报错：WebSocket connection to 'ws://localhost:3000/upgrade' failed:
 * `如果来源地址在数组中，那么就不调用socket.destory，而是发送数据给客户端`，浏览器得到："buffer数据"
 * `所以虽然websocket原生支持跨域，但是也可以限制不跨域，根据来源来设置`
+
+## 心跳包
+* 在websocket使用http完成握手之后，任意时刻，客户端或者服务器端都可以任意发起ping，然后接收方就要响应pong用来确保对方还保持着连接
+* `一般是服务器端用心跳包来确保客户端包还保持着连接`
 
 * 参考：[http://www.ruanyifeng.com/blog/2017/05/websocket.html]("webSocket")

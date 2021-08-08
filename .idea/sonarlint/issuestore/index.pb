@@ -70,8 +70,6 @@ S
 #javascript/es6/8.数组的拓展.md,5/2/52e563e2908ac6402f8dcedc1fb1d20d567e228d
 B
 网络/get_post.md,d/f/df1f9ac9c0142c3f29578e2bea6d37860b1bbc7f
-@
-网络/命令.md,3/7/373b001f3084cb34e483782838d46c83349181b0
 F
 网络/请求方式.md,3/e/3e63bfee4fa4b8a9553803bff6250b54d5ef86e4
 F
@@ -133,8 +131,6 @@ C
 css/属性/style.md,3/c/3ce203d817d580a7147327f2e9eb33044750732c
 P
  react/react-create-app/配置.md,e/9/e964911929c308a8ebd5c5c22229dacc56ab11e4
->
-网络/curl.md,8/5/85649590ec19e8e5e7e1937a19c9dd9e411b822b
 L
 前端工程/前端工程.md,6/e/6e4bd1829c874d414aa140a0be126c9ba910d445
 F
@@ -159,5 +155,5 @@ G
 html/标签/datalist.md,f/2/f2e704d5e707b9ba2162c58c472f5caf741a35a6
 L
 javascript/js手写代码.md,1/4/1455e435f89be8cfbb44797783bb47a01af4a379
-I
-小demo/15.轮播图.html,2/7/2780df9957b5f570e5fddd4b83b6d9827bffcd3c
+@
+网络/命令.md,3/7/373b001f3084cb34e483782838d46c83349181b0

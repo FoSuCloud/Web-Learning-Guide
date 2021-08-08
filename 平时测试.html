@@ -18,21 +18,14 @@
 <body>
 
 <script>
-    const evtSource = new EventSource("http://localhost:3000/", { withCredentials: true } );
-    evtSource.onmessage = function(event) {
-        console.log(event.data)
-    }
-    evtSource.addEventListener('test',(event)=>{
-        console.log(event.lastEventId) // test1
-        console.log('test:',event.data)
-        // evtSource.close(); // 关闭
-    })
-    evtSource.addEventListener('json',(event)=>{
-        console.log('json:',event.data) // {'name':'yiye','age':33};
-    })
-    evtSource.onerror = function (event){
-        console.log(event.data)
-    }
+    let work1 = new Worker('./worker.js')
+    const buffer = new ArrayBuffer(8);
+    let  data = new Int8Array(buffer);
+    data[0] = 2
+    data[1] = 4
+    work1.postMessage(buffer,[buffer])
+    console.log('buffer转移之后：',buffer) // ArrayBuffer(0)
+
 </script>
 </body>
 
