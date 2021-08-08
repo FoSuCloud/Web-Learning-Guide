@@ -76,9 +76,9 @@ User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
 * 在cors请求中，浏览器默认`不发送cookie和http认证信息`
 * 解决办法：`前端设置withCredentials:true(表示在跨域请求中也要发送cookie到服务器);在axios中，也就是`
   `service.defaults.withCredentials = true;//允许跨域携带cookie信息,(service指的是axios.create()创建的实例)`
-* `后端设置Access-Control-Allow-Crediential:true表示服务器明确许可cookie可以携带在跨域请求中发给服务器`
+* `后端设置Access-Control-Allow-Credentials:true表示服务器明确许可cookie可以携带在跨域请求中发给服务器`
 ---
-* `前端配置了service.defaults.withCredentials:true，但是后端没有设置Access-Control-Allow-Credential:true`
+* `前端配置了service.defaults.withCredentials:true，但是后端没有设置Access-Control-Allow-Credentials:true`
 * 此时前端的cors请求提示错误，控制台提示:
 ```javascript
 /*

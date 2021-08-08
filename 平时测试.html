@@ -18,8 +18,20 @@
 <body>
 
 <script>
-    for(let i=0;i<100;i++) {
-        fetch('http://localhost:3000');
+    const evtSource = new EventSource("http://localhost:3000/", { withCredentials: true } );
+    evtSource.onmessage = function(event) {
+        console.log(event.data)
+    }
+    evtSource.addEventListener('test',(event)=>{
+        console.log(event.lastEventId) // test1
+        console.log('test:',event.data)
+        // evtSource.close(); // 关闭
+    })
+    evtSource.addEventListener('json',(event)=>{
+        console.log('json:',event.data) // {'name':'yiye','age':33};
+    })
+    evtSource.onerror = function (event){
+        console.log(event.data)
     }
 </script>
 </body>

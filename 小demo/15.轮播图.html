@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="`en`">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        .loop-images{
+            position: relative;
+            margin: 20px auto;
+            width: 300px;
+        }
+        .images-container{
+            overflow: hidden;
+            height: 200px;
+            border: 1px solid gray;
+        }
+        .container-run{
+            position: relative;
+            left: -300px;
+            display: flex;
+            align-items: center;
+            height: 200px;
+            transform: translateX(0);
+            transition: transform 0.3s ease-in-out;
+        }
+        img{
+            margin: 0;
+            padding: 0;
+            border: none;
+            display: inline-block;
+            width: 300px;
+            height: 100%;
+        }
+        .images-dots{
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+        }
+        .dot{
+            width: 8px;
+            height: 8px;
+            background-color: burlywood;
+            border-radius: 50%;
+            margin-right: 10px;
+            opacity: 0.6;
+        }
+        .dot:last-child{
+            margin-right: 0px;
+        }
+        .dot.is-active{
+            opacity: 1;
+        }
+        .images-left,.images-right{
+            position: absolute;
+            top: 50%;
+            border-color: transparent transparent #a1c4fd transparent;
+            border-width: 30px;
+            border-style: solid;
+        }
+        .images-left{
+            left: -90px;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+        .images-right{
+            right: -90px;
+            transform: translateY(-50%) rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="loop-images">
+        <div class="images-container">
+            <div class="container-run">
+                <img src="../images/6.jpg" alt="">
+                <img src="../images/3.jpg" alt="">
+                <img src="../images/4.jpg" alt="">
+                <img src="../images/5.jpg" alt="">
+                <img src="../images/6.jpg" alt="">
+                <img src="../images/3.jpg" alt="">
+            </div>
+        </div>
+        <div class="images-dots">
+            <div class="dot is-active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <div class="images-left" onclick="move(false)"></div>
+        <div class="images-right" onclick="move(true)"></div>
+    </div>
+
+    <script>
+        const imgList = ['../images/3.jpg','../images/4.jpg','../images/5.jpg','../images/6.jpg']
+        /**
+         * https://juejin.cn/post/6844903863426744334#heading-1
+         * */
+        let currentIndex = 0; // 当前播放的是第几个图
+        let dotList = document.getElementsByClassName('images-dots');
+        let run = document.getElementsByClassName('container-run');
+        if(dotList.length){
+            dotList = dotList[0]
+        }
+        if(run.length){
+            run = run[0]
+        }
+        function move(isNext){
+            if(isNext && currentIndex<3){
+                currentIndex++;
+            }else if(!isNext && currentIndex>0){
+                currentIndex--;
+            }else if(!isNext && currentIndex ===0){
+                run.style.transition='none'
+                run.style.transform=`translateX(-${4*300}px)`
+                currentIndex=3; // 最后一个
+                updateDot()
+
+                requestAnimationFrame(()=>{
+                    run.style.transition = 'transform 0.3s ease-in-out'
+                    run.style.transform=`translateX(-${currentIndex*300}px)`
+                })
+                return;
+            }else if(isNext && currentIndex ===3){
+                run.style.transition='none'
+                run.style.transform=`translateX(${300}px)`
+                currentIndex=0; // 第一个
+                updateDot()
+
+                requestAnimationFrame(()=>{
+                    run.style.transition = 'transform 0.3s ease-in-out'
+                    run.style.transform=`translateX(-${currentIndex*300}px)`
+                })
+                return
+            }
+
+            updateDot()
+            run.style.transform=`translateX(-${currentIndex*300}px)`
+        }
+
+        function updateDot(){
+            Array.from(dotList.children).forEach((dot,i)=>{
+                if(i===currentIndex){
+                    dot.classList.add('is-active')
+                }else if(dot.classList.contains('is-active')){
+                    dot.classList.remove('is-active')
+                }
+            })
+        }
+    </script>
+</body>
+</html>
