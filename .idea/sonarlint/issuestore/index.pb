@@ -26,8 +26,6 @@ html/h5.md,4/e/4e936e5f501ede46b5f4d340a9ecd5ede373d68c
 vue知识.md,e/e/ee1750fd3d66629c887450fcab8e32bd9c8ff403
 >
 html/标签.md,d/c/dcd2437dc274e83b4f820072dd01fbfbf510f0ed
-T
-$javascript/其他/正则表达式.md,4/2/4206054303f1c16012602440c5faa0bd7e21b57d
 E
 react/hook/useMemo.md,0/f/0f3bb67cceba82d4e7df0dcd7ac104ea4f06d608
 I
@@ -91,8 +89,6 @@ W
 'javascript/数据类型/类型判断.md,8/7/877d7ef1e0c9dca3cd9ac2288ae162b2b1740f91
 ;
 iframe.html,c/b/cb3c04372dd6f0609526d99d0a101ffc5fd677aa
-M
-数据可视化/svg/入门.md,8/2/82ed83983234b944d51858f26dc7af974aaee6f1
 N
 数据可视化/svg/d属性.md,3/b/3b4dcda1b69d13163e032623826fc73015466dce
 K
@@ -131,8 +127,6 @@ C
 css/属性/style.md,3/c/3ce203d817d580a7147327f2e9eb33044750732c
 P
  react/react-create-app/配置.md,e/9/e964911929c308a8ebd5c5c22229dacc56ab11e4
-L
-前端工程/前端工程.md,6/e/6e4bd1829c874d414aa140a0be126c9ba910d445
 F
 前端工程/模块.md,d/7/d78ca094d93c4778a5385f879a48ec0579ae47b6
 >
@@ -157,3 +151,15 @@ L
 javascript/js手写代码.md,1/4/1455e435f89be8cfbb44797783bb47a01af4a379
 @
 网络/命令.md,3/7/373b001f3084cb34e483782838d46c83349181b0
+I
+小demo/15.轮播图.html,2/7/2780df9957b5f570e5fddd4b83b6d9827bffcd3c
+C
+网络/websocket.md,1/7/170f6c756d6a22c12fbc33d43bcecff5404ea0fb
+>
+网络/curl.md,8/5/85649590ec19e8e5e7e1937a19c9dd9e411b822b
+?
+网络/http2.md,8/9/89df722fd2916ea4356cfb8cf4d2eeb2213ca1da
+T
+$javascript/其他/dragEvent事件.md,8/1/81b60ed5c2c05096336853b25e0525d1e1fb0f28
+T
+$javascript/其他/正则表达式.md,4/2/4206054303f1c16012602440c5faa0bd7e21b57d
