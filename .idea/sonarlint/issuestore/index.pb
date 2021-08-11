@@ -40,8 +40,6 @@ B
 css/属性/font.md,6/9/690ec3577a9a5e0a8e939b4e6e79312e7680aa9f
 G
 python/命令/命令.md,c/7/c7409f7068558bca5dd4720a0dd3991b92c53c0c
-N
-数据结构与算法/linux.md,7/a/7a1cafa1b809fe7bf08386bfeb8721e18c1f212e
 K
 node/工程化/初始化.md,3/3/331f04b0e88a056162667bd1997a13d47e7ad1b9
 C
@@ -133,8 +131,6 @@ F
 网络/http.md,8/8/88ce0a6f4b03d9000cf7c8ce85d6d25551114a4d
 >
 node/代理.md,b/d/bd87f4ec41dfff82217fe32ae75f771457f05a44
-H
-计算机基础/Linux.md,1/9/19626bf82e820a3926d14c4c154d49f05646e636
 R
 "小demo/14.照片翻转动画.html,7/7/7748474f58f3ab851381b918bb1e420759c7fd51
 I
@@ -163,3 +159,5 @@ T
 $javascript/其他/dragEvent事件.md,8/1/81b60ed5c2c05096336853b25e0525d1e1fb0f28
 T
 $javascript/其他/正则表达式.md,4/2/4206054303f1c16012602440c5faa0bd7e21b57d
+G
+浏览器/web worker.md,d/d/dd0838fe87763366c803d5b0274c420b892b98f7
