@@ -104,8 +104,6 @@ D
 G
 css/其他/选择器.md,9/f/9fdeb3679920ad6fb847c84a657270b7b17958b6
 I
-前端工程/浏览器.md,8/c/8cd2e34f1d819dc45e813740b252a0f319904af4
-I
 浏览器/同源策略.md,d/d/dd60c8ffeaf4a7d4e6abd7b5f7689539c90887ad
 K
 javascript/高级/任务.md,7/d/7d5383724e9ddac0e293218aaf258860993866dc
@@ -125,8 +123,6 @@ C
 css/属性/style.md,3/c/3ce203d817d580a7147327f2e9eb33044750732c
 P
  react/react-create-app/配置.md,e/9/e964911929c308a8ebd5c5c22229dacc56ab11e4
-F
-前端工程/模块.md,d/7/d78ca094d93c4778a5385f879a48ec0579ae47b6
 >
 网络/http.md,8/8/88ce0a6f4b03d9000cf7c8ce85d6d25551114a4d
 >

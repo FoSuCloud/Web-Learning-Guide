@@ -4,7 +4,7 @@
 
 #### [https://github.com/FoSuCloud/rollup-demo/tree/main]("rollup-demo")
 
-## 创建
+## 创建rollup项目（项目初始化）
 1. npm init
 * 创建package.json文件
 2. npm i typescript -D 添加typescript
