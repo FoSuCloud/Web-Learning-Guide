@@ -3,6 +3,7 @@
 1. 第一个参数是一个无参函数，用于返回对应的useMemo返回值
 2. 第二个参数是一个依赖数组，该数组是可选参数，`不传递则表示所有的渲染改变都会触发useMemo函数更新`
 * 如果数组存在值，那么数组内部的值改变了，就会触发该useMemo函数更新
+* 类似于vue的computed
 ```javascript
 import { useMemo, useState } from 'react';
 
