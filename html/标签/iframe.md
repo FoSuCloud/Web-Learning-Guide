@@ -108,3 +108,47 @@ http.createServer((req,res)=>{
 * 结果就是父页面初始化结束重定向到新页面
 
 ### contentDocument获取iframe元素的document对象
+
+## iframe跨域通信
+```html
+<!--// index.html,运行在本地的端口63342-->
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf8" />
+    <head>
+        <title>测试</title>
+    </head>
+    <body>
+        <iframe src="http://localhost:3001/" frameborder="0" id="iframe"></iframe>
+        <script>
+            const iFrame = document.getElementById("iframe");
+            let start = true;
+            iFrame.onload = function () {
+            if (start) {
+            iFrame.contentWindow.postMessage(
+        { id: window.location.search, name: "dsadasads" },
+            "http://localhost:3001"
+            );
+            start = false;
+        }
+        };
+            window.addEventListener("message", (e) => {
+            if (e.origin === "http://localhost:3001") {
+            console.log(e.data);
+        }
+        });
+        </script>
+    </body>
+</html>
+```
+* 然后iframe页面是前端vue项目生成
+```javascript
+// 运行在30001端口
+window.addEventListener("message",e=>{
+      if(e.origin==="http://localhost:63342"){
+        console.log(e.origin); //父页面URL，这里是http://a.index.com
+        console.log(e.data);  //父页面发送的消息
+        window.parent.postMessage({status:401,msg:"ssss"},"http://localhost:63342");
+      }
+    });
+```

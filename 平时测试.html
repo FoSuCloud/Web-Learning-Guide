@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<!--    <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://localhost:3000">-->
-    <title>CSP Test</title>
-</head>
-<body>
-    <script src="http://localhost:3000"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="http://localhost:3000"></script>
-</body>
+  <meta charset="utf8" />
+  <head>
+    <title>测试</title>
+  </head>
+  <body>
+    <iframe src="http://localhost:3001/" frameborder="0" id="iframe"></iframe>
+    <script>
+      const iFrame = document.getElementById("iframe");
+      let start = true;
+      iFrame.onload = function () {
+        if (start) {
+          iFrame.contentWindow.postMessage(
+            { id: window.location.search, name: "dsadasads" },
+            "http://localhost:3001"
+          );
+          start = false;
+        }
+      };
+      window.addEventListener("message", (e) => {
+        if (e.origin === "http://localhost:3001") {
+          console.log(e.data);
+        }
+      });
+    </script>
+  </body>
 </html>
