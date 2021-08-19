@@ -75,7 +75,13 @@
 </script>
 ```
 
+## iframe不跨域通信
+* `注意：要确保iframe加载完成了再进行操作，使用iframe.onload来判断`
+* [参考]("https://zhuanlan.zhihu.com/p/50193200")
+
+
 ## iframe跨域实例
+* `注意：要确保iframe加载完成了再进行操作，使用iframe.onload来判断`
 * iframe跨域一般用在创建一个iframe元素，或者改变元素的src属性
 ```javascript
 // node.js 返回一个静态文件，文件路径为root/static/index.html
@@ -152,3 +158,29 @@ window.addEventListener("message",e=>{
       }
     });
 ```
+
+## iframe同域通信
+* 获取cookie
+* 通信
+* 获取location
+
+
+## iframe内部路由
+
+## iframe内部跳转到别的url
+* 首先我们在3000端口运行index.html前端项目
+```html
+<div class="content">
+  <div class="header">Header</div>
+  <iframe src="http://localhost:3001/#/experiment/" frameborder="0" id="iframe">
+  </iframe>
+</div>
+```
+* 然后iframe项目运行在3001端口
+```html
+window.location.href = url;
+```
+* `在iframe页面，点击一个按钮，跳转到另一个程序`
+* 首先跳转的url是:`http://localhost:3001/#/other/a`
+* `可以发现结果iframe所在页面被替换为项目a的页面`
+* `这是因为nginx做了代理，根据url启动了项目a,发送给浏览器！`

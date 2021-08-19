@@ -1,5 +1,5 @@
-// onmessage=function(e){
-// 	console.log(new Uint8Array(e.data)) // [2, 4, 0, 0, 0, 0, 0, 0]
-// }
-console.log('worker')
+onmessage=function(e){
+	e.data.sort((a,b) => b-a)
+	self.postMessage(e.data.slice(0,100))
+}
 

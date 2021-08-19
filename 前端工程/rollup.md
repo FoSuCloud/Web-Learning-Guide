@@ -480,18 +480,56 @@ typescript2()
     "paths": {
       "@/*": [ "src/*"]
     },
-    "declaration": true
+    "declaration": true,
+    "sourceMap": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "config", "dist", "public"]
 }
 ```
+* `declaration:true生成声明文件`
+* `注意sourceMap必须是true，如果是false，那么因为我们在rollup.config.js开启了sourceMap，那么还是会生成.map文件`
+* `但是生成的文件是不对的，mappings结果全部是逗号，。没法生成正确的map文件`
 * [官网说明]("https://www.typescriptlang.org/docs/handbook/tsconfig-json.html")
 
+23. 解决typescript文件使用别名失效问题
+* 这是因为在tsconfig.json中配置错误，修改为
+* `baseUrl从src改为.;然后src路径修改`
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@": [ "src"],
+      "src": ["src"]
+    },
+    "declaration": true,
+    "sourceMap": true,
+  },
+  "include": ["src/**/*.ts","src/*.ts"],
+  "exclude": ["node_modules", "config", "dist", "public"]
+}
+```
+* `然后我们发现src可以找到别名了，但是使用@还是会报错。`
+* `最后的解决方法是："@/*": [ "src/*"],也就是需要通过@/*这种别名方式来解决！`
 
-- `ts里面不可以使用src,@ 这种别名？`
+24. README.md文件美化
+* 首先找到了一个插件：`readme-md-generator`
+* 执行命令：`npx readme-md-generator`,自定义输出内容
+* 由于输出内容过少，所以根据提示修改package.json,添加字段
+```json
+"engines": {
+    "npm": ">=6.14.12",
+    "node": ">=10.24.1"
+  }
+```
+* 并且把test命令删除，把多余的广告删除，补上dev命令
+
+25. commit 提交规范
+* commit提交遵守 [commit emoji]("https://github.com/liuchengxu/git-commit-emoji-cn")
+
+
 - 怎么打包出多个 js,css 文件？
-
 
 - 处理 svg, @rollup/plugin-image
 
@@ -508,3 +546,6 @@ typescript2()
 - 生成.bak 文件的意义是什么？
 
 - `一些问题可以看看vue源码有没有解决方案`
+
+- 为什么操作canvas比操作dom快？
+* [参考]("http://www.ruanyifeng.com/blog/2015/02/future-of-dom.html")
