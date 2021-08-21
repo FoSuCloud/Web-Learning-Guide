@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>canvas文本省略</title>
+</head>
+<body>
+<canvas id="canvas" width="120" height="1000"></canvas>
+<script>
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+    ctx.font = "20px PingFang";
+    let ellipsisWidth = Math.ceil(ctx.measureText("...").width); // ...的宽度
+    let defaultWidth = Math.ceil(ctx.measureText("正").width); // 缺省值，帮助确认可显示最大宽度
+    let colWidth = 120;
+    let visibleWidth = colWidth - ellipsisWidth; // 可视区域宽度
+    console.log("...宽度:", ellipsisWidth);
+    console.log("可视区域宽度:", visibleWidth);
+    // 1.例子，迭代计算次数0
+    let res = handleEllipsis('Hello World!')
+    console.log("res:", res);
+    console.log("res width:", ctx.measureText(res).width);
+    ctx.fillText(res, 0, 100);
+    // 2.中文,迭代计算次数: 2
+    let res2 = handleEllipsis("中文中文中文中文")
+    console.log("res:", res2);
+    console.log("res width:", ctx.measureText(res2).width);
+    ctx.fillText(res2, 0, 130);
+    // 3.中英文，迭代计算次数2
+    let res3 = handleEllipsis("中文asssad32中sd文dsd中文")
+    console.log("res:", res3);
+    console.log("res width:", ctx.measureText(res3).width);
+    ctx.fillText(res3, 0, 160);
+    // // 4.字段长度超20倍,迭代计算次数1
+    const longWord = '1232ds中文32中sd文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文中文ass中文32中sd文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文中文ass中文32中sd文dsd中文'
+    let res4 =
+        handleEllipsis(longWord)
+    console.log("res:", res4);
+    console.log("res width:", ctx.measureText(res4).width);
+    ctx.fillText(res4, 0, 200);
+    // 5. 空格
+    let res5 = handleEllipsis('Hello             333')
+    console.log("res:", res5);
+    console.log("res width:", ctx.measureText(res5).width);
+    ctx.fillText(res5, 0, 230);
+    // 6. 英文数字
+    let res6 = handleEllipsis('Hello213das213dsa21')
+    console.log("res:", res6);
+    console.log("res width:", ctx.measureText(res6).width);
+    ctx.fillText(res6, 0, 260);
+
+    function handleEllipsis(word) {
+        let result = "";
+        let width = ctx.measureText(word).width;
+        console.log("width:", width);
+        if (width < colWidth) {
+            return word;
+        }
+        let n = Math.ceil(width / visibleWidth) + 1; // 倍数
+        let end = Math.ceil(word.length / n); // 最后一个词的索引
+        let num = 0; // 迭代计算次数
+        while (true) {
+            num++;
+            let minWord = word.slice(0, end);
+            let w = ctx.measureText(minWord).width;
+            console.log(minWord,w)
+
+            if (w <= visibleWidth) {
+                // 太小,继续增加
+                if (w + defaultWidth <= visibleWidth) {
+                    end += Math.ceil(end / 2);
+                } else {
+                    result = minWord;
+                    break;
+                }
+            } else {
+                // 太大，继续减少
+                if(w - defaultWidth>visibleWidth){
+                    end -= Math.ceil(end / 2);
+                }else{
+                    end-=1
+                    result = minWord.slice(0, end);
+                    break;
+                }
+            }
+        }
+        console.log('迭代计算次数:',num)
+        return result+'...';
+    }
+</script>
+</body>
+</html>

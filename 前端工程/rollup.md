@@ -491,6 +491,7 @@ typescript2()
 * `注意sourceMap必须是true，如果是false，那么因为我们在rollup.config.js开启了sourceMap，那么还是会生成.map文件`
 * `但是生成的文件是不对的，mappings结果全部是逗号，。没法生成正确的map文件`
 * [官网说明]("https://www.typescriptlang.org/docs/handbook/tsconfig-json.html")
+* 关于 sourcemap 的原理可以看阮一峰的博客。更进一步可以看mozilla做的sourcemap源码[sourcemap]("https://github.com/mozilla/source-map")
 
 23. 解决typescript文件使用别名失效问题
 * 这是因为在tsconfig.json中配置错误，修改为

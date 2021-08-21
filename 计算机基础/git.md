@@ -58,3 +58,13 @@
 
 `(即使修改了一些代码，但是只要没有提交，现在想恢复到之前拉取的代码状态，也就是没修改前的项目)，那么使用git reset --hard HEAD`
 
+## git stash
+* `临时存储文件目录（避免一次commit）`，不然pull代码提示需要commit
+* pull结束之后，`git stash pop恢复临时存储的文件目录`
+
+## 一台电脑，公司和个人两个github账号
+* [https://www.jianshu.com/p/4fc7c534cc04]
+
+## ssh命令
+* ssh -T -p 22 git@ssh.github.com
+* `测试是否可以连接上远程github.com的端口`

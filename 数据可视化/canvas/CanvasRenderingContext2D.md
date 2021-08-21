@@ -86,11 +86,48 @@
 ```
 * 可以看到设置了最大宽度，那么文本会被整体缩放，`高度也会被缩放`
 * 并且发现一个问题，`在坐标为(0,0)的时候，文本绘制无法显示，所以canvas文本定位是怎么处理的？`
+2. strokeText(text,x,y,[maxWidth]): 是一个用在(x,y)位置给文本描边的api
+* 如果设置了最大宽度，那么文本会进行缩放以适应最大宽度
+```javascript
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+ctx.strokeRect(0, 0, 300, 300);
+ctx.font='40px courier'
+ctx.strokeText("hello world", 100, 100);
+ctx.strokeText("hello world", 200, 200, 40);
+```
+* `发现使用font必须包含font-size,font-family;否则无效`
+* [参考]("https://developer.mozilla.org/zh-CN/docs/Web/CSS/font")
+3. measureText(text):`返回关于被测量文本TextMetrics对象包含的信息`
+* [TextMetrics](https://developer.mozilla.org/zh-CN/docs/Web/API/TextMetrics)
+```javascript
+      let canvas = document.getElementById("canvas");
+      let ctx = canvas.getContext("2d");
+      ctx.font='40px system-ui'
+      ctx.strokeText('hello world',100,100)
+      console.log(ctx.measureText('hello'))
+```
+* 最后打印出来的结果是：
+```html
+actualBoundingBoxAscent: 28.18359375
+actualBoundingBoxDescent: 0.3515625
+actualBoundingBoxLeft: -2.578125
+actualBoundingBoxRight: 80.15625
+fontBoundingBoxAscent: 39
+fontBoundingBoxDescent: 8
+width: 81.5625
+```
+* `我们最常用的就是使用measureText来获取文本宽度`
 
+### 绘制线条
+1. lineWidth:设置线条的宽度，`默认1.0`
+* 0,负数和NaN，Infinity会被忽略。只接受正数
+* `lineWidth绘制的时候使用1px；那么会发现实际上渲染的是2px,具体原因看样式和颜色这章节`
+2. lineCap:`指定每一线段末端的属性`，有以下三个值：`butt,round,square`
+* butt:默认值，以方形结束线段
+* round:线段末端以圆形结束
+* square:线段末端以方形结束。`但是在末端之后还显示一个方形，宽度是线段宽度，高度是线段宽度的一半`
+```html
 
-
-
-
-
-
+```
 
