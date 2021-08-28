@@ -131,3 +131,10 @@ width: 81.5625
 
 ```
 
+
+### 文本
+
+* font属性对应顺序
+* 例子：需要按照css的对应顺序
+* [https://developer.mozilla.org/zh-CN/docs/Web/CSS/font]
+`font-style  font-weight fontSize fontFamily`
