@@ -424,6 +424,7 @@ console.log(map);
 - 可以在 bundle.js 看到打包后的结果是导入了`'core-js/modules/es6.map.js'`这种的代码， 提供了 es6 api 的环境
 - prettier 格式化时间长是因为格式化前后需要进行 diff 对比，但是修改了配置发现还是会进行对比
   `prettier({ cwd: prettierFile, sourcemap: false });// 没用`
+  - `最后查看源码才知道，需要使用'sourcemap: 'silent'`
 - 注意，使用 npm run dev 之后，回提示警告:`Unresolved dependencies`
 - 这是因为我们引入了 es6.string.iterator.js，web.dom.iterable.js 等文件，但是并没有使用（在 rollup 看来）
 
@@ -463,22 +464,26 @@ output: {
     }
 ```
 
-22. 生成.d.ts声明文件
-* 由于@rollup/plugin-typescript 无法生成 声明文件，所以按照官方提示使用rollup-plugin-typescript2
-* 安装：
-`npm i rollup-plugin-typescript2 -D`
-* 修改rollup.config.js
+22. 生成.d.ts 声明文件
+
+- 由于@rollup/plugin-typescript 无法生成 声明文件，所以按照官方提示使用 rollup-plugin-typescript2
+- 安装：
+  `npm i rollup-plugin-typescript2 -D`
+- 修改 rollup.config.js
+
 ```javascript
-const typescript2 = require('rollup-plugin-typescript2');
-typescript2()
+const typescript2 = require("rollup-plugin-typescript2");
+typescript2();
 ```
-* 生成声明文件，需要添加一个文件tsconfig.json
+
+- 生成声明文件，需要添加一个文件 tsconfig.json
+
 ```json
 {
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@/*": [ "src/*"]
+      "@/*": ["src/*"]
     },
     "declaration": true,
     "sourceMap": true
@@ -487,66 +492,74 @@ typescript2()
   "exclude": ["node_modules", "config", "dist", "public"]
 }
 ```
-* `declaration:true生成声明文件`
-* `注意sourceMap必须是true，如果是false，那么因为我们在rollup.config.js开启了sourceMap，那么还是会生成.map文件`
-* `但是生成的文件是不对的，mappings结果全部是逗号，。没法生成正确的map文件`
-* [官网说明]("https://www.typescriptlang.org/docs/handbook/tsconfig-json.html")
-* 关于 sourcemap 的原理可以看阮一峰的博客。更进一步可以看mozilla做的sourcemap源码[sourcemap]("https://github.com/mozilla/source-map")
 
-23. 解决typescript文件使用别名失效问题
-* 这是因为在tsconfig.json中配置错误，修改为
-* `baseUrl从src改为.;然后src路径修改`
+- `declaration:true生成声明文件`
+- `注意sourceMap必须是true，如果是false，那么因为我们在rollup.config.js开启了sourceMap，那么还是会生成.map文件`
+- `但是生成的文件是不对的，mappings结果全部是逗号，。没法生成正确的map文件`
+- [官网说明]("https://www.typescriptlang.org/docs/handbook/tsconfig-json.html")
+- 关于 sourcemap 的原理可以看阮一峰的博客。更进一步可以看 mozilla 做的 sourcemap 源码[sourcemap]("https://github.com/mozilla/source-map")
+
+23. 解决 typescript 文件使用别名失效问题
+
+- 这是因为在 tsconfig.json 中配置错误，修改为
+- `baseUrl从src改为.;然后src路径修改`
+
 ```json
 {
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@": [ "src"],
+      "@": ["src"],
       "src": ["src"]
     },
     "declaration": true,
-    "sourceMap": true,
+    "sourceMap": true
   },
-  "include": ["src/**/*.ts","src/*.ts"],
+  "include": ["src/**/*.ts", "src/*.ts"],
   "exclude": ["node_modules", "config", "dist", "public"]
 }
 ```
-* `然后我们发现src可以找到别名了，但是使用@还是会报错。`
-* `最后的解决方法是："@/*": [ "src/*"],也就是需要通过@/*这种别名方式来解决！`
 
-24. README.md文件美化
-* 首先找到了一个插件：`readme-md-generator`
-* 执行命令：`npx readme-md-generator`,自定义输出内容
-* 由于输出内容过少，所以根据提示修改package.json,添加字段
+- `然后我们发现src可以找到别名了，但是使用@还是会报错。`
+- `最后的解决方法是："@/*": [ "src/*"],也就是需要通过@/*这种别名方式来解决！`
+
+24. README.md 文件美化
+
+- 首先找到了一个插件：`readme-md-generator`
+- 执行命令：`npx readme-md-generator`,自定义输出内容
+- 由于输出内容过少，所以根据提示修改 package.json,添加字段
+
 ```json
 "engines": {
     "npm": ">=6.14.12",
     "node": ">=10.24.1"
   }
 ```
-* 并且把test命令删除，把多余的广告删除，补上dev命令
+
+- 并且把 test 命令删除，把多余的广告删除，补上 dev 命令
 
 25. commit 提交规范
-* commit提交遵守 [commit emoji]("https://github.com/liuchengxu/git-commit-emoji-cn")
 
+- commit 提交遵守 [commit emoji]("https://github.com/liuchengxu/git-commit-emoji-cn")
 
-- 怎么打包出多个 js,css 文件？
+* 怎么打包出多个 js,css 文件？
 
-- 处理 svg, @rollup/plugin-image
+* 处理 svg, @rollup/plugin-image
 
-- 处理 web worker [rollup-plugin-web-worker-loader]("需要？")
+* 处理 web worker [rollup-plugin-web-worker-loader]("需要？")
 
-- soucemap 作用?开发环境需要，作为开发辅助。生产环境不需要，因为不想暴露出去。
-- [https://chenshenhai.github.io/rollupjs-note/note/chapter03/02.html]("参考博客")
+* soucemap 作用?开发环境需要，作为开发辅助。生产环境不需要，因为不想暴露出去。
+* [https://chenshenhai.github.io/rollupjs-note/note/chapter03/02.html]("参考博客")
 
-- es,umd,cjs,life,mjs 区别
-- [https://github.com/shfshanyue/Daily-Question/issues/475]("模块化")
-- 由于兼容性(`ie 不支持es module`) [https://caniuse.com/?search=es%20module]("es module")
-- 最后还是选择使用 umd
+* es,umd,cjs,life,mjs 区别
+* [https://github.com/shfshanyue/Daily-Question/issues/475]("模块化")
+* 由于兼容性(`ie 不支持es module`) [https://caniuse.com/?search=es%20module]("es module")
+* 最后还是选择使用 umd
 
-- 生成.bak 文件的意义是什么？
+* 生成.bak 文件的意义是什么？
 
-- `一些问题可以看看vue源码有没有解决方案`
+* `一些问题可以看看vue源码有没有解决方案`
 
-- 为什么操作canvas比操作dom快？
-* [参考]("http://www.ruanyifeng.com/blog/2015/02/future-of-dom.html")
+* 为什么操作 canvas 比操作 dom 快？
+
+- [参考]("http://www.ruanyifeng.com/blog/2015/02/future-of-dom.html")

@@ -160,12 +160,55 @@ window.addEventListener("message",e=>{
 ```
 
 ## iframe同域通信
-* 获取cookie
-* 通信
-* 获取location
+* // index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="utf8" />
+  <head>
+    <title>测试</title>
+    <style></style>
+  </head>
+  <body>
+  <iframe src="./iframe.html" frameborder="0" id="iframe"></iframe>
+  <script>
+  window.addEventListener('message',(e)=>{
+    if(e.origin === 'http://localhost:63342'){
+      console.log(e.data)
+    }
+  })
+  let iframe =document.getElementById('iframe')
+  iframe.onload=()=>{
+    iframe.contentWindow.postMessage(' i am index.html')
+  }
+    </script>
+  </body>
+</html>
+```
+* `然后我们来查看iframe.html`
+```html
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document </title>
+</head>
+<body>
 
+<script>
+    top.postMessage('i am iframe', 'http://localhost:63342')
 
-## iframe内部路由
+    window.addEventListener('message',(e)=>{
+        if(e.origin === 'http://localhost:63342'){
+            console.log('iframe accept', e.data)
+        }
+    })
+</script>
+</body>
+</html>
+```
 
 ## iframe内部跳转到别的url
 * 首先我们在3000端口运行index.html前端项目

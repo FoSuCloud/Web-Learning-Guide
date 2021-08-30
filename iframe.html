@@ -9,7 +9,13 @@
 <body>
 
 <script>
-    console.log('iframe',window.parent.location.search)
+    top.postMessage('i am iframe', 'http://localhost:63342')
+
+    window.addEventListener('message',(e)=>{
+        if(e.origin === 'http://localhost:63342'){
+            console.log('iframe accept', e.data)
+        }
+    })
 </script>
 </body>
 </html>
