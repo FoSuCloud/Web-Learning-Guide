@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="120" height="44"></canvas>
+    <script>
+      let canvas = document.getElementById("canvas");
+      let ctx = canvas.getContext("2d");
+      // 1. 默认文本基线是alphabetic（标准的字母基线）
+      ctx.strokeText("文本垂直居中AACabc", 0, 0);
+      // 2. 设置文本基线为top,此时设置y轴坐标0才能使得文字顶部是0
+      // ctx.textBaseline = "top";
+      // ctx.strokeText("文本垂直居中AACabc", 0, 0);
+      // 3. 根据基线为top,设置文本垂直居中;前提是知道文字高度和容器高度！
+      // y=(height-fontSize)/2
+      // ctx.textBaseline = "top";
+      // ctx.font = '14px system-ui'
+      // let y = (44-14)/2
+      // ctx.strokeText("文本垂直居中AACabc", 0, y);
+    </script>
+  </body>
+</html>

@@ -3,64 +3,26 @@
   <meta charset="utf8" />
   <head>
     <title>测试</title>
-    <style></style>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
-  <div class="router">
-    <a href="/page1">page1</a>
-    <a href="/page2">page2</a>
-    <div id="router-view"></div>
-  </div>
+
   <body>
-  <script>
-    let view = document.getElementById('router-view')
-    // 页面加载完不会触发 hashchange，这里主动触发一次 hashchange 事件
-    window.addEventListener('DOMContentLoaded', load)
-    window.addEventListener('popstate',changeView)
+    <canvas id="canvas" width="600" height="44"></canvas>
 
-    let page1=document.createElement('div')
-    page1.innerHTML = 'page11111'
-    let page2=document.createElement('div')
-    page2.innerHTML = 'page22222'
-
-    let oldChild = null;
-
-    function load(){
-      // 第一次触发
-      changeView();
-
-      let list = document.querySelectorAll('a')
-      list.forEach((cell)=>{
-        cell.onclick=(e)=>{
-          // 阻止默认事件
-          e.preventDefault()
-          // 改为触发pushState
-          history.pushState(null,'',cell.getAttribute('href'));
-          // 触发PopChange
-          // 改变当前渲染的组件
-          changeView()
-        }
-      })
-    }
-    function changeView(){
-      let pathname=window.location.pathname;
-      if(view.childElementCount){
-        view.removeChild(oldChild)
-      }
-      switch (pathname){
-        case '/page1':
-          oldChild=page1;
-          view.appendChild(page1);
-          break;
-        case '/page2':
-          oldChild=page2;
-          view.appendChild(page2);
-          break;
-        default:
-          oldChild=page2;
-          view.appendChild(page2);
-          break;
-      }
-    }
-  </script>
+    <script>
+      let canvas = document.getElementById("canvas");
+      let ctx = canvas.getContext("2d");
+      ctx.font = "14px system-ui";
+      ctx.textBaseline = "top";
+      ctx.fillStyle = "red";
+      ctx.fillRect(0, 0, 100, 44);
+      ctx.fillStyle = "black";
+      ctx.fillText("4省略省略", 0, 15);
+    </script>
   </body>
 </html>

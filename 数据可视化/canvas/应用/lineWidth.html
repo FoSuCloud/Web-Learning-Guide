@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <script>
+        // 获取canvas元素
+        let canvas = document.getElementById('canvas');
+        // 获取canvas绘图环境
+        let context = canvas.getContext('2d');
+
+        function drawGrid(stepX, stepY, color, lineWidth){
+            // 创建垂直格网线路径
+            for(let i = 0.5 + stepX; i < canvas.width; i += stepX){
+                context.moveTo(i, 0);
+                context.lineTo(i, canvas.height);
+            }
+            // 创建水平格网线路径
+            for(let j = 0.5 + stepY; j < canvas.height; j += stepY){
+                context.moveTo(0, j);
+                context.lineTo(canvas.width, j);
+            }
+
+            // 设置绘制颜色
+            context.strokeStyle = color;
+            // 设置绘制线段的宽度
+            context.lineWidth = lineWidth;
+            // 绘制格网
+            context.stroke();
+            // 清除路径
+            context.beginPath();
+        }
+        drawGrid(20, 20, 'lightgray', 0.5);
+    </script>
+</body>
+</html>

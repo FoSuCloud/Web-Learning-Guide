@@ -1,16 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="" />
+    <list default="true" id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/前端工程/工具介绍.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/属性/tabIndex.md" beforeDir="false" afterPath="$PROJECT_DIR$/html/属性/tabIndex.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/平时测试.html" beforeDir="false" afterPath="$PROJECT_DIR$/平时测试.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/CanvasRenderingContext2D.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/CanvasRenderingContext2D.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/canva.html" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/canva.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/样式和颜色.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/样式和颜色.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1xTJ7qwqwYmHgsMIiTp64PpFeTS" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="" />
+      <created>1630372980878</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1630372980878</updated>
+      <workItem from="1630372982206" duration="1614000" />
+      <workItem from="1630392558069" duration="5038000" />
+      <workItem from="1630422300766" duration="1779000" />
+      <workItem from="1630457471006" duration="4548000" />
+      <workItem from="1630467832208" duration="1250000" />
+      <workItem from="1630488051209" duration="3584000" />
+    </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/ts/02/modules/db.js" />
+        <option value="$PROJECT_DIR$/ts/02/model/name.js" />
+        <option value="$PROJECT_DIR$/ts/02/model/user.js" />
+        <option value="$PROJECT_DIR$/ts/02/06装饰器.js" />
+        <option value="$PROJECT_DIR$/ts/02/05命名空间.js" />
+        <option value="$PROJECT_DIR$/ts/02/01泛型.js" />
+        <option value="$PROJECT_DIR$/ts/02/03封装库.js" />
+        <option value="$PROJECT_DIR$/ts/02/04模块.js" />
+        <option value="$PROJECT_DIR$/ts/02/02泛型的应用.js" />
+        <option value="$PROJECT_DIR$/ts/01/01.js" />
+        <option value="$PROJECT_DIR$/ts/01/02数据类型.js" />
+        <option value="$PROJECT_DIR$/ts/01/05静态属性.js" />
+        <option value="$PROJECT_DIR$/ts/01/03函数.js" />
+        <option value="$PROJECT_DIR$/ts/01/04类.js" />
+        <option value="$PROJECT_DIR$/ts/01/06接口.js" />
+        <option value="$PROJECT_DIR$/ts/pond.js" />
+      </list>
+    </option>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

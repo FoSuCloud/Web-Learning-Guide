@@ -128,8 +128,29 @@ width: 81.5625
 * round:线段末端以圆形结束
 * square:线段末端以方形结束。`但是在末端之后还显示一个方形，宽度是线段宽度，高度是线段宽度的一半`
 ```html
+    <canvas id="canvas" width="120" height="1000"></canvas>
+    <script>
+      let canvas =document.getElementById('canvas')
+      let ctx = canvas.getContext('2d')
+      ctx.lineWidth = 5;
+      ctx.lineCap = 'butt'
+      ctx.lineCap = 'round'
+      ctx.beginPath()
+      ctx.moveTo(50,10)
+      ctx.lineTo(50,100)
+      ctx.stroke()
+      ctx.closePath()
 
+      ctx.lineWidth = 5;
+      ctx.lineCap = 'square'
+      ctx.beginPath()
+      ctx.moveTo(100,10)
+      ctx.lineTo(100,100)
+      ctx.stroke()
+      ctx.closePath()
+    </script>
 ```
+* `经过对比，可以看出square的确变长了`
 
 
 ### 文本
@@ -138,3 +159,16 @@ width: 81.5625
 * 例子：需要按照css的对应顺序
 * [https://developer.mozilla.org/zh-CN/docs/Web/CSS/font]
 `font-style  font-weight fontSize fontFamily`
+
+* 基线
+```html
+<canvas id="canvas" width="600" height="600"></canvas>
+
+    <script>
+      let canvas = document.getElementById("canvas");
+      let ctx = canvas.getContext("2d");
+      ctx.font = "48px system-ui";
+      ctx.textBaseline = 'top'
+      ctx.fillText("hello world", 0, 0);
+    </script>
+```

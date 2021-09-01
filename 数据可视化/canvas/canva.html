@@ -5,19 +5,34 @@
     <title>Title</title>
   </head>
   <body>
-    <canvas id="canvas" width="120" height="1000"></canvas>
+    <canvas id="canvas" width="1000" height="1000"></canvas>
     <script>
-      let canvas =document.getElementById('canvas')
-      let ctx = canvas.getContext('2d')
-      ctx.lineWidth = 3;
-      ctx.lineCap = 'butt'
-      ctx.beginPath()
-      ctx.moveTo(10,10)
-      ctx.lineTo(10,100)
-      ctx.closePath()
+      function getHiDPI() {
+        const c = document.createElement("canvas"),
+          ctx = c.getContext("2d"),
+          dpr = window.devicePixelRatio || 1,
+          bsr =
+            ctx["webkitBackingStorePixelRatio"] ||
+            ctx["mozBackingStorePixelRatio"] ||
+            ctx["msBackingStorePixelRatio"] ||
+            ctx["oBackingStorePixelRatio"] ||
+            ctx["backingStorePixelRatio"] ||
+            1;
+        return dpr / bsr;
+      }
+      let ratio = getHiDPI();
+      let canvas = document.getElementById("canvas");
+      let ctx = canvas.getContext("2d");
+      let width = 500,
+        height = 500;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      console.log(ratio);
 
-      ctx.lineCap = 'round'
-
+      ctx.font = "14px system-ui";
+      ctx.fillText("hello world", 30, 100);
     </script>
   </body>
 </html>
