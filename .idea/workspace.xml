@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/前端工程/工具介绍.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/8/3821de9fb9dd89c2c4c8e76827af6a8a8ebfd9ba" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/8/a80dcc75ad0b625d722245049fc734bfccbb890f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/属性/tabIndex.md" beforeDir="false" afterPath="$PROJECT_DIR$/html/属性/tabIndex.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/package-json.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/package-json.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/前端工程.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/前端工程.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/平时测试.html" beforeDir="false" afterPath="$PROJECT_DIR$/平时测试.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/CanvasRenderingContext2D.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/CanvasRenderingContext2D.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据可视化/canvas/canva.html" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/canva.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/样式和颜色.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/样式和颜色.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/网络/HTTP缓存机制.md" beforeDir="false" afterPath="$PROJECT_DIR$/网络/HTTP缓存机制.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,10 +49,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/网络" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/网络" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -66,6 +73,15 @@
       <workItem from="1630457471006" duration="4548000" />
       <workItem from="1630467832208" duration="1250000" />
       <workItem from="1630488051209" duration="3584000" />
+      <workItem from="1630508809295" duration="1751000" />
+      <workItem from="1630543821678" duration="316000" />
+      <workItem from="1630554617323" duration="616000" />
+      <workItem from="1630630911060" duration="2499000" />
+      <workItem from="1630650145051" duration="1335000" />
+      <workItem from="1630720547103" duration="4932000" />
+      <workItem from="1630736111947" duration="6656000" />
+      <workItem from="1630826953442" duration="2752000" />
+      <workItem from="1630889305039" duration="860000" />
     </task>
     <servers />
   </component>
