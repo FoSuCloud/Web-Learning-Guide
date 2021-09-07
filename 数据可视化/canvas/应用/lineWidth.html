@@ -34,6 +34,13 @@
             context.beginPath();
         }
         drawGrid(20, 20, 'lightgray', 0.5);
+        context.lineWidth = 1;
+        context.strokeStyle = 'lightgray';
+        context.beginPath();
+        context.moveTo(20, 20);
+        context.lineTo(20, 20);
+        context.lineTo(130, 130);
+        context.stroke();
     </script>
 </body>
 </html>

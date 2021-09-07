@@ -71,12 +71,24 @@ server.listen(port,()=>{
     //    http://127.0.0.1/3/%E4%B8%AD%E5%8D%88?wd=%E4%B8%AD%E6%96%87&sValue=%E4%B8%AD%E6%96%87
 // 我们可以看到?,&特殊字符并没有被编码
 ```
+* [参考]("https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURI")
+* `需要额外注意，encodeURI和encodeURIComponent编码的范围哦是不一样的！`
+* `encodeURI无法产生用于get,post请求的uri；因为对于xhr,&+不会被编码；但是对于get,post请求，他们是特殊字符，所以使用decodeURIComponent进行编码`
 3、然后是encodeURIComponent方法，这个方法`用于对url的个别组成部分进行编码，所以会对?&这些特殊符号进行编码`
+* `对除了以下字符之外的字符进行编码：A-Z a-z 0-9 - _ . ! ~ * ' ( )`
+* 例如，空格就会被编码
+* `encodeURIComponent编码的结果是成对的数字或者字母，(%[\dA-F]{2})+`
 ```html
     console.log(encodeURIComponent('http://127.0.0.1/3/中午?wd=中文&sValue=中文'))
     //    http%3A%2F%2F127.0.0.1%2F3%2F%E4%B8%AD%E5%8D%88%3Fwd%3D%E4%B8%AD%E6%96%87%26sValue%3D%E4%B8%AD%E6%96%87
 ```
 * 我们可以看到很明显的，所有特殊字符都被编码了!
+---
+* 所以对于同一个字符串，encodeURI和encodeURIComponent会得到不同的结果
+```js
+decodeURI("%20%2B%2F") // ' %2B%2F' 
+decodeURI("%20%2B%2F")  // ' +/'
+```
 
 ### 那么body数据是否也需要先encode？
 * 不需要，因为请求体的数据发送到后端是只读流对象

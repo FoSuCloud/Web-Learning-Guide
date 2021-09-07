@@ -12,6 +12,37 @@
   </head>
   <img src="http://localhost:3000/img" alt="" />
   <body>
-    <script></script>
+    <script>
+      function get(key){
+        if(typeof document === "undefined" || !arguments.length || !key){
+          return ;
+        }
+        // 间隔一个空格是因为document.cookie的键值之间默认就是间隔一个空格
+        let cookies = document.cookie ? document.cookie.split('; ') :[]
+        let result = ''
+        for (let i=0;i<cookies.length;i++){
+          let arr = cookies[i].split('=')
+          let foundKey = decode(arr[0]);
+          if(foundKey === key){
+            // 可能value是  a=bdsd=32323= 这种有多个=符号的形式
+            let value = arr.slice(1).join('=')
+            result = decode(value)
+            break;
+          }
+        }
+        return result
+      }
+
+      function decode(str){
+        return decodeURIComponent(str)
+      }
+      // document.cookie = 'a=33'
+      // console.log(get('a'))
+      // document.cookie = 'a%20b=44'
+      // console.log(get('a b'))
+      // document.cookie = 'c=44=55=dsd-*%20$#32&/ds='
+      // // 对%20进行解码
+      // console.log(get('c'))// 44=55=dsd-* $#32&/ds=
+    </script>
   </body>
 </html>

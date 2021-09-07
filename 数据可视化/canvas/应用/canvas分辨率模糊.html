@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="1000"></canvas>
+    <script>
+      let canvas = document.getElementById("canvas");
+      // 获取上下文
+      let ctx = canvas.getContext('2d')
+      let {width,height} = canvas.getBoundingClientRect()
+      let ratio = dpr();
+      // 画布尺寸
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      // 实际canvas大小,（假设radio为2）此时虽然canvas变为2*2，但是可视区域还是1*1
+      // 所以为了适应，canvas的绘制大小会改变，结果就是在左上角占据1/4区域
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      // 缩放大小(放大两杯，所以1/4绘制区域，变为了1，所以还是实际画布尺寸，但是分辨率提高了)
+      // 也就是现在的canvas实际大小是两倍的，也就是一像素代表的是两像素*两像素的内容
+      ctx.scale(ratio, ratio);
+      ctx.font = '20px system-ui'
+      ctx.fillText("hello world", 100, 100);
+
+      function dpr() {
+        // 当前显示设备的物理像素分辨率与CSS像素分辨率之比。使用x个物理像素表示1个css像素
+        // 通过调整开发者工具的屏幕设备，可以改变window.devicePixelRatio
+        // Moto G4是3；Iphone6 是2； 可以看到不使用window.devicePixelRatio，那么会模糊！
+        return window.devicePixelRatio || 1;
+      }
+    </script>
+  </body>
+</html>

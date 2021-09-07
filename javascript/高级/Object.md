@@ -39,3 +39,18 @@
 * 获取对象的原型(内部[[Prototype]]的值)
 * params : obj
 * return : obj的原型对象
+
+
+## Object.assign的实现
+```js
+      function assign(target){
+        for(let i=1;i<arguments.length;i++){
+          for(let key of Object.keys(arguments[i])){
+            target[key] = arguments[i][key]
+          }
+        }
+        return target
+      }
+      let res = assign({a:1},{a:33,b:44,0:111},{c:33,4:22,a:9,b:99})
+      console.log(res)
+```

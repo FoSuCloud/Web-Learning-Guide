@@ -7,32 +7,48 @@
   <body>
   <canvas id="canvas" width="1000" height="1000"></canvas>
     <script>
-      function getHiDPI() {
-        const c = document.createElement("canvas"),
-          ctx = c.getContext("2d"),
-          dpr = window.devicePixelRatio || 1,
-          bsr =
-            ctx["webkitBackingStorePixelRatio"] ||
-            ctx["mozBackingStorePixelRatio"] ||
-            ctx["msBackingStorePixelRatio"] ||
-            ctx["oBackingStorePixelRatio"] ||
-            ctx["backingStorePixelRatio"] ||
-            1;
-        return dpr / bsr;
+       function handleEllipsis(word) {
+        let result = '';
+        let canvas = document.getElementById('canvas')
+        let ctx = canvas.getContext('2d')
+        let width = ctx.measureText(word).width;
+        if (width < 100) {
+          return word;
+        }
+        const n = Math.ceil(width / 80) + 1; // 倍数
+        let end = Math.ceil(word.length / n); // 最后一个词的索引
+        // todo 使用while true是否不安全？是否需要添加一个退出条件
+        let num = 0; // 迭代计算次数
+        while (num < 100) {
+          num++;
+          let minWord = word.slice(0, end);
+          let w = ctx.measureText(minWord).width;
+          if (w <= 80) {
+            // 太小,继续增加
+            if (w + 20 <= 80) {
+              end += Math.ceil(end / 2);
+            } else {
+              result = minWord;
+              break;
+            }
+          } else {
+            // 太大，继续减少
+            if (w - 20 > 80) {
+              end -= Math.ceil(end / 2);
+            } else {
+              end -= 1;
+              result = minWord.slice(0, end);
+              break;
+            }
+          }
+        }
+        return result + '...';
       }
-      let ratio = getHiDPI();
-      let canvas = document.getElementById("canvas");
-      let ctx = canvas.getContext("2d");
-      let width = 500,
-        height = 500;
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      canvas.width = width * ratio;
-      canvas.height = height * ratio;
-      console.log(ratio);
+      console.log(handleEllipsis('287991省略省略省略省略'))
+       console.log(handleEllipsis('287971省略省略省略省略'))
+       console.log(handleEllipsis('288011省略省略省略省略'))
 
-      ctx.font = "14px system-ui";
-      ctx.fillText("hello world", 30, 100);
+
     </script>
   </body>
 </html>
