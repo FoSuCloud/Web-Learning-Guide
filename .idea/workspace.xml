@@ -5,19 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/5/15783b80508a9fc6899d17ebfc180de1f7317335" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/5/35f6ba59a857640a7b968402754a678b20818a20" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/4/e4592c370cf9db4c5af625fb5c9eef854beba9f9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitingnoe" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/0/7030d0b2f71b999ff89a343de08c414af32fc93a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/3/f357b53ee0f6203116f1a200f645864571c8cd57" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/其他/url编码.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/其他/url编码.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/数据类型/数组.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/数据类型/数组.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascript/es6/6. 数值的拓展.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/es6/6. 数值的拓展.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascript/数据类型/Number.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/数据类型/Number.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascript/数据类型/Object.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/数据类型/Object.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javascript/高级/Object.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/高级/Object.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/高级/事件.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/高级/事件.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascript/高级/时间.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/高级/时间.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/text.js" beforeDir="false" afterPath="$PROJECT_DIR$/text.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ts/ts项目.md" beforeDir="false" afterPath="$PROJECT_DIR$/ts/ts项目.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/平时测试.html" beforeDir="false" afterPath="$PROJECT_DIR$/平时测试.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/canva.html" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/canva.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/应用/lineWidth.html" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/应用/lineWidth.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/样式和颜色.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/样式和颜色.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/入门.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/入门.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/浏览器/cookie.md" beforeDir="false" afterPath="$PROJECT_DIR$/浏览器/cookie.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/浏览器/字段.md" beforeDir="false" afterPath="$PROJECT_DIR$/浏览器/字段.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +60,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -94,6 +99,16 @@
       <workItem from="1630999672365" duration="1988000" />
       <workItem from="1631008033400" duration="36000" />
       <workItem from="1631012975359" duration="2688000" />
+      <workItem from="1631024932990" duration="3146000" />
+      <workItem from="1631063108954" duration="1551000" />
+      <workItem from="1631101819541" duration="3138000" />
+      <workItem from="1631148527859" duration="3137000" />
+      <workItem from="1631153518746" duration="640000" />
+      <workItem from="1631162823816" duration="2378000" />
+      <workItem from="1631196994608" duration="1128000" />
+      <workItem from="1631234925959" duration="3147000" />
+      <workItem from="1631347547698" duration="3486000" />
+      <workItem from="1631410182233" duration="565000" />
     </task>
     <servers />
   </component>

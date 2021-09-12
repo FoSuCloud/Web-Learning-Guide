@@ -54,3 +54,16 @@
       let res = assign({a:1},{a:33,b:44,0:111},{c:33,4:22,a:9,b:99})
       console.log(res)
 ```
+* `如果使用 for in ，那么需要使用hasOwnProperty判断是否是对象自身的属性`
+```js
+function assign(target){
+        for(let i=1;i<arguments.length;i++){
+          for(let key in arguments[i]){
+            if(arguments[i].hasOwnProperty(key)){
+                target[key] = arguments[i][key]
+            }
+          }
+        }
+        return target
+      }
+```

@@ -13,36 +13,80 @@
   <img src="http://localhost:3000/img" alt="" />
   <body>
     <script>
-      function get(key){
-        if(typeof document === "undefined" || !arguments.length || !key){
-          return ;
-        }
-        // 间隔一个空格是因为document.cookie的键值之间默认就是间隔一个空格
-        let cookies = document.cookie ? document.cookie.split('; ') :[]
-        let result = ''
-        for (let i=0;i<cookies.length;i++){
-          let arr = cookies[i].split('=')
-          let foundKey = decode(arr[0]);
-          if(foundKey === key){
-            // 可能value是  a=bdsd=32323= 这种有多个=符号的形式
-            let value = arr.slice(1).join('=')
-            result = decode(value)
-            break;
+      /**
+       * @param {string[]} chessboard
+       * @return {number}
+       */
+      var flipChess = function(chessboard) {
+        let sum = 0;
+        chessboard.forEach((cell,index)=>{
+          for(let i=0;i<cell.length;i++){
+            if(cell[i]==='O'){
+              sum++;
+            }
+          }
+          chessboard[index] = cell.split('')
+        })
+        let max=0;
+        for(let i=0;i<chessboard.length;i++){
+          for(let j=0;j<chessboard[i].length;j++){
+            if(max === sum){
+              return sum;
+            }
+            let matrix = chessboard.slice()
+            let offset = change(matrix,i,j)
+            if(offset===0){
+              continue;
+            }
+            let num = sum - offset;
+            dp(matrix,num)
           }
         }
-        return result
-      }
+        return sum>max?sum:max;
 
-      function decode(str){
-        return decodeURIComponent(str)
-      }
-      // document.cookie = 'a=33'
-      // console.log(get('a'))
-      // document.cookie = 'a%20b=44'
-      // console.log(get('a b'))
-      // document.cookie = 'c=44=55=dsd-*%20$#32&/ds='
-      // // 对%20进行解码
-      // console.log(get('c'))// 44=55=dsd-* $#32&/ds=
+        function change(matrix,x,y){
+          if(matrix[x][y] === 'O'){
+            return 0;
+          }else if(matrix[x][y] === 'X'){
+            return 0;
+          }
+          let sum=0
+          for(let i=0;i<matrix[x].length;i++){
+            if(matrix[x][i] === 'O'){
+              sum++;
+              matrix[x][i]='X'
+            }
+          }
+          for(let j=0;j<matrix.length;j++){
+            if(matrix[j][y] === 'O'){
+              sum++;
+              matrix[j][y]='X'
+            }
+          }
+          // 对角线
+
+          return sum;
+        }
+        function dp(matrix,num){
+          if(num===0){
+            max=sum;
+            return;
+          }
+          max = Math.max(max,(sum-num))
+          for(let i=0;i<matrix.length;i++){
+            for(let j=0;j<matrix[i].length;j++){
+              let matrixDp = matrix.slice()
+              let offset  = change(matrixDp,i,j)
+              if(offset===0){
+                continue;
+              }
+              let numDp = sum - offset;
+              dp(matrixDp,numDp)
+            }
+          }
+        }
+      };
+      console.log(flipChess(["....X.","....X.","XOOO..","......","......"]))
     </script>
   </body>
 </html>

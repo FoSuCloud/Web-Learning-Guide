@@ -46,3 +46,27 @@
 * Object.seal是封闭一个对象，不能新增属性，不能删除属性，但是可以更高属性值！
 * `注意，Object.freeze是浅冻结，对象属性如果也是一个引用数据类型，那么属性的值还是可以更改`
 
+## hasOwnProperty作用
+* 检测一个属性是否是对象自身的！
+```js
+// 1. 
+var bStr = "Test String".hasOwnProperty("split");    // 得到false， 因为不能检测原型链中的属性 
+// 但是是可以调用原型链上的属性的！
+bStr.split('')
+// 2.
+var bStr1 = String.prototype.hasOwnProperty("split"); //String对象的原型上本来就有这个属性,自然返回true  
+// 3.
+var bObj = ({fnTest:function(){}}).hasOwnProperty("fnTest"); // 返回true，因为对象中属性 存在
+```
+* `实际使用上，会因为for in 获取到对象原型链的属性而导致错误！`
+```js
+let obj = {a:1}
+let child = Object.create(obj)
+// {}[[Prototype]]: Objecta: 1[[Prototype]]: Object
+child.b=2
+
+for(let i in child){console.log(i)}
+// VM701:1 b
+// VM701:1 a
+```
+* `解决办法是添加一个hasOwnProperty判断`

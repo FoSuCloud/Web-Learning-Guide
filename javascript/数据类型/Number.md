@@ -4,8 +4,18 @@
 * 所以会有以下区别：
 ```javascript
 isNaN('NaN'); // true
+isNaN('sdasd');// true
+isNaN(null); // true
+isNaN(true); // true
+// -------
 Number.isNaN('NaN');// false,因为没把字符串转换为Number
+Number.isNaN('dasdsa'); // false
+Number.isNaN(''); // false
+Number.isNaN(1); // false
+Number.isNaN(true); // false
+Number.isNaN(NaN); // 只有输入值是NaN才会返回true！
 ```
+* `Number.isNaN是强校验，必须输入值是NaN才会返回true;isNaN是弱校验，只要输入值转换后是NaN，那么就会返回true`
 
 ## parseInt
 * parseInt函数用于解析一个字符串并返回指定基数的`十进制整数或者NaN`
