@@ -21,16 +21,12 @@ G
 html/属性/tabIndex.md,8/6/866d58512af7be637270a8051df22f0d1b64a351
 k
 ;数据可视化/canvas/应用/canvas文本垂直居中.html,8/f/8ffdbfbe9c4530abe66399d5b12706d1c778249c
-b
-2数据可视化/canvas/CanvasRenderingContext2D.md,7/0/70ebabfc02ba3b57ea4648cc4e5014c23a9d09fb
 L
 前端工程/前端工程.md,6/e/6e4bd1829c874d414aa140a0be126c9ba910d445
 L
 前端工程/package-json.md,e/f/ef149ae70d888101e612f51dd6eb96abc93b7459
 F
 前端工程/docker.md,b/9/b90a7a1d8d7859f4e69c151a23811aef1dce817a
-J
-网络/HTTP缓存机制.md,a/8/a80dcc75ad0b625d722245049fc734bfccbb890f
 >
 网络/http.md,8/8/88ce0a6f4b03d9000cf7c8ce85d6d25551114a4d
 ?
@@ -45,20 +41,14 @@ O
 笔记整理/纯原生前端.md,0/5/055974f1da45d73e7e2d0e6573eaffe3d954d4a0
 Q
 !javascript/数据类型/数组.md,b/3/b31be620b47219f94af44947a3f635688bb62c65
-\
-,数据可视化/canvas/应用/lineWidth.html,1/5/15783b80508a9fc6899d17ebfc180de1f7317335
 C
 网络/虚拟机.md,5/e/5e4d0cd2cc5e854b0bfb9ae1eaa4bd86dc11a975
 Q
 !数据可视化/canvas/canva.html,f/0/f03873a69fa0525fc0bd5b1fb7355e90223874bd
-Y
-)数据可视化/canvas/样式和颜色.md,e/4/e4592c370cf9db4c5af625fb5c9eef854beba9f9
 K
 javascript/高级/事件.md,c/8/c887f641f3830b349bc252a6318693e9b16b04a3
 C
 浏览器/显示.md,f/2/f24dd6886bce0d7d147c261c97ec7189217afb19
-P
- 数据可视化/canvas/入门.md,3/5/35f6ba59a857640a7b968402754a678b20818a20
 Q
 !javascript/数据类型/Object.md,e/f/efc80ca012f1c4de6d0eaead1c841b943bcd7192
 K
@@ -71,8 +61,6 @@ O
 浏览器/3.HTTP请求流程.md,5/f/5f359c607413fb3566b88e6e9e16ffd78b4a1e13
 N
 javascript/其他/url编码.md,a/2/a25337f7e10d450fb3b0809091a630d26d59fd02
-C
-浏览器/字段.md,b/9/b90242a626fb3f59a9eb88fc06740cef04c2a110
 D
 前端工程/gulp.md,d/2/d271f742de1ce200bd564b8fff605476fba6dcab
 T
@@ -90,7 +78,50 @@ Q
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 7
 text.js,a/3/a3211d25389241187fe2b2ede9fbab9e2b0c9b75
+K
+小demo/1.代办事项.html,d/2/d21c16116558ae22a466e33bb652be5d9889aaa4
+H
+小demo/2.登录框.html,1/5/150b1c7d6386b521ca98b8fcfcd0da32cf6f14cb
+K
+小demo/3.下拉菜单.html,3/6/367eadeefbe1781451dcb1cd68522854ad73f26e
+Z
+*小demo/4.生成动画的三种方式.html,1/9/193fc5d214d992ea644fa0f781bb5a1e50ef7149
+K
+小demo/5.水球效果.html,2/5/258244336920b7bc70b56d2d5d55ac1415636044
+L
+小demo/10.动态爱心.html,f/5/f5a52db35087a22523c57f21c1b950285db24706
+I
+小demo/11.照片墙.html,0/4/04da8a92cebce9e4230f420619d36579a4346d1f
+O
+小demo/12.倒计时动画.html,5/d/5dc29dcc99c9a649d03aaa1f453e8e0c8e421fe8
+I
+小demo/15.轮播图.html,2/7/2780df9957b5f570e5fddd4b83b6d9827bffcd3c
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+<
+package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
 F
-前端工程/rollup.md,9/3/93476abe01b54a2ff14d7bdc7a81e81ef72630bf
+node/工程化/gzip.md,5/4/543ea37de6aa2270510053c9aa065b7f9541c28b
+C
+浏览器/字段.md,b/9/b90242a626fb3f59a9eb88fc06740cef04c2a110
+L
+网络/内容协商机制.md,b/e/beced076f3876e6d110ffa89d727e0d51f8998cf
+U
+%数据结构与算法/回溯算法.md,3/d/3d609494af144bec443d8d9cc578adbd1bf6e022
+C
+浏览器/cookie.md,f/0/f0db516eb966d15e04bed11543d74cb5bb5fd4fc
 A
 平时测试.html,3/8/3821de9fb9dd89c2c4c8e76827af6a8a8ebfd9ba
+F
+前端工程/rollup.md,9/3/93476abe01b54a2ff14d7bdc7a81e81ef72630bf
+\
+,数据可视化/canvas/应用/lineWidth.html,1/5/15783b80508a9fc6899d17ebfc180de1f7317335
+Y
+)数据可视化/canvas/样式和颜色.md,e/4/e4592c370cf9db4c5af625fb5c9eef854beba9f9
+J
+网络/HTTP缓存机制.md,a/8/a80dcc75ad0b625d722245049fc734bfccbb890f
+M
+数据可视化/svg/入门.md,8/2/82ed83983234b944d51858f26dc7af974aaee6f1
+_
+/数据可视化/canvas/canvas绘图优越性.md,0/b/0b577257daf5fa1ade4376f752ee4aec8cf0cf15

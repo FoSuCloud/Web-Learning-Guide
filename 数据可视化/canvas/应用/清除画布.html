@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--
+    如果 canvas 的渲染上下文已经经过了变换(平移、缩放、旋转)，那么在使用 clearRect() 清空画布前，需要先重置变换，否则 clearRect() 将无法有效地清楚整块画布。
+    如果需要在清除画布后，仍恢复之前的变换，那么可以在重置前保存环境, 充值后恢复环境即可:
+
+    // 保存当前渲染上下文所进行的变换
+    ctx.save();
+
+    // 重置渲染上下文并清空画布
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // 实验中的api
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 恢复先前渲染上下文所进行的变换
+    ctx.restore();
+
+    -->
+</body>
+</html>

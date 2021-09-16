@@ -69,6 +69,20 @@
     </script>
 ```
 * `从这里可以引申出一个1px像素问题，lineWidth的绘制方式？看下文`
+* `HTML5 画布支持子像素呈现，且无法停用。如果您使用非整数的坐标绘制内容，系统就会自动使用抗锯齿功能，尝试对线条进行平滑处理。`
+* `http://diveintohtml5.info/canvas.html`
+* 如果不需要平滑贴图的效果，您可以使用 Math.floor 或 Math.round 更快地将坐标转换成整数
+* 您可以使用几种巧妙的技术将浮点数坐标转换成整数，其中性能最高的是，将目标数字加上 0.5，然后对结果执行逐位运算以消除小数部分。
+```js
+// With a bitwise or.
+rounded = (0.5 + somenum) | 0;
+// A double bitwise not.
+rounded = ~~ (0.5 + somenum);
+// Finally, a left bitwise shift.
+rounded = (0.5 + somenum) << 0;
+```
+* 请注意，如果画布实施经过了 GPU 加速，能快速呈现非整数坐标，那么这种优化就没有什么意义了。
+* https://www.html5rocks.com/zh/tutorials/canvas/performance/
 * [参考]("https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Applying_styles_and_colors")
 
 ### 绘制文本
@@ -123,6 +137,7 @@ width: 81.5625
 1. lineWidth:设置线条的宽度，`默认1.0`
 * 0,负数和NaN，Infinity会被忽略。只接受正数
 * `lineWidth绘制的时候使用1px；那么会发现实际上渲染的是2px,具体原因看样式和颜色这章节`
+
 2. lineCap:`指定每一线段末端的属性`，有以下三个值：`butt,round,square`
 * butt:默认值，以方形结束线段
 * round:线段末端以圆形结束

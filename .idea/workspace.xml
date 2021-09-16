@@ -5,23 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitingnoe" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/0/7030d0b2f71b999ff89a343de08c414af32fc93a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/3/f357b53ee0f6203116f1a200f645864571c8cd57" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/0/70ebabfc02ba3b57ea4648cc4e5014c23a9d09fb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/es6/6. 数值的拓展.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/es6/6. 数值的拓展.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/数据类型/Number.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/数据类型/Number.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/数据类型/Object.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/数据类型/Object.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/高级/Object.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/高级/Object.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/高级/时间.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/高级/时间.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/text.js" beforeDir="false" afterPath="$PROJECT_DIR$/text.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ts/ts项目.md" beforeDir="false" afterPath="$PROJECT_DIR$/ts/ts项目.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/平时测试.html" beforeDir="false" afterPath="$PROJECT_DIR$/平时测试.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/CanvasRenderingContext2D.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/CanvasRenderingContext2D.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/canvas绘图优越性.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/canvas绘图优越性.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据可视化/canvas/入门.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/入门.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/浏览器/cookie.md" beforeDir="false" afterPath="$PROJECT_DIR$/浏览器/cookie.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/样式和颜色.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/样式和颜色.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/浏览器/字段.md" beforeDir="false" afterPath="$PROJECT_DIR$/浏览器/字段.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/笔记整理/设计模式.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/设计模式.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/计算机基础/Linux.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/Linux.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/计算机基础/操作系统.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/操作系统.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +62,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/网络" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/计算机基础" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -108,7 +106,21 @@
       <workItem from="1631196994608" duration="1128000" />
       <workItem from="1631234925959" duration="3147000" />
       <workItem from="1631347547698" duration="3486000" />
-      <workItem from="1631410182233" duration="565000" />
+      <workItem from="1631410182233" duration="2094000" />
+      <workItem from="1631416534181" duration="6401000" />
+      <workItem from="1631448751335" duration="2958000" />
+      <workItem from="1631494503474" duration="2520000" />
+      <workItem from="1631532819790" duration="691000" />
+      <workItem from="1631534556864" duration="2100000" />
+      <workItem from="1631580797008" duration="5964000" />
+      <workItem from="1631606944025" duration="1757000" />
+      <workItem from="1631631515470" duration="174000" />
+      <workItem from="1631667279046" duration="721000" />
+      <workItem from="1631721477305" duration="204000" />
+      <workItem from="1631754488048" duration="328000" />
+      <workItem from="1631785113414" duration="1279000" />
+      <workItem from="1631790039565" duration="737000" />
+      <workItem from="1631802181936" duration="514000" />
     </task>
     <servers />
   </component>
