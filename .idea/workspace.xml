@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/0/70ebabfc02ba3b57ea4648cc4e5014c23a9d09fb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/8/a80dcc75ad0b625d722245049fc734bfccbb890f" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascript/其他/正则表达式.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/其他/正则表达式.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/ast.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/ast.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/babel.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/babel.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/平时测试.html" beforeDir="false" afterPath="$PROJECT_DIR$/平时测试.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/CanvasRenderingContext2D.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/CanvasRenderingContext2D.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/canvas绘图优越性.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/canvas绘图优越性.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/入门.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/入门.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/样式和颜色.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/样式和颜色.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/浏览器/字段.md" beforeDir="false" afterPath="$PROJECT_DIR$/浏览器/字段.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/笔记整理/设计模式.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/设计模式.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/计算机基础/Linux.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/Linux.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/计算机基础/操作系统.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/操作系统.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +115,11 @@
       <workItem from="1631754488048" duration="328000" />
       <workItem from="1631785113414" duration="1279000" />
       <workItem from="1631790039565" duration="737000" />
-      <workItem from="1631802181936" duration="514000" />
+      <workItem from="1631802181936" duration="3709000" />
+      <workItem from="1631842586796" duration="1530000" />
+      <workItem from="1631851471907" duration="614000" />
+      <workItem from="1632015219148" duration="2142000" />
+      <workItem from="1632060032041" duration="3569000" />
     </task>
     <servers />
   </component>
