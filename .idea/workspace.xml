@@ -5,13 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/8/a80dcc75ad0b625d722245049fc734bfccbb890f" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/网络/鉴权机制.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javascript/其他/正则表达式.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/其他/正则表达式.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/前端工程/ast.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/ast.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/前端工程/babel.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/babel.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/平时测试.html" beforeDir="false" afterPath="$PROJECT_DIR$/平时测试.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jq/01/05开关灯实例.html" beforeDir="false" afterPath="$PROJECT_DIR$/jq/01/05开关灯实例.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jq/01/09突出显示.html" beforeDir="false" afterPath="$PROJECT_DIR$/jq/01/09突出显示.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jq/02/03组合动画.html" beforeDir="false" afterPath="$PROJECT_DIR$/jq/02/03组合动画.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/入门/1.介绍.md" beforeDir="false" afterPath="$PROJECT_DIR$/node/入门/1.介绍.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/gulp.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/打包构建工具/gulp.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/package-json.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/package-json.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/rollup.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/打包构建工具/rollup初始化.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/前端工程.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/前端工程.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/前端测试.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/前端测试.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/浏览器/cookie.md" beforeDir="false" afterPath="$PROJECT_DIR$/浏览器/cookie.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/网络/HTTP缓存机制.md" beforeDir="false" afterPath="$PROJECT_DIR$/网络/HTTP缓存机制.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/网络/https.md" beforeDir="false" afterPath="$PROJECT_DIR$/网络/https.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/计算机基础/Linux.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/Linux.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/计算机基础/git.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/git.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +32,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JavaScript File" />
         <option value="HTML File" />
       </list>
     </option>
@@ -55,9 +67,15 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/网络" />
+      <recent name="$PROJECT_DIR$/vue/vue3" />
+      <recent name="$PROJECT_DIR$/前端工程/cli/vue-template" />
+      <recent name="$PROJECT_DIR$/前端工程/cli/demo" />
+      <recent name="$PROJECT_DIR$/node" />
+      <recent name="$PROJECT_DIR$/每日三题" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/前端工程/打包构建工具" />
+      <recent name="$PROJECT_DIR$/每日三题" />
       <recent name="$PROJECT_DIR$/计算机基础" />
     </key>
   </component>
@@ -119,7 +137,34 @@
       <workItem from="1631842586796" duration="1530000" />
       <workItem from="1631851471907" duration="614000" />
       <workItem from="1632015219148" duration="2142000" />
-      <workItem from="1632060032041" duration="3569000" />
+      <workItem from="1632060032041" duration="5504000" />
+      <workItem from="1632098402707" duration="7816000" />
+      <workItem from="1632108712763" duration="5125000" />
+      <workItem from="1632129354452" duration="2664000" />
+      <workItem from="1632186597701" duration="1420000" />
+      <workItem from="1632189805330" duration="11932000" />
+      <workItem from="1632272403530" duration="517000" />
+      <workItem from="1632273299429" duration="71000" />
+      <workItem from="1632274570389" duration="344000" />
+      <workItem from="1632287162596" duration="1534000" />
+      <workItem from="1632317493997" duration="141000" />
+      <workItem from="1632358284843" duration="324000" />
+      <workItem from="1632496363473" duration="1131000" />
+      <workItem from="1632533133263" duration="4660000" />
+      <workItem from="1632552587576" duration="2279000" />
+      <workItem from="1632578065011" duration="1593000" />
+      <workItem from="1632616582638" duration="148000" />
+      <workItem from="1632642666608" duration="1343000" />
+      <workItem from="1632659668930" duration="43000" />
+      <workItem from="1632666425443" duration="3289000" />
+      <workItem from="1632703481781" duration="1215000" />
+      <workItem from="1632812728127" duration="205000" />
+      <workItem from="1632813135811" duration="1768000" />
+      <workItem from="1633142000828" duration="2763000" />
+      <workItem from="1633264613372" duration="118000" />
+      <workItem from="1633355817943" duration="161000" />
+      <workItem from="1633437699197" duration="4354000" />
+      <workItem from="1633493163499" duration="3698000" />
     </task>
     <servers />
   </component>

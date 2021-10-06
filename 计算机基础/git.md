@@ -68,3 +68,10 @@
 ## ssh命令
 * ssh -T -p 22 git@ssh.github.com
 * `测试是否可以连接上远程github.com的端口`
+
+## git push
+* [参考]("https://www.djc8.cn/archives/github-started-from-august-13-2021-and-does-not-accept-the-user-password-for-git-operation-verification.html")
+* `关键点在于：Github->Settings->Developer Settings->Personal access tokens->"generate personal access tokens"`
+* `使用生成的tokens作为密码去登陆！`
+* `解决github ;github access august 13 不能提交代码的问题！`
+

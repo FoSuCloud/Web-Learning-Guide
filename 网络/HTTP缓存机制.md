@@ -158,6 +158,7 @@ serve.listen(port,()=>{
 ```
 * `根据描述，Last-Modefied和if-modefied-since这两组字段是很可靠的，但是有时候服务器资源修改了，但是修改时间没有及时更新，这个时候，这种问题就不容易定位出来！`
 * `这是因为因为Last-modefied（使用格林乔治时间，GMT）只能精确到一秒,所以说是弱校验器`
+* `例如：一秒内修改两次，第一次修改完成发送给客户端，然后立即修改第二次！然后就下次判断就只能认为时间一致，没有更新`
 * [参考]("https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching")
 
 2. Etag/If-No-Match
@@ -240,7 +241,6 @@ https://juejin.cn/post/6844903764566999054
 1）解决了跨运营商和跨地域访问的问题，访问延时大大降低
 2）大部分请求在CDN边缘节点完成，CDN起到了分流的作用，减轻了源站的负担
 * https://www.haorooms.com/post/cache_huancunliyong
-#### CDN缓存
 * CDN节点在接收到客户端请求之后，会判断本节点的这个缓存数据是否过期，如果没有过期就返回304状态码
 * 如果过期了，那么CDN节点会向源站发出请求，刷新CDN缓存的响应数据，然后响应最新数据给请求的客户端
 

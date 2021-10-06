@@ -39,7 +39,7 @@
 		<div class="one">
 			<button type="button">暂停</button>
 			<button type="button">重新开始</button>
-			<img src="../logo.png" >
+			<img src="../../每日三题/logo.png" >
 		</div>
 		<script type="text/javascript">
 			window.onload=function(){
@@ -48,14 +48,14 @@
 					img.className='leave'
 					setTimeout(()=>{img.className='';img.style.display="none"},3000)
 				},3000)
-				
-				
+
+
 				// 暂停/重新开始动画,由于存在多个动画，并且是通过改变class类名，所以看起来不明显
 				var btnlist=document.getElementsByTagName('button');
 				btnlist[0].onclick=function(){
 					img.style.animationPlayState="paused"
 				}
-				
+
 				btnlist[1].onclick=function(){
 					img.style.animationPlayState="running"
 				}

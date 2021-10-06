@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      // 模仿vue3
+      const Vue = {
+        // 创建渲染器（抽取出来的目的是为了在不同平台更方便扩展，渲染器变得平台无关）
+        createRender({ querySelector, insert }) {
+          return {
+            createApp(options) {
+              return {
+                // 挂载
+                mount(selector) {
+                  // 1.找到宿主元素
+                  const parent = querySelector(selector);
+                  // 2. 渲染页面(两种情况)
+                  if (!options.render) {
+                    //  2.1 处理template编译
+                    options.render = this.compile(parent.innerHTML);
+                  }
+
+                  // setup和其他选项，需要判断究竟对哪个取值
+                  if (options.setup) {
+                    this.setupState = options.setup();
+                  }
+                  if (options.data) {
+                    this.data = options.data();
+                  }
+
+                  // 对对象进行代理
+                  const proxy = new Proxy(this, {
+                    get(target, key) {
+                      if (target.setupState && key in target.setupState) {
+                        return target.setupState[key];
+                      } else {
+                        return target.data[key];
+                      }
+                    },
+                    set(target, key, val) {
+                      if (target.setupState && key in target.setupState) {
+                        target.setupState[key] = val;
+                      } else {
+                        target.data[key] = val;
+                      }
+                    },
+                  });
+
+                  //  2.2 用户直接编写render
+                  const el = options.render.call(proxy); // 返回的data对象是上下文，this指向对应的数据
+
+                  // 3. 追加到宿主
+                  insert(parent, el);
+                },
+                compile(template) {
+                  // 返回一个render函数
+                  // parse -> ast
+                  return function render() {
+                    const h3 = document.createElement("h3");
+                    h3.textContent = this.title;
+                    return h3;
+                  };
+                },
+              };
+            },
+          };
+        },
+        createApp(options) {
+          const renderer = Vue.createRender({
+            querySelector(selector) {
+              return document.querySelector(selector);
+            },
+            insert(parent, el) {
+              parent.appendChild(el);
+            },
+          });
+          return renderer.createApp(options);
+        },
+      };
+    </script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            title: "hello",
+          };
+        },
+        setup() {
+          return {
+            title: "setup hello",
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

@@ -75,7 +75,7 @@
 
 ## https例子
 ```javascript
-// 前端
+// 前端,需要在vue项目开启https，开启代理
 fetch('https://localhost:3000').then((res)=>{
     console.log(res)
 })

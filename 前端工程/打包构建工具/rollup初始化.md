@@ -563,3 +563,6 @@ typescript2();
 * 为什么操作 canvas 比操作 dom 快？
 
 - [参考]("http://www.ruanyifeng.com/blog/2015/02/future-of-dom.html")
+
+
+

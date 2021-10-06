@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      // 模仿vue3
+      const Vue = {
+        // 创建渲染器（抽取出来的目的是为了在不同平台更方便扩展，渲染器变得平台无关）
+        createRender({ querySelector, insert }) {
+          return {
+            createApp(options) {
+              return {
+                // 挂载
+                mount(selector) {
+                  // 1.找到宿主元素
+                  const parent = querySelector(selector);
+                  // 2. 渲染页面(两种情况)
+                  if (!options.render) {
+                    //  2.1 处理template编译
+                    options.render = this.compile(parent.innerHTML);
+                  }
+
+                  // setup和其他选项，需要判断究竟对哪个取值
+                  if (options.setup) {
+                    this.setupState = options.setup();
+                  }
+                  if (options.data) {
+                    this.data = options.data();
+                  }
+
+                  // 对对象进行代理
+                  const proxy = new Proxy(this, {
+                    get(target, key) {
+                      if (target.setupState && key in target.setupState) {
+                        return target.setupState[key];
+                      } else {
+                        return target.data[key];
+                      }
+                    },
+                    set(target, key, val) {
+                      if (target.setupState && key in target.setupState) {
+                        target.setupState[key] = val;
+                      } else {
+                        target.data[key] = val;
+                      }
+                    },
+                  });
+                  // todo 所谓的mount周期，其实还绑定了update事件（周期）应该做的事
+                  // todo update其实就是重新渲染页面 ，再重新追加到宿主
+                  // todo 使用effect之后，只要值发生了变化 就会重新触发渲染 更新(因为视图渲染的时候通过get函数获取了值，触发了依赖收集函数)
+                  this.update = effect(() => {
+                    //  2.2 用户直接编写render
+                    const el = options.render.call(proxy); // 返回的data对象是上下文，this指向对应的数据
+
+                    // 3. 追加到宿主
+                    insert(parent, el);
+                  });
+                  // this.update();
+                },
+                compile(template) {
+                  // 返回一个render函数
+                  // parse -> ast
+                  return function render() {
+                    const h3 = document.createElement("h3");
+                    h3.textContent = this.title + this.age;
+                    return h3;
+                  };
+                },
+              };
+            },
+          };
+        },
+        createApp(options) {
+          const renderer = Vue.createRender({
+            querySelector(selector) {
+              return document.querySelector(selector);
+            },
+            insert(parent, el) {
+              parent.innerHTML = "";
+              parent.appendChild(el);
+            },
+          });
+          return renderer.createApp(options);
+        },
+      };
+    </script>
+    <script>
+      /**
+       * todo 可以把下面的例子改为weakMap和set
+       * */
+      // vue2 -watcher; vue3 创建map结构
+      // 调用effect （副作用函数） 首先执行fn
+      // todo 为什么effectStack是一个数组 ，因为effect可能会嵌套，那样只用一个变量无法解决
+      const effectStack = [];
+      function effect(fn) {
+        const eff = function () {
+          try {
+            effectStack.push(eff);
+            fn();
+          } finally {
+            // todo 立马删除可以？可以，因为push之后立马fn()调用了
+            // 所以fn函数还是会获取到最新的数值
+            effectStack.pop();
+          }
+        };
+        eff();
+        return eff;
+      }
+      // 建立依赖关系 target,key 和存储的副作用函数effect的关系
+      const targetMap = {};
+      // {target:{key:[update1,update2]}}
+      function track(target, key) {
+        // 栈的长度最多为1！因为每次finally都会出栈
+        const effect = effectStack[effectStack.length - 1];
+        // 判断target为key的对象存不存在
+        let map = targetMap[target];
+        if (!map) {
+          map = targetMap[target] = {};
+        }
+        let deps = map[key];
+        if (!deps) {
+          deps = map[key] = [];
+        }
+        // 映射关系建立
+        if (!deps.includes(effect)) {
+          deps.push(effect);
+        }
+      }
+      // 触发订阅函数
+      function trigger(target, key) {
+        let map = targetMap[target];
+        if (map) {
+          const deps = map[key];
+          if (deps && deps.length) {
+            // 通知订阅后函数更新
+            deps.forEach((dep) => dep());
+          }
+        }
+      }
+
+      // 响应式-数据驱动-数据改动更新视图
+      // 关键点1.能够拦截用户对代理对象的访问
+      // 关键点2.在拦截到访问的时候作出响应式变化
+      function reactive(obj) {
+        // vue2使用Object.defineProperty
+        // 存在以下缺点：
+        // 1. 需要对对象进行递归，递归效率低
+        // 2. 无法拦截数组的变化，因为数组存在push,pop等方法可以改变数组，但是通过这种方式无法拦截到！
+        // （解决办法是对数组进行单独实现，创建数组的pop,push等一套api）
+        // 3. 无法检测到动态属性的新增和删除，所以才会有Vue.$delete和Vue.$set这两个api
+        // 目的就是对动态属性标记一下，需要变为数据响应式（这是Object.definedProperty的特点）
+        // * 但是proxy也有问题
+        // 1. `兼容性不好，例如不支持ie11`
+        return new Proxy(obj, {
+          get(target, p, receiver) {
+            console.log("get", target[p]);
+            console.log("targetMap", targetMap);
+            /**
+             * todo 虽然使用object作为对象的key会显示字符串'[object Object]',但还是可以这么使用，但是为什么需要这么做呢？
+             * {[object Object]: {…}}
+             * [object Object]: age: [ƒ]title: [ƒ]
+             * [[Prototype]]: Object[[Prototype]]: Object
+             *
+             * */
+            // 建立依赖
+            track(target, p);
+            return target[p];
+          },
+          set(target, p, value, receiver) {
+            target[p] = value;
+            console.log("set", target[p]);
+            // 获取依赖
+            // todo 通知更新  整个流程就是发布订阅模式！
+            trigger(target, p);
+            // app.update();
+          },
+        });
+      }
+      const app = Vue.createApp({
+        data() {
+          return {
+            title: "hello",
+          };
+        },
+        setup() {
+          const state = reactive({
+            title: "setup hello",
+            age: 1,
+          });
+          setTimeout(() => {
+            state.title = "update title";
+            state.age = 2;
+          }, 1000);
+          return state;
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

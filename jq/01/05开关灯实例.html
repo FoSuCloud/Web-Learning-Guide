@@ -7,17 +7,17 @@
 	<body>
 		<button type="button">开灯</button>
 		<button type="button">关灯</button>
-		<img src="../logo.png" >
+		<img src="../../每日三题/logo.png" >
 		<script src="../jquery-3.1.1.js"></script>
 		<script type="text/javascript">
 			$(function(){
 				// 使用dom方式获取元素是因为jq对象不能使用dom方法，也就是onclick监听事件
 				var btn=document.getElementsByTagName('button');
-				
+
 				btn[0].onclick=function(){
 					$('body').css('background','black')
 				}
-				
+
 				btn[1].onclick=function(){
 					$('body').css('background','white');
 				}

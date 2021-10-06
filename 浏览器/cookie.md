@@ -1,3 +1,6 @@
+## cookie和session的区别
+## token是用来解决session的不足的
+
 ## cookie的保存
 * `当cookie中包含有等号、空格、分号等特殊字符时，可能会导致数据丢失、或者不能解析的错误，
   一个较好的解决办法就是：在将cookie值写入客户端浏览器之前，首先进行URLEncode编码，读取cookie时，进行URLDecode即可。`
@@ -27,6 +30,8 @@ function set(key, value, params) {
             }
             // toUTCString把当前时间转换为世界时，例如北京时间转换为世界时
             // Header头部字段Date的值指示的是GMT格林乔治标准时间
+            // todo 其实不转换为UTC也可以，可以在chrome浏览器看到会把GMT时间转换为标准世界时再存储！
+            // 但是安全起见还是要转换
             params.expires = params.expires.toUTCString();
           }
           for (let pKey in params) {

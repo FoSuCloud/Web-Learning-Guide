@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      /**
+       * 在reactive.html中实现的更新是全量更新，但是我们需要做到diff更新
+       * 首先，什么是vNode?为什么需要vNode?
+       * 因为使用vNode可以减少dom操作；并且可以高效地更新，渲染；（跨平台；兼容性）（这是因为vNode转为dom之前可以进行通用的操作来解决平台和版本的兼容问题）
+       * -----------------------
+       * vNode就是使用js的object结构来描述视图，其实就是一个object对象
+       * */
+      /*
+       * diff patch是通过比较已存在的vnode和新生成的vnode
+       * 最大限度复用已存在的dom节点，最终最小化dom操作！
+       * -----
+       * diff树很庞大，所以diff算法的性能怎么保障？
+       * 1。vue-diff算法原则：同层比较（只会比较在同一层的vnode节点）（深度优先）
+       * 2。编译阶段：由于我们搭建vue项目，会创建.vue文件，那么就会用到vue-loader(对模板进行一次预编译)
+       **/
+      /*
+       * patch实现：
+       * 在vnode中保存真实dom,vnode.el=el
+       * patch中需要保存上次vnode,this._vnode = vnode
+       * patch分为以下步骤：1）获取操作的dom,通过之前保存的真实dom,vnode.el;
+       * 2)相同节点判断，key和tag相同才视为同一个节点
+       * 3）节点类型判断：
+       * 3。1）都是字符串
+       * 3。2）旧节点是字符串，新节点是数组
+       * 3。3）旧节点是数组，新节点是字符串
+       * 3。4）都是数组
+       * */
+    </script>
+    <script>
+      // 传入vNode信息，返回vNode虚拟dom对象，使用vNode对象描述视图
+      function h(tag, props, children) {
+        return { tag, props, children };
+      }
+      // 模仿vue3
+      const Vue = {
+        // 创建渲染器（抽取出来的目的是为了在不同平台更方便扩展，渲染器变得平台无关）
+        createRender({ querySelector, insert, createElement, remove }) {
+          return {
+            createApp(options) {
+              return {
+                isMounted: false,
+                // 挂载
+                mount(selector) {
+                  // 1.找到宿主元素
+                  const parent = querySelector(selector);
+                  // 2. 渲染页面(两种情况)
+                  if (!options.render) {
+                    //  2.1 处理template编译
+                    options.render = this.compile(parent.innerHTML);
+                  }
+
+                  // setup和其他选项，需要判断究竟对哪个取值
+                  if (options.setup) {
+                    this.setupState = options.setup();
+                  }
+                  if (options.data) {
+                    this.data = options.data();
+                  }
+
+                  // 对对象进行代理
+                  const proxy = new Proxy(this, {
+                    get(target, key) {
+                      if (target.setupState && key in target.setupState) {
+                        return target.setupState[key];
+                      } else {
+                        return target.data[key];
+                      }
+                    },
+                    set(target, key, val) {
+                      if (target.setupState && key in target.setupState) {
+                        target.setupState[key] = val;
+                      } else {
+                        target.data[key] = val;
+                      }
+                    },
+                  });
+                  // todo 所谓的mount周期，其实还绑定了update事件（周期）应该做的事
+                  // todo update其实就是重新渲染页面 ，再重新追加到宿主
+                  // todo 使用effect之后，只要值发生了变化 就会重新触发渲染 更新(因为视图渲染的时候通过get函数获取了值，触发了依赖收集函数)
+                  this.update = effect(() => {
+                    //  2.2 用户直接编写render
+                    // 获取一个vnode
+                    const vnode = options.render.call(proxy); // 返回的data对象是上下文，this指向对应的数据
+                    // 3. 追加到宿主(初始化创建整棵树)
+                    if (!this.isMounted) {
+                      // vnode转换为node
+                      const el = this.createElm(vnode);
+                      insert(parent, el);
+                      // init
+                      this.isMounted = true;
+                    } else {
+                      // todo patch 更新vnode diff比较
+                      this.patch(this._vnode, vnode);
+                    }
+                    this._vnode = vnode;
+                  });
+                  // this.update();
+                },
+                patch(old, vNode) {
+                  // 1.更新
+                  /**
+                   * 判断两个节点是否是同一个节点
+                   * 最重要的是key,tag是否相同，只要key或者tag不同，那么就认为是两个不同的节点！
+                   * sameVNode函数：判断是否是相同的虚拟节点
+                   * */
+                  const el = (vNode.el = old.el);
+                  if (old.tag === vNode.tag && old.key === vNode.key) {
+                    // update
+                    // 1。 props 更新
+                    // 2。children 更新
+                    const oldCh = old.children;
+                    const newCh = vNode.children;
+                    if (typeof oldCh === "string") {
+                      if (typeof newCh === "string") {
+                        // text update
+                        if (oldCh !== newCh) {
+                          el.textContent = newCh;
+                        }
+                      } else {
+                        // 旧的是文本，新的是子元素数组
+                        // 清空，再创建，并追加
+                        el.textContent = "";
+                        newCh.forEach((child) =>
+                          insert(el, this.createElm(child))
+                        );
+                      }
+                    } else {
+                      if (typeof newCh === "string") {
+                        // 把一组子元素替换为文本
+                        el.textContent = newCh;
+                      } else {
+                        // 都是数组
+                        this.updateChildren(el, oldCh, newCh);
+                      }
+                    }
+                  } else {
+                    // replace
+                  }
+                },
+                updateChildren(el, oldCh, newCh) {
+                  // 1.获取oldCh和newCh较短的哪一个
+                  const len = Math.min(oldCh.length, newCh.length);
+                  // 强制更新
+                  for (let i = 0; i < len; i++) {
+                    this.patch(oldCh[i], newCh[i]);
+                  }
+                  // 处理剩余元素
+                  // 新数组元素多
+                  if (newCh.length > oldCh.length) {
+                    // 批量创建并追加
+                    // 截取newCh后面len的部分
+                    newCh.slice(len).forEach((child) => {
+                      insert(el, this.createElm(child));
+                    });
+                  } else if (newCh.length < oldCh.length) {
+                    oldCh.slice(len).forEach((child) => {
+                      remove(el, child.el);
+                    });
+                  }
+                },
+                // 遍历vNode 创建整棵树
+                createElm(vnode) {
+                  const { tag, props, children } = vnode;
+                  const el = createElement(tag);
+                  // 如果存在属性，就设置
+                  // el.setAttribute(key,val)
+                  // 递归，添加children
+                  if (Array.isArray(children)) {
+                    children.forEach((child) =>
+                      insert(el, this.createElm(child))
+                    );
+                  } else {
+                    el.textContent = children;
+                  }
+                  // vnode中要保存真实dom，以备未来更新使用（例如vue的el属性）
+                  vnode.el = el;
+                  return el;
+                },
+                compile(template) {
+                  // 返回一个render函数
+                  // parse -> ast
+                  return function render() {
+                    // todo 改为返回vNode虚拟dom结构对象
+                    // todo 第三个参数如果不是数组，那么一定要是字符串！
+                    // return h("h3", null, this.title);
+                    if (Array.isArray(this.title)) {
+                      return h(
+                        "h3",
+                        null,
+                        this.title.map((child) => h("p", null, child))
+                      );
+                    } else {
+                      return h("h3", null, this.title);
+                    }
+                  };
+                },
+              };
+            },
+          };
+        },
+        createApp(options) {
+          const renderer = Vue.createRender({
+            querySelector(selector) {
+              return document.querySelector(selector);
+            },
+            insert(parent, el) {
+              parent.appendChild(el);
+            },
+            remove(parent, el) {
+              parent.removeChild(el);
+            },
+            createElement(tag) {
+              return document.createElement(tag);
+            },
+          });
+          return renderer.createApp(options);
+        },
+      };
+    </script>
+    <script>
+      /**
+       * todo 可以把下面的例子改为weakMap和set
+       * */
+      // vue2 -watcher; vue3 创建map结构
+      // 调用effect （副作用函数） 首先执行fn
+      // todo 为什么effectStack是一个数组 ，因为effect可能会嵌套，那样只用一个变量无法解决
+      const effectStack = [];
+      function effect(fn) {
+        const eff = function () {
+          try {
+            effectStack.push(eff);
+            fn();
+          } finally {
+            // todo 立马删除可以？可以，因为push之后立马fn()调用了
+            // 所以fn函数还是会获取到最新的数值
+            effectStack.pop();
+          }
+        };
+        eff();
+        return eff;
+      }
+      // 建立依赖关系 target,key 和存储的副作用函数effect的关系
+      const targetMap = {};
+      // {target:{key:[update1,update2]}}
+      function track(target, key) {
+        // 栈的长度最多为1！因为每次finally都会出栈
+        const effect = effectStack[effectStack.length - 1];
+        // 判断target为key的对象存不存在
+        let map = targetMap[target];
+        if (!map) {
+          map = targetMap[target] = {};
+        }
+        let deps = map[key];
+        if (!deps) {
+          deps = map[key] = [];
+        }
+        // 映射关系建立
+        if (!deps.includes(effect)) {
+          deps.push(effect);
+        }
+      }
+      // 触发订阅函数
+      function trigger(target, key) {
+        let map = targetMap[target];
+        if (map) {
+          const deps = map[key];
+          if (deps && deps.length) {
+            // 通知订阅后函数更新
+            deps.forEach((dep) => dep());
+          }
+        }
+      }
+
+      // 响应式-数据驱动-数据改动更新视图
+      // 关键点1.能够拦截用户对代理对象的访问
+      // 关键点2.在拦截到访问的时候作出响应式变化
+      function reactive(obj) {
+        // vue2使用Object.defineProperty
+        // 存在以下缺点：
+        // 1. 需要对对象进行递归，递归效率低
+        // 2. 无法拦截数组的变化，因为数组存在push,pop等方法可以改变数组，但是通过这种方式无法拦截到！
+        // （解决办法是对数组进行单独实现，创建数组的pop,push等一套api）
+        // 3. 无法检测到动态属性的新增和删除，所以才会有Vue.$delete和Vue.$set这两个api
+        // 目的就是对动态属性标记一下，需要变为数据响应式（这是Object.definedProperty的特点）
+        // * 但是proxy也有问题
+        // 1. `兼容性不好，例如不支持ie11`
+        return new Proxy(obj, {
+          get(target, p, receiver) {
+            console.log("get", target[p]);
+            console.log("targetMap", targetMap);
+            /**
+             * todo 虽然使用object作为对象的key会显示字符串'[object Object]',但还是可以这么使用，但是为什么需要这么做呢？
+             * {[object Object]: {…}}
+             * [object Object]: age: [ƒ]title: [ƒ]
+             * [[Prototype]]: Object[[Prototype]]: Object
+             *
+             * */
+            // 建立依赖
+            track(target, p);
+            return target[p];
+          },
+          set(target, p, value, receiver) {
+            target[p] = value;
+            console.log("set", target[p]);
+            // 获取依赖
+            // todo 通知更新  整个流程就是发布订阅模式！
+            trigger(target, p);
+            // app.update();
+          },
+        });
+      }
+      const app = Vue.createApp({
+        data() {
+          return {
+            title: "hello",
+          };
+        },
+        setup() {
+          const state = reactive({
+            title: "setup hello",
+            age: 1,
+          });
+          setTimeout(() => {
+            state.title = "update title".split("");
+            state.age = 2;
+          }, 1000);
+          return state;
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

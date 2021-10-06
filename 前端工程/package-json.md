@@ -10,3 +10,8 @@
 
 ## 生成美化的readme.md文件
 *  npx readme-md-generator
+
+## package.json配置"type": "module"
+* `让js文件中也可以使用esm规范！也就是可以import fs from "fs""`
+* // todo: package.json添加，"type": "module"；否则fs无法使用esm
+  
