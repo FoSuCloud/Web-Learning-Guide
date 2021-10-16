@@ -310,3 +310,15 @@ let str="   dssd  44 s   "
         }
         console.log(str.trim())
 ```
+
+## 反引号不要随便用
+```js
+// 1. 虽然可以在字符串中使用无意义的反引号，但这是无意义的！
+const foo = '\'this\' \i\s \"quoted\"';
+// 结果是 `'this' is "quoted"`
+
+// 2.应该把无意义的反引号去掉
+const foo = '\'this\' is "quoted"';
+
+// eslint配置: no-useless-escape
+```

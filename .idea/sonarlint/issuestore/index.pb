@@ -21,8 +21,6 @@ G
 html/属性/tabIndex.md,8/6/866d58512af7be637270a8051df22f0d1b64a351
 k
 ;数据可视化/canvas/应用/canvas文本垂直居中.html,8/f/8ffdbfbe9c4530abe66399d5b12706d1c778249c
-F
-前端工程/docker.md,b/9/b90a7a1d8d7859f4e69c151a23811aef1dce817a
 >
 网络/http.md,8/8/88ce0a6f4b03d9000cf7c8ce85d6d25551114a4d
 H
@@ -35,8 +33,6 @@ Q
 !javascript/数据类型/数组.md,b/3/b31be620b47219f94af44947a3f635688bb62c65
 C
 网络/虚拟机.md,5/e/5e4d0cd2cc5e854b0bfb9ae1eaa4bd86dc11a975
-Q
-!数据可视化/canvas/canva.html,f/0/f03873a69fa0525fc0bd5b1fb7355e90223874bd
 K
 javascript/高级/事件.md,c/8/c887f641f3830b349bc252a6318693e9b16b04a3
 Q
@@ -93,14 +89,10 @@ C
 浏览器/字段.md,b/9/b90242a626fb3f59a9eb88fc06740cef04c2a110
 U
 %数据结构与算法/回溯算法.md,3/d/3d609494af144bec443d8d9cc578adbd1bf6e022
-\
-,数据可视化/canvas/应用/lineWidth.html,1/5/15783b80508a9fc6899d17ebfc180de1f7317335
 _
 /数据可视化/canvas/应用/清除画布.html,1/8/18aedf55e965ced0e661459158037cc88e7b8e05
 O
 计算机基础/操作系统.md,e/3/e3ee379e00b4a1ae289bfeff4a146722d459965a
-F
-前端工程/模块.md,d/7/d78ca094d93c4778a5385f879a48ec0579ae47b6
 L
 javascript/js手写代码.md,1/4/1455e435f89be8cfbb44797783bb47a01af4a379
 I
@@ -109,14 +101,8 @@ O
 计算机基础/设计模式.md,a/3/a36970275dce726258dec03944f42a770a80856d
 L
 计算机基础/mvc架构.md,e/d/edbe3d6d7e87fe697d097dae7d4a59f2b699f125
-P
- 数据可视化/canvas/入门.md,3/5/35f6ba59a857640a7b968402754a678b20818a20
-b
-2数据可视化/canvas/CanvasRenderingContext2D.md,7/0/70ebabfc02ba3b57ea4648cc4e5014c23a9d09fb
 Y
 )数据可视化/canvas/样式和颜色.md,e/4/e4592c370cf9db4c5af625fb5c9eef854beba9f9
-V
-&数据可视化/canvas/canvas渲染.md,8/0/80a38a162ba50d85ef03e49739ef320b0d22e3fd
 _
 /数据可视化/canvas/canvas绘图优越性.md,0/b/0b577257daf5fa1ade4376f752ee4aec8cf0cf15
 L
@@ -131,8 +117,6 @@ A
 浏览器/CORS.md,d/b/db57baadb4a6ebc24c5c4ac1a90f203a5f7262eb
 I
 浏览器/同源策略.md,d/d/dd60c8ffeaf4a7d4e6abd7b5f7689539c90887ad
-U
-%浏览器/浏览器的前端路由.md,3/1/315140cfcb78d6617ae64222e5b429a1c2b97f00
 >
 网络/curl.md,8/5/85649590ec19e8e5e7e1937a19c9dd9e411b822b
 U
@@ -151,8 +135,6 @@ G
 node/入门/1.介绍.md,5/3/532065f90dbce9f7b493a00962226f71df92d05b
 C
 node/api/process.md,d/7/d7b4042f00936d1eff3c9ce22a877bc9eefe06e6
-I
-杂谈/阿里云部署.md,9/e/9e22462154a857aaf9139edbf86265da884aa649
 W
 '前端工程/打包构建工具/gulp.md,a/0/a0be695aa2e8bc4b5dfdb34234f31e46ff840c73
 >
@@ -211,8 +193,6 @@ F
 网络/鉴权机制.md,1/9/19f69050cc61737f4c9cca91a9a0b22ff121eeb7
 =
 网络/cdn.md,b/0/b083a0a2fa58f05ef9e2fe9930963d01d5203ffa
-J
-网络/HTTP缓存机制.md,a/8/a80dcc75ad0b625d722245049fc734bfccbb890f
 K
 javascript/高级/时间.md,6/e/6ec5dded3306d4b2ec0b781639c22c66cc4d1ae2
 C
@@ -223,8 +203,6 @@ L
 前端工程/前端测试.md,d/a/da7d1ff2ce2cefccaa67bf62a863ffd4001c8665
 O
 前端工程/测试/git-hook.md,e/1/e109aa415e74a53c136b6510d0de85753914a326
-Z
-*前端工程/打包构建工具/Webpack.md,3/4/343532e272df715c396b3fa339db70dbcac4a461
 P
  前端工程/测试/e2e测试.md,7/6/763fbe85b2fa9412613ee47eef0f20deb91e2cb2
 S
@@ -239,10 +217,6 @@ H
 vue/vue3/创建项目.md,8/7/8777616f8c690d95db7dc23846a2c76768659998
 ?
 网络/http2.md,8/9/89df722fd2916ea4356cfb8cf4d2eeb2213ca1da
-H
-计算机基础/Linux.md,1/9/19626bf82e820a3926d14c4c154d49f05646e636
-A
-平时测试.html,3/8/3821de9fb9dd89c2c4c8e76827af6a8a8ebfd9ba
 D
 vue/vue3/mini-vue.md,e/1/e18c4358b03fb37f41501df6a54c6fade96ab4ab
 O
@@ -251,8 +225,6 @@ B
 vue/vue3/init.html,2/5/2590e2edf80b61d57af9132201f44f84ee304009
 G
 vue/入门/响应式.md,a/8/a816cc9ad293e70aacc06bb68656992f3f983544
-M
-vue/vue3/vue2和vue3区别.md,8/f/8f9a9334fae16a34cc8481b0d55cf6b3f8ba27a2
 a
 1计算机基础/shell/批量创建大量文件.md,4/0/40a7a5a8aaaa4276c7d8b3d107374447cbc34cba
 M
@@ -263,11 +235,57 @@ K
 javascript/高级/编码.md,6/4/6424b947dd6e23d551338b25fbe49bb109c90216
 g
 7浏览器/(HTML实体编码)HTML和JS自解码机制.md,b/9/b9091acfe93574458fbfe2b884084c5d5830f71b
-Q
-!javascript/数据类型/String.md,1/2/12361abb0f142b446a935f19aef32b90b7445a77
 L
 网络/内容协商机制.md,b/e/beced076f3876e6d110ffa89d727e0d51f8998cf
 T
 $javascript/其他/正则表达式.md,4/2/4206054303f1c16012602440c5faa0bd7e21b57d
 L
 前端工程/性能优化.md,c/2/c26b11a830d2808391d94fe7c19e903a713ab74d
+F
+vue/vue3/reactive.html,5/2/52c0fae99efe7c6f7dc0dd86fa99b5ad9e183232
+D
+vue/vue3/update.html,a/3/a332f41b963f76d3da7d535fad7dda4760c7521c
+A
+vue/入门/SFC.md,1/f/1fe676022626c03fa6396da85153391e6b791a5d
+A
+vue/入门/jsx.md,4/d/4d16aa1f1d2f7a597570a6e51a7e41d8155bb252
+F
+node/CommonJs模块.md,c/f/cfb7beff8b1f88291324351e9d3b5c9c6b393289
+L
+vue/vue3/updateChildren.html,4/b/4ba8a79bea78ab264078a333b40b5a1ce39824cd
+Z
+*前端工程/打包构建工具/Webpack.md,3/4/343532e272df715c396b3fa339db70dbcac4a461
+;
+iframe.html,c/b/cb3c04372dd6f0609526d99d0a101ffc5fd677aa
+W
+'javascript/数据类型/类型判断.md,8/7/877d7ef1e0c9dca3cd9ac2288ae162b2b1740f91
+E
+html/标签/script.md,7/f/7f82306d4b7a53482e52e3e67c57e8a160e03847
+M
+vue/vue3/vue2和vue3区别.md,8/f/8f9a9334fae16a34cc8481b0d55cf6b3f8ba27a2
+I
+杂谈/阿里云部署.md,9/e/9e22462154a857aaf9139edbf86265da884aa649
+H
+计算机基础/Linux.md,1/9/19626bf82e820a3926d14c4c154d49f05646e636
+D
+vue/入门/render.md,d/f/dfd0e33965627837341d3537f0848184814caded
+S
+#vue/入门/vue-template-compiler.md,8/6/862122199b7a0524091250f487a4fb5ca6ef5c6d
+H
+vue/入门/vue-loader.md,f/2/f2c64ccf27dac66bb616d4c0ff7b90f53c40eea5
+K
+前端工程/cli/vue-cli.md,5/4/542a4302ae1e25d7d932a265ac0e0f197a8b15b3
+J
+网络/HTTP缓存机制.md,a/8/a80dcc75ad0b625d722245049fc734bfccbb890f
+S
+#javascript/es6/8.数组的拓展.md,5/2/52e563e2908ac6402f8dcedc1fb1d20d567e228d
+F
+前端工程/模块.md,d/7/d78ca094d93c4778a5385f879a48ec0579ae47b6
+U
+%浏览器/浏览器的前端路由.md,3/1/315140cfcb78d6617ae64222e5b429a1c2b97f00
+Q
+!javascript/数据类型/String.md,1/2/12361abb0f142b446a935f19aef32b90b7445a77
+A
+平时测试.html,3/8/3821de9fb9dd89c2c4c8e76827af6a8a8ebfd9ba
+b
+2数据可视化/canvas/CanvasRenderingContext2D.md,7/0/70ebabfc02ba3b57ea4648cc4e5014c23a9d09fb

@@ -1,6 +1,10 @@
 ## webpack
 * 原理：递归地构建
 
+## 使用webpack创建项目
+* https://webpack.docschina.org/guides/getting-started/
+
+
 ## loader和plugins的区别
 * loader是转换文件格式的工具
 * plugins是可以执行其他功能的插件,`拓展webpack的能力`

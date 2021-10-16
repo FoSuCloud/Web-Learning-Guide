@@ -6,7 +6,12 @@
 </head>
 <body>
     <canvas id="canvas" width="600" height="600"></canvas>
+    <input type="text" value="改变" onclick="change()">
     <script>
+
+        function change(){
+            drawGrid(100, 200, 'red', 0.5);
+        }
         // 获取canvas元素
         let canvas = document.getElementById('canvas');
         // 获取canvas绘图环境

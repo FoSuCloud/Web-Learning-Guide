@@ -5,24 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/网络/鉴权机制.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/其他/正则表达式.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/其他/正则表达式.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jq/01/05开关灯实例.html" beforeDir="false" afterPath="$PROJECT_DIR$/jq/01/05开关灯实例.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jq/01/09突出显示.html" beforeDir="false" afterPath="$PROJECT_DIR$/jq/01/09突出显示.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jq/02/03组合动画.html" beforeDir="false" afterPath="$PROJECT_DIR$/jq/02/03组合动画.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/入门/1.介绍.md" beforeDir="false" afterPath="$PROJECT_DIR$/node/入门/1.介绍.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/前端工程/gulp.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/打包构建工具/gulp.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/前端工程/package-json.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/package-json.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/前端工程/rollup.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/打包构建工具/rollup初始化.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/前端工程/前端工程.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/前端工程.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/前端工程/前端测试.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/前端测试.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/浏览器/cookie.md" beforeDir="false" afterPath="$PROJECT_DIR$/浏览器/cookie.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/网络/HTTP缓存机制.md" beforeDir="false" afterPath="$PROJECT_DIR$/网络/HTTP缓存机制.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/网络/https.md" beforeDir="false" afterPath="$PROJECT_DIR$/网络/https.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/计算机基础/Linux.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/Linux.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/计算机基础/git.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/git.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascript/es6/8.数组的拓展.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/es6/8.数组的拓展.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascript/数据类型/String.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/数据类型/String.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascript/数据类型/类型判断.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/数据类型/类型判断.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/入门/render.md" beforeDir="false" afterPath="$PROJECT_DIR$/vue/入门/render.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/docker.md" beforeDir="false" afterPath="$PROJECT_DIR$/运维部署/docker/docker.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/打包构建工具/Webpack.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/打包构建工具/Webpack.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/模块.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/模块.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/平时测试.html" beforeDir="false" afterPath="$PROJECT_DIR$/平时测试.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/canvas渲染.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/canvas渲染.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/入门.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/入门.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/应用/lineWidth.html" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/应用/lineWidth.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +69,8 @@
       <recent name="$PROJECT_DIR$/每日三题" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/运维部署/nginx" />
+      <recent name="$PROJECT_DIR$/运维部署/docker" />
       <recent name="$PROJECT_DIR$/前端工程/打包构建工具" />
       <recent name="$PROJECT_DIR$/每日三题" />
       <recent name="$PROJECT_DIR$/计算机基础" />
@@ -164,7 +161,26 @@
       <workItem from="1633264613372" duration="118000" />
       <workItem from="1633355817943" duration="161000" />
       <workItem from="1633437699197" duration="4354000" />
-      <workItem from="1633493163499" duration="3698000" />
+      <workItem from="1633493163499" duration="4062000" />
+      <workItem from="1633585662821" duration="3486000" />
+      <workItem from="1633653918211" duration="1378000" />
+      <workItem from="1633870538139" duration="2570000" />
+      <workItem from="1633913088148" duration="1321000" />
+      <workItem from="1633919006874" duration="317000" />
+      <workItem from="1633922314203" duration="684000" />
+      <workItem from="1633966192109" duration="129000" />
+      <workItem from="1633999150685" duration="2403000" />
+      <workItem from="1634030392237" duration="41000" />
+      <workItem from="1634032457929" duration="625000" />
+      <workItem from="1634037432949" duration="725000" />
+      <workItem from="1634086575697" duration="549000" />
+      <workItem from="1634089093966" duration="679000" />
+      <workItem from="1634134181698" duration="1357000" />
+      <workItem from="1634171993775" duration="1004000" />
+      <workItem from="1634197955655" duration="593000" />
+      <workItem from="1634261660035" duration="675000" />
+      <workItem from="1634269127043" duration="9592000" />
+      <workItem from="1634351181542" duration="344000" />
     </task>
     <servers />
   </component>
