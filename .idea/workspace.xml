@@ -7,17 +7,12 @@
     <list default="true" id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/es6/8.数组的拓展.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/es6/8.数组的拓展.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/数据类型/String.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/数据类型/String.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/数据类型/类型判断.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/数据类型/类型判断.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/入门/render.md" beforeDir="false" afterPath="$PROJECT_DIR$/vue/入门/render.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/前端工程/docker.md" beforeDir="false" afterPath="$PROJECT_DIR$/运维部署/docker/docker.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/前端工程/打包构建工具/Webpack.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/打包构建工具/Webpack.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/前端工程/模块.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/模块.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iframe.html" beforeDir="false" afterPath="$PROJECT_DIR$/iframe.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/平时测试.html" beforeDir="false" afterPath="$PROJECT_DIR$/平时测试.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/canvas渲染.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/canvas渲染.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/入门.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/入门.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据可视化/canvas/应用/lineWidth.html" beforeDir="false" afterPath="$PROJECT_DIR$/数据可视化/canvas/应用/lineWidth.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/计算机基础/Linux.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/Linux.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/计算机基础/shell/批量创建大量文件.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/shell/批量创建大量文件.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/运维部署/docker/docker.md" beforeDir="false" afterPath="$PROJECT_DIR$/运维部署/docker/docker.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/运维部署/nginx/nginx.md" beforeDir="false" afterPath="$PROJECT_DIR$/运维部署/nginx/nginx.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +175,18 @@
       <workItem from="1634197955655" duration="593000" />
       <workItem from="1634261660035" duration="675000" />
       <workItem from="1634269127043" duration="9592000" />
-      <workItem from="1634351181542" duration="344000" />
+      <workItem from="1634351181542" duration="1262000" />
+      <workItem from="1634441210938" duration="3679000" />
+      <workItem from="1634455895699" duration="2785000" />
+      <workItem from="1634478053287" duration="783000" />
+      <workItem from="1634517636236" duration="1777000" />
+      <workItem from="1634546629888" duration="393000" />
+      <workItem from="1634548305438" duration="379000" />
+      <workItem from="1634557604055" duration="1200000" />
+      <workItem from="1634563823214" duration="254000" />
+      <workItem from="1634604116990" duration="473000" />
+      <workItem from="1634780861348" duration="1540000" />
+      <workItem from="1634802621683" duration="3891000" />
     </task>
     <servers />
   </component>

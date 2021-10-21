@@ -225,8 +225,6 @@ B
 vue/vue3/init.html,2/5/2590e2edf80b61d57af9132201f44f84ee304009
 G
 vue/入门/响应式.md,a/8/a816cc9ad293e70aacc06bb68656992f3f983544
-a
-1计算机基础/shell/批量创建大量文件.md,4/0/40a7a5a8aaaa4276c7d8b3d107374447cbc34cba
 M
 数据可视化/svg/入门.md,8/2/82ed83983234b944d51858f26dc7af974aaee6f1
 N
@@ -255,8 +253,6 @@ L
 vue/vue3/updateChildren.html,4/b/4ba8a79bea78ab264078a333b40b5a1ce39824cd
 Z
 *前端工程/打包构建工具/Webpack.md,3/4/343532e272df715c396b3fa339db70dbcac4a461
-;
-iframe.html,c/b/cb3c04372dd6f0609526d99d0a101ffc5fd677aa
 W
 'javascript/数据类型/类型判断.md,8/7/877d7ef1e0c9dca3cd9ac2288ae162b2b1740f91
 E
@@ -265,8 +261,6 @@ M
 vue/vue3/vue2和vue3区别.md,8/f/8f9a9334fae16a34cc8481b0d55cf6b3f8ba27a2
 I
 杂谈/阿里云部署.md,9/e/9e22462154a857aaf9139edbf86265da884aa649
-H
-计算机基础/Linux.md,1/9/19626bf82e820a3926d14c4c154d49f05646e636
 D
 vue/入门/render.md,d/f/dfd0e33965627837341d3537f0848184814caded
 S
@@ -285,7 +279,23 @@ U
 %浏览器/浏览器的前端路由.md,3/1/315140cfcb78d6617ae64222e5b429a1c2b97f00
 Q
 !javascript/数据类型/String.md,1/2/12361abb0f142b446a935f19aef32b90b7445a77
-A
-平时测试.html,3/8/3821de9fb9dd89c2c4c8e76827af6a8a8ebfd9ba
 b
 2数据可视化/canvas/CanvasRenderingContext2D.md,7/0/70ebabfc02ba3b57ea4648cc4e5014c23a9d09fb
+Q
+!数据可视化/canvas/canva.html,f/0/f03873a69fa0525fc0bd5b1fb7355e90223874bd
+\
+,数据可视化/canvas/应用/lineWidth.html,1/5/15783b80508a9fc6899d17ebfc180de1f7317335
+P
+ 数据可视化/canvas/入门.md,3/5/35f6ba59a857640a7b968402754a678b20818a20
+V
+&数据可视化/canvas/canvas渲染.md,8/0/80a38a162ba50d85ef03e49739ef320b0d22e3fd
+O
+运维部署/nginx/代理版.md,3/1/31f132195cc83dc1c79ee0ef71eb05e0b76f9363
+U
+%运维部署/nginx/负载均衡版.md,0/c/0cc1b5c42cc98a018f5362aba360770b1f5a01e3
+M
+运维部署/前端/部署.md,d/e/de87facfce6e06264ecd8dddb5103fef279ae9b6
+a
+1计算机基础/shell/批量创建大量文件.md,4/0/40a7a5a8aaaa4276c7d8b3d107374447cbc34cba
+V
+&运维部署/服务器部署/安装.md,2/9/296ae2c00f8d198a5f2b281e5ad66d391614b0a3

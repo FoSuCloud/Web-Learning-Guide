@@ -9,13 +9,11 @@
 <body>
 
 <script>
-    top.postMessage('i am iframe', 'http://localhost:63342')
-
-    window.addEventListener('message',(e)=>{
-        if(e.origin === 'http://localhost:63342'){
-            console.log('iframe accept', e.data)
-        }
-    })
+    fetch("http://localhost:3000", {
+        withCredentials: true,
+    }).then((res) => {
+        console.log(res, "date:", Math.floor(new Date().getTime() / 1000));
+    });
 </script>
 </body>
 </html>

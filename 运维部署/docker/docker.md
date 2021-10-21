@@ -82,3 +82,22 @@ CMD npm run serve
 ---
 * `-it`参数，`分为-i和-t`,-i表示交互，没有-i,则bash不需要交互就会推出；-t是分配终端，没有-t,则docker进去后没法和bash进行交互
 `docker container run -it hello-world`
+---
+* `-p表示端口,-p 80:80表示本地80端口映射到容器的80端口`
+ * `-v ,VOLUME（共享文件系统）提供了映射，-v后面最后的ro表示(read only)只读权限,rw表示读写权限`
+* 下面是一个启动脚本
+* [参考]("https://docs.docker.com/engine/reference/run/")
+```bash
+#!/bin/bash
+docker run --name test-nginx-container \
+        -v $(pwd)/config/nginx.conf:/etc/nginx/nginx.conf:ro \
+        -v $(pwd)/config/js:/etc/nginx/js:ro \
+        -v $(pwd)/html:/usr/share/nginx/html \
+        -p 80:80 -d nginx
+```
+
+* 使用文件共享允许 Mac 上的本地目录与 Linux 容器共享。这对于在容器中运行和测试代码时在主机上的 IDE 中编辑源代码特别有用。
+* [mac共享文件]("https://docs.docker.com/desktop/mac/")
+* `本地修改代码，docker中运行的服务也可以同步修改`
+
+

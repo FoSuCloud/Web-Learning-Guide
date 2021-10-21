@@ -27,6 +27,13 @@
 * `chmod 765 => (4+2+1)(4+2)(4+1) => rwxrw-r-x`
 
 ## find查找文件或目录
+```text
+-type 按类型进行查找，d查找目录，f查找文件
+
+find . –type d –name [document]
+
+find . type f –name [filename]
+```
 ## grep在文件中查找字符串
 
 ## .tar.gz是tar的压缩文件
@@ -86,4 +93,8 @@ ll查看文件权限
 ## dd
 添加文件，但是还有很多用处
 
+## ps
+* `process status显示进程的状态`
 
+## grep
+* grep命令用于查找文件里符合条件的字符串。
