@@ -1,5 +1,5 @@
 ## 介绍
-* nginx又一个主进程和多个工作进程。
+* nginx有一个主进程和多个工作进程。
 * 主进程主要负责读取和评估配置，以及维护工作进程
 * 工作进程对请求进行实际处理。
 ---
@@ -9,6 +9,27 @@
 * nginx的配置文件是nginx.conf
 ---
 * [参考]("http://nginx.org/en/docs/")
+* nginx最初的设计是称为一个http服务器，旨在设计一个同时连接处理10000连接数的web处理器
+* 为了可以实现同时连接处理10000连接数的web服务器，nginx通过`基于事件的连接-处理机制`
+
+## 安装
+* `安装方式有本地安装，还有docker安装，由于本机就有docker容器，所以就直接使用docker来运行nginx`
+* docker安装，通过脚本的形式，
+* pull.sh, 让本地的docker先拉取nginx
+```bash
+#!/bin/bash
+docker pull nginx
+```
+* start.sh, 启动docker
+```bash
+#!/bin/bash
+docker run --name test-nginx-container \
+        -v $(pwd)/config/nginx.conf:/etc/nginx/nginx.conf:ro \
+        -v $(pwd)/config/js:/etc/nginx/js:ro \
+        -v $(pwd)/html:/usr/share/nginx/html \
+        -p 80:80 -d nginx
+```
+* [本地安装]("https://www.cnblogs.com/meng1314-shuai/p/8335140.html")
 
 ## nginx运行后
 * 执行可执行文件，就可以启动nginx了
@@ -46,6 +67,7 @@
 * `$() 是括号`
 * `nginx.conf每条语句结束要添加 ; 分号`
 * `$upstream_http_x_backend是html中 r.headersOut['X-backend'] = backend;`
+* `如果是使用docker部署服务，那么可以点开详情，查看控制台日志调试`
 
 ## 变量
 * 将请求重定向到的 URL。支持NGINX变量：$scheme\，$http_x_forwarded_proto\，$request_uri\， $host。

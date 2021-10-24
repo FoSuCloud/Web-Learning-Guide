@@ -39,8 +39,6 @@ Q
 !javascript/数据类型/Object.md,e/f/efc80ca012f1c4de6d0eaead1c841b943bcd7192
 K
 javascript/高级/Object.md,e/1/e1d62cd5773315a71ed47d007752494a6571409e
-?
-网络/fetch.md,8/7/8743102088a58756ee05076f9e476c8a842845b6
 O
 浏览器/3.HTTP请求流程.md,5/f/5f359c607413fb3566b88e6e9e16ffd78b4a1e13
 N
@@ -251,10 +249,6 @@ F
 node/CommonJs模块.md,c/f/cfb7beff8b1f88291324351e9d3b5c9c6b393289
 L
 vue/vue3/updateChildren.html,4/b/4ba8a79bea78ab264078a333b40b5a1ce39824cd
-Z
-*前端工程/打包构建工具/Webpack.md,3/4/343532e272df715c396b3fa339db70dbcac4a461
-W
-'javascript/数据类型/类型判断.md,8/7/877d7ef1e0c9dca3cd9ac2288ae162b2b1740f91
 E
 html/标签/script.md,7/f/7f82306d4b7a53482e52e3e67c57e8a160e03847
 M
@@ -299,3 +293,34 @@ a
 1计算机基础/shell/批量创建大量文件.md,4/0/40a7a5a8aaaa4276c7d8b3d107374447cbc34cba
 V
 &运维部署/服务器部署/安装.md,2/9/296ae2c00f8d198a5f2b281e5ad66d391614b0a3
+Q
+!javascript/其他/文件上传.md,0/6/067e02faca81d2af4223afe74b177afc1e832a3e
+H
+计算机基础/Linux.md,1/9/19626bf82e820a3926d14c4c154d49f05646e636
+O
+运维部署/jenkins/jenkins.md,f/9/f965d203477c2ba02fba30c9532dfe73ded84107
+I
+javascript/其他/ajax.md,e/2/e27c09801e8a6923d3be4f1345f29a19cdc602d5
+?
+网络/fetch.md,8/7/8743102088a58756ee05076f9e476c8a842845b6
+A
+平时测试.html,3/8/3821de9fb9dd89c2c4c8e76827af6a8a8ebfd9ba
+;
+iframe.html,c/b/cb3c04372dd6f0609526d99d0a101ffc5fd677aa
+:
+
+index.html,f/6/f6013a00b362253c64368d6eebc50ea2131754e2
+b
+2运维部署/nginx/前端项目部署-普通版.md,8/8/88c54ed4a49dcfc74c0e3313c035f89020ee51a3
+Z
+*前端工程/打包构建工具/Webpack.md,3/4/343532e272df715c396b3fa339db70dbcac4a461
+^
+.ts/高级用法/函数的参数多种情况.md,3/2/32ff6194133c8296c29cf69406ca896059ffd935
+W
+'javascript/数据类型/类型判断.md,8/7/877d7ef1e0c9dca3cd9ac2288ae162b2b1740f91
+K
+javascript/es6/10.Symbol.md,a/8/a805672ea0f15692131868a16dca8b675e1e71a1
+U
+%运维部署/docker/和nginx搭配.md,a/c/acfb179077e65323fb83271c7ce89a70aed35af9
+M
+运维部署/docker/安装.md,f/6/f6d7b3aac120e887d5ed74b18ca5f10d32935049

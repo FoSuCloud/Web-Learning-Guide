@@ -7,10 +7,8 @@
     <list default="true" id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe.html" beforeDir="false" afterPath="$PROJECT_DIR$/iframe.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/平时测试.html" beforeDir="false" afterPath="$PROJECT_DIR$/平时测试.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/计算机基础/Linux.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/Linux.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/计算机基础/shell/批量创建大量文件.md" beforeDir="false" afterPath="$PROJECT_DIR$/计算机基础/shell/批量创建大量文件.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascript/其他/ajax.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/其他/ajax.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/前端工程/打包构建工具/Webpack.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/打包构建工具/Webpack.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/运维部署/docker/docker.md" beforeDir="false" afterPath="$PROJECT_DIR$/运维部署/docker/docker.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/运维部署/nginx/nginx.md" beforeDir="false" afterPath="$PROJECT_DIR$/运维部署/nginx/nginx.md" afterDir="false" />
     </list>
@@ -187,6 +185,9 @@
       <workItem from="1634604116990" duration="473000" />
       <workItem from="1634780861348" duration="1540000" />
       <workItem from="1634802621683" duration="3891000" />
+      <workItem from="1634826696799" duration="884000" />
+      <workItem from="1634885952766" duration="2697000" />
+      <workItem from="1634973678614" duration="2279000" />
     </task>
     <servers />
   </component>

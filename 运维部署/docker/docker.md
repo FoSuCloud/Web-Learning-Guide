@@ -99,5 +99,3 @@ docker run --name test-nginx-container \
 * 使用文件共享允许 Mac 上的本地目录与 Linux 容器共享。这对于在容器中运行和测试代码时在主机上的 IDE 中编辑源代码特别有用。
 * [mac共享文件]("https://docs.docker.com/desktop/mac/")
 * `本地修改代码，docker中运行的服务也可以同步修改`
-
-

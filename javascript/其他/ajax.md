@@ -44,7 +44,7 @@ function ajax(options){
                     if(xhr.status >= 200 || xhr<=304){
                         console.log(xhr.getResponseHeader('content-type')) // text/html; charset=utf-8
                         console.log(xhr.getAllResponseHeaders())
-                        /**
+                        fetch/**
                          * content-length: 11
                          content-type: text/html; charset=utf-8
                          * */
