@@ -135,8 +135,6 @@ C
 node/api/process.md,d/7/d7b4042f00936d1eff3c9ce22a877bc9eefe06e6
 W
 '前端工程/打包构建工具/gulp.md,a/0/a0be695aa2e8bc4b5dfdb34234f31e46ff840c73
->
-node/代理.md,b/d/bd87f4ec41dfff82217fe32ae75f771457f05a44
 F
 计算机基础/git.md,b/b/bb0252bdcfc413b83557fbfffa7c5597c948e0cd
 S
@@ -263,8 +261,6 @@ H
 vue/入门/vue-loader.md,f/2/f2c64ccf27dac66bb616d4c0ff7b90f53c40eea5
 K
 前端工程/cli/vue-cli.md,5/4/542a4302ae1e25d7d932a265ac0e0f197a8b15b3
-J
-网络/HTTP缓存机制.md,a/8/a80dcc75ad0b625d722245049fc734bfccbb890f
 S
 #javascript/es6/8.数组的拓展.md,5/2/52e563e2908ac6402f8dcedc1fb1d20d567e228d
 F
@@ -301,15 +297,10 @@ O
 运维部署/jenkins/jenkins.md,f/9/f965d203477c2ba02fba30c9532dfe73ded84107
 I
 javascript/其他/ajax.md,e/2/e27c09801e8a6923d3be4f1345f29a19cdc602d5
-?
-网络/fetch.md,8/7/8743102088a58756ee05076f9e476c8a842845b6
 A
 平时测试.html,3/8/3821de9fb9dd89c2c4c8e76827af6a8a8ebfd9ba
 ;
 iframe.html,c/b/cb3c04372dd6f0609526d99d0a101ffc5fd677aa
-:
-
-index.html,f/6/f6013a00b362253c64368d6eebc50ea2131754e2
 b
 2运维部署/nginx/前端项目部署-普通版.md,8/8/88c54ed4a49dcfc74c0e3313c035f89020ee51a3
 Z
@@ -320,7 +311,11 @@ W
 'javascript/数据类型/类型判断.md,8/7/877d7ef1e0c9dca3cd9ac2288ae162b2b1740f91
 K
 javascript/es6/10.Symbol.md,a/8/a805672ea0f15692131868a16dca8b675e1e71a1
-U
-%运维部署/docker/和nginx搭配.md,a/c/acfb179077e65323fb83271c7ce89a70aed35af9
 M
 运维部署/docker/安装.md,f/6/f6d7b3aac120e887d5ed74b18ca5f10d32935049
+L
+javascript/高级/promise.md,4/c/4c3095d035934aad1109cf4fd721eb2cd45579a0
+L
+javascript/es6/14.Promise.md,1/1/11a731761ac321da6a92ab5efef6e6e919292841
+?
+网络/fetch.md,8/7/8743102088a58756ee05076f9e476c8a842845b6

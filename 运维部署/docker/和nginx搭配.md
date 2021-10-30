@@ -36,3 +36,14 @@ global {
  }
 }
 ```
+
+## 加入第三方模块
+* 在dockerfile中写配置导入
+* [参考]("https://www.bbsmax.com/A/pRdBQran5n/")
+
+## 案例
+* [参考]("https://github.com/javanan/tms-nginx-finder")
+* [redis例子]("https://jishuin.proginn.com/p/763bfbd658c5")
+* [nginx+lua+redis鉴权]("https://blog.csdn.net/suewar3/article/details/88752965?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.opensearchhbase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.opensearchhbase")
+* `调用后端接口或者连接redis服务器进行token鉴权！`
+## 使用docker-compose可以更加便捷的便携配置文件！

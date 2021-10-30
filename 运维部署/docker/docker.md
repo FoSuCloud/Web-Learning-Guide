@@ -87,6 +87,7 @@ CMD npm run serve
  * `-v ,VOLUME（共享文件系统）提供了映射，-v后面最后的ro表示(read only)只读权限,rw表示读写权限`
 * 下面是一个启动脚本
 * [参考]("https://docs.docker.com/engine/reference/run/")
+* `docker -t检测配置是否正确`
 ```bash
 #!/bin/bash
 docker run --name test-nginx-container \
@@ -99,3 +100,6 @@ docker run --name test-nginx-container \
 * 使用文件共享允许 Mac 上的本地目录与 Linux 容器共享。这对于在容器中运行和测试代码时在主机上的 IDE 中编辑源代码特别有用。
 * [mac共享文件]("https://docs.docker.com/desktop/mac/")
 * `本地修改代码，docker中运行的服务也可以同步修改`
+
+## pull超时
+* [参考]("https://www.cnblogs.com/ygh1229/p/6549062.html")

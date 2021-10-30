@@ -190,8 +190,10 @@ window.getComputedStyle(border).flexBasis
         }
 ```
 
-
-
+## 无法自动伸缩
+* display:flex父元素，子元素flex:1,还要加上min-width:0;
+* [参考]("https://stackoverflow.com/questions/39884226/why-does-an-element-with-flex-1-width-0-still-have-width")
+  https://makandracards.com/makandra/66994-css-flex-and-min-width
 
 
 

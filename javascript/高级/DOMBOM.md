@@ -454,3 +454,8 @@ function commonParentNode(oNode1, oNode2) {
 			// 转换为字符串
 			var str='['+JSON.stringify(domTree(div))+']';
 ```
+
+## append和appendChild区别
+1、append不支持ie;appendChild支持
+2、append支持传入多个节点，也支持传入字符串
+3、appendChild支持传入一个节点，不支持传入字符串

@@ -29,6 +29,8 @@ docker run --name test-nginx-container \
         -v $(pwd)/html:/usr/share/nginx/html \
         -p 80:80 -d nginx
 ```
+*  `  // todo 172.17.0.1是docker的默认地址。。。`
+* `所以nginx中配置代理，如果使用localhost可能会出错，要使用ifconfig找到的ip地址，否则可能localhost指向错误！`
 * [本地安装]("https://www.cnblogs.com/meng1314-shuai/p/8335140.html")
 
 ## nginx运行后
@@ -58,6 +60,9 @@ docker run --name test-nginx-container \
 ## vue项目部署
 * [参考]("https://blog.csdn.net/mocoe/article/details/83932268")
 
+## 例子
+* [参考]("https://github.com/dunwu/nginx-tutorial/blob/master/docs/nginx-configuration.md")
+
 ## 403
 * Nginx出现403 forbidden
 * `在nginx.conf首行添加 user root owner`
@@ -72,4 +77,16 @@ docker run --name test-nginx-container \
 ## 变量
 * 将请求重定向到的 URL。支持NGINX变量：$scheme\，$http_x_forwarded_proto\，$request_uri\， $host。
 * 变量必须用花括号括起来。例如：${host}${request_uri}。
+
+##  前端路由内部重定向
+```text
+        location / {
+                try_files $uri $uri/ @router;
+                }
+ 
+        location @router  {
+                rewrite ^.*$ /index.html last;
+                }
+```
+
 

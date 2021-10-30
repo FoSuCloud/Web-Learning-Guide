@@ -7,10 +7,13 @@
     <list default="true" id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/其他/ajax.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/其他/ajax.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/前端工程/打包构建工具/Webpack.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/打包构建工具/Webpack.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/属性/flex.md" beforeDir="false" afterPath="$PROJECT_DIR$/css/属性/flex.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascript/高级/DOMBOM.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/高级/DOMBOM.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/运维部署/docker/docker.md" beforeDir="false" afterPath="$PROJECT_DIR$/运维部署/docker/docker.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/运维部署/docker/和nginx搭配.md" beforeDir="false" afterPath="$PROJECT_DIR$/运维部署/docker/和nginx搭配.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/运维部署/nginx/nginx.md" beforeDir="false" afterPath="$PROJECT_DIR$/运维部署/nginx/nginx.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/运维部署/nginx/njs.md" beforeDir="false" afterPath="$PROJECT_DIR$/运维部署/nginx/njs.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,6 +191,17 @@
       <workItem from="1634826696799" duration="884000" />
       <workItem from="1634885952766" duration="2697000" />
       <workItem from="1634973678614" duration="2279000" />
+      <workItem from="1635037795163" duration="761000" />
+      <workItem from="1635123877001" duration="3578000" />
+      <workItem from="1635147927951" duration="2237000" />
+      <workItem from="1635215658127" duration="930000" />
+      <workItem from="1635326403833" duration="612000" />
+      <workItem from="1635398171379" duration="2829000" />
+      <workItem from="1635419275776" duration="780000" />
+      <workItem from="1635424430946" duration="736000" />
+      <workItem from="1635479161113" duration="471000" />
+      <workItem from="1635495035197" duration="1663000" />
+      <workItem from="1635563550793" duration="703000" />
     </task>
     <servers />
   </component>

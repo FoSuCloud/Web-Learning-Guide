@@ -3,8 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        #root{
+            width: 600px;
+            overflow: hidden;
+            height: 200px;
+            border: 1px solid gray;
+        }
+        .parent{
+            display: inline-block;
+            background-color: red;
+        }
+        .child{
+            display: inline-block;
+            width: 3000px;
+            height: 200px;
+        }
+    </style>
 </head>
 <body>
-    <div>title</div>
+    <div id="root">
+        <div class="parent">
+            <div class="child"></div>
+        </div>
+    </div>
+    <script>
+
+    </script>
 </body>
 </html>
