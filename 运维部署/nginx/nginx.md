@@ -32,12 +32,16 @@ docker run --name test-nginx-container \
 *  `  // todo 172.17.0.1是docker的默认地址。。。`
 * `所以nginx中配置代理，如果使用localhost可能会出错，要使用ifconfig找到的ip地址，否则可能localhost指向错误！`
 * [本地安装]("https://www.cnblogs.com/meng1314-shuai/p/8335140.html")
+---
+* `由于本地安装需要手动编译，需要安装很多东西才可以使用njs等功能，所以使用docker安装方式`
+
 
 ## nginx运行后
 * 执行可执行文件，就可以启动nginx了
 * nginx运行后！`通过s(信号)来控制它`
 1、nginx -s reload `重新加载配置文件`
 2、nginx -s stop 快速关闭
+`关闭提示没有pid，可能是因为还没有开启，所以获取不到进程id(pid)`
 3、nginx -s quit 优雅关闭
 4、nginx -s reopen `重新加载日志文件`
 

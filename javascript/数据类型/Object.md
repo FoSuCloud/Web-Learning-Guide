@@ -70,3 +70,27 @@ for(let i in child){console.log(i)}
 // VM701:1 a
 ```
 * `解决办法是添加一个hasOwnProperty判断`
+
+## Object.setPrototypeOf()
+* `Object.setPrototypeOf是一个把对象的原型指向另一个对象的方法`
+* `相比于Object.prototype.__proto__，被认为是更加适合修改对象原型的方法`
+* `但是由于Object.setPrototypeOf是es6的方法，所以可能存在兼容性问题，一般需要和__proto__方法一起兼容使用`
+---
+* `另外由于js引擎优化的问题，修改对象的原型对象是一个很慢的过程，因为任何可以访问到该prototype的对象都可能会改变该原型`
+* `所以Object.setPrototypeOf方法一般和Object.create方法搭配使用！`
+```js
+        let parent ={a:1,b:333,fn:function (){
+            return this.a
+        }}
+        let ch = Object.create(parent)
+        let obj = {c:'ccc'}
+        Object.setPrototypeOf(obj,ch)
+        console.log(obj)
+        /**
+         * c: "ccc"
+         [[Prototype]]: Object
+         todo 虽然我们可以使用 Object.setPrototypeOf(obj,parent)
+         去替代Object.setPrototypeOf(obj,ch);但是指向一个Object.create创建出来的对象会更好！
+         * */
+        console.log(obj.fn()) // 1
+```

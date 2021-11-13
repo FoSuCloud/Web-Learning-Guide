@@ -28,6 +28,18 @@
         </div>
     </div>
     <script>
+        let parent ={a:1,b:333,fn:function (){
+            return this.a
+        }}
+        let ch = Object.create(parent)
+        let obj = {c:'ccc'}
+        Object.setPrototypeOf(obj,ch)
+        console.log(obj)
+        /**
+         * c: "ccc"
+         [[Prototype]]: Object
+         * */
+        console.log(obj.fn()) // 1
 
     </script>
 </body>

@@ -35,8 +35,6 @@ C
 网络/虚拟机.md,5/e/5e4d0cd2cc5e854b0bfb9ae1eaa4bd86dc11a975
 K
 javascript/高级/事件.md,c/8/c887f641f3830b349bc252a6318693e9b16b04a3
-Q
-!javascript/数据类型/Object.md,e/f/efc80ca012f1c4de6d0eaead1c841b943bcd7192
 K
 javascript/高级/Object.md,e/1/e1d62cd5773315a71ed47d007752494a6571409e
 O
@@ -76,11 +74,6 @@ O
 小demo/12.倒计时动画.html,5/d/5dc29dcc99c9a649d03aaa1f453e8e0c8e421fe8
 I
 小demo/15.轮播图.html,2/7/2780df9957b5f570e5fddd4b83b6d9827bffcd3c
-:
-
-.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-<
-package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
 F
 node/工程化/gzip.md,5/4/543ea37de6aa2270510053c9aa065b7f9541c28b
 C
@@ -291,8 +284,6 @@ V
 &运维部署/服务器部署/安装.md,2/9/296ae2c00f8d198a5f2b281e5ad66d391614b0a3
 Q
 !javascript/其他/文件上传.md,0/6/067e02faca81d2af4223afe74b177afc1e832a3e
-H
-计算机基础/Linux.md,1/9/19626bf82e820a3926d14c4c154d49f05646e636
 O
 运维部署/jenkins/jenkins.md,f/9/f965d203477c2ba02fba30c9532dfe73ded84107
 I
@@ -319,3 +310,23 @@ L
 javascript/es6/14.Promise.md,1/1/11a731761ac321da6a92ab5efef6e6e919292841
 ?
 网络/fetch.md,8/7/8743102088a58756ee05076f9e476c8a842845b6
+M
+运维部署/docker/docker.md,2/3/233f691d97aafbf863b360701f7695cfd8f2b018
+B
+node/node简介.md,b/4/b479316bd3b104a02410c9578a4d89db8194b222
+>
+node/代理.md,b/d/bd87f4ec41dfff82217fe32ae75f771457f05a44
+U
+%运维部署/docker/和nginx搭配.md,a/c/acfb179077e65323fb83271c7ce89a70aed35af9
+J
+网络/HTTP缓存机制.md,a/8/a80dcc75ad0b625d722245049fc734bfccbb890f
+I
+运维部署/nginx/njs.md,2/7/274477126f71374248425de99562184f4cab7dc0
+B
+css/属性/flex.md,d/0/d09609577d4bfc4cccbd24c1efa385dc54591d50
+C
+网络/websocket.md,1/7/170f6c756d6a22c12fbc33d43bcecff5404ea0fb
+O
+javascript/高级/Node节点.md,4/0/409479c6616052e9b50a46788227087f29c55787
+K
+javascript/高级/DOMBOM.md,d/4/d47b8bfa5991bd7c7328331664665d7bd9372cf0
