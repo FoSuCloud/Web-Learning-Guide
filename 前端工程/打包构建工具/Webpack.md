@@ -4,6 +4,11 @@
 ## 使用webpack创建项目
 * https://webpack.docschina.org/guides/getting-started/
 
+#### .staging
+* `.staging文件夹是下载过程中产生的链接目录，在下载完成后会自动销毁`
+
+#### .cache
+* `.cache文件夹是启动之后产生的缓存目录，代码的增量更新也是更新该部分的代码，并且运行状态实际使用的也是该部分的代码`
 
 ## loader和plugins的区别
 * loader是转换文件格式的工具
