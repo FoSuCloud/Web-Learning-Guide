@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abb8f484-ef99-412e-a4b7-aee2080bade8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/数据结构与算法/栈.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/1/81b60ed5c2c05096336853b25e0525d1e1fb0f28" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/1/51b6f577e2469a8c7498eaa9fb112b9904c4066c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/8/88ce0a6f4b03d9000cf7c8ce85d6d25551114a4d" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/其他/正则表达式.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/其他/正则表达式.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/入门/vue-loader.md" beforeDir="false" afterPath="$PROJECT_DIR$/vue/入门/vue-loader.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/前端工程/打包构建工具/Webpack.md" beforeDir="false" afterPath="$PROJECT_DIR$/前端工程/打包构建工具/Webpack.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/浏览器/8.栈溢出.md" beforeDir="false" afterPath="$PROJECT_DIR$/浏览器/8.栈溢出.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/网络/https.md" beforeDir="false" afterPath="$PROJECT_DIR$/网络/https.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +209,8 @@
       <workItem from="1636814370221" duration="1837000" />
       <workItem from="1636855639253" duration="7617000" />
       <workItem from="1636894932878" duration="3152000" />
-      <workItem from="1636937882723" duration="1793000" />
+      <workItem from="1636937882723" duration="3926000" />
+      <workItem from="1636988039054" duration="1779000" />
     </task>
     <servers />
   </component>
