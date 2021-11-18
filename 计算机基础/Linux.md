@@ -34,6 +34,11 @@ find . –type d –name [document]
 
 find . type f –name [filename]
 ```
+1. 查找文件
+`find / -name nginx.conf  表示以/为根目录查找名称为nginx.conf的文件`
+2. 查找目录
+`find ~/Documents/blog/blog -type d -name vue 表示以~/Documents/blog/blog为根目录查找文件夹名称为vue的文件夹`
+
 ## grep在文件中查找字符串
 
 ## .tar.gz是tar的压缩文件
