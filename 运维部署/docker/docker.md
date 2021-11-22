@@ -103,3 +103,9 @@ docker run --name test-nginx-container \
 
 ## pull超时
 * [参考]("https://www.cnblogs.com/ygh1229/p/6549062.html")
+
+## 切换目录
+* `docker中使用RUN cd .. 是无法切换到上层工作目录的`
+* `应该使用WORKDIR /root/a 来切换工作目录`
+
+
