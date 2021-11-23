@@ -4,7 +4,7 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "### 再使用凸优化函数optim寻找最佳的数值分割点， Quadratic_Weighted_Kappa指标值可提升4个百分点"
+        "### 再使用凸优化函数optim寻找最佳的数值分割点"
       ]
     },
     {
@@ -24,7 +24,7 @@
         }
       ],
       "source": [
-        "len(evals_process['train'][\"rmse\"])   #训练了700个epoch"
+        "len(evals_process['train'][\"rmse\"])   #训练了500个epoch"
       ]
     }
   "nbformat": 4,
