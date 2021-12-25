@@ -1,22 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-  <meta charset="utf8" />
-  <head>
-    <title>测试</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <script>
-      // fetch("http://localhost:3000", {
-      //   withCredentials: true,
-      // }).then((res) => {
-      //   console.log(res, "date:", Math.floor(new Date().getTime() / 1000));
-      // });
-    </script>
-  </body>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8" />
+  <!-- Make sure to load the highlight.js CSS file before the Diff2Html CSS file -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/github.min.css" />
+  <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css"
+  />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
+</head>
+<script>
+  const diffString = `
+diff --git a/src/page/login/Login.tsx b/src/page/login/Login.tsx
+index 36814d6..6bf20ba 100644
+--- a/src/page/login/Login.tsx
++++ b/src/page/login/Login.tsx
+@@ -192,9 +192,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
+             this.saveProfile(data);
+             return;
+         }
+-
+         let path = RoutePath.SAMPLE_DATA_LIST;
+-
+         if (
+             GlobalConstant.RedirectPage &&
+             GlobalConstant.RedirectUserId !== undefined &&
+@@ -250,6 +248,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
+                                 autoComplete="off"
+                                 onChange={(e) => this.onChangeForm('username', e)}
+                                 placeholder="用户名"
++                                onBlur={() => this.validateUserName()}
+                             />
+                         </Form.Item>
+                         <Form.Item name="pwd">`;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var targetElement = document.getElementById('myDiffElement');
+    var configuration = {
+      drawFileList: true,
+      fileListToggle: false,
+      fileListStartVisible: false,
+      fileContentToggle: false,
+      matching: 'lines',
+      outputFormat: 'side-by-side',
+      synchronisedScroll: true,
+      highlight: true,
+      renderNothingWhenEmpty: false,
+    };
+    var diff2htmlUi = new Diff2HtmlUI(targetElement, diffString, configuration);
+    diff2htmlUi.draw();
+    diff2htmlUi.highlightCode();
+  });
+  //def3d788028c6b26653b483a39bdce801f50d47d
+  // 8874bc6637dba1aa55601934d49c2ceda9df6e35
+</script>
+<body>
+<div id="myDiffElement"></div>
+</body>
 </html>

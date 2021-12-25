@@ -4,31 +4,31 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        #root{
-            width: 600px;
-            overflow: hidden;
-            height: 200px;
-            border: 1px solid gray;
-        }
-        .parent{
-            display: inline-block;
-            background-color: red;
-        }
-        .child{
-            display: inline-block;
-            width: 3000px;
-            height: 200px;
-        }
+
     </style>
 </head>
 <body>
-    <div id="root">
-        <div class="parent">
-            <div class="child"></div>
-        </div>
-    </div>
-    <script>
 
+    <script>
+        function redirect(domain_str, path){
+            let domainArr = window.location.host.split(".")
+            if(!domainArr || !domainArr.length || domainArr.length<2){
+                return;
+            }
+            console.log(domainArr)
+            let domain = domainArr[1].toLowerCase();
+            console.log(domain)
+            if(domain_str.indexOf(domain) === -1){
+                console.log(domain_str)
+                let arr = window.location.pathname.split(path);
+                if(!arr || !arr.length || arr.length<2){
+                    return;
+                }
+                console.log(arr)
+                window.location.href =domain_str+path+arr[1]+window.location.search;
+            }
+        }
+        redirect("https://www.anitazoey.com","/checkout")
     </script>
 </body>
 </html>
