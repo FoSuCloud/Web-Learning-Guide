@@ -14,3 +14,40 @@
 
 ## 查看模块state的方法:`this.$store.state.模块名`
 ## 调用模块的方法不需要分了。。`this.$store.dispatch('asyncChangeUser',res.data.data)`
+
+## vuex实现原理
+* [参考]("https://juejin.cn/post/6844904062240948231")
+* [实现]("https://juejin.cn/post/6855474001838342151")
+* 核心理念：
+1. vuex本质上就是一个对象
+2. vuex对象有两个属性，一个是install方法,一个是store类
+3. install方法的作用是把store类的实例挂载到vue实例全局上
+
+* 思路：
+1. `在vue的beforeCreated生命周期(该周期还没有进行数据代理)注入了this.$store对象`
+2. `store对象会创建一个属性_vm,在该属性上挂载一个vue实例`
+```js
+// src/store.js
+function resetStoreVM (store, state, hot) {
+  Vue.config.silent = true
+  store._vm = new Vue({
+    data: {
+      $$state: state
+    },
+    computed
+  })
+}
+```
+* `通过劫持data.$$state的属性变化，将数据放入组件中！实现响应式更新`
+* 响应式监听还需要以下代码
+```js
+// 当获取state时，返回以双向绑定的$$sate
+var prototypeAccessors$1 = { state: { configurable: true } };
+
+prototypeAccessors$1.state.get = function () {
+  return this._vm._data.$$state
+};
+
+// 将state定义在原型中
+Object.defineProperties( Store.prototype, prototypeAccessors$1 );
+```
