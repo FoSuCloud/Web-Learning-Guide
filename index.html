@@ -4,31 +4,14 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-
     </style>
 </head>
 <body>
+<div class='main'>
 
-    <script>
-        function redirect(domain_str, path){
-            let domainArr = window.location.host.split(".")
-            if(!domainArr || !domainArr.length || domainArr.length<2){
-                return;
-            }
-            console.log(domainArr)
-            let domain = domainArr[1].toLowerCase();
-            console.log(domain)
-            if(domain_str.indexOf(domain) === -1){
-                console.log(domain_str)
-                let arr = window.location.pathname.split(path);
-                if(!arr || !arr.length || arr.length<2){
-                    return;
-                }
-                console.log(arr)
-                window.location.href =domain_str+path+arr[1]+window.location.search;
-            }
-        }
-        redirect("https://www.anitazoey.com","/checkout")
-    </script>
+</div>
+<script type="module">
+import './text.js'
+</script>
 </body>
 </html>
