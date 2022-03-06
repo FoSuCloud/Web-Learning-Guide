@@ -35,3 +35,12 @@
 1. `禁止浏览器前进和后退的方法:1.window.history.go(0)  2.设置window.history.forward(1)禁止前进，window.history.forward(-1)禁止后退`
 
 ## window是浏览器的顶层对象，而node的顶层对象是global
+
+## online
+* `当浏览器能够访问网络，并且navigator.online为true时，online事件触发`
+* 注意: 该事件不能用来决定某个网站可否访问.网站自身问题或防火墙或GFW都依然有可能阻止该网站的访问.
+* window.online
+
+## offline
+* `当navigator.onLine属性更改并变为false时，或者body上的offline事件被触发时,也就是离线状态`
+* window.offline
