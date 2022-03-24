@@ -68,12 +68,13 @@ find . type f –name [filename]
 
 ## netstart用于打印网络的状态
 ## top用于获取本机的cpu使用率
-## uptime用于打印系统运行时间和系统平均负载
+## uptime用于打印系统运行时间和系统平均负f载
 ## export用于设置环境变量
 ## env用于查询环境变量
 ## echo用于显示一段文字
 ## cat用于查看文件内容，创建文件，文件合并，追加文件等
 
+## tail -100f error.log 查看error.log文件的最后100行
 
 ## 链接
 * 硬链接就是同`一个文件使用了多个别名`
