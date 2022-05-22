@@ -217,5 +217,8 @@ server.listen(3000);
 ## 心跳包
 * 在websocket使用http完成握手之后，任意时刻，客户端或者服务器端都可以任意发起ping，然后接收方就要响应pong用来确保对方还保持着连接
 * `一般是服务器端用心跳包来确保客户端包还保持着连接`
-
+* Ping表示发送方，pong表示接收方；例如浏览器发送信息给服务器，那么浏览器发送ping,服务器返回pong;
 * 参考：[http://www.ruanyifeng.com/blog/2017/05/websocket.html]("webSocket")
+
+## 断线重连
+* 在接收到close事件的时候，重新发送connect,尝试连接（例如重新尝试3次）

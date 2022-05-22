@@ -109,3 +109,6 @@ docker run --name test-nginx-container \
 * `应该使用WORKDIR /root/a 来切换工作目录`
 
 
+## 保存
+1. docker save保存镜像，使用docker load加载
+2. docker export保存容器，使用 docker import加载
