@@ -77,3 +77,6 @@
 
 ## .gitignore文件不生效？
 * `试一下清除git缓存 git rm -r --cached .`
+
+## 查看当前tag
+* git describe --tags `git rev-list --tags --max-count=1`

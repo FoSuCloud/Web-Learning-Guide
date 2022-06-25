@@ -249,7 +249,7 @@ https://juejin.cn/post/6844903764566999054
 ## CDN缓存
 * CDN和反向代理的区别？`反向代理只是CDN的一种技术，只是CDN的其中一部分！`
 * CDN是内容分发网络`content delivery network`，`可以理解为12306在每个城镇的代理点，有了代理点，想要响应请求就可以直接在代理点响应，而不需要在北京这个总站响应！`
-* CDN的优势；：
+* CDN的优势：
 1）解决了跨运营商和跨地域访问的问题，访问延时大大降低
 2）大部分请求在CDN边缘节点完成，CDN起到了分流的作用，减轻了源站的负担
 * https://www.haorooms.com/post/cache_huancunliyong

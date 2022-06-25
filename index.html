@@ -1,24 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
+<meta charset="UTF-8">
 <head>
-    <meta charset="UTF-8">
-    <title>CSS动画left</title>
-    <style>
-        body {
-            padding: 30px;
-            text-align: center;
-        }
-    </style>
+    <title></title>
 </head>
 <body>
-<div class="container">
-    <img src="https://localhost:3000/1.0/competition/info/image?id=206" alt="">
-    <img src="https://img1.baidu.com/it/u=3122194179,3768265727&fm=253&fmt=auto&app=120&f=JPEG?w=888&h=500" alt="">
-    <img src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/wechat.ce329e6.png" alt="">
-</div>
+<script src="https://unpkg.com/d3-dag@0.11.1"></script>
 <script>
-
+    if (window.requestIdleCallback === undefined) {
+        // On Safari, requestIdleCallback is not available, so we use replacement functions for `idleCallbacks`
+        // See: https://developer.mozilla.org/en-US/docs/Web/API/Background_Tasks_API#falling_back_to_settimeout
+        // eslint-disable-next-line @typescript-eslint/ban-types
+        window.requestIdleCallback = function (handler) {
+            let startTime = Date.now();
+            return setTimeout(function () {
+                handler({
+                    didTimeout: false,
+                    timeRemaining: function () {
+                        return Math.max(0, 50.0 - (Date.now() - startTime));
+                    }
+                });
+            }, 1);
+        };
+        window.cancelIdleCallback = function (id) {
+            clearTimeout(id);
+        };
+    }
+    window.requestIdleCallback(myNonEssentialWork, { timeout: 2000 });
+    // 任务队列
+    const tasks = [
+        () => {
+            console.log("第一个任务");
+        },
+        () => {
+            console.log("第二个任务");
+        },
+        () => {
+            console.log("第三个任务");
+        },
+    ];
+    function myNonEssentialWork (deadline) {
+        // 如果帧内有富余的时间，或者超时
+        while ((deadline.timeRemaining() > 0 || deadline.didTimeout) && tasks.length > 0) {
+            work();
+        }
+         if (tasks.length > 0){
+             window.requestIdleCallback(myNonEssentialWork);
+         }
+    }
+    function work () {
+        tasks.shift()();
+        console.log('执行任务');
+    }
 </script>
+
 </body>
 </html>
 

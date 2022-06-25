@@ -25,6 +25,7 @@
 
 ## find查找文件或目录
 ## grep在文件中查找字符串
+* pip list | grep jupyterlab
 
 ## .tar.gz是tar的压缩文件
 ## .gz是另一种压缩文件，不一样的！

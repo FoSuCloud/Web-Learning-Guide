@@ -181,3 +181,5 @@ const start = () => {
 * [https://blog.csdn.net/weixin_44691608/article/details/115315566]("区别")
 * [https://juejin.cn/post/6844903877976981517](丢帧)
 * [https://blog.csdn.net/think_A_lot/article/details/114165916](图片)
+
+## requestAnimationFrame在每一帧的执行时机

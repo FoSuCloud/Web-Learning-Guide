@@ -3,6 +3,15 @@
 * webAssembly官网:[https://webassembly.org/getting-started/developers-guide/]("官网")
 * 但是官网的教程都是指向mdn
 
+## webAssembly是什么
+* webAssembly是一种新的编码方式。可以在现代浏览器中运行，是一种`低级的类汇编语言`，具有紧凑的二进制格式
+* 可以以接近原生的性能运行，`可以为c/c++等语言提供一个编译目标`
+* `webAssembly可以和js一起运行，共存，共同在浏览器工作`
+
+## webAssembly的作用
+1. 可以把c,c++转为js语言，从而可以把这些语言的项目搬到前端web中
+
+
 ## 安装emsdk
 * 首先需要有git,xcode,cmake
 * `本机没有cmake，所以进行安装`
