@@ -51,6 +51,11 @@ docker run --name test-nginx-container \
 * 如果成功，`主进程将启动新的工作进程，并向旧的工作进程发送信号，请求它们关闭`
 * 如果失败，`主进程将回滚更改并继续使用旧的配置`。
 
+## 配置
+* 如果安装好了nginx，需要开启debug
+* `cd /usr/local/etc/nginx`
+* `./configure --with-debug`
+
 ## 信号执行
 * 默认情况下，主进程的pid将会写入nginx.pid文件中
 * 我们可以通过`ps -ax | grep nginx`，查看nginx进程的pid信息（主进程和工作进程）

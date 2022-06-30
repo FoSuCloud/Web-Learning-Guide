@@ -2,6 +2,7 @@
 * 参考[https://www.ruanyifeng.com/blog/2017/09/asmjs_emscripten.html]("参考")
 * webAssembly官网:[https://webassembly.org/getting-started/developers-guide/]("官网")
 * 但是官网的教程都是指向mdn
+* ["https://mp.weixin.qq.com/s/dEOIArtK6DIfewIva2zLKw"]("webAssembly架构")
 
 ## webAssembly是什么
 * webAssembly是一种新的编码方式。可以在现代浏览器中运行，是一种`低级的类汇编语言`，具有紧凑的二进制格式
