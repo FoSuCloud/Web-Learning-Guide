@@ -5,7 +5,7 @@
 * ["https://mp.weixin.qq.com/s/dEOIArtK6DIfewIva2zLKw"]("webAssembly架构")
 
 ## webAssembly是什么
-* webAssembly是一种新的编码方式。可以在现代浏览器中运行，是一种`低级的类汇编语言`，具有紧凑的二进制格式
+* webAssembly是一种新的编码方式。可以在现代浏览器中运行，是一种`低级的类汇编语言`，具有紧凑的`二进制格式`
 * 可以以接近原生的性能运行，`可以为c/c++等语言提供一个编译目标`
 * `webAssembly可以和js一起运行，共存，共同在浏览器工作`
 
@@ -39,3 +39,10 @@ emcc hello.cc //emcc命令用于编译源码，默认生成a.out.wasm 和 a.out.
 node a.out.js // 执行out.js
 ```
 * `最后打印hello world`
+
+## c语言->html
+* [https://developer.mozilla.org/en-US/docs/WebAssembly/C_to_wasm]("使用html")
+
+## 项目参考
+* ffmpeg [https://github.com/ffmpegwasm/ffmpeg.wasm]("多媒体")
+* [https://github.com/bobbiec/react-wasm-demo]("react-demo")
