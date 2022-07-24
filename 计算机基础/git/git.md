@@ -80,3 +80,6 @@
 
 ## 查看当前tag
 * git describe --tags `git rev-list --tags --max-count=1`
+
+## git log
+* 查看log记录，`git log --pretty=oneline用于只展示一行，也就是只展示message`

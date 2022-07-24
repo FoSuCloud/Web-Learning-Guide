@@ -32,6 +32,24 @@ v1.8.5.5
 
 ## 附注标签
 * `git tag -a xxx 就是生成了一条附注标签`
+* 流程
+```text
+git add .
+git commit -m "feat:添加git tag"
+git tag -a 测试gitTag
+git push
+```
+* 查看tag信息
+* `git show 测试gitTag`
 
+## 轻量标签
+* `git tag "xxx" 不需要-a,直接使用 git tag ""就可以打一个轻量标签`
+* 如` git tag 轻量`
+* `git show 轻量`
+* `可以看到少了一些信息`
 
-
+## 后期打标签
+* 首先查看log `git log --pretty==oneline`
+* 然后使用标注标签的方式，但是-a后面需要加上该log的commitId
+* `git tag -a 测试后期打标签 9fceb02`
+* 然后git tag就可以看到该tag记录了
