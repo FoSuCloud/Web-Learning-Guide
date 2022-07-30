@@ -40,6 +40,7 @@ find . type f –name [filename]
 `find ~/Documents/blog/blog -type d -name vue 表示以~/Documents/blog/blog为根目录查找文件夹名称为vue的文件夹`
 
 ## grep在文件中查找字符串
+* `ktb xxxpod | grep Status`,(例如查看某个pod当前实时日志)
 
 ## .tar.gz是tar的压缩文件
 ## .gz是另一种压缩文件，不一样的！
