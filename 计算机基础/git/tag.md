@@ -53,3 +53,15 @@ git push
 * 然后使用标注标签的方式，但是-a后面需要加上该log的commitId
 * `git tag -a 测试后期打标签 9fceb02`
 * 然后git tag就可以看到该tag记录了
+
+## 推送tag到远程
+1.push单个tag，命令格式为：git push origin [tagname]
+例如：
+git push origin v1.0 #将本地v1.0的tag推送到远端服务器
+
+## 删除tag
+* 注意加一个冒号
+```text
+git tag -d 1.0.0
+git push origin :1.0.0
+```

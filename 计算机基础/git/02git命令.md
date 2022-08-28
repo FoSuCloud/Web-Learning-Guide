@@ -122,3 +122,7 @@ HEAD:
 
 `注意git push是对于线上代码的，非常重要！一般合作的时候使用git push origin master(推送到同名分支)`
 [参考](https://www.cnblogs.com/qianqiannian/p/6008140.html)
+
+## git clone 指定分支
+* git clone -b branch-name git地址
+* -b 后面跟着分支名称

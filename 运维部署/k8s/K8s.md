@@ -64,6 +64,7 @@
 * Ingress 是对集群中服务的外部访问进行管理的 API 对象，典型的访问方式是 HTTP。
 * Ingress 可以提供负载均衡、SSL 终结和基于名称的虚拟托管。
 * `通俗来讲，就是提供了外网入口`
+* Ingress 控制器有多种实现，比较常见的是基于 Nginx 实现的。也就是ingress-nginx
 
 ## service
 
