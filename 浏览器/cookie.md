@@ -12,6 +12,7 @@
 2. `发给后端的cookie是没有携带expires,domain等信息的！`
 3. `后端的set-cookie字段也是具有expires,domain,path,secure,httpOnly等字段的`
 4. `删除cookie很简单，只需要设置expires为-1，过期就好了！`
+5. cookie是区分域，不区分端口的，所以同一个主机，不同端口的两个服务，如果存在同名的cookie那么就会导致冲突
 
 ## cookie的封装
 * `关于封装，还需要注意编码和默认值`，[参考]("https://github.com/js-cookie/js-cookie")

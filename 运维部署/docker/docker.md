@@ -112,3 +112,24 @@ docker run --name test-nginx-container \
 ## 保存
 1. docker save保存镜像，使用docker load加载
 2. docker export保存容器，使用 docker import加载
+
+## 环境变量
+* 由EVN指令声明的环境变量也可以用在Dockerfile的一些指令中作为变量使用。转义符也将类似变量的语法转义为语句。
+* 在Dockerfile引用环境变量可以使用$variable_name或${variable_name}。
+
+## if判断
+```text
+# 根据变量判断是哪个环境，例如开发环境、调试环境、公网环境
+RUN if [ $TYPE == "dev" ]; \
+    then \
+        npm run build; \
+    fi \
+    if [ $TYPE == 'test' ]; \
+    then \
+        npm run test-build; \
+    fi
+    if [ $TYPE == 'publish' ]; \
+    then \
+        npm run publish-build; \
+    fi
+```
