@@ -133,3 +133,10 @@ RUN if [ $TYPE == "dev" ]; \
         npm run publish-build; \
     fi
 ```
+
+## 网络
+* `/sys/class/net目录是容器的网卡`
+* `cat /sys/class/net/eth0/iflink 查看容器的eth0网卡的连接情况`
+
+## ip link
+* 查看宿主机的网卡信息
