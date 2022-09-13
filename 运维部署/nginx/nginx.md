@@ -124,3 +124,10 @@ docker run --name test-nginx-container \
                 rewrite ^.*$ /index.html last;
                 }
 ```
+
+## https
+* nginx没有自己去实现https协议的tls/ssl协议层，而是通过调用操作系统的openssl库来实现tls/ssl协议。
+* 为了支持https,`nginx需要对Https和http进行区分，所以http协议是80端口，https协议是443端口`
+* `nginx会先处理tls/ssl通信之后，再去接着处理Http数据！(注意顺序)`
+* `浏览器也是一样的，没有自己实现tls/ssl协议，也是通过调用操作系统的openssl库来实现tls/ssl协议(可能不同版本不同浏览器处理不太一致，但是都是调用类似openssl的库来处理)`
+

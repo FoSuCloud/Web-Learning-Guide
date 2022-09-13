@@ -15,3 +15,11 @@
 * `让js文件中也可以使用esm规范！也就是可以import fs from "fs""`
 * // todo: package.json添加，"type": "module"；否则fs无法使用esm
   
+## publishConfig
+* 配置发布的配置信息
+* registry:NPM注册表的基本URL。
+```json
+  "publishConfig": {
+    "registry": "https://af-biz.qianxin-inc.cn/artifactory/api/npm/data-security-npm-local-dev/"
+  }
+```
