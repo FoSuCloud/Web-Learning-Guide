@@ -24,3 +24,31 @@ export default function Hook() {
 `useMemo通常用于避免在每次渲染的时候进行高开销的计算`
 `因为我们如果使用useSate，那么每次重新渲染，都会触发该函数重新计算`
 
+
+#### `使用React.memo包装的组件会阻止重新渲染`
+* `使用React.memo包装的组件会阻止重新渲染，即使父组件重新渲染。除非props发生改变`
+```typescript jsx
+import React, { useState } from 'react';
+import './App.css';
+import { Render1 } from './components/Render1';
+
+let appState: IState = {
+    name: ''
+};
+export interface IState {
+    name: string;
+}
+const DemoRender = React.memo(Render1);
+function App() {
+    const [state, setState] = useState(appState);
+    return (
+        <div className="App">
+            <DemoRender name={'sdsd'} />
+            {state.name}
+            <button onClick={() => setState({ name: 'xxx' })}>app click</button>
+        </div>
+    );
+}
+
+export default App;
+```

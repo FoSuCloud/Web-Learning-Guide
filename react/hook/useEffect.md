@@ -34,3 +34,46 @@ export default function Hook() {
 
 ```
 
+### 模拟class生命周期
+```typescript jsx
+export const Render1 = (props: IProps) => {
+    console.log('render:Render1');
+    const [state, setState] = useState(1);
+    // 模拟 class 组件的 componentDidMount 和 componentDidUpdate
+    // 第一个参数执行函数，第二个参数不传
+    useEffect(() => {
+        console.log('DidMount 和 DidUpdate');
+    });
+    // 模拟 class 组件的 componentDidMount
+    // 第一个参数执行函数，第二个参数传空数组[]
+    useEffect(() => {
+        console.log('加载完了componentDidMount');
+    }, []); // 第二个参数是 [] （不依赖于任何 state）
+
+    // 模拟 class 组件的 componentDidUpdate
+    // 第一个参数执行函数，第二个参数传state数组|props
+    useEffect(() => {
+        console.log('更新了');
+    }, [props.name]); // 第二个参数就是依赖的 state
+
+    // 模拟 class 组件的 componentDidMount 和 componentWillUnmount
+    useEffect(() => {
+        // 返回一个函数 模拟 componentWillUnmount
+        return () => {
+            console.log('componentWillUnmount');
+        };
+    }, []);
+
+    return (
+        <div>
+            render1 {props.name}
+            <button
+                onClick={() => {
+                    setState(state + 1);
+                }}>
+                Render1 click
+            </button>
+        </div>
+    );
+};
+```

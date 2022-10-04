@@ -131,3 +131,6 @@ docker run --name test-nginx-container \
 * `nginx会先处理tls/ssl通信之后，再去接着处理Http数据！(注意顺序)`
 * `浏览器也是一样的，没有自己实现tls/ssl协议，也是通过调用操作系统的openssl库来实现tls/ssl协议(可能不同版本不同浏览器处理不太一致，但是都是调用类似openssl的库来处理)`
 
+## $request_time
+* 从接受用户请求的第一个字节到发送完响应数据的时间，即包括接收请求数据时间、程序响应时间、输出
+* log_format 的 $request_time变量
