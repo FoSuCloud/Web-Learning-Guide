@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="utf8" />
+
 <head>
-    <title>测试</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <style>
-        svg{
-            width: 2400px;
-            height: 2400px;
+        .wrap {
+            background: red;
+            padding: 10px;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
         }
     </style>
 </head>
-<body>
-<iframe src="./iframe.html"></iframe>
-<script>
 
+<body>
+<div class="wrap">
+    123
+    <div class="box">
+        <div class="wrap">
+            原来的内容,开启attachShadow后，不在显示
+        </div>
+    </div>
+</div>
+<script>
 </script>
 </body>
+
 </html>
