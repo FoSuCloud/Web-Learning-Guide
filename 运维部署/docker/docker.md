@@ -141,3 +141,11 @@ RUN if [ $TYPE == "dev" ]; \
 ## ip link
 * 查看宿主机的网卡信息
 
+## 删除没有tag的镜像
+* `docker rmi `docker images|grep none|awk '{print $3 }'|xargs``
+* 
+
+##  宿主机文件挪出去
+* https://www.muzhuangnet.com/show/79708.html
+* `docker cp 容器名称:在容器中的文件路径 宿主机的目标路径`
+* 例如 docker cp 12345:/root/a.txt  /var
