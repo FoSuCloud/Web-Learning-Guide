@@ -126,3 +126,6 @@ HEAD:
 ## git clone 指定分支
 * git clone -b branch-name git地址
 * -b 后面跟着分支名称
+
+## 回退到指定commit
+* git rest --hard commitId

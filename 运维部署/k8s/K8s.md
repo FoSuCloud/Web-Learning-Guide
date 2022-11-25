@@ -51,6 +51,7 @@
 4. 基本信息：包括内核版本，容器引擎版本，os类型等
 
 * 如果node被删除，所拥有的pod会自动分流到其他的node
+* `有多个node节点，那么就可以ssh进入多个机器。通过kubectl get node -owide获取到节点ip`
 
 ## 集群
 
