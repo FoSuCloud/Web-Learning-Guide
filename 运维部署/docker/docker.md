@@ -111,7 +111,9 @@ docker run --name test-nginx-container \
 
 ## 保存
 1. docker save保存镜像，使用docker load加载
+`docker save pc-ui:1.0.0 > pc-ui.tar`
 2. docker export保存容器，使用 docker import加载
+
 
 ## 环境变量
 * 由EVN指令声明的环境变量也可以用在Dockerfile的一些指令中作为变量使用。转义符也将类似变量的语法转义为语句。
