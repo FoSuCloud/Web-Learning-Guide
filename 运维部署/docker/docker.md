@@ -96,6 +96,9 @@ docker run --name test-nginx-container \
         -v $(pwd)/html:/usr/share/nginx/html \
         -p 80:80 -d nginx
 ```
+* `如果使用-it，记得把-it放在最后！`
+`docker run -d --name xxx -p 8082:80 -it xxx:1.0.0`
+* xxx表示的是镜像名称。后面的xxx:1.0.0其实就是容器名称。可以通过docker ps -a获取到对应的container名称
 
 * 使用文件共享允许 Mac 上的本地目录与 Linux 容器共享。这对于在容器中运行和测试代码时在主机上的 IDE 中编辑源代码特别有用。
 * [mac共享文件]("https://docs.docker.com/desktop/mac/")
