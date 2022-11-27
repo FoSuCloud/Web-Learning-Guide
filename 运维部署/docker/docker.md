@@ -24,6 +24,10 @@
 * image文件生成的容器实例，本身也是一个文件，称为容器文件。
 * 容器文件可以暂停，可以删除。但是暂停运行的容器文件还是会占据硬盘空间
 
+### docker ps
+* docker ps -a 命令查看容器
+* docker ps 命令查看运行中的容器
+
 ## 流程
 * 对于前端来说，使用docker的主要步骤是：
 * （先创建一个vue项目hello-world,端口采用vue默认端口8080）
@@ -84,7 +88,8 @@ CMD npm run serve
 `docker container run -it hello-world`
 ---
 * `-p表示端口,-p 80:80表示本地80端口映射到容器的80端口`
- * `-v ,VOLUME（共享文件系统）提供了映射，-v后面最后的ro表示(read only)只读权限,rw表示读写权限`
+* `-v ,VOLUME（共享文件系统）提供了映射，-v后面最后的ro表示(read only)只读权限,rw表示读写权限`
+* `-d表示后台启动容器`
 * 下面是一个启动脚本
 * [参考]("https://docs.docker.com/engine/reference/run/")
 * `docker -t检测配置是否正确`
@@ -148,9 +153,44 @@ RUN if [ $TYPE == "dev" ]; \
 
 ## 删除没有tag的镜像
 * `docker rmi `docker images|grep none|awk '{print $3 }'|xargs``
-* 
+
+## 删除容器
+* docker stop containerid 先停止容器（如果运行中无法删除）
+* docker rm containerid 删除容器
+
+## 删除镜像
+* 删除镜像前需要先删除对应的容器！
 
 ##  宿主机文件挪出去
 * https://www.muzhuangnet.com/show/79708.html
 * `docker cp 容器名称:在容器中的文件路径 宿主机的目标路径`
 * 例如 docker cp 12345:/root/a.txt  /var
+
+## 查看镜像的构建记录
+* docker history 镜像名称
+* `然后我们就能看到镜像构建的每一步，包括从空白镜像到最后。最新的一条记录就是最终的镜像`
+
+## 分发镜像
+* `docker build -f dockerbuild/Dockerfile -t test .`
+* 生成一个名为test的镜像，输入 `docker images | grep test`
+* 然后我们可以看到一个test镜像的tag默认为latest
+`test                  latest                   c016542c5ab0   11 hours ago    21.8MB`
+* `实际上镜像名称由两部分组成，一个是名称，一个是版本。正确的命名应该是 test:1.0.0`
+* docker build -f dockerbuild/Dockerfile -t test:1.0.0 .
+---
+#### latest tag
+* 如果我们的tag是latest，那么不要误会，这不是表示最新，而是默认值。如果我们build的时候没有指定版本
+* 那么生成的镜像默认tag就是latest
+
+## registry
+* 存储和分发镜像最常用的就是使用docker hub
+* 用户可以将自己的镜像存储到公共的免费的仓库，也可以自己搭建一个私有的docker仓库
+* docker push推送镜像
+* docker pull拉取镜像
+
+## docker commit
+* 从容器创建新镜像。其实我们使用docker build生成镜像的原理也是docker commit！
+
+## docker rmi
+* 删除镜像
+
