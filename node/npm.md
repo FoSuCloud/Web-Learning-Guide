@@ -58,8 +58,8 @@
     {
   "antd": {
     "version": "4.19.3",
-    "resolved": "https://registry.npmjs.org/antd/-/antd-4.19.3.tgz",
-    "integrity": "sha512-q4oT2lIM0Fb60MfcdtjH6LFQcmo5MuM27PN3nJMsRG1FeiQ9n+OPFlkQSdtb0ZWFIFjTH3p0W02T6SbB2U7ChQ==",
+    "resolved": "/antd/-/antd-4.19.3.tgz",
+    "integrity": "sha512==",
     "requires": {
       "@ant-design/colors": "^6.0.0",
       "@ant-design/icons": "^4.7.0",
@@ -109,19 +109,19 @@
       "memoize-one": {
         "version": "6.0.0",
         "resolved": "https://registry.npmjs.org/memoize-one/-/memoize-one-6.0.0.tgz",
-        "integrity": "sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw=="
+        "integrity": "sha512-+=="
       }
     }
   },
   "memoize-one": {
     "version": "5.2.1",
-    "resolved": "https://af-biz.qianxin-inc.cn:443/artifactory/api/npm/data-security-npm-virtual-release/memoize-one/-/memoize-one-5.2.1.tgz",
-    "integrity": "sha1-gzeqPEM1WBg57AHD1ZQJDOvo8A4="
+    "resolved": "/memoize-one/-/memoize-one-5.2.1.tgz",
+    "integrity": "sha1-="
   },
   "react-window": {
     "version": "1.8.6",
-    "resolved": "https://af-biz.qianxin-inc.cn:443/artifactory/api/npm/data-security-npm-virtual-release/react-window/-/react-window-1.8.6.tgz",
-    "integrity": "sha1-0BGVCsZDqZQRhjJmWq0MY4LioRI=",
+    "resolved": "/react-window/-/react-window-1.8.6.tgz",
+    "integrity": "",
     "requires": {
       "@babel/runtime": "^7.0.0",
       "memoize-one": ">=3.1.1 <6"
