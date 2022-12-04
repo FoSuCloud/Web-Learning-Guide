@@ -32,4 +32,102 @@
 ---
 * 如果由lock文件，那么首先判断lock文件的版本versions是否和package.json的版本一致。然后继续走上面的分支！
 
+## 开发依赖和生产依赖的区别！
+* [参考]("https://juejin.cn/post/7031181878380118047")
+* 首先我们来看官方文档对于 devDependencies 和 Dependencies 的区别说法
+* https://docs.npmjs.com/specifying-dependencies-and-devdependencies-in-a-package-json-file
+* `Dependencies是我们需要用在生产阶段的包`
+* `devDependencies是我们只需要用在开发阶段或者测试阶段的包(生产阶段不需要的包)`
+---
+* `但是如果我们只是执行npm install，那么程序是不会知道我们当前是在哪个阶段的。。所以`
+---
+1、`production导致的是否安装区别`
+* https://docs.npmjs.com/cli/v8/commands/npm-install
+* `使用 npm install --production（或者将process.env.NODE_ENV环境变量设置为production时），NPM将不会安装DevDepentencies中列出的模块。`
+* 要安装依赖关系和DevDepenties中列出的所有模块时，NODE_ENV环境变量设置为生产，则可以使用-production = false (`其实执行npm install默认就是这样了`)。
+---
+2、`作为组件的区别`
+* `例如antd是一个组件库，我们把这个三方库加载进我们的项目中，我们去查看这个lock.json文件可以看到`
+* `在"antd"这个对象里面的requires只有Dependencies对应的三方库，只有生产依赖，也就是我们只需要生产依赖，antd的开发依赖我们是完全不需要的`
+
+### package-lock.json
+* requires 和dependencies的区别
+* `require 可以被所有其他顶级依赖所共享，而 dependencies 是独立的，只属于需要它的模块`
+* 例子
+```json
+    {
+  "antd": {
+    "version": "4.19.3",
+    "resolved": "https://registry.npmjs.org/antd/-/antd-4.19.3.tgz",
+    "integrity": "sha512-q4oT2lIM0Fb60MfcdtjH6LFQcmo5MuM27PN3nJMsRG1FeiQ9n+OPFlkQSdtb0ZWFIFjTH3p0W02T6SbB2U7ChQ==",
+    "requires": {
+      "@ant-design/colors": "^6.0.0",
+      "@ant-design/icons": "^4.7.0",
+      "@ant-design/react-slick": "~0.28.1",
+      "@babel/runtime": "^7.12.5",
+      "@ctrl/tinycolor": "^3.4.0",
+      "classnames": "^2.2.6",
+      "copy-to-clipboard": "^3.2.0",
+      "lodash": "^4.17.21",
+      "memoize-one": "^6.0.0",
+      "moment": "^2.25.3",
+      "rc-cascader": "~3.2.1",
+      "rc-checkbox": "~2.3.0",
+      "rc-collapse": "~3.1.0",
+      "rc-dialog": "~8.6.0",
+      "rc-drawer": "~4.4.2",
+      "rc-dropdown": "~3.3.2",
+      "rc-field-form": "~1.24.0",
+      "rc-image": "~5.2.5",
+      "rc-input": "~0.0.1-alpha.5",
+      "rc-input-number": "~7.3.0",
+      "rc-mentions": "~1.6.1",
+      "rc-menu": "~9.3.2",
+      "rc-motion": "^2.4.4",
+      "rc-notification": "~4.5.7",
+      "rc-pagination": "~3.1.9",
+      "rc-picker": "~2.6.4",
+      "rc-progress": "~3.2.1",
+      "rc-rate": "~2.9.0",
+      "rc-resize-observer": "^1.2.0",
+      "rc-select": "~14.0.2",
+      "rc-slider": "~10.0.0-alpha.4",
+      "rc-steps": "~4.1.0",
+      "rc-switch": "~3.2.0",
+      "rc-table": "~7.23.0",
+      "rc-tabs": "~11.10.0",
+      "rc-textarea": "~0.3.0",
+      "rc-tooltip": "~5.1.1",
+      "rc-tree": "~5.4.3",
+      "rc-tree-select": "~5.1.1",
+      "rc-trigger": "^5.2.10",
+      "rc-upload": "~4.3.0",
+      "rc-util": "^5.19.3",
+      "scroll-into-view-if-needed": "^2.2.25"
+    },
+    "dependencies": {
+      "memoize-one": {
+        "version": "6.0.0",
+        "resolved": "https://registry.npmjs.org/memoize-one/-/memoize-one-6.0.0.tgz",
+        "integrity": "sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw=="
+      }
+    }
+  },
+  "memoize-one": {
+    "version": "5.2.1",
+    "resolved": "https://af-biz.qianxin-inc.cn:443/artifactory/api/npm/data-security-npm-virtual-release/memoize-one/-/memoize-one-5.2.1.tgz",
+    "integrity": "sha1-gzeqPEM1WBg57AHD1ZQJDOvo8A4="
+  },
+  "react-window": {
+    "version": "1.8.6",
+    "resolved": "https://af-biz.qianxin-inc.cn:443/artifactory/api/npm/data-security-npm-virtual-release/react-window/-/react-window-1.8.6.tgz",
+    "integrity": "sha1-0BGVCsZDqZQRhjJmWq0MY4LioRI=",
+    "requires": {
+      "@babel/runtime": "^7.0.0",
+      "memoize-one": ">=3.1.1 <6"
+    }
+  }
+}
+```
+* `例如antd需要的"memoize-one"版本是6.0.0，而"react-window"需要的"memoize-one"小于6.0.0，所以在antd里面，"memoize-one"就是dependencies（不能共享）`
 
