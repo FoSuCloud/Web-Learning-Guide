@@ -134,3 +134,12 @@ docker run --name test-nginx-container \
 ## $request_time
 * 从接受用户请求的第一个字节到发送完响应数据的时间，即包括接收请求数据时间、程序响应时间、输出
 * log_format 的 $request_time变量
+
+## 302相对路径
+* `如果我们的网关接收到的路由不是/根路由，而是/xxx/xxx这种路由，而我们的重定向需要指向/a.html，那么就需要关闭绝对路径重定向`
+```text
+absolute_redirect off;                                                                                        
+default_type text/html;                                                     
+return 302 "/redirectLogin.html"; 
+```
+

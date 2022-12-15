@@ -20,6 +20,11 @@
 * git checkout master
 * git commit -m "2"
 * git merge bugFix
+---
+* `但是如果使用git merge失败，那么需要合并代码就可以使用git pull --rebase origin master去合并master分支的代码`
+
+### merge和rebase
+* merge会产生一个新的commit,而rebase是直接合并，不会产生新的commit
 
 
 

@@ -15,3 +15,7 @@
 ## 聚焦搜索
 
 * 快捷键：command+空格
+
+#### mac修改用户权限
+* sudo visudo
+* 添加  xxx(username) ALL = (ALL) ALL （在root之后）

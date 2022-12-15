@@ -9,15 +9,11 @@
 <body>
 <div id="content-root"></div>
 <script>
-    let id = '';
-    console.log(window.document.location)
-    window.addEventListener("message",e=>{
-        if(e.origin==="http://localhost:63342"){
-            console.log(e.origin); //父页面URL，这里是http://a.index.com
-            console.log(e.data);  //父页面发送的消息
-            window.parent.postMessage({status:401,msg:"ssss"},"http://localhost:63342");
-        }
-    });
+    setTimeout(()=>{
+        fetch('http://localhost:9000/1.0/profile/config').catch((err)=>{
+            throw new Error(err)
+        })
+    })
 </script>
 </body>
 </html>

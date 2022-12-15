@@ -9,6 +9,7 @@
 
 #### .cache
 * `.cache文件夹是启动之后产生的缓存目录，代码的增量更新也是更新该部分的代码，并且运行状态实际使用的也是该部分的代码`
+* `node_modules目录下的.cache可以缓存babel-loader,terser-webpack-plugin插件在构建的时候的缓存内容`
 
 ## loader和plugins的区别
 * loader是转换文件格式的工具
