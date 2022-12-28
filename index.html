@@ -7,70 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<iframe id="iframe" src="./iframe.html" frameborder="0" onerror="ierror"></iframe>
 <body>
 <script>
-    const iframe = document.getElementById('iframe')
-    iframe.onload = function(){
-        const that = document.getElementById('iframe')
-        try{
-            that.contentDocument;
-        }
-        catch(err){
-            //TODO
-        }
-    }
-    function ierror(e){
-        console.log('e');
-    }
-    iframe.contentWindow.onerror=function (err){
-        console.log('err',err);
-    }
-    window.addEventListener("unhandledrejection", function(e){
-        // e.preventDefault(); // 阻止异常向上抛出
-        console.log('捕获到异常：', e);
-    });
-    window.frames[0].onerror = function(message, source, lineno, colno, error) {
-        console.log('Caught inner iframe ERROR!');
-        console.log({
-            message,
-            source,
-            lineno,
-            colno,
-            error
-        });
-        return true;
-    };
-    window.frames[0].onunhandledrejection = function(message, source, lineno, colno, error) {
-        console.log('Caught inner iframe ERROR!');
-        console.log({
-            message,
-            source,
-            lineno,
-            colno,
-            error
-        });
-        return true;
-    };
-    window.frames[0].onabort = function(message, source, lineno, colno, error) {
-        console.log('Caught inner iframe onabort!');
-        console.log({
-            message,
-            source,
-            lineno,
-            colno,
-            error
-        });
-        return true;
-    };
-    window.addEventListener(
-        'error',
-        (error) => {
-            console.log('捕获到异常：', error);
-        },
-        true
-    );
-
+    
 </script>
 </body>
 

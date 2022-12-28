@@ -70,6 +70,8 @@
 * ` 因为oninstall和onactivate完成前需要一些时间，service worker 标准提供一个waitUntil方法`
 * `，当oninstall或者onactivate触发时被调用，接受一个 promise。`
 * `在这个 promise 被成功 resolve 以前，功能性事件不会分发到 service worker。`
+---
+* `addEventListener('fetch')用于阻止浏览器的默认 fetch 操作，并且由你自己提供一个响应`
 
 ### Service workers 也可以用来做这些事情
 后台数据同步

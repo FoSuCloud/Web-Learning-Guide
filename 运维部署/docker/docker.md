@@ -101,6 +101,7 @@ docker run --name test-nginx-container \
         -v $(pwd)/html:/usr/share/nginx/html \
         -p 80:80 -d nginx
 ```
+* `注意：即使我们停止了该容器，只要重新启动(在desktop软件点击启动)，之后还是会按照我们之前 run的参数启动的！`
 * `如果使用-it，记得把-it放在最后！`
 `docker run -d --name xxx -p 8082:80 -it xxx:1.0.0`
 * xxx表示的是镜像名称。后面的xxx:1.0.0其实就是容器名称。可以通过docker ps -a获取到对应的container名称
@@ -110,12 +111,15 @@ docker run --name test-nginx-container \
 * `本地修改代码，docker中运行的服务也可以同步修改`
 
 ## pull超时
+* docker pull xxx 拉取xxx镜像
 * [参考]("https://www.cnblogs.com/ygh1229/p/6549062.html")
+
+## search
+* docker search xxx 搜索xxx镜像，用于获取镜像全名（可能有多种镜像）
 
 ## 切换目录
 * `docker中使用RUN cd .. 是无法切换到上层工作目录的`
 * `应该使用WORKDIR /root/a 来切换工作目录`
-
 
 ## 保存
 1. docker save保存镜像，使用docker load加载
