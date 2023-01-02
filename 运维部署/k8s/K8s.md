@@ -31,7 +31,7 @@
 * `pod相当于一个逻辑主机，可能包含一个或者多个关系密切的应用`
 * pod的context可以理解为多个Linux空间的集合
 
-1. pid空间（同一个pod中，应用可以看到其他进程）
+1. pid空间（同一个pod中，应用可以看到其他进程） `pod ip: 也就是docker容器的ip地址，和cluster ip一样是虚拟ip地址`
 2. 网络 命名空间（同一个pod中的应用对相同的ip地址和端口有权限）
 3. ipc命名空间（同一个pod中的应用可以通过vpc或者posix进行通信）
 4. uts命名空间（同一个pod中的应用共享一个主机名称）
@@ -69,19 +69,17 @@
 
 ## service (svc)
 
-Kubernetes [Pod](https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/) 是转瞬即逝的。 Pod 实际上拥有 [生命周期](https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/pod-lifecycle/)。 当一个工作 Node 挂掉后, 在 Node 上运行的 Pod 也会消亡。 [ReplicaSet](https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/replicaset/) 会自动地通过创建新的 Pod 驱动集群回到目标状态，以保证应用程序正常运行。 换一个例子，考虑一个具有3个副本数的用作图像处理的后端程序。这些副本是可替换的; 前端系统不应该关心后端副本，即使 Pod 丢失或重新创建。也就是说，Kubernetes 集群中的每个 Pod (即使是在同一个 Node 上的 Pod )都有一个唯一的 IP 地址，因此需要一种方法自动协调 Pod 之间的变更，以便应用程序保持运行。
-
+Kubernetes [Pod](https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/) 是转瞬即逝的。 Pod 实际上拥有 [生命周期](https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/pod-lifecycle/)。 当一个工作 Node 挂掉后, 在 Node 上运行的 Pod 也会消亡。 [ReplicaSet](https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/replicaset/) 会自动地通过创建新的 Pod 驱动集群回到目标状态，以保证应用程序正常运行。 换一个例子，考虑一个具有3个副本数的用作图像处理的后端程序。这些副本是可替换的; 前端系统不应该关心后端副本，即使 Pod 丢失或重新创建。
+也就是说，Kubernetes 集群中的每个 Pod (即使是在同一个 Node 上的 Pod )都有一个唯一的 IP 地址，因此需要一种方法自动协调 Pod 之间的变更，以便应用程序保持运行。
 Kubernetes 中的服务(Service)是一种抽象概念，它定义了 Pod 的逻辑集和访问 Pod 的协议。Service 使从属 Pod 之间的松耦合成为可能。 和其他 Kubernetes 对象一样, Service 用 YAML [(更推荐)](https://kubernetes.io/zh-cn/docs/concepts/configuration/overview/#general-configuration-tips) 或者 JSON 来定义. Service 下的一组 Pod 通常由 *LabelSelector* (请参阅下面的说明为什么你可能想要一个 spec 中不包含`selector`的服务)来标记。
-
 尽管每个 Pod 都有一个唯一的 IP 地址，但是如果没有 Service ，这些 IP 不会暴露在集群外部。Service 允许你的应用程序接收流量。Service 也可以用在 ServiceSpec 标记`type`的方式暴露
 
-* *ClusterIP* (默认) - 在集群的内部 IP 上公开 Service 。这种类型使得 Service 只能从集群内访问。
-* *NodePort* - 使用 NAT 在集群中每个选定 Node 的相同端口上公开 Service 。使用`<NodeIP>:<NodePort>` 从集群外部访问 Service。是 ClusterIP 的超集。
+* *ClusterIP* (默认) - 在集群的内部 IP 上公开 Service `也就是虚拟ip` 。这种类型使得 Service 只能从集群内访问。
+* *NodePort* - 使用 NAT 在集群中每个选定 Node 的相同端口上公开 Service`也就是 Node的ip地址，也就是物理网卡的ip地址` 。使用`<NodeIP>:<NodePort>` 从集群外部访问 Service。是 ClusterIP 的超集。
 * *LoadBalancer* - 在当前云中创建一个外部负载均衡器(如果支持的话)，并为 Service 分配一个固定的外部IP。是 NodePort 的超集。
 * *ExternalName* - 通过返回带有该名称的 CNAME 记录，使用任意名称(由 spec 中的`externalName`指定)公开 Service。不使用代理。这种类型需要`kube-dns`的v1.7或更高版本。
 
 ## kube-dns
-
 * kube-dns负责为整个集群提供dns服务
 
 ## pvc

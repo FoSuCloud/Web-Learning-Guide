@@ -5,8 +5,8 @@ const Sequelize = require('sequelize')
 // 1.建立连接
 const sequelize = new Sequelize('demo','root','12345678',{
     host:'localhost',
-    /* 数据库类型 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
-    dialect:'mysql'
+    /* 数据库类型 'rc' | 'mariadb' | 'postgres' | 'mssql' */
+    dialect:'rc'
 })
 console.log('连接建立成功')
 

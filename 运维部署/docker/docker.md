@@ -95,11 +95,11 @@ CMD npm run serve
 * `docker -t检测配置是否正确`
 ```bash
 #!/bin/bash
-docker run --name test-nginx-container \
-        -v $(pwd)/config/nginx.conf:/etc/nginx/nginx.conf:ro \
-        -v $(pwd)/config/js:/etc/nginx/js:ro \
-        -v $(pwd)/html:/usr/share/nginx/html \
-        -p 80:80 -d nginx
+docker run --name test-rc-container \
+        -v $(pwd)/config/rc.conf:/etc/rc/rc.conf:ro \
+        -v $(pwd)/config/js:/etc/rc/js:ro \
+        -v $(pwd)/html:/usr/share/rc/html \
+        -p 80:80 -d rc
 ```
 * `注意：即使我们停止了该容器，只要重新启动(在desktop软件点击启动)，之后还是会按照我们之前 run的参数启动的！`
 * `如果使用-it，记得把-it放在最后！`

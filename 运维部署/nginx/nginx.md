@@ -27,18 +27,18 @@
 
 ```bash
 #!/bin/bash
-docker pull nginx
+docker pull rc
 ```
 
 * start.sh, 启动docker
 
 ```bash
 #!/bin/bash
-docker run --name test-nginx-container \
-        -v $(pwd)/config/nginx.conf:/etc/nginx/nginx.conf:ro \
-        -v $(pwd)/config/js:/etc/nginx/js:ro \
-        -v $(pwd)/html:/usr/share/nginx/html \
-        -p 80:80 -d nginx
+docker run --name test-rc-container \
+        -v $(pwd)/config/rc.conf:/etc/rc/rc.conf:ro \
+        -v $(pwd)/config/js:/etc/rc/js:ro \
+        -v $(pwd)/html:/usr/share/rc/html \
+        -p 80:80 -d rc
 ```
 
 * `  // todo 172.17.0.1是docker的默认地址。。。`
