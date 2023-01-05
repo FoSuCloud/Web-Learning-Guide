@@ -6,10 +6,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
+<button>click</button>
 <script>
-    
+    class ClassWithPrivateField {
+        #privateField;
+
+        constructor() {
+            this.#privateField = 42;
+        }
+    }
+
+    class SubClass extends ClassWithPrivateField {
+        #subPrivateField;
+
+        constructor() {
+            super();
+            this.#subPrivateField = 23;
+        }
+    }
+
+    let s = new SubClass();
+    console.log('s:',s);
+    // SubClass {#privateField: 42, #subPrivateField: 23}
+
 </script>
 </body>
 

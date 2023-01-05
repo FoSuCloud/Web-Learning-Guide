@@ -1,4 +1,4 @@
-/* 
+/*
  接口:在面向对象的编程中，接口是一种规范的定义(定义了动作和行为的规范)
   在程序设计里面，接口起到了定义某一批类所需要遵守的规范。
   接口规定了这批类必须提供某些方法，提供这些方法的类就可以满足实际需要。
@@ -11,7 +11,7 @@ function printLabel(obj:{label:string}):string{
 	return obj.label
 }
 console.log(printLabel({label:'i am'}));//i am
-/* 
+/*
  从上面可以发现一个问题，如果对象有很多个属性
  那么不就需要对每个属性都写一遍属性约束？
  如何进行批量约束？
@@ -59,7 +59,7 @@ console.log(func(myobj));//ww is w son
 
 // 两种方式都必须含有属性接口中定义的属性
 
-/* 
+/*
  2.可选属性，使用 ? 表示可以传递 可以不传递该属性
  */
 
@@ -82,9 +82,9 @@ function ajax(config:XhrUrl):void{
 }
 /* data属性是可选的，所以可以不传递 */
 // ajax({url:'https://www.baidu.com',method:'get'})
-// ajax({url:'https://www.baidu.com',method:'get',data:'ts'})
+// ajax({url:'https://www.baidu.com',method:'get',data:'typescript'})
 
-/* 
+/*
  3.函数类型接口:对方法传入的参数以及返回值进行约束
  */
 
@@ -98,11 +98,11 @@ interface encrypt{
  如果key:string改为key:number那么就会报错了
  改为any不会报错*/
 var md5:encrypt=function(key:string,value:string):string{
-	return key+value 
+	return key+value
 }
 console.log(md5('key:','value'));//key:value
 
-/* 
+/*
  4. 可索引接口
  */
 /* ts中定义数组的方式 */
@@ -110,8 +110,8 @@ var arr_o:number[]=[2,3]
 var arr_t:Array<string>=['3','s']
 console.log(arr_o);//[2, 3]
 console.log(arr_t);//["3", "s"]
-/* 
- 可索引接口: 对数组的约束 
+/*
+ 可索引接口: 对数组的约束
  */
 interface arrIndex{
 	[index:number]:string
@@ -119,15 +119,15 @@ interface arrIndex{
 /* 该数组使用可索引接口的约束 */
 var arr_i:arrIndex=['e','t']
 console.log(arr_i[0]);//e
-/* 
- 可索引接口:对对象的约束 
+/*
+ 可索引接口:对对象的约束
  虽然对象的键不是index索引，但是也可以使用可索引接口！
  */
 // var obj_i:arrIndex={name:'yiye',age:'age'}
 // console.log(obj_i.name,obj_i.age);//yiye age
 
 
-/* 
+/*
  5. 类类型接口:和抽象类有点像，就是对类的约束
  就是对类的属性和方法的约束
  */
@@ -154,8 +154,8 @@ mydog.eat();//哈哈吃大米
 mydog.eat("虾米");//汪汪吃虾米 */
 
 
-/* 
- 6.接口的拓展(接口继承接口) 
+/*
+ 6.接口的拓展(接口继承接口)
  */
 
 interface myeat{
@@ -182,7 +182,7 @@ var try_o=new mytry("一叶")
 console.log(try_o.eat("好吃的"));//一叶喜欢吃好吃的
 console.log(try_o.work(99999));//一叶一天挣99999元
 
-/* 
+/*
  类继承类使用extends;接口继承接口也使用extends
  类继承接口使用Implements
  */

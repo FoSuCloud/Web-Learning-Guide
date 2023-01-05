@@ -137,7 +137,7 @@ export class ShadowView extends React.Component {
     render() {
         const { children } = this.props;
 
-        // @ts-ignore
+        // @typescript-ignore
         return <div ref={this.attachShadow}>{children}</div>;
     }
 }
@@ -210,7 +210,7 @@ import "./index.scss";
 import ReactDOM from "react-dom";
 import React from "react";
 
-// @ts-ignore
+// @typescript-ignore
 export function ShadowContent({ root, children }) {
   return ReactDOM.createPortal(children, root);
 }
@@ -248,7 +248,7 @@ export class ShadowView extends React.Component {
     const { root } = this.state;
 
     return (
-      // @ts-ignore
+      // @typescript-ignore
       <div ref={this.setRoot}>
         {root && (
           <ShadowContent root={root}>
@@ -290,7 +290,7 @@ export class ShadowCom extends React.Component {
 
   render() {
     return (
-      // @ts-ignore
+      // @typescript-ignore
       <div id={"com"}>
         <button onClick={this.onBtnClick}>shadow com单击</button>
       </div>
@@ -299,6 +299,8 @@ export class ShadowCom extends React.Component {
 }
 ```
 
+##  缺点
+* `无法作用于dialog等会添加到body的组件中！`
 
 
 

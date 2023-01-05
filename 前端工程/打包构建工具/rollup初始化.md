@@ -288,7 +288,7 @@ config.plugins = [
 - `注意，添加了@，但是在编写的时候还是有黄色下划线，警告。但是运行成功`
 
 ```javascript
-import { A } from "@/a.ts";
+import { A } from "@/a.typescript";
 // todo 这里会有警告，因为@还是有问题，但是运行成功。。。
 // 并且没法通过点击进入对应的文件
 ```
@@ -298,7 +298,7 @@ import { A } from "@/a.ts";
 ```javascript
 const alias = require("@rollup/plugin-alias");
 const customResolver = nodeResolve({
-  extensions: [".js", ".ts", ".json", ".scss"],
+  extensions: [".js", ".typescript", ".json", ".scss"],
 });
 alias({
   entries: [
@@ -369,7 +369,7 @@ node_modules/**
     "dev": "npm run lint && rollup -w -c ./config/rollup.config.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run lint && rollup -c ./config/rollup.config.prod.js",
-    "lint": "eslint --fix --ext .ts,.js src"
+    "lint": "eslint --fix --ext .typescript,.js src"
   }
 ```
 
@@ -515,7 +515,7 @@ typescript2();
     "declaration": true,
     "sourceMap": true
   },
-  "include": ["src/**/*.ts", "src/*.ts"],
+  "include": ["src/**/*.typescript", "src/*.typescript"],
   "exclude": ["node_modules", "config", "dist", "public"]
 }
 ```
