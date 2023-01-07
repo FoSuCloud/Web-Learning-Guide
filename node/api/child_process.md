@@ -103,3 +103,77 @@ subprocess.stderr.on('data', (data) => {
     console.error(`subprocess stderr: ${data}`);
 });
 ```
+
+#### signal
+* `注意spawn是异步的，所以同步代码会先执行;`
+* signal <AbortSignal>允许使用 AbortSignal 中止子进程。
+* 如果signal启用该选项，调用.abort()相应 AbortController的类似于调用.kill()子进程，除了传递给回调的错误将是AbortError
+```js
+// spawn  的option参数有一个signal
+// signal <AbortSignal>允许使用 AbortSignal 中止子进程。
+const { spawn } = require('node:child_process');
+const controller = new AbortController();
+const { signal } = controller;
+const grep = spawn('grep', ['ssh'], { signal });
+grep.on('error', (err) => {
+    console.log('err:',err) // AbortError: The operation was aborted
+    // This will be called with err being an AbortError if the controller aborts
+});
+controller.abort(); // Stops the child process
+// 另一个
+const controller1 = new AbortController();
+// 由于spawn是异步的，所以先执行controller1.abort()，spawn子进程还未执行ps ax
+const ps = spawn('ps',['ax'],{signal:controller1.signal})
+ps.on('error',(err)=>{
+    console.log('ps err:',err) // AbortError: The operation was aborted
+})
+controller1.abort(); // Stops the child process
+```
+
+#### detached
+* 在windows系统上，设置options.detached为true可以让子进程在父进程退出后继续运行。
+* 如果设置detached为true，那么子进程将会有自己的控制台窗口，一旦被子进程启用，这个控制台窗口就不能被禁用
+---
+* 在非windows平台上，如果options.detached为true,那么子进程将会成为新进程组和会话的领导者，子进程可以在父进程退出后继续运行，无论他们是否分离
+* 默认情况下，父进程将会等待要分离的子进程退出。`不让父进程等待子进程退出，需要使用subprocess.unref()方法`
+* `这会导致父事件循环不讲子事件包括在他的引用计数中，允许父事件独立于子事件退出。除非在子事件和父事件之间建立了ipc通道`
+* 当使用该detached选项启动一个长时间运行的进程时，该进程将不会在父进程退出后继续在后台运行，除非为其提供stdio不连接到父进程的配置。如果父母的stdio是继承的，孩子将继续依附于控制终端。
+* 例子：一个长时间运行的进程的实例，通过分离并忽略其父stdio文件描述符，以忽略父进程的终止：
+```js
+const { spawn } = require('node:child_process');
+console.log('argv[0]:',process.argv[0]) // xxx/.nvm/versions/node/v16.18.0/bin/node
+const subprocess = spawn(process.argv[0], ['child_program.js'], {
+    detached: true,
+    stdio: 'ignore'
+});
+
+subprocess.unref();
+// 我们先执行 node detached.js
+// 然后打开一个新的终端，输入 ps ax | grep node
+// 可以看到  /Users/xx/.nvm/versions/node/v16.18.0/bin/node child_program.js
+// todo 说明即使我们的父进程退出了。子进程还是可以独立于父进程，继续在后台运行
+```
+```js
+// 除了ignore stdio，还可以将子进程的输出重定向到文件中
+function other(){
+    const fs = require('node:fs');
+    const { spawn } = require('node:child_process');
+    const out = fs.openSync('./out.log', 'a');
+    const err = fs.openSync('./out.log', 'a');
+    // 子进程也能在后台运行。我们同时可以看到把out err的结果也输出到日志文件了
+    const subprocess = spawn(process.argv[0], ['child_program.js'], {
+        detached: true,
+        stdio: [ 'ignore', out, err ]
+    });
+
+    subprocess.unref();
+}
+other()
+```
+
+#### options.stdio
+
+
+
+
+
