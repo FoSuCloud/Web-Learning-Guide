@@ -155,7 +155,7 @@
 		console.log(range(0, 3).__proto__);
 		/* 该实例的原型具有以下属性
 		 constructor: class RangeIterator
-		 next: ƒ next()
+		 nextjs: ƒ nextjs()
 		 Symbol(Symbol.iterator): ƒ [Symbol.iterator]()
 		 __proto__: Object
 		 */

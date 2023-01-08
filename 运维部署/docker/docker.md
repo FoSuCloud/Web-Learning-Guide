@@ -198,3 +198,15 @@ RUN if [ $TYPE == "dev" ]; \
 ## docker rmi
 * 删除镜像
 
+## .dockerignore
+* `不需要指定路径，只要目录名称相同就会被忽略`
+```gitignore
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+.next
+.git
+```
+

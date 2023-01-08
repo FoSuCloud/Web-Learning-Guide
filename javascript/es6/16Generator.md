@@ -119,8 +119,8 @@
 		a(yield 2)
 	}
 	var res=b()
-	// console.log(res.next())
-	// console.log(res.next())
+	// console.log(res.nextjs())
+	// console.log(res.nextjs())
 	/* 
 	 第一个打印: {value: 2, done: false}
 	 第二个打印:
@@ -632,7 +632,7 @@
 		yield 34;
 	}
 	var res=g()
-	// next
+	// nextjs
 	console.log(res.next());//{value: 4, done: false}
 	// throw
 	res.next();// 目的是为了进入try-caych语句块中
