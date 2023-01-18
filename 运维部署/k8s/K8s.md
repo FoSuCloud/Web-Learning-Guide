@@ -16,6 +16,12 @@
 ## k8s组件
 
 * `k8s集群由代表控制平面的组件和一组称为节点的机器组成`
+* kube-apiserver:API服务器，公开了kubernetes API
+* etcd:键值数据库，可以作为保存kubernetes所有集群数据的后端数据库
+* kube-scheduler:调度pod到哪个节点运行
+* kube-controller:集群控制器
+* cloud-controller:与云服务商交互
+
 
 ## k8s对象
 

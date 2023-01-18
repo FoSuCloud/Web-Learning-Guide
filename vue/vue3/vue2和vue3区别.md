@@ -20,3 +20,21 @@
 1. 在vue2中，`使用watcher实现`
 2. 在vue3中，`通过创建map结构实现，例如：{target: { key : [update1,update2,...]}}`
 * `也就是每个对象都有多个属性，每个属性维护一个更新数组`
+
+
+## vue3-ts
+* vue3的class语法-被废弃。
+---
+* `想要支持，需要引入vue-class-component，使用Option语法`
+---
+* 建议使用Composition APi,而不是Option Api(class写法)
+* https://github.com/vuejs/rfcs/pull/17#issuecomment-494242121
+---
+可疑的收益
+对于上述所有问题，引入类 API 的收益似乎值得怀疑。
+* 它没有很好地实现其主要目的（更好的 TypeScript 支持）
+* 它使内部实施复杂化
+* 它没有带来逻辑组合的改进
+
+
+

@@ -82,6 +82,11 @@
 自定义模板用于特定 URL 模式
 性能增强，比如预取用户可能需要的资源，比如相册中的后面数张图片
 
+## 推送消息限制
+* Chrome上对http协议默认Notification.permission = 'denied'，想要愉快的推送消息就要使用https协议！
+* 但是如果https网站是不安全的，那么也还是不可以使用。
+
+
 #### service-worker 的更新
 https://www.cnblogs.com/lhp2012/p/14237542.html
 

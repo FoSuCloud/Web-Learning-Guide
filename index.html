@@ -7,36 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body{
-            height: 100%;
-        }
     </style>
 </head>
 <body>
-<button>click</button>
+<svg viewBox="0 0 20 10" xmlns="http://www.w3.org/2000/svg">
+    <circle id="all" cx="5" cy="5" r="2" fill="red" pointer-events="all" />
+    <circle  id="none" cx="15" cy="5" r="2" fill="black" pointer-events="none"/>
+</svg>
 <script>
-    class ClassWithPrivateField {
-        #privateField;
-
-        constructor() {
-            this.#privateField = 42;
-        }
-    }
-
-    class SubClass extends ClassWithPrivateField {
-        #subPrivateField;
-
-        constructor() {
-            super();
-            this.#subPrivateField = 23;
-        }
-    }
-
-    let s = new SubClass();
-    console.log('s:',s);
-    // SubClass {#privateField: 42, #subPrivateField: 23}
-
+const svg = document.getElementsByTagName('svg')
+if(svg && svg.length){
+    const all = svg[0].getElementById('all')
+    all.addEventListener('click',(e)=>{
+        console.log('all:',e)
+    })
+    const none = svg[0].getElementById('none')
+    none.addEventListener('click',(e)=>{
+        console.log('none:',e)
+    })
+}
 </script>
 </body>
-
 </html>
