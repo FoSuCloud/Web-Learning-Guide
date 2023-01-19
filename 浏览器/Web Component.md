@@ -25,4 +25,57 @@ class CustomButton extends HTMLElement {
 window.customElements.define("custom-button", CustomButton);
 ```
 
+#### shadow dom
+* shadow dom其实早在iframe中就已经出现。相当于iframe里面的DOM Tree，是独立于文档流之外的DOM Tree ，有点像是BFC
+* `但是shadow dom的元素不存在样式污染，样式可以随心所欲，并且里面的元素样式变化不会触发外部的样式回流和重绘`
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    customElements.define('shadow-test', class extends HTMLElement {
+        connectedCallback() {
+            const shadow = this.attachShadow({mode: 'closed'});
+            shadow.innerHTML = "这是Shadow DOM元素"
+            const div = document.createElement("div")
+            div.innerHTML = "这是Light DOM元素"
+            this.append(div)
+        }
+    });
+</script>
+<body>
+<!--添加这个shadow-dom元素-->
+<shadow-test/>
+</body>
+</html>
+```
+
+#### template
+* 当您必须在网页上重复使用相同的标记结构时，使用某种模板而不是一遍又一遍地重复相同的结构是有意义的。以前这是可行的，但 HTML <template> 元素使它更容易实现 (这在现代浏览器中得到了很好的支持)。
+* `此元素及其内容不会在 DOM 中呈现，但仍可使用 JavaScript 去引用它。`
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<template id="test">
+     <div>i am a template</div>
+</template>
+<script>
+    const template = document.getElementById('test')
+    document.body.appendChild(template.content)
+</script>
+</body>
+</html>
+```
 

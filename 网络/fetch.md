@@ -185,3 +185,39 @@ res.end(JSON.stringify(req.headers)); // 最后把请求头部分内容返回来
 1. 无法中止fetch请求
 2. fetch不兼容ie浏览器，ie11也不支持
 
+#### 停止请求
+* `AbortController可以用来终止一个或者多个web请求(fetch请求)。axios的底层也是基于fetch去实现的，所以也可以去终止axios的请求`
+```js
+controller = new AbortController()
+```
+* `signal：实例化之后，响应一个AbortSingal对象，这个对象需要设置在fetch请求中，用于接收终止消息，终止请求`
+* `abort():一个函数，用于调用该函数，终止对应的fetch请求。只要请求还未完成都可以终止`
+* 看个例子
+```js
+let controller = new AbortController()
+fetch('https://www.baidu.com/s?wd=1&rsv_spt=1&rsv_iqid=0x870244ea0001b600&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_dl=tb&rsv_enter=1&rsv_sug3=2&rsv_sug1=1&rsv_sug7=100&rsv_sug2=0&rsv_btype=i&prefixsug=1&rsp=5&inputT=728&rsv_sug4=803',{
+    signal: controller.signal
+})
+setTimeout(()=>{
+    controller.abort()
+})
+// 控制台显示 DOMException: The user aborted a request.
+// 说明我们的请求被正确终止了！
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

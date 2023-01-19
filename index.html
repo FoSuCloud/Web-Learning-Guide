@@ -1,31 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-    </style>
 </head>
 <body>
-<svg viewBox="0 0 20 10" xmlns="http://www.w3.org/2000/svg">
-    <circle id="all" cx="5" cy="5" r="2" fill="red" pointer-events="all" />
-    <circle  id="none" cx="15" cy="5" r="2" fill="black" pointer-events="none"/>
-</svg>
+<template id="test">
+     <div>i am a template</div>
+</template>
 <script>
-const svg = document.getElementsByTagName('svg')
-if(svg && svg.length){
-    const all = svg[0].getElementById('all')
-    all.addEventListener('click',(e)=>{
-        console.log('all:',e)
-    })
-    const none = svg[0].getElementById('none')
-    none.addEventListener('click',(e)=>{
-        console.log('none:',e)
-    })
-}
+    const template = document.getElementById('test')
+    document.body.appendChild(template.content)
 </script>
 </body>
 </html>
