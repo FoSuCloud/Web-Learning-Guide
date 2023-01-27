@@ -2,6 +2,7 @@
 * 组件化开发使得我们可以将页面切割成模块便于封装和开发，
 * `而 Web Component 在此基础上，可以将每个组件渲染在独立的 DOM 树中，天然支持模块间样式和逻辑的隔离。`
 * [参考]("https://codesandbox.io/s/snowy-darkness-jmdip7?file=/index.html")
+* [官方文档]("https://developer.mozilla.org/zh-CN/docs/Web/Web_Components?spm=a2c6h.12873639.article-detail.9.677b4a9cF4YtzS")
 * Web Components 旨在解决这些问题 — 它由三项主要技术组成，它们可以一起使用来创建封装功能的定制元素，可以在你喜欢的任何地方重用，不必担心代码冲突。
 1. Custom elements（自定义元素）：一组 JavaScript API，允许您定义 custom elements 及其行为，然后可以在您的用户界面中按照需要使用它们。
 2. Shadow DOM（影子 DOM）：一组 JavaScript API，用于将封装的“影子”DOM 树附加到元素（与主文档 DOM 分开呈现）并控制其关联的功能。通过这种方式，您可以保持元素的功能私有，这样它们就可以被脚本化和样式化，而不用担心与文档的其他部分发生冲突。

@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<template id="test">
-     <div>i am a template</div>
-</template>
+<h1>Example 2</h1>
+
+<h1>Example 2: Watching the GC work.</h1>
+
+<p>Look at the time spent by the GC.</p>
+
+<p><button onclick="start()">add</button></p>
 <script>
-    const template = document.getElementById('test')
-    document.body.appendChild(template.content)
+   let i=0;
+   function start(){
+       i++;
+       let tmp=String.fromCharCode(97+i).repeat(i*1024*1024)
+       console.log(tmp)
+   }
 </script>
-</body>
-</html>
+<hr>
+<pre>
+window.tmp1 287519
+    soource 297187
+
+</pre>
