@@ -131,3 +131,7 @@
 ```
 * `例如antd需要的"memoize-one"版本是6.0.0，而"react-window"需要的"memoize-one"小于6.0.0，所以在antd里面，"memoize-one"就是dependencies（不能共享）`
 
+#### .npmignore
+* `npm publish发包的时候忽略某些目录或者文件`
+* https://docs.npmjs.com/cli/v8/using-npm/developers#testing-whether-your-npmignore-or-files-config-works
+
