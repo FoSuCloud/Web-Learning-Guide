@@ -135,3 +135,13 @@
 * `npm publish发包的时候忽略某些目录或者文件`
 * https://docs.npmjs.com/cli/v8/using-npm/developers#testing-whether-your-npmignore-or-files-config-works
 
+### npm钩子函数
+* preinstall: 在install之前执行
+* postinstall: 在install之后执行
+* preuninstall: 在uninstall包卸载之前执行
+* postuninstall: 在uninstall包卸载之后执行
+* poststop: 在npm stop之后触发
+* poststart: 在npm start之后触发
+* posttest: 在npm test之后触发
+
+

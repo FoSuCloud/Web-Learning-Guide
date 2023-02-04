@@ -1,5 +1,6 @@
 ## webpack
 * 原理：递归地构建
+* `webpack是对各种资源进行打包的，例如决定babel编译后的js文件的导出方法(cmd/esm/cjs...)`
 
 ## 使用webpack创建项目
 * https://webpack.docschina.org/guides/getting-started/
