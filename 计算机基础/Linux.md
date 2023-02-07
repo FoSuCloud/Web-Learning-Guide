@@ -189,4 +189,5 @@ ll查看文件权限
 #### uname -m
 * 查看机器是arm架构还是x86架构
 
-
+#### ab
+* ab - Apache HTTP 服务器基准测试工具是一个 linux shell 软件，可用于执行网站网页的性能基准测试。

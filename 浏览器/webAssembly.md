@@ -3,6 +3,7 @@
 * webAssembly官网:[https://webassembly.org/getting-started/developers-guide/]("官网")
 * 但是官网的教程都是指向mdn
 * ["https://mp.weixin.qq.com/s/dEOIArtK6DIfewIva2zLKw"]("webAssembly架构")
+* [比较好的教程]("https://mp.weixin.qq.com/s/NA3lXimLOzPe_C91KicysQ")
 
 ## webAssembly是什么
 * webAssembly是一种新的编码方式。可以在现代浏览器中运行，是一种`低级的类汇编语言`，具有紧凑的`二进制格式`
@@ -14,11 +15,9 @@
 1. 可以把c,c++转为js语言，从而可以把这些语言的项目搬到前端web中
 2. `由于js是弱类型语言，在执行指令前需要先判断变量类型，这削弱了js的执行效率，增加了运算的复杂度。；而webassembly 包含了可以预判变量的类型的运算，有效避免了js由于弱类型带来的执行效率低的弱点`
 
-
 ## webAssembly的缺陷
 1. webAssembly不能直接访问DOM和web api
 2. 如果逻辑非常简单，那么建立编译工具链去编写另外一种语言的程序可能得不偿失。`webAssembly最擅长的就是计算！`
-
 
 ## 安装emsdk
 * 首先需要有git,xcode,cmake
@@ -55,3 +54,4 @@ node a.out.js // 执行out.js
 ## 项目参考
 * ffmpeg [https://github.com/ffmpegwasm/ffmpeg.wasm]("多媒体")
 * [https://github.com/bobbiec/react-wasm-demo]("react-demo")
+

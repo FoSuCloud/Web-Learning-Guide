@@ -2,6 +2,12 @@
 * 原理：递归地构建
 * `webpack是对各种资源进行打包的，例如决定babel编译后的js文件的导出方法(cmd/esm/cjs...)`
 
+#### 分类
+* `如果只有一个入口，那么是不是一次把所有对应的ts编译好,一次把scss编译好，也就是babel-loader其实也就是用一次？`
+
+#### require
+* `我们npm run start启动项目，可以看到浏览器的js代码，其实有使用到require函数，但是这个是webpack实现的`
+
 ## 使用webpack创建项目
 * https://webpack.docschina.org/guides/getting-started/
 
@@ -13,10 +19,10 @@
 * `node_modules目录下的.cache可以缓存babel-loader,terser-webpack-plugin插件在构建的时候的缓存内容`
 
 ## loader和plugins的区别
-* loader是转换文件格式的工具
+* loader是转换文件格式的工具，`或者说就是编译不同文件的工具，把ts编译为js等`
 * plugins是可以执行其他功能的插件,`拓展webpack的能力`
-
-`webpack相当于一条流水线，在编译执行等不同的阶段会抛出不同的事件 插件根据抛出的这些钩子完成不同的动作`
+* webpack相当于一条流水线，在编译执行等不同的阶段会抛出不同的事件 插件根据抛出的这些钩子完成不同的动作
+* `例如eslintplugin就是在webpack开始编译之前做eslint检查；minicssplugin就是在编译完成之后针对css统一做代码压缩`
 
 ## 打包原理
 * [参考]("https://github.com/cuixiaorui/mini-pack")

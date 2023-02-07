@@ -144,4 +144,10 @@
 * poststart: 在npm start之后触发
 * posttest: 在npm test之后触发
 
+#### postinstall
+* `我们有时候会下载失败，就是因为有三方库在下载成功后需要执行postinstall，再去下载一些其他依赖或者执行某些脚本，但是失败导致的`
+* 例如electron就会在下载成功后，通过postinstall去下载其他依赖，但是因为网络问题超时失败了
+
+### depcheck
+* 检查项目中没有用的依赖 depcheck
 
