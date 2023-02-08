@@ -1,48 +1,75 @@
+## 数据类型
+* rust是一个静态类型语言，这意味着它在编译程序的过程中需要知道所有变量的具体类型
+* 在大部分情况下，编译器都可以根据我们绑定、使用变量的值来自动推导出变量的类型。
+* `但是当我们需要进行类型转换的时候，就必须显式的添加一个类型标注`
+  `let g:u32 = "42".parse().expect("Not a number!");`
+* 如果我们移除u32这个类型标注，那么rust就会在编译的过程中输出如下所示的错误提示：
+```text
+error[E0282]: type annotations needed
+ --> src/main.rs:2:9
+  |
+2 |     let guess = "42".parse().expect("Not a number!");
+  |         ^^^^^
+  |         |
+  |         cannot infer type for `_`
+  |         consider giving `guess` a type
+```
+* `这段信息表明当前的编译器无法自动推导出变量的类型，为了避免混淆需要我们手动的添加类型标准`
+
 ## primitives
 * primitives指的是原语，或者说原始数据类型
 
 ### 标准数据类型
-* 有符号整数：i8,i16,i32,i64,i128,isize(指针大小)
+* 有符号整数：i8,i16,i32,i64,i128,isize(指针大小), `默认整数类型为i32`
 * `8位有符号整数，取值范围：-128 ~ +127`
 * 无符号整数：u8,u16,u32,u64,u128,usize(指针大小)
 * `8位无符号整数，取值范围（0000 0000-1111 1111）：0 ~ 255 `
-* 浮点数：f32,f64
-* char Unicode标量值，如 "a","A",">"
-* bool 为 true false
+* 浮点数：f32,f64 `默认浮点数类型为f64`
+* char Unicode标量值，如 "a","A",">", `字符使用单引号，字符串使用多引号`
+* bool 为 true false 
 * unit type,唯一可能的值是一个空元组  ()
 
 ### 组合类型
+* rust提供了两个内置的基础组合类型，元组(tuple)和数组(array)
 
-
-
-* 性能测评 https://zhuanlan.zhihu.com/p/451184900
-* 源码分析 https://kdy1.dev/posts/2022/6/minifier
-
-* 为什么node擅长做高并发？
-Web 业务开发中，如果你有高并发应用场景那么 Node.js 会是你不错的选择。 在单核 CPU 系统之上我们采用 单进程 + 单线程 的模式来开发。
-在多核 CPU 系统之上，可以通过 child_process.fork 开启多个进程(Node.js 在 v0.8 版本之后新增了 Cluster 来实现多进程架构) ，即 多进程 + 单线程 模式。
-* `开启多进程不是为了解决高并发，主要是解决了单进程模式下 Node.js CPU 利用率不足的情况，充分利用多核 CPU 的性能。`
-* NodeJS的多进程架构
-* 面对单进程单线程对多核使用率不高的问题，按照之前的经验，每个进程各使用一个CPU即可，以此实现多核CPU的利用。Node提供了child_process模块，并且也提供了fork()方法来实现进程的复制(只要是进程复制，都需要一定的资源和时间。Node复制进程需要不小于10M的内存和不小于30ms的时间)。
-* 这样的解决方案就是linux系统上最经典的Master-Worker模式，又称为主从模式。这种典型并行处理业务模式的分布式架构具备较好的可伸缩性（可伸缩性实际上是和并行算法以及并行计算机体系结构放在一起讨论的。某个算法在某个机器上的可扩放性反映该算法是否能有效利用不断增加的CPU。）和稳定性。主进程不负责具体的业务处理，而是负责调度和管理工作进程，工作进程负责具体的业务处理，所以，工作进程的稳定性是开发人员需要关注的。
-
-* 通过fork()复制的进程都是一个独立的进程，这个进程中有着独立而全新的V8实例。虽然Node提供了fork()用来复制进程使每个CPU内核都使用上，但是依然要记住fork()进程代价是很大的。
-* `好在Node通过事件驱动在单个线程上可以处理大并发的请求。`
-
----
-* [ ] node升级到14,试下 worker_threads 多线程，babel是否会快很多
-* 使用 worker threads 来执行 CPU 密集的代码操作. `每个 worker 都有其自己的 libuv event loop。`
-* https://developers.cloudflare.com/workers/learning/how-workers-works/
-```text
-现在，最大的问题就是，，既然 JavaScript 本身并不支持并行，那么两个 Node.js workers 是如何并行 执行的呢？
-答案就是 V8 Isolates 。
-V8 Isolates 是一个独立的 chrome V8 运行实例，其有独立的 JS 堆和微任务队列。这就为 每一个 Node.js worker 独立运行提供了保障。其缺陷就是，workers 之间没法直接访问对方的堆。
-由于这个原因，每个 worker 都有其自己的 libuv event loop。
+#### 元组
+* 元组是一种相当常见的复合类型，可以将其他不同类型的多个值组合进一个复合类型中
+* 元组还拥有一个固定的长度：无法在声明结束后增加或者减少其中的元素数量
+* `元组中的值可以是不同类型的,可以不给元组手动添加类型标注`
+```rust
+fn add(){
+  let num = 5 as f64 +7.222; // 整数和浮点数相加，不是同一类型，所以需要最后as 定义一个类型
+  let tup = (1,444.1,true,num); // 如果在元组里面进行不同类型的求和，会编译失败
+  let (x1,x2,x3,x4) = tup; // let () = xx 属于元组德解构赋值
+  println!("{},{},{},{}",x1,x2,x3,x4); // 1,444.1,true,12.222000000000001
+  println!("索引访问：{},{},{},{}",tup.0,tup.1,tup.2,tup.3); // 索引访问：1,444.1,true,12.222000000000001
+}
 ```
 
-* [ ] 即使在单核同步基准测试中，swc也比 babel 快 16 到 20 倍。
-* `请注意，实际性能差距更大，因为 swc 在工作线程上工作，而 babel 在事件循环线程上工作。`
-* https://swc.rs/blog/perf-swc-vs-babel
-* https://github.com/swc-project/node-swc/blob/bf7718049d67148e2094d0e431d71d4a21993ec7/benches/multicore.js
-* https://zhuanlan.zhihu.com/p/167920353
+#### 数组类型
+* 我们同样可以在数组中存储多个值的集合
+* `和元组不同的是，数组中的每一个元素都必须是相同的类型。`
+* `rust中的数组拥有固定的长度，一旦声明就再也不能随意更改大小！`
+```rust
+// 函数名称：小写组合_下划线的形式
+fn create_array(){
+    let arr = [1,2];
+    println!("arr======={},{}",arr[0],arr[1]); // arr=======1,2
+    // 编译成功 但是运行时报错了
+    // 实际上，每次通过索引来访问一个元素，rust都会检查这个索引是否会超过这个数组的长度，假如超过了，rust就会发生panic
+    // println!("arr======={},{},{}",arr[0],arr[1],arr[2]) // index out of bounds: the length is 2 but the index is 2
+}
+```
+* 当我们想再栈上而不是堆上为数据分配空间时，或者想要确保总有固定数量的元素时，数组是一个非常有用的工具
+* `但是rust也提供了一个动态数组类型(vector),允许用户自由地调整数组长度`
+
+
+
+
+
+
+
+
+
+
 
