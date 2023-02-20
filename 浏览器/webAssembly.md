@@ -5,6 +5,14 @@
 * ["https://mp.weixin.qq.com/s/dEOIArtK6DIfewIva2zLKw"]("webAssembly架构")
 * [比较好的教程]("https://mp.weixin.qq.com/s/NA3lXimLOzPe_C91KicysQ")
 
+### rust/c/c++
+* 在WebAssembly前端开发中，您可以使用多种语言来编写WebAssembly模块。一般来说，您可以使用C、C++或Rust等语言来编写WebAssembly模块。
+* 如果您已经熟悉其中一种语言，那么使用这种语言可能更容易上手。
+* 但是，如果您希望选择最适合WebAssembly的语言，我建议您选择Rust。
+* Rust是一种系统级编程语言，具有严格的内存安全性和线程安全性，可以在编译时消除许多运行时错误。
+* 此外，Rust的编译器非常快，可以生成高效的WebAssembly二进制代码。
+* Rust还具有出色的Emscripten和WebAssembly工具链支持，可以轻松地将现有的C和C++代码移植到WebAssembly中。
+
 ## webAssembly是什么
 * webAssembly是一种新的编码方式。可以在现代浏览器中运行，是一种`低级的类汇编语言`，具有紧凑的`二进制格式`
 * 可以以接近原生的性能运行，`可以为c/c++等语言提供一个编译目标`
