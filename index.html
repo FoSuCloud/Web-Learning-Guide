@@ -1,32 +1,3 @@
 <!DOCTYPE html>
-<h1>Example 2</h1>
-
-<h1>Example 2: Watching the GC work.</h1>
-
-<p>Look at the time spent by the GC.</p>
-
-<p><button onclick="start()">add</button></p>
-<!-- 导出立即执行函数 -->
-<script>
-    // 立即执行函数的一种写法
-    !function(e){ e.Vue={a:1} }(window);
+<script type="module" src="./main.js">
 </script>
-<script>
-    console.log(window.Vue,Vue) // {a: 1} {a: 1}
-</script>
-<!--就是普通的函数-->
-<script>
-    function Element(e){
-        e.ele={b:2}
-    }
-</script>
-<script>
-    Element(window)
-    console.log(window.ele,ele) // {b: 2} {b: 2}
-</script>
-<hr>
-<pre>
-window.tmp1 287519
-    soource 297187
-
-</pre>
