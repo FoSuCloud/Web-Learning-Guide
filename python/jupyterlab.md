@@ -17,6 +17,14 @@ jupyter lab build  # Build the app dir assets (optional)
 * 如果您想更改 TypeScript 代码并即时重建（每次重建后都需要刷新页面）：
 `jupyter lab --dev-mode --watch`，也就是改了代码之后不需要手动执行代码，但是需要等待compile success完成
 
+
+#### 注意，如果修改了package的代码
+* 教程 https://jupyterlab.readthedocs.io/en/latest/developer/contributing.html#installing-jupyterlab
+  https://jupyterlab.readthedocs.io/en/latest/developer/contributing.html#setting-up-a-local-development-environment
+* [ ] `修改了jupyterlab源码的话，就直接jlpm run build 然后再jupyter lab --dev-mode`
+
+
+
 ## 安装依赖库
 * 本地调试，如果想执行
 ```text

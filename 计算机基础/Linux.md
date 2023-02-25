@@ -4,6 +4,21 @@
 * hostname
 * hostnamectl
 
+#### uname
+* uname -p 打印机器处理器架构名称。
+* uname -m 打印机器硬件名称。
+* 不带参数的arch命令显示机器的架构类型。
+```shell
+$arch
+i386
+$machine  
+i486
+$uname -m
+x86_64
+$uname -p
+i386
+```
+
 ## 打包解压
 
 ```
@@ -11,6 +26,12 @@
 `无需解压，放到tomcat服务器webapps中即可`
 `解压命令 tar -xvf xx.tar`
 ```
+
+#### 给某个用户添加在某个文件夹的权限
+* sudo mkdir -p /var/log/systemlog/sysLoginLog/            
+* chown xielipei:staff /var/log/systemlog/sysLoginLog/
+
+
 
 ## 重启服务 进入/etc/init.d 输入 service apache2 restart
 
