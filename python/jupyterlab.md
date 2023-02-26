@@ -31,3 +31,7 @@ print(df)
 ```
 * 会提示没有安装pandas
 * 此时就在jupyterlab本地目录执行 `pip install pandas`
+
+### 给jupyterlab提pr之后添加标签
+* `@meeseeksdev tag bug, 添加一个名为bug的标签`
+* `@meeseeksdev untag bug, 删除一个名为bug的标签`
