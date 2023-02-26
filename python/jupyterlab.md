@@ -39,3 +39,9 @@ print(df)
 ```
 * 会提示没有安装pandas
 * 此时就在jupyterlab本地目录执行 `pip install pandas`
+
+### 进行ui测试
+*  `进入目录 cd galata`
+* 首先启动服务 `yarn run start`
+* `执行ui测试 yarn run test`
+
