@@ -46,6 +46,9 @@ print(df)
 
 ### 进行ui测试
 *  `进入目录 cd galata`
-* 首先启动服务 `yarn run start`
+* `yarn run build`
+* 首先启动服务 `jupyter lab --config jupyter_server_test_config.py`
 * `执行ui测试 yarn run test`
 
+#### ui测试debug
+* `npx playwright test ./test/jupyterlab/font-size.test.ts --headed --debug`
