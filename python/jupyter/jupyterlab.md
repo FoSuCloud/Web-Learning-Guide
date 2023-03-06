@@ -40,6 +40,16 @@ print(df)
 * 会提示没有安装pandas
 * 此时就在jupyterlab本地目录执行 `pip install pandas`
 
+#### galata ui测试
+* `注意，执行pip uninstall jupyterlab-language-pack-zh-CN 因为某些ui-test的case就是针对has-text来做的`
+* `并且isActiveTab会一直错误`
+---
+* cd galata
+* jlpm start `启动服务`
+* jlpm run test `执行测试`
+---
+* `调试某个文件 jlpm run test:debug ./test/jupyterlab/settings.test.ts`
+
 ### 给jupyterlab提pr之后添加标签
 * `@meeseeksdev tag bug, 添加一个名为bug的标签`
 * `@meeseeksdev untag bug, 删除一个名为bug的标签`
