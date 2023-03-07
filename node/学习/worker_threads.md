@@ -2,6 +2,14 @@
 * `worker_threads可以用于创建js线程，用于并行执行`
 * `通过postMessage在线程之间传输数据，传输的数据需要经过序列化`
 
+
+### nodejs的多线程
+* Node.js Worker线程是使用Node.js V12中引入的Worker_threads模块实现的。
+* 该模块允许Node.js应用程序并行运行多个JavaScript脚本，每个脚本都在其自己的单独线程中。
+* `Node.js中的Worker线程通过使用系统中可用的JavaScript引擎（例如V8）来工作，这是Google Chrome使用的JavaScript引擎。`
+* 但是，每个工作人员线程在自己的隔离JavaScript环境中运行，与主线程分开，它们通过消息传递相互通信。这使工作人员线程可以同时执行自己的JavaScript代码，并与主线程并行，从而提高了某些类型的计算强度操作的性能。
+
+
 ### 例子
 * 首先进到对应目录  ~/Documents/nodeProject/demo/thread
 * 我们直接执行对应脚本文件worker-simple.js `node worker-simple.js`

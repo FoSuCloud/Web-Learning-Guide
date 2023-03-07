@@ -9,6 +9,7 @@ jlpm run build  # Build the dev mode assets (optional)
 jlpm run build:core  # Build the core mode assets (optional)
 jupyter lab build  # Build the app dir assets (optional)
 ```
+* jupyterlab4.0.0需要使用v18版本：`nvm use v18.13.0 `
 
 * 最后以开发模式启动 JupyterLab：
 `jupyter lab --dev-mode`
@@ -55,3 +56,6 @@ print(df)
 * `@meeseeksdev untag bug, 删除一个名为bug的标签`
 
 
+#### JupyterLab清除缓存
+* 尝试清除 JupyterLab 缓存并重新启动 JupyterLab。可以使用以下命令清除缓存：
+* `jupyter lab clean 删除staging缓存`
