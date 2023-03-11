@@ -59,3 +59,7 @@ print(df)
 #### JupyterLab清除缓存
 * 尝试清除 JupyterLab 缓存并重新启动 JupyterLab。可以使用以下命令清除缓存：
 * `jupyter lab clean 删除staging缓存`
+
+#### 更新ui快照
+* `输入 bot please update snapshots`
+
