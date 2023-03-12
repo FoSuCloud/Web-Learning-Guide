@@ -67,7 +67,4 @@ print(df)
 #### jupyter lab build --debug
 * `用于排查build 的错误，添加--debug参数`
 
-撤回某次提交
-git revert commit-id
 
-git push 更新

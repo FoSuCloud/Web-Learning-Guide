@@ -87,3 +87,7 @@
 ## clone的时候不携带commit
 * 当我们下载非常庞大的代码库的时候，经常会下载失败，这是因为会把历史commit内容也一起下载
 * `git clone xx --depth 1可以不下载历史 commit 内容，从而使得clone会变得非常块`
+
+### 撤回某次提交
+* git revert commit-id
+* git push 更新
