@@ -91,3 +91,7 @@
 ### 撤回某次提交
 * git revert commit-id
 * git push 更新
+
+#### 删除某个commit
+* git reset --hard commit_id 回退到指定的commit
+* git push origin HEAD --force 把这次commit推送到远端，然后这个commit之后的提交都会被删除！
