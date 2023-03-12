@@ -50,6 +50,7 @@ print(df)
 * jlpm run test `执行测试`
 ---
 * `调试某个文件 jlpm run test:debug ./test/jupyterlab/settings.test.ts`
+* `但是其实jupyterlab4.0是没有这个问题的，因为jupyterlab-language-pack-zh-CN没有对应的jupyterlab4.0的包`
 
 ### 给jupyterlab提pr之后添加标签
 * `@meeseeksdev tag bug, 添加一个名为bug的标签`
@@ -63,3 +64,10 @@ print(df)
 #### 更新ui快照
 * `输入 bot please update snapshots`
 
+#### jupyter lab build --debug
+* `用于排查build 的错误，添加--debug参数`
+
+撤回某次提交
+git revert commit-id
+
+git push 更新
