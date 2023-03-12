@@ -67,4 +67,7 @@ print(df)
 #### jupyter lab build --debug
 * `用于排查build 的错误，添加--debug参数`
 
+#### 多次提pr
+* `最好一个pr建立一个分支，否则在pr合并的时候可以看到上次pr的commit!`
+* `并且该分支需要从源项目中获取，而不是fork项目中创建，否则还是会有多个旧commit`
 

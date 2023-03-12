@@ -95,3 +95,8 @@
 #### 删除某个commit
 * git reset --hard commit_id 回退到指定的commit
 * git push origin HEAD --force 把这次commit推送到远端，然后这个commit之后的提交都会被删除！
+
+#### 删除远程仓库
+* 一个项目可以配置多个远程仓库，想要删除其中一个远程仓库，可以
+* `git remote remove upstream(仓库名称)`
+
