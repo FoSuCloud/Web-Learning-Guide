@@ -37,6 +37,19 @@ public SomeResponseObject handlePostRequest(@RequestBody SomeRequestObject reque
 * 该方法将接收一个SomeRequestObject类型的请求体，并返回一个SomeResponseObject类型的响应对象。
 
 #### RequestBody
+* @RequestBody 是 Spring Web 框架中一个注解，用于将 HTTP 请求中的请求体（body）映射为 Java 对象。
+* 当使用该注解时，Spring 框架会`自动将 HTTP 请求中的 JSON、XML 或其他格式的数据转换成 Java 对象`，
+* 并将其作为方法的参数传入。
+
+* 具体来说，@RequestBody 注解可以用于标注一个方法参数，`该参数表示需要从请求体中获取的数据。`
+```text
+@PostMapping("/users")
+public void createUser(@RequestBody User user) {
+    // 处理用户创建操作
+}
+```
+
+
 
 
 
