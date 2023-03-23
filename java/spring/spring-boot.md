@@ -1,5 +1,15 @@
 ## spring
 
+
+### 创建spring boot程序
+* 安装cli
+```shell
+$ brew tap spring-io/tap
+$ brew install spring-boot
+```
+* 创建一个基于maven的spring boot的web程序
+* `spring init --dependencies=web --build maven spring-demo`
+
 #### @SpringBootApplication
 * `@SpringBootApplication 注解就是 Spring Boot 的核心注解之一，用于标注 Spring Boot 应用程序的启动类。`
 * @SpringBootApplication 注解实际上是一个组合注解，包含了以下三个注解的元注解：

@@ -18,6 +18,28 @@ public class MyController {
 }
 ```
 
+####  LoggerFactory.getLogger
+* `LoggerFactory.getLogger是slf4j框架提供的一个用于获取Logger实例的静态方法。`
+* Logger是一个简单的日志接口，它提供了输出日志消息的方法（例如，debug、info、warn、error等），并允许你在输出消息时指定消息级别、消息内容和异常对象等信息。
+* `使用该实例来调用日志方法是一种打日志的方式，但是还有一种方法是直接使用@Slf4j注解`
+```text
+public static Logger getLogger(Class<?> clazz)
+```
+```java
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class MyClass {
+    private static final Logger logger = LoggerFactory.getLogger(MyClass.class);
+
+    public void myMethod() {
+        logger.debug("Debug message");
+        logger.info("Info message");
+        logger.warn("Warning message");
+        logger.error("Error message");
+    }
+}
+```
 
 
 

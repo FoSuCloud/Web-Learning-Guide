@@ -1,6 +1,6 @@
 ## int
 * Int是基本数据类型
-
+* `Integer.parseInt(xxx) 转换为int`
 
 ### Integer
 * `Integer是Int的包装类Wrapper class`
@@ -10,6 +10,17 @@
 * `Int是值类型，即变量保存的是实际的数值，而Integer是引用类型，即变量保存的是对象的地址，指向堆内存中的对象。`
 * `在Java 5及以上版本中，可以使用自动装箱和拆箱的特性来方便地将int和Integer类型相互转换，使得它们之间的转换更加简单和方便。`
 
+#### 可以通过以下两种方式将int类型转换为Integer类型
+* 自动装箱
+```text
+int i = 123;
+Integer integer = i; // 自动装箱
+```
+* valueOf
+```text
+int i = 123;
+Integer integer = Integer.valueOf(i);
+```
 
 #### 两个int整数的除法
 ```java

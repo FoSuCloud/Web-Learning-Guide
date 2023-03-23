@@ -49,12 +49,17 @@ public void createUser(@RequestBody User user) {
 }
 ```
 
+#### @ModelAttribute
+* `@ModelAttribute 是 Spring MVC 中的一个注解，用于绑定请求参数到方法参数或者 Model 属性上。`
+* 当 @ModelAttribute 注解被用于方法参数上时，它会将请求参数绑定到对应的方法参数上。
+```text
+@GetMapping("/user")
+public String getUser(@ModelAttribute("username") User user) {
+    // ...
+}
+```
+* `和RequestBody不同的是，ModelAttribute绑定的是请求参数而不是请求体！`
 
-
-
-
-
-
-
+* `它适用于表单提交或者 URL 查询参数等简单的数据绑定场景。`
 
 

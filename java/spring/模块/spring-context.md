@@ -286,10 +286,21 @@ public class AppConfig {
 * `当程序运行时，Spring 容器会自动为 MyAspect 类创建代理对象，并将它与 MyService 类关联起来。`
 * `这样，当调用 MyService 类的方法时，AspectJ 会自动拦截并执行 MyAspect 类中定义的切面逻辑。`
 
+#### @Repository
+* `在Spring框架中，@Repository注解是用来标记数据访问层（DAO）类的注解。`
+* 它是一个`在Spring上下文中启用数据访问层的组件扫描的注解，它的作用是让Spring框架知道这个类的作用`，以便进行适当的处理和管理。
+
+* @Repository注解是Spring框架中的一个通用的注解，它和@Service和@Component注解一样，都是用来定义Spring bean的注解。
+
+* @Repository注解的作用是：
+1. 声明该类是数据访问层的组件，告诉Spring框架该类的作用。
+2. 为该类提供异常转译的功能。该注解会将平台特定的异常（例如，JDBC SQLException）转换为Spring的数据访问异常，这样上层的代码就可以统一处理这些异常。
+3. 自动处理持久化异常。使用该注解后，Spring会为DAO层提供自动处理的功能，当出现异常时，它会自动执行回滚操作。
 
 
-
-
+#### 装配Bean
+* 当需要在测试中使用一个真正的Bean实例时，可以`使用@Autowired注解将该实例注入到测试类中`。
+* 当需要模拟一个Bean实例时，可以`使用@MockBean注解将其替换掉`。
 
 
 
