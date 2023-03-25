@@ -1,5 +1,5 @@
 ## maven
-* maven是java的项目构建工具
+* maven是java的项目构建工具,`类似js的webpack`
 * [入门]("https://juejin.cn/post/7051407711308627981")
 * ant是java的另一个项目构建工具
 

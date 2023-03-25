@@ -6,6 +6,37 @@
 * 例如，使用 `@Data 注解`可以
 * 自动生成Getter和Setter方法、toString 方法、equals 和 hashCode 方法，而不需要手动编写这些代码。
 
+#### 添加到项目中
+* 可以在pom.xml中手动添加
+```xml
+<dependency>
+  <groupId>org.projectlombok</groupId>
+  <artifactId>lombok</artifactId>
+</dependency>
+```
+* `如果想要手动添加Lombok到构建之中，还需要在pom.xml文件的<build>部分将其从Spring Boot Maven插件中排除：`
+* Lombok的魔力是在编译期发挥作用的，所以在运行期没有必要用到它们。`像这样将其排除出去，在最终形成的JAR或WAR文件中就不会包含它了。`
+* `因为lombok做的事情就是在编译器给需要额外添加方法的属性/方法自动生成，编译器生成完成就结束了`
+```xml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+      <configuration>
+        <excludes>
+          <exclude>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+          </exclude>
+        </excludes>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+```
+
+
 #### 一个使用Lombok注解的Java类示例
 ```java
 @Data

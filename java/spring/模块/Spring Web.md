@@ -1,7 +1,7 @@
 ### spring web
 * Spring Web 是 Spring Framework 的一个模块，用于支持 Web 应用程序的开发。它提供了一系列的工具和框架，帮助开发者更容易地创建和管理 Web 应用程序。
 
-* 其中最常用的是 Spring MVC，它是一个基于模型-视图-控制器（MVC）模式的 Web 框架，用于构建 Web 应用程序和 RESTful 服务。
+* 其中最常用的是 `Spring MVC`，它是一个基于模型-视图-控制器（MVC）模式的 Web 框架，用于构建 Web 应用程序和 RESTful 服务。
 * Spring MVC 提供了强大的灵活性和可扩展性，使得开发者可以使用不同的视图技术、验证框架、数据绑定和数据存储方式等等。
 * 同时，Spring MVC 也提供了许多特性，例如拦截器、异常处理、数据转换器等等，用于简化 Web 应用程序的开发和维护。
 
@@ -17,7 +17,7 @@
 * 而不需要在每个方法上使用 @ResponseBody 注解。
 
 * @RestController 注解可以用于标注一个类，表示该类是一个 RESTful 风格的控制器，
-* 它可以处理 HTTP 请求，并将响应数据以 JSON 或 XML 等格式返回给客户端。
+* `它可以处理 HTTP 请求，并将响应数据以 JSON 或 XML 等格式返回给客户端(如果不添加这个，无法扫描识别为一个HTTP控制器，添加@Controller发现不行)`。
 
 * 此外，@RestController 还可以与其他 Spring 组件和功能集成，例如 Spring Security、Spring Data 等等，
 * 使得开发者可以更加便捷地构建复杂的 Web 应用程序。
