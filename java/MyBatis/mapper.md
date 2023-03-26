@@ -1,5 +1,9 @@
 ## mapper
 
+#### @MapperScan
+* `如果Mapper一直找不到，那可能是因为版本比较旧，需要配置`
+* `在@SpringBootApplication基础上 增加@MapperScan("com.example.springdemo.mapper"),例如这样指定扫描的文件夹！`
+
 
 #### BaseMapper
 * `BaseMapper是一个抽象类，提供了一些通用的CRUD操作，同时也是Mapper接口的基类，可以帮助开发者更快速地编写Mapper接口。`
