@@ -207,6 +207,7 @@ public class AppConfig {
 }
 ```
 * `然后在需要定时执行的方法上添加 @Scheduled 注解,指定定时任务的时间间隔和起始时间等信息`
+* `并且@Scheduled 可以使用cron表达式 来表示定时规则`
 ```java
 @Component
 public class MyTask {

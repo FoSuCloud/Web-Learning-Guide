@@ -12,6 +12,18 @@
 #### 哪些是Bean
 * 接口（interface）、枚举（enum）和类（class）,注解（Annotation）,值对象（Value Object）,工具类（Utility Class）
 
+#### @Qualifier
+* `@Qualifier注解是Spring框架中的一个注解，它的作用是在自动装配时，当有多个实现类时，指定使用哪个实现类。`
+* 使用@Qualifier注解时，需要在@Qualifier注解中指定具体的bean名称，这样Spring框架就能从多个相同类型并满足装配要求的bean中找到我们想要的，避免让Spring脑裂。
+* `@Qualifier注解通常与@Autowired注解一起使用`。下面是一个使用@Qualifier注解的例子：
+```java
+@Service
+public class UserServiceImpl implements UserService {
+    @Autowired
+    @Qualifier("userDaoImpl")
+    private UserDao userDao; // UserDao 可能有多个实现类，这里指定使用哪个实现类
+}
+```
 
 ### validate规范
 

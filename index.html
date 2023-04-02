@@ -5,9 +5,19 @@
 </head>
 <body>
 <script>
-    let a= '111'
-    a+=333
-    console.log('a',a)
+    let buffer = new ArrayBuffer(16); // 16字节
+    let dataView = new DataView(buffer);
+    dataView.setInt8(0, 42); // 1字节
+    dataView.setFloat32(1, 99.99); // 4字节
+    dataView.setInt8(1+4, 1); // 1字节
+    console.log(dataView.getInt8(0)); // 42
+    console.log(dataView.getFloat32(1)); // 99.98999786376953
+    console.log(dataView.getInt8(1+4)); // 1
+
+    let dataView2 = new DataView(buffer,1,5); // 从第1个字节开始，共5个字节
+    console.log(dataView2.getFloat32(0)); // 99.98999786376953
+    console.log(dataView2.getInt8(4)); // 1
+
 </script>
 </body>
 </html>
