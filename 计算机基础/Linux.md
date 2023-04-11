@@ -217,3 +217,15 @@ ll查看文件权限
 * `watch -n 1 'ps aux | grep <进程关键字>'`
 * 其中，-n 1 表示每隔 1 秒钟刷新一次。<进程关键字> 是指需要查看的进程关键字，可以是进程名、进程号、用户等。例如，如果想要查看所有 Python 进程，可以执行以下命令：
 * `watch -n 1 'ps aux | grep python'`
+
+#### ls -al
+* `查看当前目录下的文件/子目录，可以看到对应的权限(读写修改等)，用户id,用户组id,文件大小,修改时间,文件名`
+* 例如 `drwxrwxrwx    3 root      staff          96  4  4 23:36 mount`
+
+#### chown
+* `sudo chown -R root:root ~/mount/home/xx/sample_task/7/original_sample_file`
+* `以这个为例子，——R表示当前目录和子目录下的所有文件都是相同的用户id/用户组id, root表示用户是root,第二个root表示用户组是root用户组`
+
+#### chmod
+* `sudo chmod -R 777 ~/mount/home/yunanbao/sample_task/7/original_sample_file`
+* `chmod表示修改这个目录的权限为777，777表示所有用户都有读写执行的权限`

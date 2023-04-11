@@ -14,9 +14,17 @@ List<String> list = Collections.nCopies(5, "apple");
 System.out.println(list); // [apple, apple, apple, apple, apple]
 ```
 
-
-
-
+#### StringBuilder
+* StringBuilder是Java中的一个可变字符串类，它可以动态地添加、删除和修改字符串内容
+* `类似于StringBuffer，但比StringBuffer更加高效。`
+* `StringBuilder是线程不安全的`，适用于单线程环境下的字符串构建任务。
+append()：向字符串末尾添加新的字符、字符串或其他数据类型的值。
+insert()：在指定位置插入新的字符、字符串或其他数据类型的值。
+delete()：删除指定位置或范围内的字符。
+replace()：替换指定位置或范围内的字符为新的字符、字符串或其他数据类型的值。
+toString()：将StringBuilder对象转换为String类型的字符串。
+* `使用StringBuilder可以避免频繁创建新的String对象，提高字符串操作的效率和性能。`
+* 由于StringBuilder是非线程安全的，因此在多线程环境下需要使用ThreadLocal或者使用线程安全的StringBuffer类。
 
 
 

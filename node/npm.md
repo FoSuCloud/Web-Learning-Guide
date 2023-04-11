@@ -151,3 +151,10 @@
 ### depcheck
 * 检查项目中没有用的依赖 depcheck
 
+#### .npmrc文件的认证信息
+* `auth 字段在 npm v7.0.0 中被弃用，并在后续版本中被移除。`
+* `从 Node.js v15.0.0 开始，npm v7 已经成为默认的包管理器。`
+* //registry.npm.xxx.cn/:_auth 字段是新版本的身份验证字段，
+* 与 auth 不同的是它可以支持更复杂的认证方式，例如 token 认证。
+  `//registry.npm.xxx.cn/:_authToken=TOKEN_VALUE`
+
