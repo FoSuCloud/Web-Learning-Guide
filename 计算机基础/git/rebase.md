@@ -13,11 +13,19 @@
 `git checkout master`
 然后，执行以下命令，将你想要合并的分支（例如feature_branch）变基到master分支：
 `git rebase master feature_branch`
-如果有冲突需要手动解决，然后执行以下命令继续变基：
+* `如果有冲突需要手动解决`，然后执行以下命令继续变基：
 `git add .`
 `git rebase --continue`
-最后，将变基后的分支合并到master分支：
+* 最后，将变基后的分支合并到master分支(`因为执行完it rebase master feature_branch，此时分支变成了feature_branch`)：
 `git checkout master`
 `git merge feature_branch`
 这样就完成了使用rebase和合并其他分支的代码。
+
+#### 直接切换到对应分支拉取代码，然后解决冲突
+* `git checkout other_branch`
+* `git pull --rebase`
+* `git checkout master`
+* `git rebase merge master other_branch`
+* 有冲突则解决冲突
+
 
