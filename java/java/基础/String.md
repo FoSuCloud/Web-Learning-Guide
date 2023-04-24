@@ -26,5 +26,6 @@ toString()：将StringBuilder对象转换为String类型的字符串。
 * `使用StringBuilder可以避免频繁创建新的String对象，提高字符串操作的效率和性能。`
 * 由于StringBuilder是非线程安全的，因此在多线程环境下需要使用ThreadLocal或者使用线程安全的StringBuffer类。
 
-
+#### char
+* `基本数据类型char的包装类是Character`
 

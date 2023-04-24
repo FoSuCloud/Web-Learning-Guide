@@ -40,6 +40,10 @@ public class UserServiceImpl implements UserService {
 private String name;
 ```
 
+#### @Override 
+* @Override 是一个 Java 注解(annotation)，用于表明一个方法覆盖了父类中的同名方法或者实现了接口中的同名方法。
+* 这个注解可以帮助程序员在编译时检测到是否正确地重写了父类或接口中的方法，从而避免一些常见的错误。
+
 
 
 

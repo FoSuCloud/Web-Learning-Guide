@@ -13,7 +13,7 @@
 * 并附带一条解释哪个约束被违反了的消息。
 
 #### quota字段含义
-* quota的requests.cpu和limits.cpu是两种在k8s中为pod或容器分配CPU资源的方式。它们的含义和区别如下：
+* quota的requests.cpu和limits.cpu是两种`在k8s中为pod或容器分配CPU资源的方式`。它们的含义和区别如下：
   requests.cpu：表示pod或容器需要的`最小CPU资源`，用于调度时确定pod可以放置在哪些节点上。如果节点上可用的CPU资源小于pod的requests.cpu，那么pod将无法在该节点上运行12。
   limits.cpu：表示pod或容器可以使用的`最大CPU资源`，用于运行时限制pod或容器的CPU使用量。如果pod或容器超过了limits.cpu，那么它将被k8s限制或抢占，以保证其他pod或容器的正常运行12。
 
