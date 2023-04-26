@@ -20,10 +20,11 @@ List<Person> people = Arrays.asList(
         System.out.println(peopleByName);
 ```
 
+#### Array转换为Stream
+* 在Java 8中，将数组转换为流的操作非常方便，并且可以通过Stream API来对数组进行各种处理和操作。
+* 因此，如果您需要对数组进行复杂的数据操作，或者需要利用Stream API提供的各种高级功能`（例如过滤、映射、排序等）`
 
-
-
-
+* `把一些for循环的处理可以改为使用stream去做处理`
 
 
 

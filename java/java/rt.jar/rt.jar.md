@@ -83,7 +83,23 @@ public class UserController {
 }
 ```
 
+#### Optional
+* Optional类，提供了一种优雅的方式来处理可能为空（null）的值。Optional可以看作是一个包装器，用于表示某个值有可能为空或不可用。
+
+* Optional可以通过以下方式创建：
+1. 使用静态工厂方法Optional.of(value)：返回一个包含给定非空值的Optional对象。如果传入的值为null，则抛出NullPointerException异常。
+2. 使用静态工厂方法Optional.empty()：返回一个空的Optional对象。
+3. 使用静态工厂方法Optional.ofNullable(value)：返回一个包含给定值的Optional对象，如果传入的值为null，则返回一个空的Optional对象。
 
 
+Optional类提供了许多有用的方法，例如：
+* isPresent()：如果Optional包含一个非空值，则返回true，否则返回false。
+* get()：如果Optional包含一个非空值，则返回该值，否则抛出NoSuchElementException异常。
+* orElse(T other)：如果Optional包含一个非空值，则返回该值，否则返回指定的默认值other。
+* map(Function<? super T, ? extends U> mapper)：如果Optional包含一个非空值，则应用给定的函数mapper并返回结果Optional对象。
+* filter(Predicate<? super T> predicate)：如果Optional包含一个非空值并且满足给定的谓词predicate，则返回该Optional对象，否则返回一个空的Optional对象。
+
+* `Optional类可以避免在代码中出现大量的null检查和条件分支，从而使代码更加简洁易读，并提高代码的健壮性和可维护性。`
+* `然而，需要注意的是，在某些情况下，过度使用Optional可能会导致代码复杂化和性能问题。`
 
 
