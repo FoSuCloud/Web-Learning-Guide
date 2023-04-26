@@ -50,3 +50,72 @@ public class Main{
 
 #### 生成浮点随机数
 `new Random().nextDouble() 生成一个介于 0（含）和 1（不含）之间的伪随机数`
+
+#### 进制转换
+```java
+public class Main{
+    public static void main(String[] args) {
+        // 110010010101
+        System.out.println(Integer.toBinaryString(3221)); // 输出二进制
+        // 6225
+        System.out.println(Integer.toOctalString(3221)); // 输出8进制
+        // c95
+        System.out.println(Integer.toHexString(3221)); // 输出16进制
+        // 12833
+        System.out.println(Integer.parseInt("3221",16)); // 按照16进制解析！！！
+    }
+}
+```
+
+#### 常用常量
+```java
+        public static final Boolean TRUE = new Boolean(true);
+        public static final Boolean FALSE = new Boolean(false);
+```
+* 所有数值类型都定义累最大值和最小值，如Integer
+```text
+        public static final int    MIN_VALUE = 0x80000000;
+        public static final int    MAX_VALUE = 0x7fffffff;
+```
+* float和double还有一些其他类型常量
+```text
+        public static final double POSITIVE_INFINITY = 1.0 / 0.0; //正无穷
+        public static final double NEGATIVE_INFINITY = -1.0 / 0.0; //负无穷
+        public static final double NaN = 0.0d / 0.0; //非数值
+```
+
+#### reverse和reverseBytes
+```java
+public class Main{
+    public static void main(String[] args) {
+        int a = 0x12345678;
+        // 10010001101000101011001111000 这样看是不对的。需要补全32位再看，0补在前面
+        // 00010010001101000101011001111000
+        System.out.println(Integer.toBinaryString(a));
+        // 位翻转就是将int当作二进制，左边的位与右边的位进行互换，reverse是按位进行互换
+        int r = Integer.reverse(a);
+        // 11110011010100010110001001000
+        // 00011110011010100010110001001000
+        
+        /*
+        * 00010010001101000101011001111000
+        * 00011110011010100010110001001000 这样看起来就对了！
+        * */
+        
+        System.out.println(Integer.toBinaryString(r));
+        // reverseBytes是按byte进行互换，按照字节翻转
+        // 78，56，34，12 都是一个字节
+        int rb = Integer.reverseBytes(a);
+        // 78563412
+        System.out.println(Integer.toHexString(rb));
+        // 1111000010101100011010000010010
+        System.out.println(Integer.toBinaryString(rb));
+        /*
+        * 00010010001101000101011001111000 原始的
+        * 01111000010101100011010000010010
+        * */
+    }
+}
+```
+
+

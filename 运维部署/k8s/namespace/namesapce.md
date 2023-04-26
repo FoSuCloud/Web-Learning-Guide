@@ -31,4 +31,13 @@
   例如，如果一个cgroup的cfs_quota_us为250000，cfs_period_us为1000000，那么表示这个cgroup在每个1000000微秒（1秒）的周期内，
   最多可以使用250000微秒（0.25秒）的CPU时间。
 
+#### gateway
+* `kubectl get gateway -n <namespace>`
+*  是一个 Kubernetes 命令，用于`列出指定命名空间中的所有 Istio 网关 (Gateway) 对象`。其中，-n <namespace> 参数指定了要操作的命名空间。
+
+* 在 Kubernetes 中，Istio Gateway 是一种负责路由网络流量的对象。
+* 它通常用于`将外部流量（例如来自互联网的 HTTP 请求）路由到 Kubernetes 集群内的服务。`
+* Istio Gateway 可以配置多个虚拟主机和端口，支持多种协议（如 HTTP、HTTPS、TCP 等），并提供 SSL/TLS 加密和证书验证等功能。
+
+
 

@@ -10,4 +10,27 @@ ContainerCreating：当容器正在创建时，Pod将进入“ContainerCreating�
 Terminating：当Pod正在停止或终止时，它将进入“Terminating”状态。在此状态下，Kubernetes正在清理Pod实例并回收资源。
 CrashLoopBackOff：如果Pod中的容器反复失败，则该Pod可能会进入“CrashLoopBackOff”状态。在这种情况下，Kubernetes将尝试自动重启容器，但如果容器继续失败，则Pod将保持在此状态下。
 
+#### 获取pod状态
+* `kubectl get pod my-pod -n my-namespace -o yaml > my-pod.yaml`
+* `在yaml文件中有一个字段status-phase, phase就是描述了Pod的状态`
+```text
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: my-container
+      image: nginx
+      ports:
+        - containerPort: 80
+status:
+  phase: Running
+  conditions:
+    - type: Ready
+      status: "True"
+      lastProbeTime: null
+      lastTransitionTime: "2023-04-22T00:00:00Z"
+```
+
 

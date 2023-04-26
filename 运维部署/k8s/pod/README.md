@@ -20,3 +20,5 @@
 #### 查看所有命名空间的pod
 * `kubectl get pod --all-namespaces -owide`
 
+
+

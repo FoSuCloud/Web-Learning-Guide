@@ -29,3 +29,18 @@ toString()：将StringBuilder对象转换为String类型的字符串。
 #### char
 * `基本数据类型char的包装类是Character`
 
+#### String转换为其他基本数据类型
+```java
+public class Main{
+    public static void main(String[] args) {
+//        Boolean a = Boolean.valueOf("true");
+//        Boolean b = Boolean.valueOf("false");
+//        System.out.println("a:"+a+",b:"+b); // a:true,b:false
+
+        Double c = Double.valueOf("1.34444");
+        double d = Double.parseDouble("-2321.1");
+        System.out.println("c:"+c+",d:"+d); // c:1.34444,d:-2321.1
+    }
+}
+```
+
