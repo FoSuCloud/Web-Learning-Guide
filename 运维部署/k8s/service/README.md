@@ -13,5 +13,5 @@
 * `注意，在mac本地需要minikube image load加载对应的镜像`
 
 #### 修改svc配置文件
-* `kubectl edit svc xxx(如：redis服务名称) -n business`
+* `kubectl edit svc xxx(如：redis服务名称,pod) -n business`
 
