@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
 ```
 
 
-
+#### 快速聚焦到某个物体
+* `点击选中某个物体,然后按下快捷键f,界面会聚焦到该物体上`
 
 
