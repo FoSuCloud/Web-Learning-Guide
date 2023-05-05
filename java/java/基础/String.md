@@ -44,3 +44,16 @@ public class Main{
 }
 ```
 
+#### String的+,+=就是使用StringBuilder实现的
+* `Java中，String可以直接使用+和+=运算符，这是Java编译器提供的支持，`
+* `背后，Java编译器一般会生成StringBuilder, +和+=操作会转换为append。`
+```text
+        String hello = "hello";
+        for(int i=0; i<3; i++){
+            hello+=", world";
+        }
+        System.out.println(hello);
+```
+* 在循环内部，每一次+=操作，都会生成一个StringBuilder。
+* 所以，对于简单的情况，可以直接使用String的+和+=，
+* `对于复杂的情况，尤其是有循环的时候，应该直接使用StringBuilder。`
