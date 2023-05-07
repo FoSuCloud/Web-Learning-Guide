@@ -33,4 +33,6 @@ status:
       lastTransitionTime: "2023-04-22T00:00:00Z"
 ```
 
+### 获取pod所在的node节点信息
+* `kubectl get pods -o wide`
 
