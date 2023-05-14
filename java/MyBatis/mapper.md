@@ -34,8 +34,23 @@ public interface ModuleMapper extends BaseMapper<Module> {
 select id from tb_user where id in (1,2,3)
 ```
 
+#### mapper.update
+* `第一个参数为null，表示更新只根据第二个对象去做，也就是寻找更新对象和更新动作都在第二个参数中(in,set)`
+```text
+        LambdaUpdateWrapper<xxx> updateWrapper = Wrappers.<xxx>lambdaUpdate()
+                .set(XXX::getApplyStatus, ModelServiceApplyStatusEnum.REJECTED.getCode())
+                .set(XXX::getAuditTime, new Date())
+                .set(XXX::getAuditorName, userName)
+                .set(XXX::getRemark, reason)
+                .in(XXX::getId, id);
+        mapper.update(null, updateWrapper);
+```
 
-
-
-
+* `第一个参数不为null，那么就指定更新动作(status更新为DISABLE)，第二个参数指定更新对象(in)`
+```text
+        baseMapper.update(XXX.builder()
+                        .status(StatusEnum.DISABLE.getStatus())
+                        .build(),
+                new UpdateWrapper<>(new XXX()).in(true, "id",condition.getIds()));
+```
 
