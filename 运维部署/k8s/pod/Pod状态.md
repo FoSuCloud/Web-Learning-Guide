@@ -36,3 +36,8 @@ status:
 ### 获取pod所在的node节点信息
 * `kubectl get pods -o wide`
 
+* 查看Pod的ip和所在的节点
+
+### 查看pod所在环境的docker启动配置
+* `cat /etc/docker/daemon.json`
+
