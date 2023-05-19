@@ -100,3 +100,7 @@
 * 一个项目可以配置多个远程仓库，想要删除其中一个远程仓库，可以
 * `git remote remove upstream(仓库名称)`
 
+#### 回退到某个版本
+* `从本地暂存区删除`
+* `git reset commit-id --hard 回退到该commit-id`
+
