@@ -7,3 +7,4 @@
 * `kubectl describe node node-name获取某个node节点的cpu,memory,gpu使用情况`
 
 
+

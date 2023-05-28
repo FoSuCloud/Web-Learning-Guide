@@ -17,6 +17,8 @@
 * `实际的销毁操作会在当前帧结束后进行`。
 * 这是因为 Unity3D 的对象销毁操作通常在帧末尾进行，`以确保不会中断正在进行的其他操作`。
 
+
+#### GameObject.Destroy(gameObject, delayTime)
 * 如果您希望延迟一定时间后销毁游戏对象，可以使用 GameObject.Destroy(gameObject, delayTime) 函数，
-* 其中的 delayTime 参数表示延迟的时间（以秒为单位）。`这样可以在指定的延迟时间后销毁游戏对象。`
+* 其中的 delayTime 参数表示延迟的时间（以`秒`为单位）。`这样可以在指定的延迟时间后销毁游戏对象。`
 
