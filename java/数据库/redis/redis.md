@@ -2,6 +2,13 @@
 * [参考](https://docs.spring.io/spring-data/data-redis/docs/current/reference/html/#redis:setup)
 * Spring Redis 需要 Redis 2.6 或更高版本，并且 Spring Data Redis 与Lettuce和Jedis集成，这两个流行的 Redis 开源 Java 库。
 
+### 进入redis
+* `redis-cli 输入改命令，启动redis-cli客户端
+
+#### (error) NOAUTH Authentication required.
+* `提示需要进行身份验证`
+* `输入命令：AUTH your_password 进行身份验证`
+
 ### RedisConnection
 * RedisConnection为 Redis 通信提供核心构建块，`因为它处理与 Redis 后端的通信。`
 * 它还`会自动将底层连接库异常转换为 Spring 一致的 DAO 异常层次结构`，以便您可以在不更改任何代码的情况下切换连接器，因为操作语义保持不变。
