@@ -845,3 +845,33 @@ let arr=[3,4,6]
     console.log(res.next().value) // 6
     console.log(res.next().value) // undefined
 ````
+
+#### generator使用在接口请求中
+```ts
+import axios from "axios/index";
+
+export default class HomeCtrl {
+  public a = 1;
+  constructor() {
+    const g = this.generatorTest();
+    // console.log(g);
+    console.log(g.next());
+    // 不会等到第一个接口 finally，立即打印
+    console.log("测试间隔");
+    console.log(g.next());
+    console.log(g.next());
+  }
+  private *generatorTest() {
+    yield axios.post("/api/test1").finally(() => {
+      console.log("第一个接口 finally");
+    });
+    // 不会等到第一个接口 finally，立即打印
+    console.log("generatorTest 测试间隔");
+    yield 2;
+    yield axios.post("/api/test2").finally(() => {
+      console.log("第2个接口 finally");
+    });
+  }
+}
+```
+* 所以generator和async,await不一样，不会等到异步任务结束了，再继续执行
