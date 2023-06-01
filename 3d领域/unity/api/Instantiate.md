@@ -6,7 +6,7 @@ Instantiate 函数有多种重载形式，常用的形式如下：
 ```c#
 public static Object Instantiate(Object original, Vector3 position, Quaternion rotation);
 ```
-* original：要实例化的原始对象，通常是一个 GameObject 或其派生类。
+* original：要实例化的原始对象，通常是一个 GameObject 或其派生类 `或者是一个预制体`。
 * position：新实例的位置坐标。
 * rotation：新实例的旋转角度。
 
