@@ -1,6 +1,16 @@
 ## pnpm
 * 应用在三方库(vue3),小demo中非常好，节省下载包大小
 
+#### pnpm介绍
+* 在 PNPM 中，依赖项通常是本地安装的，而不是全局安装的。
+* 这意味着当您使用 PNPM 安装项目的依赖项时，这些依赖项将被安装到项目的特定目录中，而不是安装到全局目录。
+与传统的包管理器（如 npm 和 Yarn）不同，PNPM 使用一种称为“符号链接”的技术来管理依赖项。
+* `它将依赖项直接链接到每个项目的 node_modules 目录中，而不是将它们复制到全局目录`。这种做法具有以下优点：
+
+1. 空间效率：由于依赖项被链接而不是复制，因此节省了磁盘空间。多个项目可以共享相同的依赖项，而无需重复存储。
+2. 版本控制：每个项目都可以使用特定版本的依赖项，而不会受到全局依赖项版本的限制。这样可以更好地控制每个项目的依赖项版本。
+3. 隔离性：每个项目都有其独立的 node_modules 目录，使得依赖项在项目之间的隔离性更好。一个项目的依赖项不会干扰其他项目的依赖项。
+
 
 #### 如何把一个npm项目改为pnpm项目
 1。 在项目的根目录中运行以下命令安装pnpm（如果你尚未安装它）
@@ -43,9 +53,38 @@ pnpm是一个替代npm和Yarn的包管理工具，它有以下一些优点和缺
 
 请注意，使用overrides字段固定特定库的版本可能会导致依赖项之间的不兼容性问题。在固定版本时，务必谨慎考虑，并进行必要的测试和验证。
 
+#### 查看 PNPM 中依赖项的链接路径
+* `pnpm ls --depth=0`
+* 输出可能如下所示：
+```c
++-- dependency1@1.0.0 -> /path/to/dependency1
++-- dependency2@2.0.0 -> /path/to/dependency2
++-- dependency3@3.0.0 -> /path/to/dependency3
+```
+
+* `如果某个依赖项未被链接，而是被复制到每个项目的 node_modules 目录中`
+
+#### 仓库地址
+* /Users/xielipei/Library/pnpm
 
 
+#### pnpm install
+* `pnpm install执行之后，提示信息`
+Packages: +1243
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Packages are hard linked from the content-addressable store to the virtual store.
+Content-addressable store is at: /Users/xielipei/Library/pnpm/store/v3
+Virtual store is at:             node_modules/.pnpm
+Progress: resolved 1225, reused 1202, downloaded 23, added 1243, done
+node_modules/.pnpm/vue-demi@0.14.5_vue@3.3.4/node_modules/vue-demi: Running postinstall script, done in 462ms
 
-
-
+* 解释
+  这段输出是 PNPM 安装包时的进度信息和一些说明。以下是对输出中的关键部分的解释：
+Packages: +1243: 表示已添加/安装了 1243 个包。
+Packages are hard linked from the content-addressable store to the virtual store.: 
+* `表示已将包从内容可寻址存储硬链接到虚拟存储。`
+Content-addressable store is at: `/Users/xielipei/Library/pnpm/store/v3`: 
+* `表示内容可寻址存储的路径。这是 PNPM 存储已下载和缓存的包的位置。`
+Virtual store is at: `node_modules/.pnpm: 表示虚拟存储的路径`。
+* `这是 PNPM 在项目中创建的目录，用于保存已安装的包及其依赖项`。
 
