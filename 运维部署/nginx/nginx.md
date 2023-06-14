@@ -143,3 +143,24 @@ default_type text/html;
 return 302 "/redirectLogin.html"; 
 ```
 
+#### 只允许域名，禁止ip
+```nginx
+map $host $allowed_host {
+    default 0;
+    # 只允许这个域名和这个ip访问，其他情况下，不匹配这个map，就是0，那么就返回403
+    "xx.xx.pcl.ac.cn" 1;
+    "1.1.1.7" 1;
+}
+
+server {
+    # 其他配置项...
+
+    if ($allowed_host = 0) {
+        return 403;
+    }
+
+    # 其他配置项...
+}
+
+```
+

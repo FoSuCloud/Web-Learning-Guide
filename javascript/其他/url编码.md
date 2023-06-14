@@ -144,3 +144,13 @@ server.listen(port,()=>{
 // }
 // </script>
 ```
+
+#### 请求的query参数需要 encodeURIComponent
+* 例如密码加密，结果为
+`B0ip1urSQK3HuCO+ledQpNMUwNMYu8OQ=`
+* 如果不执行 encodeURIComponent，那么在转发给后端的`+符号会编程 空格，密码就就会校验失败`
+* `执行encodeURIComponent之后，就会把+符号转换为%2B`
+`B0ip1urSQK3HuCO%2BledQpNMUwNMYu8OQ=`
+
+
+

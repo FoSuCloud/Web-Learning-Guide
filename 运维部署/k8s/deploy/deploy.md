@@ -62,3 +62,9 @@ spec:
 总结来说，如果您只需要创建单个 Pod，可以直接创建 Pod 对象；如果您需要更高级的部署、管理和控制功能，可以使用 Deployment。
 `Deployment 可以创建和管理多个 Pod 副本，并提供了应用程序的自动管理和扩展功能`。
 
+#### 查看 deployment
+`kubectl get deployment -n xxx` 
+* 如果使用 deployment创建的pod，如果get pod获取不到，可以通过get deployment 获取到某些有用信息，用于排查
+
+
+
