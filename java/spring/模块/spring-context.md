@@ -254,7 +254,14 @@ public class MyServiceImpl implements MyService {
     }
 }
 ```
-
+* @Service注解用于实现以下功能：
+1. 标识服务类：通过将@Service注解应用于一个类，表明该类是一个服务类，用于实现业务逻辑。
+2. 自动装配：在Spring容器中，使用@Service注解将服务类标识为一个可自动装配的Bean。
+* 这意味着，当其他类（如控制器、其他服务类）需要使用该服务类时，
+* Spring容器会自动将该Bean注入到相应的依赖中，无需手动实例化服务类。
+3. Bean命名：@Service注解还提供了一个可选的参数，即value或name。
+* 该参数用于为服务类指定一个名称（即Bean的名称），以便在进行依赖注入时进行引用。
+* 在给定的例子中，@Service("redisCacheService")将服务类命名为"redisCacheService"。
 
 #### @EnableAspectJAutoProxy
 * @EnableAspectJAutoProxy用于`启用基于AspectJ 的自动代理功能`。该注解通常用于配置 Spring 应用程序中的切面和通知，以实现面向切面编程。

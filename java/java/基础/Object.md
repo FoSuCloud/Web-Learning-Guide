@@ -40,9 +40,40 @@ public class Main {
 }
 ```
 
+#### spring-beans的copyProperties
+* copyProperties是Spring Framework中的一个工具方法，位于org.springframework.beans.BeanUtils类中。
+* `它用于将一个Java对象的属性值复制到另一个Java对象中的对应属性`。
+具体而言，copyProperties方法提供了以下功能：
 
+属性复制：copyProperties方法根据属性名称匹配，将源对象中的属性值复制到目标对象中的对应属性。源对象和目标对象的属性名称和类型需要匹配或兼容。
+批量复制：copyProperties方法支持批量复制，可以一次复制多个属性。
+自定义类型转换：如果源对象和目标对象的属性类型不完全匹配，copyProperties方法会尝试进行自动类型转换。如果自动类型转换不可行，你可以自定义类型转换器来处理特定属性的复制。
+忽略空值：copyProperties方法默认情况下会复制源对象中的所有属性，即使它们的值为null。如果你想在复制时忽略源对象中的空值属性，可以通过设置ignoreNullValues参数为true来实现。
 
+```java
+import org.springframework.beans.BeanUtils;
 
+public class Person {
+    private String name;
+    private int age;
+    private int num;
 
+    // 省略构造函数、getter和setter方法
 
+    public static void main(String[] args) {
+        Person source = new Person();
+        source.setName("John");
+        source.setAge(25);
 
+        Person target = new Person();
+        target.setName("Alice");
+        target.setNum(100);
+
+        BeanUtils.copyProperties(source, target);
+
+        System.out.println(target.getName()); // 输出：John
+        System.out.println(target.getAge()); // 输出：25
+        System.out.println(target.getNum()); // 输出：100，目标对象的num属性保持不变
+    }
+}
+```
