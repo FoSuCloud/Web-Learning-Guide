@@ -107,3 +107,9 @@ Wrappers.<SystemLoginSession>lambdaQuery()
                         .lt(SystemLoginSession::getLogoutTime, delTime)
 ```
 
+#### resultType
+* 如果 Java 对象只有一个 Long 类型的属性,resultType 设置为 java.lang.Long
+* 那么即使使用了select * ，也会只返回对应的Long型的值
+
+
+
