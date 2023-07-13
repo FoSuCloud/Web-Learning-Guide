@@ -1,5 +1,5 @@
 ###  Animator 组件
-* 这意味着该游戏对象可以动画化
+* 这意味着该游戏对象可以`动画化`
 
 * Animator Controller 有一个状态机用于确定 Animator 组件在任何给定时间应该为其层级视图设置的动画。
 * 该动画基于事先在 Animator Controller 上设置的动画剪辑。
@@ -10,6 +10,16 @@
 1. 左侧有一个面板用于编辑 Animator 层 (Layers) 和 Animator 参数 (Parameters)
 2. 右侧有一个区域显示状态机本身
 
+#### Animator Controller（动画控制器）
+Animator Controller（动画控制器）是用于管理角色`动画状态和过渡`的组件。
+它允许你在`不同的动画状态之间进行平滑的过渡`，并`控制角色动画的播放逻辑`。
+Animator Controller可以通过Unity编辑器的Animator窗口进行创建和编辑。
+
+#### Animator Avatar（动画化身）
+Animator Avatar（动画化身）是角色动画的关键组成部分。
+它包含了角色模型的`骨骼结构、骨骼动画信息以及动画层权重`等。
+Animator Avatar定义了角色动画的基本结构和动作细节，可以被多个Animator Controller共享。
+在创建`Animator Controller时，你需要为其指定一个Animator Avatar。`
 
 ##### Parameters
 * 单击 Animator 窗口左上角的 Parameters 选项卡。
@@ -36,6 +46,14 @@
 * `在 Animator 组件上启用了 Apply Root Motion，因此根在动画中的任何移动都将应用于每一帧。`
 * 由于 Animator 正在播放 Idle 动画，没有移动，因此 Animator 不会施加任何动作。
 
+* 不启用apply root motion的影响
+1。`位置不受影响`：即使在角色的动画中有移动的表现，角色的实际位置将保持不变。例如，如果动画中的角色向前移动，但未启用"Apply Root Motion"，则角色的位置将保持不动。
+2。`旋转不受影响`：动画中的角色旋转操作也不会影响实际的角色旋转。如果角色在动画中旋转了，但未启用"Apply Root Motion"，则角色的旋转将保持不变。
+3。`需要手动控制角色的运动`：由于动画不会直接影响角色的位置和旋转，如果需要角色移动或旋转，你需要手动编写`脚本`来控制角色的运动。例如，你可以使用刚体组件或者脚本中的移动函数来实现角色的移动。
+
+* 当启用"Apply Root Motion"时，Animator组件会将角色动画的根动作应用于角色的位置和旋转。
+* `这意味着角色的实际移动和旋转将受到动画的影响`。
+
 #### Animate Physics
 * Animate Physics 是 Unity3D 中的一个组件，
 * `它用于启用基于物理的动画，可以让物体在运动时更真实地受到重力、碰撞等力的影响。`
@@ -50,4 +68,16 @@
 * `在Unity中，Animator组件的"Has Exit Time"（有退出时间）选项用于确定在动画播放完毕后是否等待指定的退出时间。`
 * `选中一条transition转换线，在右侧inspector，不勾选has exit time，表示立即进行转换`
 * 如果"Has Exit Time"选项为false，表示动画将立即结束并立即执行过渡到下一个状态。换句话说，它不会等待退出时间，而是立即进行状态转换。
+
+#### update mode
+* 设置为 `animate physics`
+* `更加符合无力，和rigidbody结合，基于animator动画运动`
+
+#### update
+* animator在update周期移动角色
+* `rigridbody组件在fixedupdate周期移动角色`
+
+* `FixedUpdate周期用于运行所有的物理操作，这个循环不会改变更新的频率`
+
+
 

@@ -17,5 +17,5 @@
 #### 查看secret
 * `kubectl get secret -n namepace`
 
-
-
+#### 传递环境变量
+* [参考]("https://kubernetes.io/zh-cn/docs/tasks/inject-data-application/distribute-credentials-secure/")
