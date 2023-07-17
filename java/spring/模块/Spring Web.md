@@ -58,7 +58,7 @@ public String getUser(@ModelAttribute("username") User user) {
     // ...
 }
 ```
-* `和RequestBody不同的是，ModelAttribute绑定的是请求参数而不是请求体！`
+* `和RequestBody(请求体)不同的是，ModelAttribute(表单提交)绑定的是请求参数而不是请求体！`
 
 * `它适用于表单提交或者 URL 查询参数等简单的数据绑定场景。`
 

@@ -6,3 +6,7 @@
 
 
 
+* `transform.Find("Bg").gameObject;获取物体身上的子物体`
+* `GetComponent<Animator>();获取物体身上的组件`
+* `Resources.Load("Prefab/Flag") as GameObject;获取预制体`
+
