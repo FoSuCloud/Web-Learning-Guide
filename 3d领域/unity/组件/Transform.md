@@ -1,5 +1,6 @@
 ### Transform组件
 * 这意味着该游戏对象在场景中具有位置和大小
+* `所有游戏对象都是从一个 Transform 组件开始的，这个组件可用于指定游戏对象在场景中的位置和旋转。`
 
 #### RectTransform组件
 * 在Unity中，"RectTransform"组件是用于控制UI元素的变换和布局的组件。

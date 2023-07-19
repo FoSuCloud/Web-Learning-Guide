@@ -1,5 +1,5 @@
 ## GameObject
-
+* `GameObject是Unity3D中的实体对象,MonoBehaviour是控制GameObject行为和功能的脚本组件`
 
 #### GameObject.Destroy(gameObject)
 * GameObject.Destroy(gameObject) 是 Unity3D 中用于销毁游戏对象的函数。

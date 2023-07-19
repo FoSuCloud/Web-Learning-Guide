@@ -21,6 +21,9 @@ Animator Avatar（动画化身）是角色动画的关键组成部分。
 Animator Avatar定义了角色动画的基本结构和动作细节，可以被多个Animator Controller共享。
 在创建`Animator Controller时，你需要为其指定一个Animator Avatar。`
 
+Avatar是角色模型的骨骼结构和姿势的定义，用于控制角色模型的动画。
+`Animation Clip是包含动画数据的文件，描述了角色模型在不同时间点上的动画状态。`
+
 ##### Parameters
 * 单击 Animator 窗口左上角的 Parameters 选项卡。
 
