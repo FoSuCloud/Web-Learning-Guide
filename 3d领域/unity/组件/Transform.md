@@ -35,5 +35,7 @@ if (childObject != null)
 }
 ```
 
+#### transform.position.magnitude
+* `position 可以看作是从世界中心到对象所在位置的向量，magnitude 是该向量的长度`
 
 

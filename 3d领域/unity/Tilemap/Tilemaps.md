@@ -19,7 +19,8 @@
 5.在 Project 窗口中，选择 FirstTile。
 6.在 Inspector 中，`可以看到瓦片资源的属性`。此处`包括一个 Sprite 字段（瓦片将绘制此精灵）：`
 
-
+#### 修改瓦片地图
+* `window -> 2D -> Time Palette`
 
 
 * `transform.Find("Bg").gameObject;获取物体身上的子物体`

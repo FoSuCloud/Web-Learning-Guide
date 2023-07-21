@@ -1,6 +1,5 @@
 ###  Animator 组件
 * 这意味着该游戏对象可以`动画化`
-
 * Animator Controller 有一个状态机用于确定 Animator 组件在任何给定时间应该为其层级视图设置的动画。
 * 该动画基于事先在 Animator Controller 上设置的动画剪辑。
 
@@ -22,7 +21,15 @@ Animator Avatar定义了角色动画的基本结构和动作细节，可以被�
 在创建`Animator Controller时，你需要为其指定一个Animator Avatar。`
 
 Avatar是角色模型的骨骼结构和姿势的定义，用于控制角色模型的动画。
+
+#### Animation Clip
+* `在2d游戏中，没有avatar资源，直接使用Animation Clip也可以生成动画`
 `Animation Clip是包含动画数据的文件，描述了角色模型在不同时间点上的动画状态。`
+
+* 在2d游戏项目中，先选中要添加动画的对象，点击 window->animation->animation 进入animation界面
+* 拖拽图片进入界面，设置各种 animation clip设置
+* animation生成后`默认是只读的`，需要修改的话需要重新创建
+* `然后把animation clip资源拖拽到animator 界面就可以设置动画规则`
 
 ##### Parameters
 * 单击 Animator 窗口左上角的 Parameters 选项卡。
@@ -57,12 +64,13 @@ Avatar是角色模型的骨骼结构和姿势的定义，用于控制角色模�
 * 当启用"Apply Root Motion"时，Animator组件会将角色动画的根动作应用于角色的位置和旋转。
 * `这意味着角色的实际移动和旋转将受到动画的影响`。
 
-#### Animate Physics
-* Animate Physics 是 Unity3D 中的一个组件，
-* `它用于启用基于物理的动画，可以让物体在运动时更真实地受到重力、碰撞等力的影响。`
-* 与传统的逐帧动画不同，Animate Physics 可以根据物理模拟自动生成动画效果，减少了手动制作动画的工作量，并且可以产生更加自然流畅的动画效果。
+#### Update Mode
 
+* `Animate Physics 用于启用基于物理的动画，可以让物体在运动时更真实地受到重力、碰撞等力的影响。`
+* 与传统的逐帧动画不同，Animate Physics 可以根据物理模拟自动生成动画效果，减少了手动制作动画的工作量，并且可以产生更加自然流畅的动画效果。
 * `选中Animator组件,选择update mode下拉选择Animate Physics`
+
+* `选择None,则需要使用脚本控制动画的播放`
 
 #### 弧度
 * `弧度是角度的另一种度量方式；与度相似，但更自然。一个圆为 2π 弧度，即大约为 6 弧度。`
@@ -81,6 +89,7 @@ Avatar是角色模型的骨骼结构和姿势的定义，用于控制角色模�
 * `rigridbody组件在fixedupdate周期移动角色`
 
 * `FixedUpdate周期用于运行所有的物理操作，这个循环不会改变更新的频率`
+
 
 
 
