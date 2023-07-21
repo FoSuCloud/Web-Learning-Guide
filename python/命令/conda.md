@@ -2,3 +2,9 @@
 ` /usr/bin/python3 -m pip install pandas`
 
 
+#### 删除依赖
+* conda remove name
+
+#### 查看依赖
+* conda list | grep jupyter
+

@@ -71,3 +71,11 @@ print(df)
 * `最好一个pr建立一个分支，否则在pr合并的时候可以看到上次pr的commit!`
 * `并且该分支需要从源项目中获取，而不是fork项目中创建，否则还是会有多个旧commit`
 
+#### uninstall jupyterlab 3.4.5
+* ERROR: Cannot uninstall jupyterlab 3.4.5, RECORD file not found. You might be able to recover
+* from this via: 'pip install --force-reinstall --no-deps jupyterlab==3.4.5'.
+
+* `1.pip uninstall jupyterlab`
+* `2,还是不行就直接删除文件夹`
+* /Users/xielipei/miniconda3/envs/company/lib/python3.10/site-packages/jupyterlab-3.4.5.dist-info/
+
