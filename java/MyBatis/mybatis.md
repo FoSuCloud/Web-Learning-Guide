@@ -11,7 +11,8 @@
 * `同时，MyBatis还提供了一些测试工具，如MyBatis Generator和MyBatis Test等，可以方便地进行单元测试和集成测试。`
 
 
-
+#### ORM
+* `对象关系映射`（`Object Relational Mapping`，简称 ORM、O/RM或 O/R mapping）
 
 
 

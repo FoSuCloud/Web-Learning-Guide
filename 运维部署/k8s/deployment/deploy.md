@@ -68,3 +68,12 @@ spec:
 
 
 
+使用 hostPath 类型的 PV 来持久化存储证书和私钥文件。然而，使用 hostPath 类型的 PV 在实际生产环境中并不推荐，
+因为它`受限于单个节点，不具备可移植性，也没有数据冗余和故障转移能力`。
+`其实没有问题，修改了证书文件之后，直接apply重新应用就好了`
+
+在 Kubernetes 中，推荐使用其他类型的持久化存储解决方案，比如使用云提供商的持久化存储卷（如 AWS EBS、Azure Disk、Google Persistent Disk）
+或使用 CSI（Container Storage Interface）插件来提供持久化存储功能。
+
+* [k8s管理集群中的 TLS 认证]("https://kubernetes.io/zh-cn/docs/tasks/tls/managing-tls-in-a-cluster/")
+
