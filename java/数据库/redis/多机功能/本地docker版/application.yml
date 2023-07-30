@@ -1,0 +1,20 @@
+server:
+  port: 8188
+
+spring:
+  # redis配置
+  redis:
+    # Redis数据库索引（默认为0） 使用2 避免影响别的项目
+    database: 0
+    # Redis服务器地址 1
+    host: 127.0.0.1
+    port: 44806
+    # redis连接超时时间（单位为毫秒）
+    timeout: 60000
+    password: 123456 #
+    lettuce:
+      pool:
+        max-active: 300
+        max-idle: 5
+        min-idle: 0
+        max-wait: 3000

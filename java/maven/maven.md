@@ -10,3 +10,10 @@
 
 ## gradle
 * gradle是和maven对应的另一种构建工具
+
+#### 从官方制品库下载依赖
+* `mvn dependency:get` 命令是用来`获取依赖项的 POM 文件`，并不用于下载实际的依赖 JAR 文件。
+* `mvn dependency:get -Dartifact=io.kubernetes:client-java:10.0.0 -DremoteRepositories=https://repo.maven.apache.org/maven2/`
+* 从官方制品库下载io.kubernetes:client-java:10.0.0
+
+* `-Dartifact=groupId:artifactId:version`
