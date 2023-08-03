@@ -226,7 +226,7 @@ serve.listen(port,()=>{
 * `由于etag和if-no-match这组字段是对last-modefied和If-modefied-since这组字段的缺陷的完善，所以同时存在的时候`
 * `先判断etag和IF-no-match这组字段，优先!`
 
-如果请求经过身份验证或安全（即 HTTPS），则它不会被共享缓存缓存。
+`如果请求经过身份验证或安全（即 HTTPS），则它不会被共享缓存缓存。`
 
 * [实战参考]("https://www.cnblogs.com/Jiangchuanwei/p/10632477.html")
 * [参考]("https://juejin.cn/post/6844903672556552205")
@@ -275,4 +275,7 @@ https://juejin.cn/post/6844903764566999054
 * `但是在公网环境可以缓存成功，没有问题。这是因为浏览器的安全策略，我们在开发环境或者测试环境的网址是不安全的https`
 * `chrome没有给我们缓存该网站的静态资源`
 * 直接从ip访问静态资源是可以的。但是先走 proxy再走静态资源服务才会缓存无效
+
+#### 两个cache-control
+* nginx配置Cache-Control，但是会出现两个 ,`这是因为expires生成了一个cache-control`
 
