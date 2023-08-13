@@ -69,4 +69,8 @@ RabbitMQ提供了一种灵活性用于控制这两者在可靠消息通信上的
 * RabbitMQ在支持AMQP的同时，`也支持其他诸如MQTT、Stomp和XMPP等协议`。
 * 与其他流行的消息代理服务器相比，RabbitMQ的`协议中立性和插件扩展性`使其成为构建多协议应用架构的明智选择。
 
+#### rabbitmqctl
+* RabbitMQ 提供了一个命令行工具 rabbitmqctl，它允许你在命令行中管理 RabbitMQ。
+## 获取所有队列
+* 要获取所有队列的列表，可以使用 `rabbitmqctl list_queues` 命令：
 

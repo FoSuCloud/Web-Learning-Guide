@@ -8,3 +8,6 @@
 #### 官方文档
 * https://www.rabbitmq.com/rabbitmqctl.8.html
 
+## 获取所有队列
+* 要获取所有队列的列表，可以使用 `rabbitmqctl list_queues` 命令：
+

@@ -19,3 +19,8 @@
 
 #### 传递环境变量
 * [参考]("https://kubernetes.io/zh-cn/docs/tasks/inject-data-application/distribute-credentials-secure/")
+
+#### 修改secret
+* `kubectl edit secret name -n namespace`
+* `虽然secret里面的value可能是加密后的，但是也可能是base64加密的，还是可以直接改`
+

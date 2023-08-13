@@ -23,3 +23,6 @@
 #### 查看zip内部信息
 * `unzip -l xxx.zip`
 
+#### command+F
+* 快速搜索文件/文件夹，打开finder
+
