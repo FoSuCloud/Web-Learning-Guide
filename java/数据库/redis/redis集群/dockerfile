@@ -15,5 +15,9 @@ RUN make
 
 # 安装redis-server和redis-cli
 RUN make install
+
+# Copy Redis cluster config file
+COPY ./redis.conf /redis/redis.conf
+
 # 默认命令启动Redis server
-CMD ["src/redis-server"]
+CMD ["src/redis-server", "/redis/redis.conf"]

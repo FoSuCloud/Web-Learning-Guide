@@ -26,3 +26,7 @@
 #### command+F
 * 快速搜索文件/文件夹，打开finder
 
+#### 查看ip地址
+* ipconfig getifaddr en0 `查看ipv4网址`
+* macos 用来查看公共ip地址`url ifconfig.me`
+
