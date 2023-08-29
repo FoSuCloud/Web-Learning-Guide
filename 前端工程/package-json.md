@@ -41,7 +41,7 @@
 3. 最后再npm install
 4. 顺序
 * 首先应该删除resolutions，然后npm i ;用于生成package-lock.json文件
-* 然后添加resolutions，执行npm preinstall
+* 然后添加resolutions，执行 npm run preinstall
 * 最后再执行一次npm i
 
 ## 打补丁-修改三方插件

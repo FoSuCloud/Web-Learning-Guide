@@ -103,7 +103,8 @@ find . type f –name [filename]
 
 ## linux系统中网络管理员对WWW服务器进行访问，控制存取和运行是通过httpd.conf文件体现的
 
-## netstart用于打印网络的状态
+## netstat 用于打印网络的状态
+* netstat -D 查看所有网卡
 
 ## top用于获取本机的cpu使用率
 
@@ -147,6 +148,7 @@ ll查看文件权限
 添加文件，但是还有很多用处
 
 ## ps
+* `apt-get install procps 安装`
 
 * `process status显示进程的状态`
 * ps -ef 查看当前进程
