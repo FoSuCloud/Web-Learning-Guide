@@ -58,7 +58,7 @@ var bStr1 = String.prototype.hasOwnProperty("split"); //String对象的原型上
 // 3.
 var bObj = ({fnTest:function(){}}).hasOwnProperty("fnTest"); // 返回true，因为对象中属性 存在
 ```
-* `实际使用上，会因为for in 获取到对象原型链的属性而导致错误！`
+* `实际使用上，会因为for in 获取到对象原型链的属性而导致错误！` ，`in可以获取到自身和原型链上的属性`
 ```js
 let obj = {a:1}
 let child = Object.create(obj)
