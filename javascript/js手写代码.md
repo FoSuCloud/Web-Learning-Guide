@@ -144,7 +144,7 @@ document.onmousemove=function(e){
 			var two=new child(4);
 			console.log(two)
 ```
-
+* `call/apply的实现其实都是利用闭包，把this用一个变量保存起来，方便闭包调用的时候不释放，并且指向这个变量`
 ## 手写call
 ```
 			// 手写call 

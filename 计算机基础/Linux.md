@@ -63,6 +63,7 @@ find . –type d –name [document]
 
 find . type f –name [filename]
 ```
+* `末尾添加 -print表示打印出匹配的路径`
 
 1. 查找文件
    `find / -name nginx.conf  表示以/为根目录查找名称为nginx.conf的文件`
@@ -179,7 +180,7 @@ ll查看文件权限
 2、在终端中执行“which python”命令，可以查看出当前使用的python的安装目录。(bin脚本！)
 
 ## whereis
-* Linux whereis命令用于查找文件。
+* Linux whereis 命令用于查找文件。
 * 该指令会在特定目录中查找符合条件的文件。这些文件应属于原始代码、二进制文件，或是帮助文件。
 * 该指令只能用于查找`二进制文件、源代码文件和man手册页`，一般文件的定位需使用locate命令(`locate是查找数据库`)。
   -b 　只查找二进制文件。

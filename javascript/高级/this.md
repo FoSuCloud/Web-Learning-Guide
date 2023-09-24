@@ -94,6 +94,9 @@
 			var out=obj.inner;//此时的out对象就相当于obj对象中的inner函数，并且跟obj对象没关系了！
 			out();//因为此时只是inner函数被绑定到out中，而out是作为一个独立函数被调用，所以此时是被默认绑定到window对象中
 ```
+* 因为此时out就是obj.inner函数的引用，和obj对象没有任何关系
+
+
 * `隐式绑定中this传递丢失另一种情况`
 ```
 			var a=10;
