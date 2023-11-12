@@ -11,3 +11,7 @@
 
 * 把explain sql分析结果文本全选复制到网站的第二栏json中即可，标题随便写
 
+#### optimizer_trace
+* optimizer_trace 可以帮助开发人员和数据库管理员了解查询优化器在执行查询时的决策过程，从而更好地理解和调优查询的性能。
+*  https://dev.mysql.com/doc/refman/8.0/en/information-schema-optimizer-trace-table.html
+
