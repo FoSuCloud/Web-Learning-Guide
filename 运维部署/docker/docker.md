@@ -170,6 +170,10 @@ RUN if [ $TYPE == "dev" ]; \
 * `docker cp 容器名称:在容器中的文件路径 宿主机的目标路径`
 * 例如 docker cp 12345:/root/a.txt  /var
 
+### 宿主机文件挪进去
+* `docker cp  宿主机的目标路径 容器名称:在容器中的文件路径`
+* 例如 docker cp   /var 12345:/root/a.txt
+
 ## 查看镜像的构建记录
 * docker history 镜像名称
 * `然后我们就能看到镜像构建的每一步，包括从空白镜像到最后。最新的一条记录就是最终的镜像`
