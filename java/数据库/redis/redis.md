@@ -3,7 +3,7 @@
 * Spring Redis 需要 Redis 2.6 或更高版本，并且 Spring Data Redis 与Lettuce和Jedis集成，这两个流行的 Redis 开源 Java 库。
 
 ### 进入redis
-* `redis-cli 输入改命令，启动redis-cli客户端
+* `redis-cli 输入该命令，进入redis-cli客户端
 
 #### (error) NOAUTH Authentication required.
 * `提示需要进行身份验证`
