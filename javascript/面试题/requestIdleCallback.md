@@ -6,6 +6,7 @@
 ## 如果浏览器一直不空闲，requestIdleCallback就一直不执行？
 * 不是，requestIdleCallback可以设置一个timeout来保证至少在这个时间内执行一次
 
+* `触发频率不稳定，受很多因素影响。比如当我们的浏览器切换tab后，之前tab注册的requestIdleCallback触发的频率会变得很低`
 
 ## 兼容性
 * 目前只有chrome,firefox支持这个api

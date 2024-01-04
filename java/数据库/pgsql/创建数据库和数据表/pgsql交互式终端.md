@@ -47,4 +47,10 @@ List of schemas
 (1 row)
 ```
 
-
+#### 更新密码(创建密码)
+在 PostgreSQL 的上下文中， `\password postgres` 是一个 psql 命令，用于更改 "postgres" 用户的密码。
+具体来说：
+`是一个 psql 的命令提示符，表示接下来输入的是 psql 的命令。` 
+\password 是 psql 的一个命令，用于更改当前用户的密码。
+postgres 是 PostgreSQL 的默认超级用户。
+所以，当你输入 ` \password postgres` 并按 Enter 键时，psql 会提示你输入新的密码并确认它，从而为 "postgres" 用户设置新密码。
