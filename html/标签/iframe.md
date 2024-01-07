@@ -7,7 +7,7 @@
 5. iframe的优点:
 
 ```
-1. iframe能够把镶嵌进去的网页完全张实出来
+1. iframe能够把镶嵌进去的网页完全展示出来
 2. 如果有多个网页引入该iframe,那么只需要修改iframe的内容就可以，不需要修改每一个页面
 3. 如果有加载缓慢的第三方内容如广告等可以用iframe来展现
 ```
@@ -20,6 +20,7 @@
 3. 移动设备无法完全显示iframe,兼容性差
 4. iframe会增加服务器的http请求。
 5. iframe会阻塞页面的onload事件(因为window.onload事件要等到页面所有资源加载完成才会执行)
+6. 虽然存在javascript隔离(getElementById这些api没有)，但是也可以通过window.parent获取到部分属性
 ```
 
 7. `所以现在很多都是用ajax请求来代替iframe`
@@ -62,7 +63,7 @@
     <iframe src="./iframe.html" frameborder="0"></iframe>
     <iframe src="./iframe1.html" frameborder="0"></iframe>
     <script>
-        let arr=[]
+    let arr=[]
     for(let i in Array.from(window.frames)){
         arr.push(window.frames[i])
     }

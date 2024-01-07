@@ -96,7 +96,7 @@
 ```
 
 ## requestAnimationFrame
-* `而requestAnimationFrame会在下次动画刷新（重绘/回流）之前调用函数`
+* `而requestAnimationFrame会在下次动画刷新（重绘/回流,或者说下一帧）之前调用函数`
 * `可以使用cancelAnimationFrame取消动画`
 ```javascript
 var color = ['green', 'red', 'blue', 'yellow'];

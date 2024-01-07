@@ -2,37 +2,42 @@
 <html lang="en-us">
 <head>
     <meta charset="utf-8" />
+    <style>
+        .content-root{
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <div>
-    <div id="button">btn</div>
+    <div id="box">btn</div>
+    <iframe src="./iframe.html"></iframe>
 </div>
 <script>
-    function* doWork(A, B, C) {
-        var x = doExpensiveWorkA(A);
-        yield;
-        var y = x + doExpensiveWorkB(B);
-        yield;
-        var z = y + doExpensiveWorkC(C);
-        return z;
+    var color = ['green', 'red', 'blue', 'yellow'];
+    var element = document.getElementById('box');
+    var index = 0;
+    let old=0;
+    let interval;
+    var animateCallback = function() {
+        if(performance.now()-old<10){
+            requestAnimationFrame(animateCallback);
+            return;
+        }
+        old= performance.now()
+        console.log(old)
+        element.style.backgroundColor = color[index];
+        index++;
+        if (index === 4){
+            cancelAnimationFrame(interval);
+        }else{
+            requestAnimationFrame(animateCallback);
+        }
     }
-    function doExpensiveWorkA(A) {
-        console.log("Expensive a")
-        return 1;
-    }
-    function doExpensiveWorkB(B) {
-        console.log("Expensive b")
-        return 2;
-    }
-    function doExpensiveWorkC(C) {
-        console.log("Expensive c")
-        return 3;
-    }
-    var workGenerator = doWork(4,5,6);
-    console.log(workGenerator.next());  // 输出 "Expensive a" 和 1
-    console.log(workGenerator.next());  // 输出 "Expensive b" 和 3
-    console.log(workGenerator.next());  // 输出 "Expensive c" 和 6
-
+    element.addEventListener('click',()=>{
+        old=performance.now()
+        interval=requestAnimationFrame(animateCallback);
+    })
 </script>
 </body>
 </html>

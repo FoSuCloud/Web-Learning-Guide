@@ -5,11 +5,17 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document </title>
+    <style>
+        #button{
+            color: #0000FF;
+        }
+    </style>
 </head>
 <body>
-<div id="content-root"></div>
+<div id="content-root">32323</div>
 <script>
     setTimeout(()=>{
+        console.log(window.parent);
         fetch('http://localhost:9000/1.0/profile/config').catch((err)=>{
             throw new Error(err)
         })
