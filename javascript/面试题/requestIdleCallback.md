@@ -1,7 +1,8 @@
 ## requestIdleCallback
 * requestIdleCallBack和requestAnimationFrame有什么区别呢？
-* requestAnimationFrame是每一帧都会执行，然而requestIdleCallback是在每一帧的最后，进行判断，如果有空闲时间则执行，没有就等待
+* requestAnimationFrame是每一帧都会执行，`然而requestIdleCallback是在每一帧的最后`，进行判断，如果有空闲时间则执行，没有就等待
 * 也就是requestIdleCallback是使用浏览器的空闲时间来利用的
+* `每一帧的最后指的是paint绘制之后，当前帧是否还有时间`
 
 ## 如果浏览器一直不空闲，requestIdleCallback就一直不执行？
 * 不是，requestIdleCallback可以设置一个timeout来保证至少在这个时间内执行一次
