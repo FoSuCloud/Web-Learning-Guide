@@ -146,7 +146,7 @@ var color = ['green', 'red', 'blue', 'yellow'];
             interval=requestAnimationFrame(animateCallback);
         })
 ```
-2. requestAnimationFrame也是一个宏任务，所以在主线程阻塞的时候也不能按照16.7ms这个特定时间执行
+2. `requestAnimationFrame也是一个宏任务`，所以在主线程阻塞的时候也不能按照16.7ms这个特定时间执行
 ```javascript
 const start = () => {
             const text = document.querySelector('.text')

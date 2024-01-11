@@ -14,30 +14,28 @@
     <iframe src="./iframe.html"></iframe>
 </div>
 <script>
-    var color = ['green', 'red', 'blue', 'yellow'];
-    var element = document.getElementById('box');
-    var index = 0;
-    let old=0;
-    let interval;
-    var animateCallback = function() {
-        if(performance.now()-old<10){
-            requestAnimationFrame(animateCallback);
-            return;
-        }
-        old= performance.now()
-        console.log(old)
-        element.style.backgroundColor = color[index];
-        index++;
-        if (index === 4){
-            cancelAnimationFrame(interval);
-        }else{
-            requestAnimationFrame(animateCallback);
-        }
-    }
-    element.addEventListener('click',()=>{
-        old=performance.now()
-        interval=requestAnimationFrame(animateCallback);
-    })
+   setTimeout(()=>{
+       console.log("第1个宏任务")
+       new Promise((resolve, reject)=>{
+           resolve(1)
+       }).then((res)=>{
+           console.log("第一次微任务:",res)
+           new Promise((resolve, reject)=>{
+               resolve(2)
+           }).then((res2)=>{
+               console.log("第2次微任务:",res2)
+           })
+       })
+   })
+   setTimeout(()=>{
+       console.log("第二个宏任务")
+   })
+   /**
+    * 第1个宏任务
+    * 第一次微任务: 1
+    * 第2次微任务: 2
+    * 第二个宏任务
+    */
 </script>
 </body>
 </html>
