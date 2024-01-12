@@ -14,28 +14,19 @@
     <iframe src="./iframe.html"></iframe>
 </div>
 <script>
-   setTimeout(()=>{
-       console.log("第1个宏任务")
-       new Promise((resolve, reject)=>{
-           resolve(1)
-       }).then((res)=>{
-           console.log("第一次微任务:",res)
-           new Promise((resolve, reject)=>{
-               resolve(2)
-           }).then((res2)=>{
-               console.log("第2次微任务:",res2)
-           })
-       })
-   })
-   setTimeout(()=>{
-       console.log("第二个宏任务")
-   })
-   /**
-    * 第1个宏任务
-    * 第一次微任务: 1
-    * 第2次微任务: 2
-    * 第二个宏任务
-    */
+    // let改为var 也是一样的结果
+    let obj = {
+        name: 'ddd'
+    }
+
+    function  test(obj){
+        obj = {
+            name: 'test'
+        }
+    }
+    test(obj);
+    console.log(obj) // {name: 'ddd'}
+
 </script>
 </body>
 </html>

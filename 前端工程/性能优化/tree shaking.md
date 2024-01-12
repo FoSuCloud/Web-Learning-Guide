@@ -1,5 +1,5 @@
 ## tree shaking
-
+* `由于ESModule的静态特性，它可以进行可靠的静态分析，这是Tree Shaking的前提`
 
 
 #### sideEffects
