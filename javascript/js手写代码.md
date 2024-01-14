@@ -228,25 +228,34 @@ document.onmousemove=function(e){
 
 ## 手写instanceof
 ```
-			// instance就是判断一个对象是否在另一个对象的原型链上
-			function _instanceof(obj1,obj2){
-				while(obj1){
-					if(obj1.__proto__==obj2.prototype){
-						return true;
-					}
-					a=a.__proto__;
-				}
-				return false
-			}
-			function one(){
-				
-			}
-			var t=new one();
-			console.log(t instanceof one)
-			// 一个实例的_proto_在 one构造函数>Object>null
-			console.log(t.__proto__.__proto__.__proto__);//null
-			console.log(t instanceof Function);//false,实例的原型链不在Function
-			console.log(t instanceof Object)
+			// instance就是判断一个函数 是否在另一个对象实例的原型链的构造函数中上
+			function  isInstanceOf(instance, Func){
+                if(typeof instance !== 'object'){
+                    return false;
+                }
+                if(typeof Func !== 'object' && typeof Func !== 'function'){
+                    return false;
+                }
+                let result = false;
+                let proto = instance;
+                while(proto!==null && proto.__proto__!==null){
+                    if(proto.__proto__.constructor === Func){
+                        result = true;
+                        break;
+                    } else {
+                        proto = proto.__proto__; // 继续下一跳
+                    }
+                }
+                return result;
+            }
+            let f = function () {console.log('f')}
+            let ff = new f();
+            console.log(isInstanceOf(ff, f));
+            console.log(isInstanceOf(ff, Object));
+            console.log(isInstanceOf(ff, null));
+            let arr = [1]
+            console.log(isInstanceOf(arr, Array));
+            console.log(isInstanceOf(arr, f));
 ```
 
 ## 手写jsonp

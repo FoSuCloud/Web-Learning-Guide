@@ -1,4 +1,5 @@
 ## sourcemap
+* `在webpack.config.js 设置 devtool: 'source-map' 开启`
 
 - [参考]("https://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html")
 - `sourcemap就是一个独立的map文件，和源码在同一个目录`

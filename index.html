@@ -3,29 +3,41 @@
 <head>
     <meta charset="utf-8" />
     <style>
-        .content-root{
-            color: red;
-        }
     </style>
 </head>
 <body>
 <div>
     <div id="box">btn</div>
-    <iframe src="./iframe.html"></iframe>
+    <div id="box2">==========</div>
 </div>
 <script>
-    // let改为var 也是一样的结果
-    let obj = {
-        name: 'ddd'
-    }
-
-    function  test(obj){
-        obj = {
-            name: 'test'
+    function  isInstanceOf(instance, Func){
+        if(typeof instance !== 'object'){
+            return false;
         }
+        if(typeof Func !== 'object' && typeof Func !== 'function'){
+            return false;
+        }
+        let result = false;
+        let proto = instance;
+        while(proto!==null && proto.__proto__!==null){
+            if(proto.__proto__.constructor === Func){
+                result = true;
+                break;
+            } else {
+                proto = proto.__proto__; // 继续下一跳
+            }
+        }
+        return result;
     }
-    test(obj);
-    console.log(obj) // {name: 'ddd'}
+    let f = function () {console.log('f')}
+    let ff = new f();
+    console.log(isInstanceOf(ff, f));
+    console.log(isInstanceOf(ff, Object));
+    console.log(isInstanceOf(ff, null));
+    let arr = [1]
+    console.log(isInstanceOf(arr, Array));
+    console.log(isInstanceOf(arr, f));
 
 </script>
 </body>

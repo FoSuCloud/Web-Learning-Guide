@@ -4,5 +4,10 @@
 * `plugins可以在Webpack运行过程中访问到整个编译过程，`
 * 可以获取到所有模块和chunks的构建状态，从而进行更加精细的控制和操作。
 
-
-
+#### 例如压缩插件
+```javascript
+new TerserPlugin({
+                    minify: terserMinimizer,
+                    sourceMap: shouldUseSourceMap
+                })
+```
