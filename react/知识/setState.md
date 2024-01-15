@@ -74,4 +74,3 @@ export default class Example extends React.Component<any,ExampleState> {
 </body>
 </html>
 ```
-
