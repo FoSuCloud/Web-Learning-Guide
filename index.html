@@ -7,37 +7,17 @@
 </head>
 <body>
 <div>
-    <div id="box">btn</div>
-    <div id="box2">==========</div>
 </div>
 <script>
-    function  isInstanceOf(instance, Func){
-        if(typeof instance !== 'object'){
-            return false;
+    // foo(); // Uncaught TypeError: foo is not a function
+    {
+        function foo() {
+            console.log('foo调用')
         }
-        if(typeof Func !== 'object' && typeof Func !== 'function'){
-            return false;
-        }
-        let result = false;
-        let proto = instance;
-        while(proto!==null && proto.__proto__!==null){
-            if(proto.__proto__.constructor === Func){
-                result = true;
-                break;
-            } else {
-                proto = proto.__proto__; // 继续下一跳
-            }
-        }
-        return result;
+        foo();
     }
-    let f = function () {console.log('f')}
-    let ff = new f();
-    console.log(isInstanceOf(ff, f));
-    console.log(isInstanceOf(ff, Object));
-    console.log(isInstanceOf(ff, null));
-    let arr = [1]
-    console.log(isInstanceOf(arr, Array));
-    console.log(isInstanceOf(arr, f));
+    console.log("======");
+
 
 </script>
 </body>

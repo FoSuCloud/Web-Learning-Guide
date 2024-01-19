@@ -227,35 +227,64 @@ document.onmousemove=function(e){
 
 
 ## 手写instanceof
+* instanceof就是判断一个函数的prototype属性 是否在另一个对象实例的原型链上
+* 关键点就在于：`obj.__proto__ === Func.prototype`
 ```
-			// instance就是判断一个函数 是否在另一个对象实例的原型链的构造函数中上
-			function  isInstanceOf(instance, Func){
-                if(typeof instance !== 'object'){
-                    return false;
-                }
-                if(typeof Func !== 'object' && typeof Func !== 'function'){
-                    return false;
-                }
-                let result = false;
-                let proto = instance;
-                while(proto!==null && proto.__proto__!==null){
-                    if(proto.__proto__.constructor === Func){
-                        result = true;
-                        break;
-                    } else {
-                        proto = proto.__proto__; // 继续下一跳
-                    }
-                }
-                return result;
+	// 创建Person函数
+    function Person() {
+        // Person的属性和方法
+        this.a = 1;
+    }
+
+    // 创建Student函数
+    function Student() {
+        // Student的属性和方法
+        this.b = 2;
+    }
+
+    // 让Student的原型（Student.prototype）指向Person的一个静态实例
+    Student.prototype = Object.create(Person.prototype);
+    // Student.prototype.constructor = Person; // 修复原型链上的constructor属性
+
+    const s = new Student();
+    // console.log(Student.prototype); //     function Person() {}
+    // console.log(Student.prototype.constructor); //     function Person() {}
+    // console.log(s instanceof Student);
+    // true
+    // console.log(s instanceof Person);
+    // true
+
+    // instanceof就是判断一个函数的prototype 是否在另一个对象实例的原型链的函数中上
+    function  isInstanceOf(instance, Func){
+        if(typeof instance !== 'object'){
+            return false;
+        }
+        if(Func===null || (typeof Func !== 'object' && typeof Func !== 'function')){
+            return false;
+        }
+        let result = false;
+        let proto = instance;
+        while(proto!==null && proto.__proto__!==null){
+            if(proto.__proto__ === Func.prototype){
+                result = true;
+                break;
+            } else {
+                proto = proto.__proto__; // 继续下一跳
             }
-            let f = function () {console.log('f')}
-            let ff = new f();
-            console.log(isInstanceOf(ff, f));
-            console.log(isInstanceOf(ff, Object));
-            console.log(isInstanceOf(ff, null));
-            let arr = [1]
-            console.log(isInstanceOf(arr, Array));
-            console.log(isInstanceOf(arr, f));
+        }
+        return result;
+    }
+    let f = function () {console.log('f')}
+    let ff = new f();
+    console.log(isInstanceOf(ff, f)); // true
+    console.log(isInstanceOf(ff, Object)); // true
+    console.log(isInstanceOf(ff, null)); // false
+    let arr = [1]
+    console.log(isInstanceOf(arr, Array)); // true
+    console.log(isInstanceOf(arr, f)); // false
+    console.log(isInstanceOf(s,Student)); // true
+    // true
+    console.log(isInstanceOf(s,Person)); // true
 ```
 
 ## 手写jsonp

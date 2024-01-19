@@ -327,7 +327,6 @@
 			}
 ```
 
-
 ## 水平居中
 1. `文字，图片等行内元素水平居中使用text-align: center;`
 2. `确定宽度的块级元素水平居中使用margin-left:auto;margin-right:auto;`
