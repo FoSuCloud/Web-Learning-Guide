@@ -72,7 +72,7 @@ server.listen(port,()=>{
 // 我们可以看到?,&特殊字符并没有被编码
 ```
 * [参考]("https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURI")
-* `需要额外注意，encodeURI和encodeURIComponent编码的范围哦是不一样的！`
+* `需要额外注意，encodeURI 和encodeURIComponent编码的范围哦是不一样的！`
 * `encodeURI无法产生用于get,post请求的uri；因为对于xhr,&+不会被编码；但是对于get,post请求，他们是特殊字符，所以使用decodeURIComponent进行编码`
 3、然后是encodeURIComponent方法，这个方法`用于对url的个别组成部分进行编码，所以会对?&这些特殊符号进行编码`
 * `对除了以下字符之外的字符进行编码：A-Z a-z 0-9 - _ . ! ~ * ' ( )`
@@ -89,6 +89,9 @@ server.listen(port,()=>{
 decodeURI("%20%2B%2F") // ' %2B%2F' 
 decodeURI("%20%2B%2F")  // ' +/'
 ```
+* `如果你只是想编码一个带有特殊字符（比如中文）的 URI，这个 URI 用作请求地址，请使用encodeURI`
+* `如果你想把 URI 当作请求参数传递，那么你可以使用 encodeURIComponent() 函数。encodeURIComponent() 函数会编码所有的字符。`
+
 
 ### 那么body数据是否也需要先encode？
 * 不需要，因为请求体的数据发送到后端是只读流对象
