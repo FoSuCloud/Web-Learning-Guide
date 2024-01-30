@@ -82,3 +82,32 @@
 ## sourcemap实现
 * [经典]("https://github.com/mozilla/source-map")
 * 使用了wasm这个技术，之后可以看看
+
+
+#### 浏览器是如何识别并加载 SourceMap 的？
+如果我们让构建工具开启了 SourceMap，例如 Webpack 的 devtools，
+源码经过构建过程（编译、混淆、压缩等）生成的部署代码会在`最底部增加一行注释`，如下所示：
+```javascript
+//# sourceMappingURL=app.b0e56bd3.js.map
+```
+* sourceMappingURL告诉我们，当前资源文件 app.b0e56bd3.js,
+* 对应的 SourceMap 文件的路径是 app.b0e56bd3.js.map。
+* 这是相对路径的写法，也就是说，在本地启用的服务中，构建后的 chunk 和对应的 SourceMap 文件的地址就是在同一个目录下
+
+* `这样一来，浏览器就可以根据 sourceMappingURL 去自动加载 SourceMap，而不用苦哈哈的手动添加。`
+
+#### 为什么本地可以自动加载而线上不可以？
+* 一般来讲，线上产物中会把 SourceMap 去除，除了为了加速构建过程，更重要的是避免有开发经验的人直接在浏览器中「阅读源码」
+
+* 除了直接去除，企业内也常常利用内部的存储能力，将构建好的 SourceMap 资源转存到其他地方，这样一来，
+* `构建产物中的 sourceMappingURL 将无法正确指向 SourceMap 的资源地址，从而实现与直接去除接近的效果。`
+* `hidden-source-map - 与 source-map 相同，但不向捆绑包添加引用注释。//# sourceMappingURL`
+* `如果您只想让 SourceMaps 从错误报告中映射错误堆栈跟踪，但不想为浏览器开发工具公开 SourceMap，则非常有用。`
+
+
+* 这样一来，在生产环境下 Chrome 根据 sourceMappingURL 相对路径的写法就只能寻址到不存在的 404，浏览器会加载不到需要的资源。
+* `掘金的就是这样，可以看到会提示sourcemap 404`
+
+#### 如何感知浏览器确实加载了 SourceMap？
+* 打开 Charles 抓一把
+* `但是直接在network中是找不到map文件的`

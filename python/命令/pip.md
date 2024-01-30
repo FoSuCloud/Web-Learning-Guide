@@ -10,3 +10,5 @@
 #### 删除镜像源
 * `conda config --remove channels https://pypi.douban.com/anaconda/cloud/pytorch/`
 
+#### 安装
+* `pip install scrapy -i https://pypi.tuna.tsinghua.edu.cn/simple`

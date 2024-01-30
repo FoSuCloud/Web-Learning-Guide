@@ -8,6 +8,11 @@
 * engines指明了该模块运行的平台，比如 Node 的某个版本或者浏览器。
 * 该字段也可以指定适用的npm版本。
 
+### workspaces
+* package.json 中的 workspaces 字段用于`定义一个多包存储库（multi-package repository）`。
+* 这是一个包含多个相关的 npm 包的项目，`这些包可能在同一个存储库中进行版本管理`，协同开发或共享代码。
+* 通过指定 workspaces，你可以将这些包组织在一起，以便于在它们之间共享依赖、执行脚本或者进行版本控制。
+
 ## 生成美化的readme.md文件
 *  npx readme-md-generator
 

@@ -11,7 +11,7 @@ jupyter lab build  # Build the app dir assets (optional)
 ```
 * jupyterlab4.0.0需要使用v18版本：`nvm use v18.19.0 `
 * python版本最好使用3.11
-* 基于当前电脑的 `conda active source` 环境开发
+* 基于当前电脑的 `conda active py11` 环境开发
 
 * 最后以开发模式启动 JupyterLab：
 `jupyter lab --dev-mode`
