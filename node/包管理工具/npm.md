@@ -1,3 +1,5 @@
+[npm仓库]('https://github.com/npm/cli')
+
 ## npm install
 `npm install --production 表示安装生产依赖`
 
