@@ -9,7 +9,7 @@
 
 1. 空间效率：由于依赖项被链接而不是复制，因此节省了磁盘空间。多个项目可以共享相同的依赖项，而无需重复存储。
 2. 版本控制：每个项目都可以使用特定版本的依赖项，而不会受到全局依赖项版本的限制。这样可以更好地控制每个项目的依赖项版本。
-3. 隔离性：每个项目都有其独立的 node_modules 目录，使得依赖项在项目之间的隔离性更好。一个项目的依赖项不会干扰其他项目的依赖项。
+3. 隔离性：`每个项目都有其独立的 node_modules 目录`，使得依赖项在项目之间的隔离性更好。`一个项目的依赖项不会干扰其他项目的依赖项`。
 
 
 #### 如何把一个npm项目改为pnpm项目
@@ -87,4 +87,34 @@ Content-addressable store is at: `/Users/xielipei/Library/pnpm/store/v3`:
 * `表示内容可寻址存储的路径。这是 PNPM 存储已下载和缓存的包的位置。`
 Virtual store is at: `node_modules/.pnpm: 表示虚拟存储的路径`。
 * `这是 PNPM 在项目中创建的目录，用于保存已安装的包及其依赖项`。
+
+#### 幽灵依赖
+* 问题：npm/yarn 安装依赖时，存在`依赖提升`，某个项目使用的依赖，并没有在其 package.json 中声明，
+* 也可以直接使用，这种现象称之为 “幽灵依赖”；
+* 随着项目迭代，这个依赖不再被其他项目使用，不再被安装，`使用幽灵依赖的项目，会因为无法找到依赖而报错`。
+
+* pnpm通过隔离性解决幽灵依赖问题
+* `每个项目都有其独立的 node_modules 目录`，使得依赖项在项目之间的隔离性更好。`一个项目的依赖项不会干扰其他项目的依赖项`。
+
+* `pnpm 使所有依赖项保持平坦，但使用符号链接将它们组合在一起。`
+* 例如下面这样:
+```markdown
+node_modules
+├─ foo -> .registry.npmjs.org/foo/1.0.0/node_modules/foo
+└─ .registry.npmjs.org
+   ├─ foo/1.0.0/node_modules
+   |  ├─ bar -> ../../bar/2.0.0/node_modules/bar
+   |  └─ foo
+   |     ├─ index.js
+   |     └─ package.json
+   └─ bar/2.0.0/node_modules
+      └─ bar
+         ├─ index.js
+         └─ package.json
+```
+
+
+#### 速度快
+* 速度。pnpm 不仅比 npm 快，而且比 Yarn 快。冷缓存和热缓存都比 Yarn 快。
+* `Yarn 从缓存中复制文件`，而 pnpm 只是从全局存储中链接它们。
 
