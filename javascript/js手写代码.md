@@ -301,7 +301,6 @@ document.onmousemove=function(e){
 				head.appendChild(script)
 			})()
 			// 如果要获取jsonp加载之后的数据，那么需要和后台配合，让后台返回回调函数
-			
 ```
 
 ## 手写防抖
@@ -398,37 +397,43 @@ document.onmousemove=function(e){
 
 ## 对象数组去重
 ```
-			function destinct(arr){
-				if(!(arr instanceof Array)){
-					throw new TypeError('必须是数组')
-				}
-				var newarr=arr.map((item)=>{
-					return JSON.stringify(item)
-				})
-				console.log(newarr)
-				return [...(new Set(newarr))].map((item)=>{
-					return JSON.parse(item)
-				})
+			function removeDuplicates(arr){
+			    let map = new Map();
+			    let result = [];
+			    for(let obj of arr){
+			        let str = JSON.stringify(obj);
+			        if(!map.has(str)){
+			            map.set(str,true);
+			            result.push(obj);
+			        }
+			    }
+			    return result;
 			}
-			console.log(destinct([{e:3},{e:3},{e:5}]))
+			
+			console.log(removeDuplicates([{e:3},{e:3},{e:5}]))
 ```
 
 ## promise实现红绿灯轮播
 ```
-			// 使用promise实现一个圆(红绿灯) 红色1秒 绿色3秒 黄色5秒
-			 var circle=document.getElementById('circle');
-			 setInterval(function(){
-				 new Promise(()=>{
-					 circle.style.background='red'
-					 console.log(new Date())
-				 }).then(setTimeout(()=>{
-					 circle.style.background='green'
-					 console.log(new Date())
-				 },1000)).then(setTimeout(()=>{
-					 circle.style.background='yellow'
-					 console.log(new Date())
-				 },4000))
-			 },9000)
+    async function carousel(){
+        while (true){
+            await changeColor('red',1*1000);
+            await changeColor('#448811',2*1000);
+            await changeColor('yellow',3*1000);
+        }
+    }
+
+    async function changeColor(background,time){
+        const circle = document.getElementById('circle');
+        circle.style.background = background;
+        await sleep(time);
+    }
+
+    async function sleep(time){
+        await new Promise((resolve) => setTimeout(resolve,time))
+    }
+
+    carousel()
 ```
 
 ## setTimeout实现setInterval
@@ -463,8 +468,7 @@ document.onmousemove=function(e){
 			},3000)
 ```
 
-
-## 手写map
+## 手写Array.prototype.map
 ```javascript
 Array.prototype.map1=function (func){
             if(!Array.isArray(this)){
@@ -484,7 +488,7 @@ Array.prototype.map1=function (func){
         console.log(arr.map1(pow))
 ```
 
-## 手写reduce
+## 手写Array.prototype.reduce
 ```javascript
 /**
          * @param arr {Array<T>} 数组

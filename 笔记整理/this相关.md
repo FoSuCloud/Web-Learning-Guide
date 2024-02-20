@@ -250,6 +250,7 @@
 			// 而使用Math.max.apply()方法则可以传递一个参数数组，提高效率！
 			console.log(Math.max.apply(null,[1,2,3,4]))
 ```
+* `如果函数不处于严格模式，则thisArg为： null 和 undefined 会被替换为全局对象，原始值会被转换为对象。`
 
 ## 严格模式下的函数内部this默认是undefined 
 ```

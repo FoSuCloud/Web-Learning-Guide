@@ -20,6 +20,7 @@ jupyter lab build  # Build the app dir assets (optional)
 * 如果您想更改 TypeScript 代码并即时重建（每次重建后都需要刷新页面）：
 `jupyter lab --dev-mode --watch`，也就是改了代码之后不需要手动执行代码，但是需要等待compile success完成
 
+* `如果响应500；那么可以执行pip install -e .然后也报错的话，如果是提示node_modules/.bin/rimraf不存在之类的就删除这个链接`
 
 #### 注意，如果修改了package的代码
 * 教程 https://jupyterlab.readthedocs.io/en/latest/developer/contributing.html#installing-jupyterlab
