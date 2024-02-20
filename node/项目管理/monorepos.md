@@ -30,19 +30,56 @@
 综合如上 Monorepo VS MultiRepo，`中大型项目，多模块项目`，更适合用 MonoRepo 方式管理代码，
 在开发、协作效率、代码一致性方面都能受益。
 
+#### Monorepo 踩坑
+1、`幽灵依赖`
+问题：npm/yarn 安装依赖时，存在依赖提升，某个项目使用的依赖，并没有在其 package.json 中声明，也可以直接使用，这种现象称之为 “幽灵依赖”；随着项目迭代，这个依赖不再被其他项目使用，不再被安装，使用幽灵依赖的项目，会因为无法找到依赖而报错。
+方案：基于 npm/yarn 的 Monorepo 方案，依然存在 “幽灵依赖” 问题，我们可以通过 pnpm 彻底解决这个问题
 
-#### lerna
-* Lerna 是一个快速、现代的构建系统，
-* 用于`管理和发布`来自`同一存储库的``多个 JavaScript/TypeScript 包`
+2、`依赖安装耗时长`
+问题：`MonoRepo 中每个项目都有自己的 package.json 依赖列表`，随着 MonoRepo 中依赖总数的增长，每次 install 时，耗时会较长。
+方案：相同版本依赖提升到 Monorepo 根目录下，减少冗余依赖安装；使用 pnpm 按需安装及依赖缓存。
 
-#### nx
-* https://github.com/nrwl/nx
-* Nx 是一个具有内置工具和高级 CI 功能的构建系统。它可以帮助您在本地和 CI 上维护和扩展 monorepos。
+3、构建打包耗时长
+问题：多个项目构建任务存在依赖时，往往是`串行构建 或 全量构建`，导致构建时间较长
+方案：`增量构建`，而非全量构建；也可以将串行构建，优化成`并行构建`。
 
-* `npx nx@latest init 在项目中集成nx`
+## Monorepo 选型
+### 1、构建型 Monorepo 方案
+此类工具，主要解决大仓库 Monorepo 构建效率低的问题。项目代码仓库越来越庞大，工作流（int、构建、单元测试、集成测试）也会越来越慢；这类工具，是专门针对这样的场景进行极致的性能优化。适用于包非常多、代码体积非常大的 Monorepo 项目。
 
-* 然后我们可以创建文件夹packages
-* `package.json添加 "workspaces": ["packages/*"] 设置工作目录,我们可以在本地链接他们`
-* 在文件夹packages下面添加多个子项目
+#### Turborepo
+#### Rush
+#### Nx
+
+### 2、轻量化 Monorepo 方案
+#### Lerna
+* 全部工作都交给lerna
+
+#### npm/yarn + workspace
+
+#### Lerna + npm/yarn + workspace
+1、 `依赖管理交给 yarn workspace`
+操作步骤：
+1. 配置 Lerna 使用 `Yarn 管理依赖`：learn.json 中配置 `"npmClient": "yarn"`
+2. 配置 Lerna 启用 `Yarn Workspaces`：
+   配置 lerna.json/useWorkspaces = true
+   配置根目录 package.json/workspaces = ["pacages/*"] , 此时 lerna.json 中的 packages 配置项将不再使用
+   配置根目录 package.json/private = true
+
+* `yarn` 1.x 及以上版本，新增 workspace 能力，不借助 Lerna，也可以`提供原生的 Monorepo 支持`，
+* 需要在根目录下 package.json 中，声明 workspaces
+```json
+{
+  "private": true, // 必须是私有项目
+  "workspaces": ["project1", "project2/*"]
+}
+```
+* `并且yarn把依赖提升到根目录的 node_modules 下，安装更快，体积更小`
+
+2、Lerna 更突出工作流方面
+* 使用 Lerna 命令来优化多个包的管理，如：`发包`、`版本管理`，`批量执行脚本`
+
+
+#### Lerna + pnpm + workspace
 
 
