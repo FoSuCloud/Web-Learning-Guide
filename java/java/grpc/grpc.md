@@ -1,4 +1,6 @@
 ## grpc
+* gRPC 是由 Google 开发的高性能、跨语言的`远程过程调用`（RPC）框架，
+* 基于 `HTTP/2` 和 `Protocol Buffers（protobuf）`协议。
 * [官方文档]("https://grpc.io/docs/languages/java/quickstart/")
 
 #### grpc例子

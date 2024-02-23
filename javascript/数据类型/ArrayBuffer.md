@@ -4,48 +4,37 @@
 
 * `但是由于数组可以容纳任意类型数据，可以动态增长这两个特点，进而导致运行效率低下，以及占据更多的内存消耗`
 * `为了更好的性能，js引入了ArrayBuffer，DataView,TypedArery这三个对象，来解决这个问题`
+* 但是DataView 也可以不限制数据类型
 
-#### ArrayBuffer
-```c
-    // 无符号8bit的char类型被重定义为Byte类型，和TS中的type关键字作用类似
-    typedef unsigned char Byte;
-    class CArrayBuffer
-    {
-    public:
-        // 构造函数
-        CArrayBuffer(int byteLength = 8)
-        {
-          this->_byteLength = byteLength;
-          // 分配byteLength个字节的内存
-          this->pData = new Byte[byteLength];
-        }
-        // 析构函数，用于释放分配的pData字节数组内存
-        ～CArrayBuffer()
-        {
-          if (this->pData ! = NULL)
-          {
-              delete[ ] this->pData;
-              this->pData = NULL;
-          }
-        }
-        // 使用public方法获取已分配内存的字节长度
-        // 由于使用了private且没有提供set方法，因而byteLength是只读的
-              // 这意味着你只能在构造函数中才能设置要分配的内存字节长度
-       // 这也意味着一旦在new之后，再也没机会增加内存容量了
-      int byteLength()
-    {
-          return this->_byteLength;
-      }
-    public:
-      Byte ＊pData;          // ArrayBuffer对象指向已经分配的内存字节数组的首地址
-    private:
-      int _byteLength;     // 当前内存字节数组的字节数
-    };
-```
-* `ArrayBuffer对象持有一个以字节byte为单位的固定长度的内存区域，这个内存区域可以通过ArrayBuffer对象的属性byteLength来获取`
-* 还有两点
-1. `无法动态地增减ArrayBuffer的内存区块大小（参看CArrayBuffer类中的byteLength方法注释）`
-2. `无法直接操作ArrayBuffer的内存区块中的数据（参看CArrayBuffer类，没有提供直接操作pData的方法）。`
+* ArrayBuffer 对象用来表示`通用的、固定长度的原始二进制数据缓冲区`。
+* `ArrayBuffer 不能直接操作`，而是要通过 TypeArray 类型数组对象 或 DataView 数据视图对象 来操作，
+* 它们会将缓冲区中的`数据表示为特定的格式，并通过这些格式来读写缓冲区的内容`。
+
+* `读取`：
+    通过 `FileReader` 将文件转化为 `ArrayBuffer` 数据
+* `写入`：
+  * 通过 TypeArray 对象进行操作
+  * 通过 DataView 对象进行操作
+
+#### Array的缺陷
+* JavaScript 中的 Array 类型，因为有很多功能，而且是不限制类型的，`或者它还可能是稀疏的`。
+* 而如果你从 XHR、FileAPI、Canvas 等各种地方，`读取了一大串字节流`，
+* 如果用 JavaScript 里的 Array 去存储，不仅浪费空间且低效。
+
+#### ArrayBuffer和Array的区别
+1. `ArrayBuffer 初始化后固定大小`，数组可以自由增减
+2. ArrayBuffer 没有 push 和 pop 等数组的方法
+3. `ArrayBuffer 只能读`不能写，写要借助 TypeArray 或 DataView
+
+* `ArrayBuffer 简单来说就是一片内存`，但是你不能（也不方便）直接访问它里面的字节。
+* 而`要访问 ArrayBuffer，则需要通过 TypedArray/DataView 类型引用`。
+* （可以将 ArrayBuffer 理解为 带类型的高速数组 或 类型化数组）
+
+#### 使用场景：
+1. 上传图片读取和显示
+2. Canvas 转换图片下载
+3. WebGL
+
 
 #### DataView
 * `ArrayBuffer不能直接被操作，而是要通过JS/TS中的DataView对象或类型数组对象（TypedArray）来操作，`
@@ -111,7 +100,26 @@
     console.log( view1.getUint16( 4 ) );// 2048
 ```
 
-#### Float32Array
+#### TypeArray
+* ArrayBuffer `作为内存区域`，可以存放多种类型的数据。不同数据有不同的存储方式，这就叫做视图。
+目前，JavaScript 提供以下类型的视图：
+Int8Array：8 位有符号整数，长度 1 个字节。
+Uint8Array：8 位无符号整数，长度 1 个字节。
+Int16Array：16 位有符号整数，长度 2 个字节。
+Uint16Array：16 位无符号整数，长度 2 个字节。
+Int32Array：32 位有符号整数，长度 4 个字节。
+Uint32Array：32 位无符号整数，长度 4 个字节。
+Float32Array：32 位浮点数，长度 4 个字节。
+Float64Array：64 位浮点数，长度 8 个字节。
+
+* 每一种视图都有一个 BYTES_PER_ELEMENT 常数，表示这种数据类型占据的字节数。
+```javascript
+Int8Array.BYTES_PER_ELEMENT;
+// 1
+Uint8Array.BYTES_PER_ELEMENT;
+// 1
+```
+
 * 在某些情况下，可能只需要读写一种类型的数据，`例如在WebGL中，我们仅需要浮点数表示的顶点坐标信息，如果用DataView操作略显麻烦。`
 * 此时`不如提供专用的二进制浮点数操作视图，这样更加方便。这就是JS/TS中Float32Array的用途所在。`
 

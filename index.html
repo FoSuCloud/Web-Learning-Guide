@@ -1,41 +1,44 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload and Display Image</title>
     <style>
-        #circle{
-            width:100px;
-            height:100px;
-            border-radius:50%;
-            background: black;
+        #imagePreview {
+            max-width: 300px;
+            max-height: 300px;
         }
     </style>
 </head>
 <body>
-<div>
-    <div id="circle"></div>
-</div>
+<input type="file" id="uploadInput" accept="image/*">
+<div id="imagePreview"></div>
+
 <script>
+    document.getElementById('uploadInput').addEventListener('change', function(event) {
+        const file = event.target.files[0];
 
-    async function carousel(){
-        while (true){
-            await changeColor('red',1*1000);
-            await changeColor('#448811',2*1000);
-            await changeColor('yellow',3*1000);
+        if (!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const imageData = e.target.result;
+            displayImage(imageData);
         }
-    }
 
-    async function changeColor(background,time){
-        const circle = document.getElementById('circle');
-        circle.style.background = background;
-        await sleep(time);
-    }
+        reader.readAsArrayBuffer(file);
+    });
 
-    async function sleep(time){
-        await new Promise((resolve) => setTimeout(resolve,time))
-    }
+    function displayImage(imageData) {
+        const arrayBufferView = new Uint8Array(imageData);
+        const blob = new Blob([arrayBufferView], { type: 'image/jpeg' });
+        const imageUrl = URL.createObjectURL(blob);
 
-    carousel()
+        const imagePreview = document.getElementById('imagePreview');
+        imagePreview.innerHTML = `<img src="${imageUrl}" alt="Uploaded Image">`;
+    }
 </script>
 </body>
 </html>
