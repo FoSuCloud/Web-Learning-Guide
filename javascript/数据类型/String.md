@@ -322,3 +322,11 @@ const foo = '\'this\' is "quoted"';
 
 // eslint配置: no-useless-escape
 ```
+
+#### atob (ascii to base64)
+* atob() 对经过 `base-64 编码的字符串进行解码为 ASCII 码值`
+
+#### btoa (base64 to ascii)
+* btoa() 方法可以将一个二进制字符串（例如，将字符串中的每一个字节都视为一个二进制数据字节）
+* 编码为 `Base64 转为的 ASCII 字符串`。
+

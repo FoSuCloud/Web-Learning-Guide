@@ -173,7 +173,7 @@ other()
 
 
 #### spawn
-* child_processs.spawn用于生成一个新的进程
+* child_processs.spawn用于`生成一个新的进程`
 * 参数为：
 1) command: 要运行的命令 （如java python）
 2) args: 字符串参数列表 (string[])

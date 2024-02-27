@@ -3,42 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload and Display Image</title>
+    <title>canvas transfer Image</title>
     <style>
-        #imagePreview {
-            max-width: 300px;
-            max-height: 300px;
+        #canvas {
+            width: 300px;
+            height: 300px;
         }
     </style>
 </head>
 <body>
-<input type="file" id="uploadInput" accept="image/*">
-<div id="imagePreview"></div>
+<div id="app">
+    <button id="btn" onclick="download()">点击下载</button>
+    <canvas id="canvas"></canvas>
+</div>
 
 <script>
-    document.getElementById('uploadInput').addEventListener('change', function(event) {
-        const file = event.target.files[0]; // Blob
+    // 获取WebGL上下文
+    let canvas = document.getElementById('yourCanvasId'); // 替换为你的Canvas的ID
+    let gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
-        if (!file) return;
-        let reader = new FileReader();
-        reader.onload = (res)=>{
-            displayImage(res.target.result); // ArrayBuffer
+    function download(){
+        // 获取Canvas的像素数据
+        let pixels = new Uint8Array(canvas.width * canvas.height * 4);
+        gl.readPixels(0, 0, canvas.width, canvas.height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+
+        // 创建一个新的Canvas元素
+        let newCanvas = document.createElement('canvas');
+        let ctx = newCanvas.getContext('2d');
+
+        // 设置新Canvas的尺寸
+        newCanvas.width = canvas.width;
+        newCanvas.height = canvas.height;
+
+        // 在新Canvas上绘制WebGL的像素数据
+        let imageData = ctx.createImageData(canvas.width, canvas.height);
+        imageData.data.set(pixels);
+        ctx.putImageData(imageData, 0, 0);
+
+        // 获取新Canvas的图像数据
+        let newDataUrl = newCanvas.toDataURL('image/png');
+
+        // 将图像数据转换为ArrayBuffer
+        let binaryData = atob(newDataUrl.split(',')[1]);
+        let len = binaryData.length;
+        let buffer = new ArrayBuffer(len);
+        let view = new Uint8Array(buffer);
+        for (let i = 0; i < len; i++) {
+            view[i] = binaryData.charCodeAt(i);
         }
-        reader.readAsArrayBuffer(file); // Blob -> ArrayBuffer
-    });
 
-    function displayImage(imageData) {
-        const arr = new Uint8Array(imageData); // ArrayBuffer -> Uint8Array
-        const blob = new Blob([arr],{type: 'image'}); // Uint8Array -> Blob
+        // 创建Blob对象
+        let blob = new Blob([view], { type: 'image/png' });
 
-        const imageUrl = URL.createObjectURL(blob); // Blob -> string
+        // 创建下载链接并点击下载
+        let url = window.URL.createObjectURL(blob);
+        let a = document.createElement('a');
+        a.href = url;
+        a.download = 'webgl_image.png';
+        a.click();
 
-        // 设置url，添加到对应元素
-        const imagePreview = document.getElementById('imagePreview');
-        const img = document.createElement('img');
-        img.src = imageUrl;
-        imagePreview.appendChild(img);
+        // 释放URL对象
+        window.URL.revokeObjectURL(url);
     }
+    // 绘制 WebGL 图形
+    function renderWebGL() {
+        // 清除画布
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        // 定义顶点数据
+        let vertices = [
+            0.0,  0.5,  0.0, // 顶点1坐标
+            -0.5, -0.5, 0.0, // 顶点2坐标
+            0.5, -0.5,  0.0  // 顶点3坐标
+        ];
+
+        // 创建缓冲区并将顶点数据写入缓冲区
+        let vertexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+
+        // 获取顶点着色器中顶点位置的变量引用
+        let positionAttributeLocation = gl.getAttribLocation(program, 'a_position');
+
+        // 将顶点数据传递给顶点着色器中的变量
+        gl.enableVertexAttribArray(positionAttributeLocation);
+        gl.vertexAttribPointer(positionAttributeLocation, 3, gl.FLOAT, false, 0, 0);
+
+        // 绘制三角形
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    renderWebGL();
 </script>
 </body>
 </html>

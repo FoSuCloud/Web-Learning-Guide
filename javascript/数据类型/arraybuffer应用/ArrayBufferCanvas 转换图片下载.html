@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas transfer Image</title>
+  <style>
+    #canvas {
+      width: 300px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <button id="btn" onclick="download()">点击下载</button>
+  <canvas id="canvas"></canvas>
+</div>
+
+<script>
+  let canvas = document.getElementById('canvas'); // 替换为你的Canvas的ID
+  // 绘制canvas
+  function render(){
+    // 在Canvas上绘制一些内容
+    let ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'red';
+    ctx.fillRect(10, 10, 100, 100); // 示例绘制一个红色矩形
+  }
+  render();
+  // 下载图片
+  function download(){
+    canvasToImage(canvas);
+  }
+
+  function canvasToImage(canvasDom) {
+    // 创建一个新的Canvas元素
+    let newCanvas = document.createElement('canvas');
+    let ctx = newCanvas.getContext('2d');
+
+    // 设置新Canvas的尺寸与原Canvas相同
+    newCanvas.width = canvasDom.width;
+    newCanvas.height = canvasDom.height;
+
+    // 在新Canvas上绘制原Canvas的内容
+    ctx.drawImage(canvasDom, 0, 0);
+
+    // 获取新Canvas的图像URL，是一个base64字符串
+    // 输出类似于 "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...
+    let newDataUrl = newCanvas.toDataURL('image/png');
+
+    // 将base64转换为 ASCII 码
+    let binaryData = atob(newDataUrl.split(',')[1]);
+    let len = binaryData.length;
+    let buffer = new ArrayBuffer(len); // 创建 ArrayBuffer
+    let view = new Uint8Array(buffer); // ArrayBuffer -> Uint8Array
+    // 写入 Uint8Array
+    for (let i = 0; i < len; i++) {
+      view[i] = binaryData.charCodeAt(i);
+    }
+
+    // 创建 Blob 对象 Uint8Array -> Blob
+    let blob = new Blob([view], { type: 'image/png' });
+
+    // 创建下载链接并点击下载
+    let url = window.URL.createObjectURL(blob); // blob -> string
+    let a = document.createElement('a');
+    a.href = url;
+    a.download = 'canvas_image.png';
+    a.click();
+
+    // 释放URL对象
+    window.URL.revokeObjectURL(url); // 下载
+  }
+</script>
+</body>
+</html>
+
