@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Monitoring and Optimization Demo</title>
+    <style>
+        #animation-container {
+            width: 200px;
+            height: 200px;
+            background-color: #f00;
+            position: relative;
+        }
+        #animation-item {
+            width: 50px;
+            height: 50px;
+            background-color: #00f;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="animation-container">
+    <div id="animation-item"></div>
+</div>
+
+<script>
+    // Performance monitor
+    let fpsCounter = {
+        startTime: 0,
+        frameCount: 0,
+        fps: 0,
+        update: function(timestamp) {
+            if (!this.startTime) this.startTime = timestamp;
+            const elapsedTime = timestamp - this.startTime;
+            if (elapsedTime >= 1000) {
+                this.fps = Math.round((this.frameCount * 1000) / elapsedTime);
+                console.log('Current FPS:', this.fps);
+                this.startTime = timestamp;
+                this.frameCount = 0;
+            }
+            this.frameCount++;
+            requestAnimationFrame(this.update.bind(this));
+        }
+    };
+
+    // Animation logic
+    function animate() {
+        const animationItem = document.getElementById('animation-item');
+        const containerWidth = document.getElementById('animation-container').offsetWidth;
+        const containerHeight = document.getElementById('animation-container').offsetHeight;
+        let positionX = parseInt(animationItem.style.left) || 0;
+        let positionY = parseInt(animationItem.style.top) || 0;
+
+        // Update position
+        positionX = (positionX + 1) % (containerWidth - 50);
+        positionY = (positionY + 1) % (containerHeight - 50);
+        animationItem.style.left = positionX + 'px';
+        animationItem.style.top = positionY + 'px';
+
+        // Request next frame
+        requestAnimationFrame(animate);
+    }
+
+    // Start performance monitoring
+    requestAnimationFrame(fpsCounter.update.bind(fpsCounter));
+
+    // Start animation
+    requestAnimationFrame(animate);
+</script>
+
+</body>
+</html>

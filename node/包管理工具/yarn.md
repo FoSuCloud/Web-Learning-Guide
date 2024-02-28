@@ -4,6 +4,8 @@
 * package.json配置resolution写入目标对应的三方库版本
 * 然后直接执行`yarn install`即可
 
+#### yarn安装指定源
+* `yarn install [name] --registry=https://registry.yarnpkg.com`
 
 #### 重复依赖
 * `yarn dlx yarn-deduplicate`
@@ -47,3 +49,5 @@ node_modules
    ├─ index.js
    └─ package.json
 ```
+
+#### 删除依赖 yarn remove package

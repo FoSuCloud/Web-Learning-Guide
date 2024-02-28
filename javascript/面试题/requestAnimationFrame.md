@@ -146,7 +146,7 @@ var color = ['green', 'red', 'blue', 'yellow'];
             interval=requestAnimationFrame(animateCallback);
         })
 ```
-2. `requestAnimationFrame也是一个宏任务`，所以在主线程阻塞的时候也不能按照16.7ms这个特定时间执行
+2. `requestAnimationFrame 也是一个任务`，所以在主线程阻塞的时候也不能按照16.7ms这个特定时间执行
 ```javascript
 const start = () => {
             const text = document.querySelector('.text')
@@ -161,7 +161,7 @@ const start = () => {
                         }
                     }
                     if (w < maxWidth) {
-                        w++
+                        w++;
                         text.style.width = `${w}px`
                         renderId = requestAnimationFrame(draw)
                     } else {
@@ -182,4 +182,24 @@ const start = () => {
 * [https://juejin.cn/post/6844903877976981517](丢帧)
 * [https://blog.csdn.net/think_A_lot/article/details/114165916](图片)
 
-## requestAnimationFrame在每一帧的执行时机
+#### requestAnimationFrame 应用场景
+1. `动画渲染优化`： 最常见的用途是优化动画的渲染。通过 requestAnimationFrame，
+* 可以确保动画在每次浏览器重绘之前更新，从而实现更流畅的动画效果。
+* 与使用定时器（如 setTimeout 或 setInterval）相比，requestAnimationFrame 
+* 可以更好地与浏览器的渲染循环同步，`避免了可能导致掉帧和性能问题`的情况。
+
+2. `滚动效果`实现： 用于实现自定义滚动效果，例如平滑滚动或惯性滚动。
+* 通过在 requestAnimationFrame 的回调函数中更新滚动位置，可以实现流畅的滚动效果，
+* `并确保在用户停止滚动时自然地减速`。
+
+3. 递归更新： 可以利用 requestAnimationFrame 来实现一些需要周期性更新的操作，
+*  例如`递归动画或游戏循环`。通过在每次 requestAnimationFrame 的回调函数中更新状态并发起下一次动画帧请求，可以实现周期性更新而不会消耗过多的 CPU 资源。
+
+4. `性能监控和优化`： 用于监控页面性能并进行优化。
+* 通过`在 requestAnimationFrame 的回调函数中测量每帧的执行时间`，
+* 可以评估页面的渲染性能，并识别潜在的性能瓶颈和优化机会。
+
+5. 用户界面反馈： 用于实现用户界面的实时反馈效果，例如`拖拽、缩放、滑动等操作的实时更新`。
+* 通过在 requestAnimationFrame 的回调函数中更新界面状态，可以实现响应性强且流畅的用户交互体验。
+
+
