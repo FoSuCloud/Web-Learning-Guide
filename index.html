@@ -12,57 +12,25 @@
 <div id="imageContainer"></div>
 
 <script>
-    // 打开或创建一个名为 "images" 的数据库，并定义一个名为 "pictures" 的对象存储
-    const dbPromise = window.indexedDB.open("images", 1);
+    console.log('Start'); // 1
 
-    dbPromise.onupgradeneeded = function(event) {
-        const db = event.target.result;
-        if (!db.objectStoreNames.contains("pictures")) {
-            db.createObjectStore("pictures");
-        }
-    };
+    Promise.resolve().then(() => {
+        console.log('Promise Microtask 1'); // 4
+    });
 
-    dbPromise.onsuccess = function(event) {
-        const db = event.target.result;
-
-        // 当选择了文件后，将文件保存到 IndexedDB 中
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            saveFileToIndexedDB(file);
-        });
-
-        // 当点击按钮后，从 IndexedDB 中读取并显示图片
-        document.getElementById('saveButton').addEventListener('click', function() {
-            displayImageFromIndexedDB();
-        });
-    };
-
-    function saveFileToIndexedDB(file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const imageData = event.target.result;
-            const db = dbPromise.result;
-            const tx = db.transaction("pictures", "readwrite");
-            const store = tx.objectStore("pictures");
-            store.put(imageData, "picture"); // 保存图片数据到 IndexedDB 中，使用 "picture" 作为键
-            tx.oncomplete = function() {
-                console.log('图片已保存到 IndexedDB');
-            };
-        };
-        reader.readAsDataURL(file); // 将文件读取为 Base64 格式的数据
+    async function asyncFunction() {
+        console.log('Async Function Start'); // 2
+        await Promise.resolve(); // 放入微任务队列
+        console.log('Async Function End');  // 5
     }
 
-    function displayImageFromIndexedDB() {
-        const db = dbPromise.result;
-        const tx = db.transaction("pictures", "readonly");
-        const store = tx.objectStore("pictures");
-        const request = store.get("picture");
-        request.onsuccess = function(event) {
-            const imageData = event.target.result;
-            const imageContainer = document.getElementById('imageContainer');
-            imageContainer.innerHTML = '<img src="' + imageData + '" alt="Saved Image">';
-        };
-    }
+    asyncFunction();
+
+    Promise.resolve().then(() => {
+        console.log('Promise Microtask 2'); // 6
+    });
+
+    console.log('End'); // 3
 
 </script>
 
