@@ -3,80 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drag and Drop with Real-time Update Demo</title>
-    <style>
-        #draggable {
-            width: 100px;
-            height: 100px;
-            background-color: #f00;
-            position: absolute;
-            cursor: pointer;
-        }
-    </style>
+    <title>IndexedDB Demo</title>
 </head>
 <body>
 
-<div id="draggable"></div>
+<input type="file" id="fileInput">
+<button id="saveButton">保存图片到 IndexedDB</button>
+<div id="imageContainer"></div>
 
 <script>
-    // 获取可拖拽元素
-    const draggableElement = document.getElementById('draggable');
+    // 打开或创建一个名为 "images" 的数据库，并定义一个名为 "pictures" 的对象存储
+    const dbPromise = window.indexedDB.open("images", 1);
 
-    // 初始拖拽状态
-    let isDragging = false;
-    let startPosition = { x: 0, y: 0 };
+    dbPromise.onupgradeneeded = function(event) {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains("pictures")) {
+            db.createObjectStore("pictures");
+        }
+    };
 
-    // 鼠标按下事件处理函数
-    function handleMouseDown(event) {
-        isDragging = true;
-        startPosition = {
-            x: event.clientX - draggableElement.offsetLeft,
-            y: event.clientY - draggableElement.offsetTop
+    dbPromise.onsuccess = function(event) {
+        const db = event.target.result;
+
+        // 当选择了文件后，将文件保存到 IndexedDB 中
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            saveFileToIndexedDB(file);
+        });
+
+        // 当点击按钮后，从 IndexedDB 中读取并显示图片
+        document.getElementById('saveButton').addEventListener('click', function() {
+            displayImageFromIndexedDB();
+        });
+    };
+
+    function saveFileToIndexedDB(file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const imageData = event.target.result;
+            const db = dbPromise.result;
+            const tx = db.transaction("pictures", "readwrite");
+            const store = tx.objectStore("pictures");
+            store.put(imageData, "picture"); // 保存图片数据到 IndexedDB 中，使用 "picture" 作为键
+            tx.oncomplete = function() {
+                console.log('图片已保存到 IndexedDB');
+            };
+        };
+        reader.readAsDataURL(file); // 将文件读取为 Base64 格式的数据
+    }
+
+    function displayImageFromIndexedDB() {
+        const db = dbPromise.result;
+        const tx = db.transaction("pictures", "readonly");
+        const store = tx.objectStore("pictures");
+        const request = store.get("picture");
+        request.onsuccess = function(event) {
+            const imageData = event.target.result;
+            const imageContainer = document.getElementById('imageContainer');
+            imageContainer.innerHTML = '<img src="' + imageData + '" alt="Saved Image">';
         };
     }
 
-    // 鼠标移动事件处理函数
-    function handleMouseMove(event) {
-        if (isDragging) {
-            console.log("handleMouseMove updateDrag");
-            const newPositionX = event.clientX - startPosition.x;
-            const newPositionY = event.clientY - startPosition.y;
-
-            // 更新拖拽元素位置
-            draggableElement.style.left = newPositionX + 'px';
-            draggableElement.style.top = newPositionY + 'px';
-        }
-    }
-
-    // 鼠标松开事件处理函数
-    function handleMouseUp() {
-        isDragging = false;
-    }
-
-    // 监听鼠标按下事件
-    draggableElement.addEventListener('mousedown', handleMouseDown);
-    // 监听鼠标移动事件
-    document.addEventListener('mousemove', handleMouseMove);
-    // 使用requestAnimationFrame 甚至还卡顿
-    // document.addEventListener('mousemove', updateDrag);
-    // 监听鼠标松开事件
-    document.addEventListener('mouseup', handleMouseUp);
-
-    // 使用 requestAnimationFrame 实现实时更新拖拽位置
-    function updateDrag() {
-        if (isDragging) {
-            console.log("requestAnimationFrame updateDrag");
-            requestAnimationFrame(updateDrag);
-            const newPositionX = event.clientX - startPosition.x;
-            const newPositionY = event.clientY - startPosition.y;
-            // 更新拖拽元素位置
-            draggableElement.style.left = newPositionX + 'px';
-            draggableElement.style.top = newPositionY + 'px';
-        }
-    }
-
-    // 启动实时更新拖拽位置
-    requestAnimationFrame(updateDrag);
 </script>
 
 </body>
