@@ -42,6 +42,52 @@ addNumber()
 * usedExports(`是否进行tree-shaking`) 设置为 false，Webpack 会认为你使用了模块的所有导出。
 * `这意味着只有当你明确地导入和使用模块的所有导出时，Tree Shaking 才会移除该模块。`
 
+#### sideEffects
+* `在 webpack 中，默认情况下，"sideEffects" 被设置为 false`。
+* 这意味着 webpack 默认假设所有模块都没有副作用，并且会尝试进行代码摇树优化，剔除未使用的代码。
+* 这种默认配置通常适用于大多数 JavaScript 模块，因为大部分模块的导入和导出仅涉及纯粹的函数和变量引用，而不会对其他模块或环境产生副作用。
+
+* `在react项目的index.tsx文件中import 'core-js/stable';
+  import 'regenerator-runtime/runtime'; 是否也会被tree shaking 去掉?`
+* 在一般情况下，像 import 'core-js/stable'; 和 import 'regenerator-runtime/runtime'; 这样的导入语句不会被代码摇树优化（tree shaking）去掉。
+* 这是因为 import 'core-js/stable'; 和 import 'regenerator-runtime/runtime';
+* `这样的导入语句本身并没有导出任何具体的变量或函数，它们只是执行了一些副作用操作，例如在全局范围内扩展 JavaScript 运行时环境，以确保代码的兼容性。`
+* `由于这些导入语句没有具体的导出，代码摇树优化过程无法确定它们是否被使用，因此它们通常不会被剔除。`
+
+
+### webpack5的tree shaking
+#### 跟踪对导出的嵌套属性的访问
+* webpack5能够`跟踪对导出的嵌套属性的访问`，可以改善导出命名空间对象时的tree shaking (清除未使用的导出和混淆导出)
+```javascript
+// inner.js
+export const a = 1;
+export const b = 2;
+```
+```javascript
+//module.js 
+export * as inner from './inner.js';
+```
+```javascript
+// user.js
+import * as module from './module.js'
+console.log(module.inner.a);
+```
+* `在这个例子，webpack5会删除导出的b`
+
+#### 内部模块的tree shaking
+* webpack4没有分析模块的导出和引用之间的依赖关系。webpack5有一个新的选项；optimization.innerGraph
+* 在生产模式下默认是启用的，它可以对模块中的标志进行分析，找到导出和引用之间的依赖关系。
+```javascript
+import {something} from './something';
+function usingSomeThing(){
+    return something;
+}
+export function test(){
+    return usingSomeThing();
+}
+```
+* `webpack5的内部依赖图算法会找出something只有在test被导出时才会被使用，这允许更多的出口标记为未使用`
+* `从而从代码包中省略更多的代码`
 
 
 

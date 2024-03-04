@@ -12,25 +12,49 @@
 <div id="imageContainer"></div>
 
 <script>
-    console.log('Start'); // 1
+    let set = new Set();// 被观察者维护的 集合
 
-    Promise.resolve().then(() => {
-        console.log('Promise Microtask 1'); // 4
-    });
+    let observe = function (fn) {
+        return set.add(fn);
+    };// 添加值到集合中
 
-    async function asyncFunction() {
-        console.log('Async Function Start'); // 2
-        await Promise.resolve(); // 放入微任务队列
-        console.log('Async Function End');  // 5
+    let observable = function (obj) {
+        return new Proxy(obj, {set: listener});// 返回代理器,监听set操作
     }
 
-    asyncFunction();
+    // 监听器
+    function listener(target, name, val, receiver) {
+        // console.log('receiver:',receiver); this
+        let res = Reflect.set(target, name, val, receiver);// 默认行为时的结果
+        set.forEach(item => item(name, val));// 执行函数
+        return res;
+    }
 
-    Promise.resolve().then(() => {
-        console.log('Promise Microtask 2'); // 6
+    // 返回代理器对象
+    const person = observable({
+        name: '张三',
+        age: 20
     });
 
-    console.log('End'); // 3
+    function print() {
+        console.log(`${person.name}, ${person.age}`)
+    }
+
+    // 添加 观察者1
+    observe(print);
+    console.log(set);//Set(1) {ƒ} 指的是print函数
+    person.name = '李四';  // 打印 李四, 20
+
+    // 再添加一个函数
+    function other(name, val) {
+        console.log(`other:${name}改为${val}`)
+    }
+    // 添加 观察者2
+    observe(other);
+    person.age = 99;// 此时会打印 李四, 99  ;  other:age改为99;
+
+    // 对象之前没有的属性赋值，依旧会触发代理器，vue3就是使用proxy来实现对对象属性的监听
+    person.a = 1; //李四, 99  ; other:a改为1
 
 </script>
 
