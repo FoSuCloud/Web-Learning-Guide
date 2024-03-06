@@ -35,3 +35,14 @@ export default mustache;
     app.innerHTML+=result
 </script>
 ```
+
+## js异步加载之defer/async/ type="module"
+1. defer(延缓):1.如果script标签设置了该属性，则浏览器会异步加载文件且不会影响到后续DOM的渲染
+*  `2. 如果有多个defer,那么会按照顺序去执行所有的script`
+* `3. defer脚本会在文档渲染完毕后，DOMContentLoaded事件调用前执行(所以会阻塞DOMContentLoaded事件)`
+2. async(异步):`异步加载脚本，但是不会按照顺序去执行！谁先加载完谁先执行，并且在执行脚本的时候停止渲染页面，执行完才继续执行渲染`
+* `也就是async的话就不会等待页面渲染完成，而是异步加载完毕就会去执行脚本`
+3. `type="module"`:`和defer情况很类似，区别在于会在提取的时候加载多个js文件`
+4. `同时设置async和type="module"，此时会异步加载，并且当做模块加载多个js文件，但是不必等到页面渲染完毕就可以执行`
+5. `在同时设置defer和async的时候，async的优先级更高`
+6. `async和defer都只在script标签的src属性存在时才有效，而type="module"则不需要`
