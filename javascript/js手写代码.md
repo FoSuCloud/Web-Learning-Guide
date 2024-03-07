@@ -184,45 +184,33 @@ document.onmousemove=function(e){
 
 ## 手写new运算符
 ```
-			function newObj(){
-            let args = Array.from(arguments) || [];
-            if(!args.length){
-                throw new Error('请传入构造函数')
-            }
-            if(!(args[0] instanceof Function)){
-                throw new TypeError('类型错误，请传递构造函数')
-            }
-            let constructor=args.shift();
-            let obj=Object.create(constructor.prototype)
-            let res=constructor.apply(obj, args);
-            // constructor构造函数return值不为对象则返回构造函数实例
-            if(typeof res !== 'object'){
-                return obj;
-            }
-            // 返回构造函数实际return值
-            return res;
+	function myNew(Func,...args){
+        // 1.基于函数原型对象创建实例对象
+        const instance = {};
+        Object.setPrototypeOf(instance, Func.prototype);
+        // 2. 绑定参数&this
+        const result = Func.apply(instance, args);
+        // 已经绑定了this的实例可以则返回，否则返回instance
+        return result instanceof Object ? result: instance;
+    }
+    // 1. 没有return，那么apply得到的就是 undefined, 也就是instance
+    function foo(value){
+        this.a = value;
+    }
+    const val1 = myNew(foo,3);
+    console.log(val1); // foo{a: 3}
+    console.log(new foo(3)); // foo{a: 3}
+
+    // 2. return 那么myNew返回result
+    function bar(value){
+        return {
+            name: value,
+            age: 11
         }
-        function fn(a,b){
-            return {
-                a:a,
-                b:b
-            }
-        }
-        let obj=newObj(fn,3,2)
-        console.log(obj); // {a:3,b:2}
-        
-        function fn2(){
-            return 2;
-        }
-        let obj2=newObj(fn2)
-        console.log(obj2); // fn2{}
-        
-        function fn3(a,b){
-            this.a=a;
-            this.b=b;
-        }
-        let obj3=newObj(fn3,3,5)
-        console.log(obj3); // fn3{a: 3, b: 5}
+    }
+    const val2 = myNew(bar,5);
+    console.log(val2); // {name: 5, age: 11}
+    console.log(new bar(5)); // {name: 5, age: 11}
 ```
 
 

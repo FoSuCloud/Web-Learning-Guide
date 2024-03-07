@@ -1,26 +1,9 @@
-## 14.闭包保存变量内存
-* 闭包会保存闭包内部使用的变量，不会立马释放内存
-```
-	function Foo(){
-		 var i=0;
-		 document.write(i+'a');//这个会在var f1=Foo();的时候就执行
-		 return function(){
-			 document.write(i++);
-		 }
-	}
-	var f1=Foo();//f1只是保存Foo()函数执行后的结果，即return 的函数
-	document.write(f1);、、 function(){document.write(i++);}
-	f1();//0, 0++ 闭包变量的内存不会被释放,依旧保存,所以执行f1();使用的都是同一个i变量
-	f1();//1,1++
-	f1();//2
-	f1();//3
-	// f2=Foo();//f2也是Foo()函数的结果，但是和f1不一样，变量保存的地址不一样
-	// f2();//0 ,和f1使用的变量不一样,所以i依旧为0
-```
+## this调用位置
+* this 的调用位置：`this的调用位置就是函数在代码中被调用的位置(动态作用域)`
 
 
 ## this的四种绑定
-1. 默认绑定
+### 1. 默认绑定
 * `当一个函数没有明确的被对象调用的时候，也就是单纯作为独立函数被调用的时候，对函数的this使用默认绑定，绑定到全局的window`
 ```
 			var a=10;
@@ -40,6 +23,20 @@
 			}
 			getSimple()
 ```
+* 如果使用`严格模式（Strict Mode）`，则不能将全局对象用于默认绑定，因此 `this 会绑定到 undefined`。
+```javascript
+function foo() {
+  'use strict';
+
+  console.log(this.a);
+}
+
+var a = 2;
+
+foo();
+// TypeError:this is undefined
+```
+
 * `在被隐式调用的对象属性的调用函数，只要还是作为独立函数被调用，那么就还是被默认绑定到window`
 ```
 			var a=10;
@@ -56,8 +53,9 @@
 			}
 			obj.inner();
 ```
-2. 隐式绑定
-* `当一个函数被一个对象"包含"的时候，我们就称this被隐式绑定到对象中了，此时通过this可以直接访问对象中的其他属性`
+
+### 2. 隐式绑定
+* `当一个函数被一个对象"包含/拥有"的时候，我们就称this被隐式绑定到对象中了，此时通过this可以直接访问对象中的其他属性`
 ```
 			var a=10;
 			var obj={
@@ -81,6 +79,26 @@
 			obj.inner();
 ```
 * `从上面两个例子可以看出，this是动态绑定的，不是一定要声明在对象内部才会被对象调用；函数不是完全被对象所拥有的，具有一定的独立性`
+
+* 对象属性引用链中只有上一层或最后一层在调用位置中起作用。
+```javascript
+function foo() {
+  console.log(this.a); // this还是指向obj2
+}
+
+var obj2 = {
+  a: 42,
+  foo: foo,
+};
+
+var obj1 = {
+  a: 2,
+  obj2: obj2,
+};
+
+obj1.obj2.foo(); // 42 
+```
+
 * `隐式绑定中的this传递丢失问题`
 ```
 			var a=10;
@@ -167,7 +185,7 @@ var one_span=document.getElementById('one');
 			var arr=[function(){ console.log(this.length)},1,"隐式绑定？","如果是隐式绑定，那么该返回的是该数组的长度4"];
 			arr[0]();//没错,就是4!虽然window.length=10;但是arr[0]()这种方式其实是隐式绑定,就是arr对象去调用自己的属性方法,所以自己的属性方法指向的this就是本身
 ```
-3. 显式绑定
+### 3. 显式绑定
 * `显式绑定就是利用call,apply,bind函数指定该方法被哪个对象绑定`
 ```
 			var a=10;
@@ -210,7 +228,8 @@ var one_span=document.getElementById('one');
 ```
 * `注意，call/apply/bind方法的第一个参数指的是this指向的对象，如果为null/undefined的话那就是默认绑定为window`
 * `显式绑定和隐式绑定的区别就是隐式绑定只是给函数临时绑定一个对象，函数的this指向很可能会改变，而显示绑定的话，绑定了就不会改变`
-4. new绑定
+
+### 4. new绑定
 * `this的绑定方式有四种，按照优先级分别是new绑定，显式绑定，隐式绑定，默认绑定`
 * `new绑定其实也是实现多态的一种方式`
 ```
@@ -224,7 +243,6 @@ var one_span=document.getElementById('one');
 			console.log(two.name,two.age);
 ```
 * 通过new绑定的方式把对象的this指向新创建的新对象
-5. [参考](https://www.jb51.net/article/121164.htm)
 
 ## 默认绑定不一定所有方法都可以用
 ```
@@ -315,4 +333,161 @@ var one_span=document.getElementById('one');
 ```
 
 
+
+
+
+## 箭头函数
+* `箭头函数的this指向 外层作用域(外层函数或者全局)`
+* 箭头函数不使用 this 的四种标准规则，而是根据外层（函数或者全局）作用域来决定 this 的指向。并且，
+* `箭头函数拥有静态的上下文，即一次绑定之后，便不可再修改`。
+
+* this 指向的固定化，并不是因为箭头函数内部有绑定 this 的机制，实际原因是`箭头函数根本没有自己的 this`，
+* `导致内部的 this 就是外层代码块的 this`。正是`因为它没有 this，所以也就不能用作构造函数`。
+
+* `箭头函数可以像 bind 一样确保函数的 this 被绑定到指定对象，此外，其重要性还体现在它用更常见的词法作用域取代了传统的 this 机制。`
+
+1. 无论箭头函数在对象的什么层级，只要对象在全局作用域，那么箭头函数this指向的都是window
+```javascript
+        var a=4;
+        let obj={
+            a: 3,
+            b: {
+                a:5,
+                getName: ()=>{
+                    console.log(this.a)
+                }
+            }
+        }
+        obj.b.getName(); // 4
+        // 因为所在的作用域是全局作用域，所以箭头函数的this指向的是window
+        // 所以得到的是4
+```
+2. 箭头函数在函数作用域中则this指向函数
+```javascript
+        function fn(){
+            this.a=4;
+            this.b=()=>{
+                console.log(this.a)
+            }
+        }
+        new fn().b(); // 4
+```
+```javascript
+        function fn(){
+            this.name='111'
+            return {
+                a:{
+                    b:()=>{
+                        console.log(this.name)
+                    }
+                }
+            }
+        }
+        fn().a.b(); // 111
+```
+```javascript
+    let obj={
+        a:4,
+        b:function (){
+            console.log(this.a); // 4
+            return ()=>{
+                console.log(this.a)
+            }
+        }
+    }
+    obj.b()() // 4
+```
+```javascript
+function foo() {
+  // 返回一个箭头函数
+  return (a) => {
+    // this 继承自 foo()
+    console.log(this.a);
+  };
+}
+const container1 = { a: 1 };
+const container2 = { a: 2 };
+const bar = foo.call(container1);
+bar.call(container2); // 1
+```
+
+#### 应用场景总结
+1. 函数的普通调用
+2. 函数作为对象方法调用
+3. 函数作为构造函数调用
+4. 函数通过 call、apply、bind 间接调用
+5. 箭头函数的调用
+
+## 下面代码执行结果是什么？
+```javascript
+        function Foo() {
+            Foo.a = function() {
+                console.log(1)
+            }
+
+            this.a = function() {
+                console.log(2)
+            }
+        }
+
+        Foo.prototype.a = function() {
+            console.log(3)
+        }
+
+        Foo.a = function() {
+            console.log(4)
+        }
+
+        Foo.a(); // 4 此时执行的是
+        /**
+         * Foo.a = function() {
+            console.log(4)
+        }
+         打印4; 因为函数Foo此时并没有被执行
+         * */
+
+        let obj = new Foo();
+        /**
+         * 此时执行函数Foo
+         * Foo.a指向的是function() {
+                console.log(1)
+            }
+         然后执行this.a赋值
+         * */
+        obj.a(); // 2 不需要通过原型链就可以获取到属性a
+        Foo.prototype.a(); // 3
+        Foo.a(); // 1
+```
+```javascript
+        var n = 2
+        var obj = {
+            n: 3,
+            fn: (function(n){
+                n*=2
+                this.n+=2
+                var n = 5
+                console.log("window.n", window.n)
+                return function (m) {
+                    console.log("n:", n, "m", m)    // n:5  m:3  这里的 n 向上查找是 5   //
+                    this.n*=2    // fn(3): 2 * 4 =8  //  obj.fn(3): 2 * 3 = 6
+                    console.log(m + (++n))    // 3 + (++5) ++n 导致上级作用域的n变成了6    // 3 + (++6)
+                }
+            })(n)
+        }
+        /**
+         * 立即执行函数先执行
+         * 因为立即执行函数把外层的n变量传递进来，所以obj.n变为6
+         * 把window.n 变为4
+         * 1. 打印 "window.n",4
+         * (注意，就算不执行函数fn()，立即执行函数还是会执行)
+         * */
+        var fn = obj.fn;
+        fn(3)    
+        /** 2.然后打印 n:5 ( 闭包，外面的5) m:3
+         * 然后this.n指向的是window.n ;所以window.n变为 8
+         * 3. 打印 3+ 6 =9； 打印9
+         * */
+        obj.fn(3)    // 10
+        console.log(n, obj.n)    // 8 6
+```
 
