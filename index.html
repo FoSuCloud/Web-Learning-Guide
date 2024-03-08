@@ -9,6 +9,38 @@
 <button id="button" >click</button>
 
 <script>
+    function myNew(Func, ...args) {
+        if (!(Func instanceof Function)) {
+            throw new Error('Constructor must be a function');
+        }
+        if (typeof new.target !== 'undefined' && new.target !== Func) {
+            throw new Error('Class constructor must be invoked with \'new\'');
+        }
+        let instance = Object.create(Func.prototype);
+        let result = Func.apply(instance, args);
+        return result instanceof Object ? result : instance;
+    }
+    // 调用返回对象方式
+    function foo(a){
+        return {
+            a:a
+        }
+    }
+    // 走 result instanceof Object 返回 result 逻辑
+    console.log(myNew(foo,1)); // {a: 1}
+    // class 的函数写法
+    const Person = /** @class */ (function () {
+        function Person(name,age) {
+            this.a = name;
+            this.b = age;
+            this.c = { a: 1 };
+        }
+        return Person;
+    }());
+    // 返回 instance
+    const person = myNew(Person, 'Alice', 30);
+    console.log(person); // 输出: Person { name: 'Alice', age: 30 }
+
 
 </script>
 

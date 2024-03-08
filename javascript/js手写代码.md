@@ -66,30 +66,96 @@ document.onmousemove=function(e){
 				console.log([...arguments])
 ```
 
-## 手写bind
+### 手写bind
+* 简单版
+```javascript
+    Function.prototype.myBind = function(context,args){
+        context = context || window; // 空判断
+        const property = Symbol();
+        // 1. 此时的this指的是要调用的函数，把函数设置为 context的对象属性。使用默认调用方式绑定this
+        context[property] = this;
+        // 2. 返回一个匿名函数
+        return function (...newArgs){
+            // 3. 通过闭包保存外层函数变量
+            const params = [...args].concat(...newArgs);
+            // 4. 调用函数
+            const result =  context[property](...params);
+            // 5. 删除属性
+            delete context[property];
+            // 6. 返回值
+            return result;
+        }
+    }
+    function demo(b,c,d){
+        console.log(this.a,b,c,d);
+    }
+    const obj = {a:33};
+    const func = demo.myBind(obj,'bb',99);
+    func(4);
 ```
-			// 手写bind 
-			Function.prototype.bind=function(context,...bindments){
-				// 绑定调用该函数的对象
-				context=context||window;//{name: "yiyi", age: 11}
-				// 绑定好this 使用闭包，到时候返回原来的this
-				const func=this;// 被调用的函数!
-				
-				// 如果不是函数使用bind则提示错误
-				if(!(func instanceof Function)){
-					console.log('bind方法必须是函数使用')
-				}
-				return function F(...callArgs){
-					let allArgs=bindments.concat(callArgs);// concat返回数组
-					// 如果此时是创建实例，new func 而不是调用方法，那么返回实例
-					if(this instanceof F){
-						console.log("new一个实例")
-						return new func(...allArgs)
-					}
-					// 注意：返回的是对数组展开之后的结果 字符串。。
-					return func.call(context,...allArgs)
-				}
-			}
+* 但是存在问题，如果多次bind，那么对象context会绑定多个属性
+* 可以优化一下
+```javascript
+ Function.prototype.myBind  = function (context,...args){
+        // undefined / null 使用window
+        context = context || window;
+        // 1. 避免多次绑定属性，直接使用属性绑定当前 this (目标函数)
+        const bindFunction = this;
+        // 2. 返回匿名函数
+        return function(...newArgs){
+            // 3. bindFunction.apply(context, args) 使用apply绑定this
+            const params = args.concat(...newArgs);
+            // 4. 调用函数
+            const result = bindFunction.apply(context, params);
+            // 5. return
+            return result;
+        }
+    }
+    function demo(b,c,d){
+        console.log(this.a,b,c,d);
+    }
+    const obj = {a:33};
+    const func = demo.myBind(obj,'bb',99);
+    func(4);
+```
+* `还有一种创建实例的考虑，bind之后再new实例`
+```javascript
+	Function.prototype.myBind  = function (context,...args){
+        // undefined / null 使用window
+        context = context || window;
+        // 1. 避免多次绑定属性，直接使用属性绑定当前 this (目标函数)
+        const bindFunction = this;
+        // 2. 返回匿名函数
+        return function F(...newArgs){
+            // 3. bindFunction.apply(context, args) 使用apply绑定this
+            const params = args.concat(...newArgs);
+            // 4. 判断是否是 new, F是myBind返回函数也就是原型对象, this是基于F函数进行了new的实例
+            // 如果是new，那么此刻 this 指向 prototype
+            if(this instanceof F){
+                // 但是我们实际上应该new的是 bindFunction ，所以我们需要重新new
+                // 那么我们new的结果应该是 之前绑定的函数，并且new的优先级高于bind，所以此时我们只需要new即可，不需要理会this绑定
+                return new bindFunction(...params);
+            }
+            // 5. return 调用之后的结果
+            return bindFunction.apply(context, params);
+        }
+    }
+    function demo(b,c,d){
+        console.log(this.a,b,c,d);
+    }
+    const obj = {a:33};
+    const func = demo.myBind(obj,'bb',99);
+    func(4);
+    // new
+    function demo2(c,d){
+        this.c = c;
+        this.d = d;
+        console.log(this.a,this.b,this.c,this.d)
+    }
+    const obj2 = {a:33,b:'bbbb'}; // 没有绑定到this,因为new优先级高于bind
+    const bindFunc = demo2.myBind(obj2,'cc');
+    const instance = new bindFunc(99);
+    console.log(instance);
 ```
 * bind绑定的优先级低于new，所以先bind再new也可以，但是绑定的this会失去
 ```
@@ -145,72 +211,91 @@ document.onmousemove=function(e){
 			console.log(two)
 ```
 * `call/apply的实现其实都是利用闭包，把this用一个变量保存起来，方便闭包调用的时候不释放，并且指向这个变量`
+
 ## 手写call
 ```
-			// 手写call 
-			Function.prototype.call=function(context,...callargs){
-				if(!(this instanceof Function)){
-                    throw new TypeError("必须是函数调用call");
-                }
-                context=context||window;
-				// 添加属性，隐式调用函数
-				let fnName = Symbol('fn')
-				context[fnName]=this;
-				// 使用绑定的对象去调用方法
-				let res=context[fnName](...callargs);
-				// 因为绑定的时候算是给对象添加了属性func,所以需要删除该属性
-				// 因为该属性不会再被用到
-				delete context[fnName];
-				return res
-			}
+    Function.prototype.myCall = function (context,...args) {
+        // 此时的this指的是调用 myCall  的 函数对象
+        const property = Symbol();
+        // 空判断，undefined / null 则使用window
+        context = context || window;
+        // 1. call实现原理： context 添加一个属性 该属性为 this,这样就能通过默认调用方式绑定this了
+        context[property] = this;
+        // 2. 调用函数
+        const result = context[property](...args);
+        // 3. 删除属性
+        delete context[property];
+        // 4. 返回结果
+        return result;
+    }
+    function demo(b){
+        console.log(this.a,b);
+    }
+    const obj = {a:33};
+    demo.myCall(obj,'bb');
 ```
 
 ## 手写apply
 ```
-		Function.prototype.apply=function(context,args){
-            if(!(this instanceof Function)){
-                return new TypeError('不是函数')
-            }
-            context = context || window;
-            args = args || []
-            let fn = this;
-            let fnName = Symbol('fn')
-            context[fnName] = fn;
-            let res= context[fnName](...args)
-            delete context[fnName];
-            return res;
+    Function.prototype.myApply = function(context,args){
+        context = context || window; // 空判断
+        if(!Array.isArray(args)){
+            throw new Error("param is not a array");
         }
+        const property = Symbol();
+        // 1. 此时的this指的是要调用的函数，把函数设置为 context的对象属性。使用默认调用方式绑定this
+        context[property] = this;
+        // 2. 调用函数
+        const result = context[property](...args);
+        // 3. 删除属性
+        delete context[property];
+        // 4. return
+        return result;
+    }
+    function demo(b,c){
+        console.log(this.a,b,c);
+    }
+    const obj = {a:33};
+    demo.myApply(obj,['bb',99]);
 ```
 
 ## 手写new运算符
 ```
-	function myNew(Func,...args){
-        // 1.基于函数原型对象创建实例对象
-        const instance = {};
-        Object.setPrototypeOf(instance, Func.prototype);
-        // 2. 绑定参数&this
-        const result = Func.apply(instance, args);
-        // 已经绑定了this的实例可以则返回，否则返回instance
-        return result instanceof Object ? result: instance;
+    function myNew(Func,...args){
+        // 1. 基于Func.prototype创建一个对象
+        let instance = Object.create(Func.prototype);
+        // 2. 给对象绑定this,参数
+        let result = Func.apply(instance, args);
+        // 3. 根据是否有返回值 返回绑定结果/对象
+        return result instanceof Object ? result : instance;
     }
-    // 1. 没有return，那么apply得到的就是 undefined, 也就是instance
-    function foo(value){
-        this.a = value;
+    // 1. 返回实例 instance
+    function foo(a){
+        this.a = a;
     }
-    const val1 = myNew(foo,3);
-    console.log(val1); // foo{a: 3}
-    console.log(new foo(3)); // foo{a: 3}
-
-    // 2. return 那么myNew返回result
-    function bar(value){
+    console.log(myNew(foo,1)); // foo{a: 1}
+    
+    // 2.调用返回对象方式，返回apply结果result
+    function foo(a){
         return {
-            name: value,
-            age: 11
+            a:a
         }
     }
-    const val2 = myNew(bar,5);
-    console.log(val2); // {name: 5, age: 11}
-    console.log(new bar(5)); // {name: 5, age: 11}
+    // 走 result instanceof Object 返回 result 逻辑
+    console.log(myNew(foo,1)); // {a: 1}
+    
+    // 3.class 的函数写法， 返回实例 instance
+    const Person = /** @class */ (function () {
+        function Person(name,age) {
+            this.a = name;
+            this.b = age;
+            this.c = { a: 1 };
+        }
+        return Person;
+    }());
+    // 返回 instance
+    const person = myNew(Person, 'Alice', 30);
+    console.log(person); // 输出: Person { name: 'Alice', age: 30 }
 ```
 
 
