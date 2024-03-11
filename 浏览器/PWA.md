@@ -1,6 +1,7 @@
 ## PWA
 * PWA全称是progressive web app(`渐进式web app`)
 * `pwa本质上就是web应用，使用现在web api的增幅和构建，实现与原生app相近的用户体验！`
+* 在浏览器地址栏会提供一个下载按钮，提供给用户下载，后面作为应用来使用
 
 #### Web Application Manifest
 * [官方文档]("https://w3c.github.io/manifest/")

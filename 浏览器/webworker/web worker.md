@@ -11,8 +11,7 @@
 * 另外,worker线程只要开始运行，就不会被主线程所打断(`例如请求，点击事件等`)，所以我们一定要记住`及时销毁worker线程，因为worker线程也比较耗费资源`
 
 #### web worker的事件循环
-* web worker有自己的heap、call stack、web apis、task queue、miscro tsak queue
-
+* web worker有自己的`heap、call stack、web apis、task queue、miscro tsak queue`
 
 ### 注意事项
 1. `同源限制`,分配给web worker的脚本文件必须和主线程同源
