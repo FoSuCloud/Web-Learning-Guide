@@ -15,30 +15,31 @@
 * 目前浏览器已经添加了一些实验性的api,但是还有很多浏览器不兼容，`fetch现在实际上的中止基本不可用`
 3. 例子
 1）简单例子
+
 ```javascript
 // 使用fetch实现
-fetch('http://localhost:3000').then((res)=>{
-    console.log(res, 'date:', Math.floor(new Date().getTime()/1000))
+fetch('http://localhost:3000').then((res) => {
+    console.log(res, 'date:', Math.floor(new Date().getTime() / 1000))
     res.json().then((data) => {
         console.log(data);
     });
 })
 // 后端使用node
 
-const http=require('http')
+const http = require('网络/http请求/http')
 const port = 3000;
 
-const server =http.createServer((req,res)=>{
+const server = http.createServer((req, res) => {
     res.statusCode = 200
-    let arr=['http://localhost:63342','http://localhost:3001']
-    if(arr.includes(req.headers.origin)){
-        res.setHeader('content-type','text/json; charset=utf-8')
-        res.setHeader('Cache-Control','no-cache')
-        res.setHeader('Connection','keep-alive')
-        res.setHeader('Access-Control-Allow-Origin',req.headers.origin) // req.headers.origin
+    let arr = ['http://localhost:63342', 'http://localhost:3001']
+    if (arr.includes(req.headers.origin)) {
+        res.setHeader('content-type', 'text/json; charset=utf-8')
+        res.setHeader('Cache-Control', 'no-cache')
+        res.setHeader('Connection', 'keep-alive')
+        res.setHeader('Access-Control-Allow-Origin', req.headers.origin) // req.headers.origin
         res.setHeader('Access-Control-Allow-Credentials', 'true')
     }
-    res.setHeader('set-cookie','a="aaa";expires="Sun Jul 18 2032 10:31:45";domain=localhost')
+    res.setHeader('set-cookie', 'a="aaa";expires="Sun Jul 18 2032 10:31:45";domain=localhost')
     const data = {
         "number1": "2",
         "number2": "4"
@@ -47,7 +48,7 @@ const server =http.createServer((req,res)=>{
 })
 
 
-server.listen(port,()=>{
+server.listen(port, () => {
     console.log('start')
 })
 
@@ -122,41 +123,42 @@ fetch('http://localhost:3000',{
 * 然后我们再把控制台的网络关掉，看看前端会执行then还是catch
 * 结果是：`err TypeError: Failed to fetch`
 4) 获取后端发送的buffer数据
+
 ```javascript
 //  前端
-fetch('http://localhost:3000',{
-            credentials: "include"
-        }).then((res)=>{
-            console.log(res, 'date:', Math.floor(new Date().getTime()/1000))
-            res.blob().then((data) => {
-                let fr = new FileReader()
-                fr.onload=()=>{
-                    console.log(fr.result)
-                }
-                fr.readAsText(data)
-            })
-        }).catch((err)=>{
-            console.log('err',err)
-        })
+fetch('http://localhost:3000', {
+    credentials: "include"
+}).then((res) => {
+    console.log(res, 'date:', Math.floor(new Date().getTime() / 1000))
+    res.blob().then((data) => {
+        let fr = new FileReader()
+        fr.onload = () => {
+            console.log(fr.result)
+        }
+        fr.readAsText(data)
+    })
+}).catch((err) => {
+    console.log('err', err)
+})
 // 后端
 
-const http=require('http')
+const http = require('网络/http请求/http')
 const port = 3000;
-const server =http.createServer((req,res)=>{
+const server = http.createServer((req, res) => {
     res.statusCode = 200
-    let arr=['http://localhost:63342','http://localhost:3001']
-    if(arr.includes(req.headers.origin)){
-        res.setHeader('content-type','text/html; charset=utf-8') // 类型为text/html
-        res.setHeader('Cache-Control','no-cache')
-        res.setHeader('Connection','keep-alive')
-        res.setHeader('Access-Control-Allow-Origin',req.headers.origin) // req.headers.origin
+    let arr = ['http://localhost:63342', 'http://localhost:3001']
+    if (arr.includes(req.headers.origin)) {
+        res.setHeader('content-type', 'text/html; charset=utf-8') // 类型为text/html
+        res.setHeader('Cache-Control', 'no-cache')
+        res.setHeader('Connection', 'keep-alive')
+        res.setHeader('Access-Control-Allow-Origin', req.headers.origin) // req.headers.origin
         res.setHeader('Access-Control-Allow-Credentials', 'true')
     }
-    res.setHeader('set-cookie','a="aaa";expires="Sun Jul 18 2032 10:31:45";domain=localhost')
+    res.setHeader('set-cookie', 'a="aaa";expires="Sun Jul 18 2032 10:31:45";domain=localhost')
     let buffer = new Buffer('我是服务器数据') // 创建缓存区
     res.end(buffer);
 })
-server.listen(port,()=>{
+server.listen(port, () => {
     console.log('start')
 })
 ```

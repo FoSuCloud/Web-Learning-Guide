@@ -94,3 +94,50 @@ for(let i in child){console.log(i)}
          * */
         console.log(obj.fn()) // 1
 ```
+
+## 可枚举属性
+1. 对象的属性分为可枚举和不可枚举，是否可枚举由属性的enumerable值来决定，可枚举性决定了该属性是否能被for in 循环遍历到
+```
+			var n=new 。目标 Number(4);
+			for(var key in n){
+				console.log('可枚举属性:'+key);
+			}
+			//结果是空，也就是说明没有可枚举属性！
+``` 
+2. `使用propertylsEnumerable()方法可以判断出属性是否可枚举`
+```
+			function person(){
+				this.name='name';
+				this.age=22
+			}
+			var p=new person();
+			console.log(p.propertyIsEnumerable('name'));//true 
+			console.log(p.propertyIsEnumerable('haaa'));//false
+			
+			person.prototype.hihi="对象原型的属性";
+			console.log(p.propertyIsEnumerable("hihi"));//false 
+			
+			for(var key in p){
+				console.log('对象的可枚举属性:'+key)
+			}
+```
+3. `给对象原型添加属性，无论是否可枚举，使用对象.propertyIsEnumerable()都是返回false`
+4. `for in遍历对象在自身的和继承的可枚举的属性`
+5. `console.log(Object.keys(p));Object.keys()返回对象自身的所有可枚举的属性的键名`
+6. `JSON.stringfy()用于将js的值转换为可枚举的JSON字符串(不包括可继承的)`
+7. `Object.assign()忽略enumerable为false的属性，只拷贝对象自身的可枚举属性`
+```
+			console.log(Object.keys(p));
+			console.log(JSON.stringify(p));
+			console.log(Object.assign(p));
+```
+8. `使用Object.defindProperty(obj,'key',{})方法定义不可枚举属性`
+```
+			Object.defineProperty(obj,'three',{
+				value:"三",
+				enumerable:false
+			})
+			console.log(Object.assign(obj));//es6,但是不生效
+			console.log(Object.keys(obj));//es5
+```
+9. `Object.keys()和Object.assign()都是遍历对象自身的可枚举属性，但是Object.keys是es5的，Object.assign()是es6的，而且没生效？`
