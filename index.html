@@ -9,10 +9,35 @@
 <button id="button" >click</button>
 
 <script>
-    function foo() {
-        console.log(foo.caller); // null
+    function checkByRegExp(regExp,string) {
+        return regExp.test(string);
     }
-    foo();
+    function curry(fn) {
+        // 返回柯里化接收函数
+        return function curried(...args){
+            // 满足参数长度
+            if(args.length >= fn.length){
+                return fn.apply(this,args);
+            }else{
+                // 返回一个匿名函数 等待调用 继续添加参数
+                return function (...newArgs){
+                    return curried.apply(this,args.concat(newArgs));
+                }
+            }
+        }
+    }
+    //进行柯里化
+    let _check = curry(checkByRegExp);
+    //生成工具函数，验证电话号码
+    let checkCellPhone = _check(/^1\d{10}$/);
+    //生成工具函数，验证邮箱
+    let checkEmail = _check(/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/);
+
+   console.log( checkCellPhone('18642838455')) // 校验电话号码
+    console.log( checkCellPhone('13109840560')) // 校验电话号码
+    console.log( checkCellPhone('13204061212')) // 校验电话号码
+
+
 </script>
 </body>
 </html>

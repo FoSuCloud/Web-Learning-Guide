@@ -182,34 +182,6 @@ document.onmousemove=function(e){
 			var four=new bindf(33); // 但是之前bind传的值还有效
 			console.log(four);// {a: "b", b: 33}
 ```
-* 简洁版
-```
-			// 手写bind 
-			Function.prototype.bind=function(context,...bindments){
-				context=context||window;
-				const func=this;
-				
-				return function F(...callments){
-					let args=bindments.concat(callments);
-					if(this instanceof F){
-						return new func(...args);
-					}
-					return func.call(context,...args)
-				}
-			}
-			
-			function one(a,b){
-				this.a=a;
-				this.b=b;
-				console.log(this)
-			}
-			var obj={name:'yiyi'}
-			var child=one.bind(obj,2);
-			child(3);
-			
-			var two=new child(4);
-			console.log(two)
-```
 * `call/apply的实现其实都是利用闭包，把this用一个变量保存起来，方便闭包调用的时候不释放，并且指向这个变量`
 
 ## 手写call
