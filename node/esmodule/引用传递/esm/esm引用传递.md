@@ -1,6 +1,6 @@
 * `对esmodule导出的基础数据类型，进行赋值会报错，因为esmodule导出的是const变量，不能被修改`
 
-```javascript
+```shell
 1
 num = 2
 ^

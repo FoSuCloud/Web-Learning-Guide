@@ -1,6 +1,7 @@
-let { num } = require('./a.js');
+let { num,addNumber } = require('./a.js');
 console.log(num); // 输出 1
-num+=1
+num+=1 // 直接修改对象属性是可以的
+// addNumber(); // 执行这个是不会改变的
 console.log(num); // 输出 2
 
 let a = require('./a.js');

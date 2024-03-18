@@ -3,7 +3,9 @@ Es Module 的产生有很多优势，比如:
 1. `借助 Es Module 的静态导入导出的优势，实现了 tree shaking。`
 2. `Es Module 还可以 import() 懒加载方式实现代码分割。`
 
-* `node12开始支持esmodule, 在package.json配置"type": "module"即可使用`
+#### 浏览器和服务端都支持ESmodule
+* 在浏览器端, 现代的浏览器已经开始广泛支持 ES Module，可以通过 `<script type="module">` 标签引入 ES 模块，或者通过 JavaScript 中的 import 和 export 关键字来实现模块化。
+* 在服务器端, `node12开始支持esmodule, 在package.json配置"type": "module"即可使用`
 
 #### 普通方式
 ```javascript

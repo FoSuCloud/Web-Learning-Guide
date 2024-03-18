@@ -351,8 +351,9 @@ document.onmousemove=function(e){
 ## 手写防抖
 * 防抖就是不管事件触发多少次多久。上次事件触发完必须要要经过一段等待时间
 * 如果低于等待时间，那么一定不触发防抖函数。必须在这段等待时间内不触发该事件！
-```
-			/**
+* `防抖必须要超过一个等待时间才能触发`
+```javascript
+		 /**
          * @param fn {Function} 函数
          * @param time {number} 等待时间
          * @param immediate {Boolean} 是否立即触发函数
@@ -400,8 +401,8 @@ document.onmousemove=function(e){
 ```
 
 ## 节流
-```
-			// 节流(无论点击多少次，一定时间间隔内只触发一次)
+```javascript
+			// 节流(无论点击多少次，一定时间间隔内只触发一次) 就像是瀑布被梳子梳过一样，水流量一下子减少了
 			function throttle(fn,time,immediate){
             let context = this;
             let timer;

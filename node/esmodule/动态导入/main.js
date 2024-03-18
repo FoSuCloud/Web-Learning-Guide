@@ -2,13 +2,14 @@ setTimeout(() => {
     const result  = import('./b.js')
     result.then(res=>{
         console.log(res)
-        //     [Module: null prototype] {
+        // [Module: null prototype] {
         //     age: 11,
-        // default: [Function: sayhello],
+        //     default: [Function: sayhello],
         //     name: 'alien'
         // }
 
         console.log(res.age) // 11
+        console.log(res.default()) // hello,world
     })
 }, 0);
 // import() 可以动态使用，加载模块。
