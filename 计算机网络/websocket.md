@@ -167,7 +167,7 @@ ws.on('connection', function connection(ws) {
 ```javascript
 // node后端
 const parse = require('url').parse
-const createServer = require('网络/http请求/http').createServer
+const createServer = require('计算机网络/http请求/http').createServer
 const Server = require('ws').Server
 
 const server = createServer((req, res) => {

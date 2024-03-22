@@ -65,7 +65,7 @@
 * `格林乔治时间：2021-09-04T02:57:17.582Z 差不多就是 北京时间：Sat Sep 04 2021 10:57:17 GMT+0800 (中国标准时间)`
 
 ```js
-const http = require('网络/http请求/http')
+const http = require('计算机网络/http请求/http')
 const fs = require('fs')
 const port = 3000;
 
@@ -139,7 +139,7 @@ res.setHeader('expires',new Date(Date.now()+24*60*1000))
 * node后端
 
 ```js
-const http = require('网络/http请求/http')
+const http = require('计算机网络/http请求/http')
 const fs = require('fs')
 const port = 3000;
 
@@ -181,7 +181,7 @@ serve.listen(port, () => {
 * node后端，通过定时更新资源，改变etag值来达到判断是否命中协商缓存的目的
 
 ```js
-const http = require('网络/http请求/http')
+const http = require('计算机网络/http请求/http')
 const fs = require('fs')
 const crypto = require('crypto')
 const port = 3000;

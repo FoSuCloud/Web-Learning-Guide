@@ -26,7 +26,7 @@ fetch('http://localhost:3000').then((res) => {
 })
 // 后端使用node
 
-const http = require('网络/http请求/http')
+const http = require('计算机网络/http请求/http')
 const port = 3000;
 
 const server = http.createServer((req, res) => {
@@ -142,7 +142,7 @@ fetch('http://localhost:3000', {
 })
 // 后端
 
-const http = require('网络/http请求/http')
+const http = require('计算机网络/http请求/http')
 const port = 3000;
 const server = http.createServer((req, res) => {
     res.statusCode = 200

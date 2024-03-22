@@ -3,9 +3,9 @@
 * 那么那么浏览器就会掉帧，导致页面卡顿，
 * 所以 React 才引入了`批处理机制`，`主要是为了将同一上下文中触发的更新合并为一个更新`。
 
-```react
+```tsx
 import React from "react";
-interface ExampleState{
+interface ExampleState {
     val: number;
 }
 export default class Example extends React.Component<any,ExampleState> {
@@ -37,10 +37,11 @@ export default class Example extends React.Component<any,ExampleState> {
 
     render() {
         const {val} = this.state;
-        return <div>example {val}</div>;
+        return <div>example {val} </div>;
     }
 };
 ```
+
 * `react的setState批更新会在稍后的某个阶段，也就是下一个更新阶段进行`
 * React应用的更新过程是通过"调和"（Reconciliation）机制完成的，
 * 它负责比较新旧虚拟DOM树的差异，并将这些差异应用到实际的DOM上。
@@ -51,7 +52,7 @@ export default class Example extends React.Component<any,ExampleState> {
 #### 原生js单独处理
 * `通过打断点我们可以看到其实原生的js，只要dom变化了就立即渲染，而不需要进行批处理`
 * `因为我们每次更新dom的操作都是很昂贵的，批处理一次更新多个更加划算`
-```javascript
+```html
 <!DOCTYPE html>
 <html lang="en-us">
 <head>

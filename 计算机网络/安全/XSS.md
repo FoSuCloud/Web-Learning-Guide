@@ -46,7 +46,7 @@
 * node.js后端代码
 
 ```javascript
-const http = require('网络/http请求/http')
+const http = require('计算机网络/http请求/http')
 const fs = require('fs')
 const path = require('path')
 const port = 3000;
@@ -97,7 +97,7 @@ server.listen(port, () => {
 * 后端node.js
 
 ```javascript
-const http = require('网络/http请求/http')
+const http = require('计算机网络/http请求/http')
 const fs = require('fs')
 const path = require('path')
 const port = 3000;

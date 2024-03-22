@@ -60,7 +60,7 @@
 
 ```javascript
 
-const http = require('网络/http请求/http')
+const http = require('计算机网络/http请求/http')
 const port = 3000;
 
 const server = http.createServer((req, res) => {

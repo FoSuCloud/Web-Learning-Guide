@@ -1,25 +1,7 @@
-## css驼峰格式
-```
-function cssStyle2DomStyle(sName) {
-    var arr=sName.split('-');
-    for(var i=0;i<arr.length;i++){
-        if(arr[0]==""){
-            arr.shift();
-            // 但是无论如何，第一个都不会大写，因此下一步直接判断下下个
-            continue;
-        }
-        if(arr[i]&&i!=0){
-            arr[i]=arr[i].slice(0,1).toUpperCase()+arr[i].slice(1)
-        }
-    }
-    return arr.join('')
-}
-```
-* 需要注意toUpperCase是对字符串整体都变大写，要实现首字母大写需要切割为只剩一个字母
 
 ## 生成圆形的点击区域
 1. `虽然使用border-radius后的元素占据宽高还是原来那么多，但是实际有效区域改变了`
-```
+```css
 .one{
 	background: #0000FF;
 	width: 100px;
@@ -34,7 +16,7 @@ function change(){
 ```
 * `使用border-radius后，原来点击生效的区域不生效了`
 2. 使用原生js+canvas来绘制一个圆形，然后使用勾股定理确定位置在不在范围内
-```
+```javascript
 <canvas id="one" width="300" height="300"></canvas>
 
 // 获取画布canvas
@@ -56,14 +38,18 @@ document.onmousemove=function(e){
 }
 ```
 
-## 形参的几种形式
-```
-			    // 1. Arguments(2) ["a", 11, callee: ƒ, Symbol(Symbol.iterator): ƒ]
-				console.log(arguments);
-				// 2. a 11 形参的字符串表示 a 11
-				console.log(...arguments);
-				// 3. 数组表示形式 ["a", 11] 
-				console.log([...arguments])
+#### 手写Object.create
+```javascript
+    Object.myCreate = function(proto){
+        if(typeof proto!=="object" && typeof proto!=="function"){
+            throw new Error("object only can be created by object or function")
+        }
+        // 创建一个对象
+        const obj = {}
+        // 对象原型链指向 参数
+        Object.setPrototypeOf(obj, proto);
+        return obj;
+    }
 ```
 
 ### 手写bind
@@ -232,7 +218,7 @@ document.onmousemove=function(e){
 ```
 
 ## 手写new运算符
-```
+```javascript
     function myNew(Func,...args){
         // 1. 基于Func.prototype创建一个对象
         let instance = Object.create(Func.prototype);
@@ -271,69 +257,42 @@ document.onmousemove=function(e){
 ```
 
 
-## 手写instanceof
+#### 手写instanceof
 * instanceof就是判断一个函数的prototype属性 是否在另一个对象实例的原型链上
 * 关键点就在于：`obj.__proto__ === Func.prototype`
-```
-	// 创建Person函数
-    function Person() {
-        // Person的属性和方法
-        this.a = 1;
+```javascript
+function myInstanceOf(obj,constructor) {
+    // 只有对象才有 __proto__ 属性
+    if(obj === null || (typeof obj !== 'object' && typeof obj !== 'function')){
+        return false;
     }
-
-    // 创建Student函数
-    function Student() {
-        // Student的属性和方法
-        this.b = 2;
+    // 需要判断constructor，只有function才有 prototype 属性
+    if(typeof constructor !== 'function'){
+        return false;
     }
-
-    // 让Student的原型（Student.prototype）指向Person的一个静态实例
-    Student.prototype = Object.create(Person.prototype);
-    // Student.prototype.constructor = Person; // 修复原型链上的constructor属性
-
-    const s = new Student();
-    // console.log(Student.prototype); //     function Person() {}
-    // console.log(Student.prototype.constructor); //     function Person() {}
-    // console.log(s instanceof Student);
-    // true
-    // console.log(s instanceof Person);
-    // true
-
-    // instanceof就是判断一个函数的prototype 是否在另一个对象实例的原型链的函数中上
-    function  isInstanceOf(instance, Func){
-        if(typeof instance !== 'object'){
-            return false;
+    let proto = obj;
+    while(proto){
+        if(proto.__proto__ === constructor.prototype){
+            return true;
         }
-        if(Func===null || (typeof Func !== 'object' && typeof Func !== 'function')){
-            return false;
-        }
-        let result = false;
-        let proto = instance;
-        while(proto!==null && proto.__proto__!==null){
-            if(proto.__proto__ === Func.prototype){
-                result = true;
-                break;
-            } else {
-                proto = proto.__proto__; // 继续下一跳
-            }
-        }
-        return result;
+        proto = proto.__proto__;
     }
-    let f = function () {console.log('f')}
-    let ff = new f();
-    console.log(isInstanceOf(ff, f)); // true
-    console.log(isInstanceOf(ff, Object)); // true
-    console.log(isInstanceOf(ff, null)); // false
-    let arr = [1]
-    console.log(isInstanceOf(arr, Array)); // true
-    console.log(isInstanceOf(arr, f)); // false
-    console.log(isInstanceOf(s,Student)); // true
-    // true
-    console.log(isInstanceOf(s,Person)); // true
+    return false;
+}
+
+console.log({} instanceof Object);
+console.log(myInstanceOf({},Object));
+console.log(function (){} instanceof Function);
+console.log(myInstanceOf(function (){},Function));
+
+console.log(Function instanceof Object);
+console.log(Object instanceof Function);
+console.log(myInstanceOf(Object,Function));
+console.log(myInstanceOf(Function,Object));
 ```
 
 ## 手写jsonp
-```
+```javascript
 // 手写jsonp,也就是在head标签处添加一个script标签，该标签的src能够返回一个js文件！
 			(function jsonp(){
 				let head=document.getElementsByTagName('head')[0]
@@ -442,25 +401,72 @@ document.onmousemove=function(e){
 ```
 
 ## 对象数组去重
-```
-			function removeDuplicates(arr){
-			    let map = new Map();
-			    let result = [];
-			    for(let obj of arr){
-			        let str = JSON.stringify(obj);
-			        if(!map.has(str)){
-			            map.set(str,true);
-			            result.push(obj);
-			        }
-			    }
-			    return result;
-			}
-			
-			console.log(removeDuplicates([{e:3},{e:3},{e:5}]))
+```javascript
+// 假设是一维数组
+function duplicates(arr){
+    const set = new WeakSet();
+    const result = [];
+    for(let i=0;i<arr.length;i++){
+        if(!set.has(arr[i])){
+            set.add(arr[i]);
+            result.push(arr[i]);
+        }
+    }
+    return result;
+}
+const obj = {a:1};
+const foo = {name:3};
+const bar = foo;
+const foo2 = {name:3};
+console.log(duplicates([obj,foo,bar,foo2]));
 ```
 
-## promise实现红绿灯轮播
+
+
+#### 深拷贝
+* 注意：需要考虑循环引用问题
+```javascript
+function deepClone(obj,set = new WeakSet()){
+    if(typeof obj !== "object"){
+        throw new TypeError("value must be Object")
+    }
+    if(obj=== null){
+        return null;
+    }
+    if(obj.constructor === Date){
+        return new Date(obj);
+    }
+    if(obj.constructor === RegExp){
+        return new RegExp(obj);
+    }
+    const result = Object.create(null);
+    for(let key of Object.keys(obj)){
+        if(set.has(obj[key])){
+            continue;
+        }
+        if(typeof obj[key] === "object" && obj[key] !== null){
+            set.add(obj[key]);
+            result[key] = deepClone(obj[key], set);
+        }else{
+            result[key]=obj[key];
+        }
+    }
+    return result;
+}
+const obj = {a:1};
+const foo = {name:3};
+const bar = foo;
+const foo2 = {foo,bar};
+console.log(deepClone(obj));
+console.log(deepClone(foo2));
+
+console.log(deepClone(new Date()));
+console.log(deepClone(new RegExp(/\d+/)));
 ```
+
+
+## promise实现红绿灯轮播
+```javascript
     async function carousel(){
         while (true){
             await changeColor('red',1*1000);
@@ -483,7 +489,7 @@ document.onmousemove=function(e){
 ```
 
 ## setTimeout实现setInterval
-```
+```javascript
 			class myinterval{
 				constructor(){
 					this.stop=false
@@ -570,4 +576,23 @@ Array.prototype.map1=function (func){
         let arr=[]
         console.log(arr.reduce1((a,b)=> a*b))
         console.log(arr.reduce1((a,b)=> a*b,10))
+```
+
+#### 手写Array.prototype.flat
+```javascript
+function flat(arr){
+    if(!Array.isArray(arr)){
+        throw new Error("");
+    }
+    const result = [];
+    for(let i = 0; i < arr.length; i++){
+        if(Array.isArray(arr[i])){
+            result.push(...flat(arr[i]));
+        }else{
+            result.push(arr[i]);
+        }
+    }
+    return result;
+}
+console.log(flat([1,2,[6,3,5,[5,6,7],9],0,1]));
 ```

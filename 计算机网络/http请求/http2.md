@@ -16,7 +16,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' \
 
 ```javascript
 // node后端
-const http2 = require('网络/http请求/http2');
+const http2 = require('计算机网络/http请求/http2');
 const fs = require('fs');
 const path = require('path')
 
