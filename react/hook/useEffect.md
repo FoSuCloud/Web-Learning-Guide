@@ -6,7 +6,7 @@
 * (因为包括了componentDidMount，所以初始渲染DOM完成后，也会触发该函数)
   
 ### useEffect的第二个参数为空和[]的区别
-* `如果第二个参数deps为空数组[]，那么useEffect只会在mounted的时候触发一次！不会在组件更新的时候触发，因为没有监听组件变量的变更`
+* 如果第二个参数deps为空数组[]，那么useEffect只会在mounted的时候`触发一次`！不会在组件更新的时候触发，因为没有监听组件变量的变更
 *  `如果是空，useEffect(func),那么就是默认情况下，那么每次渲染都会触发！`
 
 * `有时候我们会在useEffect执行一些副作用操作，例如setTimeout`

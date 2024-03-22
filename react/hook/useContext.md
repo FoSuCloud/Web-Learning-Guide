@@ -3,6 +3,19 @@
 * 上下文使得将数据传递到`组件树深处的组件`成为可能，而`无需中间组件`了解它
 * 经典使用场景：主题theme、本地化和路由route
 
+#### 缺点
+* 虽然 React 的 Context API 提供了一种方便的方式来在组件树中共享数据，但`滥用 Context` 可能会导致一些问题，
+* 特别是在应用规模较大或组件结构较为复杂的情况下。
+1. `耦合性增加`：使用 Context 可能会增加组件之间的耦合性，因为它使得`组件依赖于外部的状态`。
+* 这可能会使得代码更难以理解和维护，尤其是当组件的层级结构变得复杂时。
+
+2. `难以追踪状态来源`：当组件从 Context 中获取数据时，它并不清楚数据的来源是哪个组件，
+* 这可能会使得调试和追踪问题变得困难。特别是在大型应用中，可能存在`多个提供相同类型数据的 Context`， 导致混乱和错误。
+
+3. `全局状态管理的副作用`：将数据存储在全局状态中可能会导致一些副作用，例如数据的不一致性、性能问题等。
+* 此外，全局状态可能会被不相关的组件访问和修改，进而增加了代码的不确定性。
+
+
 #### useContext使用的是组件中的提供者
 * useContext()钩子确实会在组件树中向上搜索最接近的提供者，并从该提供者获取上下文值。
 * `但是`，`它是考虑在您调用useContext()的组件中的提供者的存在的`。
@@ -41,8 +54,6 @@ export const shareContext = createContext({key:'',name:'',index:0})
 ```typescript jsx
 import React, {useState} from 'react';
 import './App.css';
-import {rowContext} from "./context/rowContext";
-import WFList from "./components/WFList";
 import {Render1, Render2} from "./components/Render1";
 import {IShareContext, shareContext} from "./context/shareContext";
 
@@ -179,8 +190,6 @@ export const Render2 = () => {
 ```typescript jsx
 import React, { useState } from 'react';
 import './App.css';
-import { rowContext } from './context/rowContext';
-import WFList from './components/WFList';
 import { Render1, Render2 } from './components/Render1';
 import { IShareContext, shareContext } from './context/shareContext';
 
@@ -203,9 +212,6 @@ function App() {
 
     return (
         <div className="App">
-            <rowContext.Provider value={[]}>
-                <WFList />
-            </rowContext.Provider>
             <shareContext.Provider value={{ state: share, dispatch: setShare }}>
                 <Render2></Render2>
             </shareContext.Provider>

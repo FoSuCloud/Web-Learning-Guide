@@ -4,6 +4,8 @@
 * `useRef每次渲染时返回的是同一个ref对象`
 * `注意，当ref对象的内容发生变化时,useRef并不会通知到我们，并且变更current属性不会引发组件重新渲染`
 
+* `ref,useRef 返回元素的引用，例如 组件元素`
+
 ```javascript
 import { useRef } from 'react';
 export default function Hook() {

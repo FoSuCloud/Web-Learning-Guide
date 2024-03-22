@@ -6,12 +6,19 @@
     <title>Demo</title>
 </head>
 <body>
-<button id="button" >click</button>
-<button id="cancel" >cancel</button>
+<button id="button">click</button>
 
 <script>
-
-
+    class Demo {
+        constructor() {
+            this.name = 'John';
+            document.getElementById('button').addEventListener('click', this.handleClick);
+        }
+        handleClick() {
+            console.log('Hello,', this);
+        }
+    }
+    const obj = new Demo();
 </script>
 </body>
 </html>

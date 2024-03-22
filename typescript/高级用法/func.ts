@@ -10,7 +10,7 @@ let obj1:Omit1 = {
     name:'1',
     age:1,
 }
-console.log('Omit1:',obj1)
+console.log('Omit1:',obj1);
 
 // 2.Exclude
 // 可以看到效果就是从联合类型中排除了'c'

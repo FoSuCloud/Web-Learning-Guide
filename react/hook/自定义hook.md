@@ -30,6 +30,5 @@ export default function Hook() {
         </div>
     );
 }
-
 ```
 * `但是存在一个问题，需要定义自定义Hook函数的返回类型`
