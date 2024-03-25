@@ -9,16 +9,25 @@
 <button id="button">click</button>
 
 <script>
-    class Demo {
-        constructor() {
-            this.name = 'John';
-            document.getElementById('button').addEventListener('click', this.handleClick);
-        }
-        handleClick() {
-            console.log('Hello,', this);
-        }
-    }
-    const obj = new Demo();
+    Object.entries(
+        // document.querySelectorAll('*') 找到所有 html元素
+        Array.from(document.querySelectorAll('*'))
+            // 得到所有html元素的tag
+            .map(t => t.tagName)
+            // 计算个数
+            .reduce((counter, name) => {
+                // 有则+1， 没有则 返回1
+                    return counter[name] ? {
+                            ...counter,
+                            [name]: counter[name] + 1
+                            }
+                        :  {...counter, [name]: 1}
+                }, {}))
+        // <tagName,count> 根据数量排序
+    .sort((a, b) => b[1] - a[1])
+        // 取前三个
+    .slice(0, 3)
+
 </script>
 </body>
 </html>
