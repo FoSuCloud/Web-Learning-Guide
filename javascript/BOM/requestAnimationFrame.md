@@ -1,7 +1,112 @@
 ## 动画实现方式
 * 在前端，想要实现动画，可以通过js的setTimeout/setInterval；或者css的transition/animation;
 * 此外，使用h5提供的canvas也可以
-* 另外h5还提供了一个专门请求动画的API，也就是requestAnimationFrame
+* 另外h5还提供了一个专门请求动画的API，也就是 requestAnimationFrame
+
+#### requestAnimationFrame执行时机
+* 浏览器在一帧中需要完成的内容，从中我们可以看到 requestAnimationFrame 的
+* 执行时机，`在 Layout 和 Paint 之前`
+![frame生命周期](./img/frame生命周期.png)
+
+* 下面代码都是在同一帧触发的
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <style>
+        #test {
+            width: 100px;
+            height: 100px;
+            background: #333333;
+        }
+    </style>
+</head>
+<body>
+<div id="test"></div>
+<button id="button">start</button>
+
+<script>
+    const test = document.querySelector("#test");
+    test.style.transform = 'translate(0, 0)';
+
+    document.querySelector('button').addEventListener('click', () => {
+
+        test.style.transform = 'translate(400px, 0)'; // 立刻移动到400px
+        console.log("test.style.transform:",Date.now()); // test.style.transform: 1711363983154
+        requestAnimationFrame(() => {
+            console.log("requestAnimationFrame:",Date.now()); // requestAnimationFrame: 1711363983155
+            test.style.transition = 'transform 3s linear';
+            test.style.transform = 'translate(200px, 0)'; // 往回走到200px
+        });
+    });
+
+</script>
+</body>
+</html>
+```
+* 可以看到是在同一frame中执行了两次 `pre-paint(浏览器已经完成了布局（Layout）阶段和样式计算（Style Calculation）阶段，但尚未进行实际的绘制操作)`
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+<style>
+    #test {
+    width: 100px;
+    height: 100px;
+    background: #333333;
+}
+</style>
+</head>
+<body>
+<div id="test"></div>
+<button id="button">start</button>
+
+<script>
+    const test = document.querySelector("#test");
+    test.style.transform = 'translate(0, 0)';
+
+    document.querySelector('button').addEventListener('click', () => {
+
+    test.style.transform = 'translate(400px, 0)'; // 立刻移动到400px
+    console.log("test.style.transform:",Date.now());
+    requestAnimationFrame(() => {
+    console.log("requestAnimationFrame:",Date.now());
+    test.style.transition = 'transform 3s linear';
+    test.style.transform = 'translate(200px, 0)'; // 往回走到200px
+});
+});
+
+</script>
+</body>
+</html>
+
+```
+* 并且 paint阶段在requestAnimationFrame之后
+![frame实践](./img/frame实践.png)
+
+```tsx
+    const test = document.querySelector("#test");
+    test.style.transform = 'translate(0, 0)';
+
+    document.querySelector('button').addEventListener('click', () => {
+        requestAnimationFrame(() => {
+            console.log('1',Date.now());// 1 1711363169619
+            test.style.transition = 'transform 1s linear';
+            test.style.transform = 'translate(200px, 0)';
+        });
+        requestAnimationFrame(() => {
+            console.log('2',Date.now()); // 2 1711363169619
+            test.style.transition = 'transform 1s linear';
+            test.style.transform = 'translate(300px, 0)';
+        });
+    });
+```
 
 ## setTimeout/setInterval的缺点
 * 使用定时器实现的动画，存在以下几个缺点：

@@ -4,29 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo</title>
+    <style>
+        #test {
+            width: 100px;
+            height: 100px;
+            background: #333333;
+        }
+    </style>
 </head>
 <body>
-<button id="button">click</button>
+<div id="test"></div>
+<button id="button">start</button>
 
 <script>
-    Object.entries(
-        // document.querySelectorAll('*') 找到所有 html元素
-        Array.from(document.querySelectorAll('*'))
-            // 得到所有html元素的tag
-            .map(t => t.tagName)
-            // 计算个数
-            .reduce((counter, name) => {
-                // 有则+1， 没有则 返回1
-                    return counter[name] ? {
-                            ...counter,
-                            [name]: counter[name] + 1
-                            }
-                        :  {...counter, [name]: 1}
-                }, {}))
-        // <tagName,count> 根据数量排序
-    .sort((a, b) => b[1] - a[1])
-        // 取前三个
-    .slice(0, 3)
+    const test = document.querySelector("#test");
+    test.style.transform = 'translate(0, 0)';
+
+    document.querySelector('button').addEventListener('click', () => {
+
+        test.style.transform = 'translate(400px, 0)'; // 立刻移动到400px
+        console.log("test.style.transform:",Date.now()); // test.style.transform: 1711363983154
+        requestAnimationFrame(() => {
+            console.log("requestAnimationFrame:",Date.now()); // requestAnimationFrame: 1711363983155
+            test.style.transition = 'transform 3s linear';
+            test.style.transform = 'translate(200px, 0)'; // 往回走到200px
+        });
+    });
 
 </script>
 </body>
