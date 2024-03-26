@@ -2,6 +2,11 @@
 * 在前端，想要实现动画，可以通过js的setTimeout/setInterval；或者css的transition/animation;
 * 此外，使用h5提供的canvas也可以
 * 另外h5还提供了一个专门请求动画的API，也就是 requestAnimationFrame
+```tsx
+requestAnimationFrame(callback)
+callback: (DOMHighResTimeStamp)=>{}
+```
+* DOMHighResTimeStamp `表示 requestAnimationFrame() 开始执行回调函数的时刻(毫秒数)`。
 
 #### requestAnimationFrame执行时机
 * 浏览器在一帧中需要完成的内容，从中我们可以看到 requestAnimationFrame 的
@@ -282,10 +287,6 @@ const start = () => {
 1. requestAnimationFrame会把每一帧的DOM操作集中在一次，在一次重绘或者回流中完成。重绘或者回流的时机是由浏览器确定的
 2. 对于隐藏的元素，requestAnimationFrame不会进行重绘回流。对于后台脚本（浏览器最小化）也不会重绘回流。节省了cpu性能开销
 
-#### 参考
-* [https://blog.csdn.net/weixin_44691608/article/details/115315566]("区别")
-* [https://juejin.cn/post/6844903877976981517](丢帧)
-* [https://blog.csdn.net/think_A_lot/article/details/114165916](图片)
 
 #### requestAnimationFrame 应用场景
 1. `动画渲染优化`： 最常见的用途是优化动画的渲染。通过 requestAnimationFrame，

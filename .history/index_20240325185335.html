@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <style>
+        #test {
+            width: 100px;
+            height: 100px;
+            background: #333333;
+        }
+    </style>
+</head>
+<body>
+<div id="test"></div>
+<button id="button">start</button>
+
+<script>
+    const test = document.querySelector("#test");
+    test.style.transform = 'translate(0, 0)';
+
+    document.querySelector('button').addEventListener('click', () => {
+
+        test.style.transform = 'translate(400px, 0)'; // 立刻移动到400px
+        console.log("test.style.transform:",Date.now()); // test.style.transform: 1711363983154
+        requestAnimationFrame(() => {
+            console.log("requestAnimationFrame:",Date.now()); // requestAnimationFrame: 1711363983155
+            test.style.transition = 'transform 3s linear';
+            test.style.transform = 'translate(200px, 0)'; // 往回走到200px
+        });
+    });
+
+</script>
+</body>
+</html>

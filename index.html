@@ -1,35 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo</title>
-    <style>
-        #test {
-            width: 100px;
-            height: 100px;
-            background: #333333;
-        }
-    </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" />
+    <title>demo</title>
 </head>
 <body>
-<div id="test"></div>
-<button id="button">start</button>
-
+<div onclick="start()">start</div>
 <script>
-    const test = document.querySelector("#test");
-    test.style.transform = 'translate(0, 0)';
+    // 用于模拟代码执行耗费时间
+    const sleep = delay => {
+        for (let start = Date.now(); Date.now() - start <= delay;) {}
+    }
 
-    document.querySelector('button').addEventListener('click', () => {
+    // performWorkUntilDeadline 的执行时间，也就是一次批量任务执行的开始时间，通过现在的时间 - startTime，来判断是否超过了切片时间
+    let startTime;
 
-        test.style.transform = 'translate(400px, 0)'; // 立刻移动到400px
-        console.log("test.style.transform:",Date.now()); // test.style.transform: 1711363983154
-        requestAnimationFrame(() => {
-            console.log("requestAnimationFrame:",Date.now()); // requestAnimationFrame: 1711363983155
-            test.style.transition = 'transform 3s linear';
-            test.style.transform = 'translate(200px, 0)'; // 往回走到200px
-        });
-    });
+    let scheduledHostCallback;
+    let isMessageLoopRunning = false;
+    let getCurrentTime = () => performance.now();
+
+    const taskQueue = [{
+        expirationTime: 1000000,
+        callback: () => {
+            sleep(30);
+            console.log(1)
+        }
+    }, {
+        expirationTime: 1000000,
+        callback: () => {
+            sleep(30);
+            console.log(2)
+        }
+    }, {
+        expirationTime: 1000000,
+        callback: () => {
+            sleep(30);
+            console.log(3)
+        }
+    }]
+
+    function requestHostCallback(callback) {
+        scheduledHostCallback = callback;
+        if (!isMessageLoopRunning) {
+            isMessageLoopRunning = true;
+            schedulePerformWorkUntilDeadline();
+        }
+    }
+
+    const channel = new MessageChannel();
+    const port = channel.port2;
+
+    function performWorkUntilDeadline() {
+        if (scheduledHostCallback !== null) {
+            const currentTime = getCurrentTime();
+            startTime = currentTime;
+            const hasTimeRemaining = true;
+
+            let hasMoreWork = true;
+            try {
+                hasMoreWork = scheduledHostCallback(hasTimeRemaining, currentTime);
+            } finally {
+                console.log('hasMoreWork', hasMoreWork)
+                if (hasMoreWork) {
+                    schedulePerformWorkUntilDeadline();
+                } else {
+                    isMessageLoopRunning = false;
+                    scheduledHostCallback = null;
+                }
+            }
+        } else {
+            isMessageLoopRunning = false;
+        }
+    }
+
+    channel.port1.onmessage = performWorkUntilDeadline;
+
+    let schedulePerformWorkUntilDeadline = () => {
+        port.postMessage(null);
+    };
+
+    function flushWork(hasTimeRemaining, initialTime) {
+        return workLoop(hasTimeRemaining, initialTime);
+    }
+
+    let currentTask;
+
+    function workLoop(hasTimeRemaining, initialTime) {
+        currentTask = taskQueue[0];
+        while (currentTask != null) {
+            console.log(currentTask)
+            if (
+                currentTask.expirationTime > initialTime &&
+                (!hasTimeRemaining || shouldYieldToHost())
+            ) {
+                break;
+            }
+
+            const callback = currentTask.callback;
+            callback();
+
+            taskQueue.shift()
+
+            currentTask = taskQueue[0];
+        }
+
+        return currentTask != null;
+    }
+
+    const frameInterval = 5;
+
+    function shouldYieldToHost() {
+        const timeElapsed = getCurrentTime() - startTime;
+        return timeElapsed >= frameInterval;
+    }
+    // 开始测试demo
+    function start(){
+        requestHostCallback(flushWork)
+    }
 
 </script>
 </body>
