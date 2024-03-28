@@ -13,7 +13,7 @@
 ### 启用Concurrent模式
 * `目前v18版本还不清楚是否直接支持Concurrent模式。我们参考v16的做法`
 * Concurrent模式需要安装实验版本来支持一下
-```text
+```shell
 npm install react@experimental react-dom@experimental
 # or
 yarn add react@experimental react-dom@experimental

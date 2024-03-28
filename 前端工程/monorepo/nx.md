@@ -8,3 +8,4 @@
 * `package.json添加 "workspaces": ["packages/*"] 设置工作目录,我们可以在本地链接他们`
 * 在文件夹packages下面添加多个子项目
 
+ 

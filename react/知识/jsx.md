@@ -1,5 +1,26 @@
 #### jsx
+* JSX代表JavaScript XML，它是 ECMAScript 的类似 XML 的语法扩展。基本上它只是为函数提供了
+* `语法糖React.createElement(type, props, ...children)`，
+* 为我们提供了 JavaScript 的表达能力以及类似 HTML 的模板语法。
+```tsx
+export default function App() {
+  return (
+      <h1 className="greeting">{"Hello, this is a JSX Code!"}</h1>
+  );
+}
+```
+* 如果不使用 JSX 语法，则相应的 JavaScript 代码应如下编写
+```tsx
+import { createElement } from 'react';
 
+export default function App() {
+  return createElement(
+    'h1',
+    { className: 'greeting' },
+    'Hello, this is a JSX Code!'
+  );
+}
+```
 
 #### React Component 和 React Element 关系
 1.` React Element 是 React 应用的最小构建块，它描述了你在屏幕上想看到的内容。`

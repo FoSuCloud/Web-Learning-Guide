@@ -1,5 +1,6 @@
 ## Monorepo 演进
-1. 阶段一：单仓库巨石应用， 一个 Git 仓库维护着项目代码.随着迭代业务复杂度的提升，项目代码会变得越来越多，越来越复杂，大量代码构建效率也会降低，最终导致了单体巨石应用
+1. 阶段一：单仓库巨石应用， 一个 Git 仓库维护着项目代码.随着迭代业务复杂度的提升，项目代码会变得越来越多，越来越复杂，
+* 大量代码构建效率也会降低，最终导致了单体巨石应用
 2. 阶段二：`多仓库多模块`应用，于是将项目拆解成多个业务模块，并在多个 Git 仓库管理，模块解耦，降低了巨石应用的复杂度.
 * 每个模块都可以独立编码、测试、发版，代码管理变得简化，构建效率也得以提升，这种代码管理方式称之为 MultiRepo。
 3. 阶段三：`单仓库多模块`应用，随着业务复杂度的提升，模块仓库越来越多，MultiRepo这种方式虽然从业务上解耦了，
@@ -63,7 +64,7 @@
 1. 配置 Lerna 使用 `Yarn 管理依赖`：learn.json 中配置 `"npmClient": "yarn"`
 2. 配置 Lerna 启用 `Yarn Workspaces`：
    配置 lerna.json/useWorkspaces = true
-   配置根目录 package.json/workspaces = ["pacages/*"] , 此时 lerna.json 中的 packages 配置项将不再使用
+   配置根目录 package.json/workspaces = ["packages/*"] , 此时 lerna.json 中的 packages 配置项将不再使用
    配置根目录 package.json/private = true
 
 * `yarn` 1.x 及以上版本，新增 workspace 能力，不借助 Lerna，也可以`提供原生的 Monorepo 支持`，

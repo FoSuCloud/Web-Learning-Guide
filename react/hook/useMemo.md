@@ -25,7 +25,7 @@ export default function Hook() {
 `因为我们如果使用useSate，那么每次重新渲染，都会触发该函数重新计算`
 
 
-#### `使用React.memo包装的组件会阻止重新渲染`
+#### 使用React.memo包装的组件会阻止重新渲染
 * `使用React.memo包装的组件会阻止重新渲染，即使父组件重新渲染。除非props发生改变`
 ```typescript jsx
 import React, { useState } from 'react';

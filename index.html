@@ -36,6 +36,14 @@
     }, {
         expirationTime: 1000000,
         callback: () => {
+            // 如果<5，那么和下面的任务同一个workLoop；
+            // 如果>5，那么单独一个workLoop
+            sleep(6);
+            console.log("==========")
+        }
+    }, {
+        expirationTime: 1000000,
+        callback: () => {
             sleep(30);
             console.log(3)
         }
@@ -52,6 +60,7 @@
     const channel = new MessageChannel();
     const port = channel.port2;
 
+    // 接收到消息，执行
     function performWorkUntilDeadline() {
         if (scheduledHostCallback !== null) {
             const currentTime = getCurrentTime();
@@ -60,10 +69,12 @@
 
             let hasMoreWork = true;
             try {
+                // 执行任务，并且根据返回值判断是否还可以执行下一个任务
                 hasMoreWork = scheduledHostCallback(hasTimeRemaining, currentTime);
             } finally {
-                console.log('hasMoreWork', hasMoreWork)
+                console.log('hasMoreWork', hasMoreWork);
                 if (hasMoreWork) {
+                    // 还有任务，那么就让出主线程，通过 postMessage 把下一个任务推到任务队列，避免阻塞主线程
                     schedulePerformWorkUntilDeadline();
                 } else {
                     isMessageLoopRunning = false;
@@ -76,7 +87,7 @@
     }
 
     channel.port1.onmessage = performWorkUntilDeadline;
-
+    // 发送消息，通知更新
     let schedulePerformWorkUntilDeadline = () => {
         port.postMessage(null);
     };
@@ -86,11 +97,13 @@
     }
 
     let currentTask;
-
+    // 执行任务队列的任务，并且返回一个值 判断任务是否还存在
+    // initialTime -> currentTime -> performance.now()
     function workLoop(hasTimeRemaining, initialTime) {
         currentTask = taskQueue[0];
         while (currentTask != null) {
-            console.log(currentTask)
+            console.log(currentTask);
+            // 结束
             if (
                 currentTask.expirationTime > initialTime &&
                 (!hasTimeRemaining || shouldYieldToHost())
@@ -99,18 +112,17 @@
             }
 
             const callback = currentTask.callback;
+            // 执行任务
             callback();
 
-            taskQueue.shift()
-
+            taskQueue.shift();
             currentTask = taskQueue[0];
         }
-
         return currentTask != null;
     }
 
     const frameInterval = 5;
-
+    // 如果没有过默认的切片时间（5ms），那就再执行一个任务
     function shouldYieldToHost() {
         const timeElapsed = getCurrentTime() - startTime;
         return timeElapsed >= frameInterval;
