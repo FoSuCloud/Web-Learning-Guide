@@ -4,6 +4,60 @@
 
 * `但是建议使用生命周期方法而不是此回调函数(如果多的话，代码会非常丑陋)`
 
+* setState其实就是通过闭包实现的，返回的 setXxxx 函数访问外部作用域的上次渲染state或者初始值
+
+#### setState实现
+1、闭包 保留上次渲染state, 不存在则使用initail初始化值
+2、数组存储setState,避免多个state
+3、批量处理state,只渲染一次
+4、setState的参数是函数，那么把state当前值传递过去作为参数；如果不是函数，那么包装一下为() => action，也就是直接赋值
+
+* 下面是一个简单的实现思路，具体还是看react官网
+```javascript
+// 每次调用function component 都会重新初始化render,stateHooks,stateIndex
+function useState(initial) {
+    let currentFiber = wipFiber;
+    const oldHook = currentFiber.alternate?.stateHooks[stateIndex]; // 上次渲染的state快照
+    const stateHook = {
+        state: oldHook ?oldHook.state: initial, // 不是初始化则取上次渲染的快照，否则取初始化值
+        queue: oldHook ?oldHook.queue: []
+    };
+    // fiber.type()的时候会调用到这里
+    // console.log("queue:",stateHook.queue)
+    stateHook.queue.forEach((action) =>{
+        stateHook.state = action(stateHook.state);
+    })
+    stateHook.queue = [];
+
+    stateHooks.push(stateHook);
+    stateIndex++;
+    currentFiber.stateHooks = stateHooks;
+
+    function setState(action) {
+        // memo才会开启，相同值则不更新
+        const eagerState = typeof action === "function" ? action(stateHook.state) : action;
+        if (eagerState === stateHook.state) return;
+
+        if (typeof action === "function") {
+            stateHook.queue.push(action);
+        } else {
+            stateHook.queue.push(() => action);
+        }
+        // 渲染el
+        wipRoot = {
+            ...currentFiber,
+            alternate: currentFiber // 设置 alternate 备用树
+        };
+        console.log("setState wipRoot:",wipRoot);
+        // 记录下本次渲染的根节点
+        nextWorkOfUnit = wipRoot;
+    }
+
+    return [stateHook.state, setState]
+}
+```
+
+
 #### setState是同步的
 * 正是因为 setState 是同步的，当同时触发多次 setState 时浏览器会一直被JS线程阻塞，
 * 那么那么浏览器就会掉帧，导致页面卡顿，

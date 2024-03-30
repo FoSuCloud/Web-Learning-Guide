@@ -15,3 +15,4 @@ if (hasPerformanceNow) {
 
 * 如果当前浏览器帧没有剩余时间，shouldYield会中止循环，直到浏览器有空闲时间后再继续遍历。
 
+ 
