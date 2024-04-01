@@ -1,10 +1,13 @@
 ## useEffect
 * useEffect可以让我们`在函数组件中执行副作用操作`
 * `也就是可以把useEffect看作是componentDidMount、componentDidUpdate、componentWillUnMount这三个生命周期钩子函数的组合`
-* `useEffect函数会在DOM更新之后触发,每次渲染都会触发！`
 * `useEffect有第二个参数，可选。表示是否在数组中的值变化时才触发函数`
 * (因为包括了componentDidMount，所以初始渲染DOM完成后，也会触发该函数)
   
+#### useEffect调用时机
+* `useEffect 的调用时机是在react完成对DOM的渲染之后，并且在浏览器完成绘制之前`
+* 也就是在reconcile统一提交完成后
+
 ### useEffect的第二个参数为空和[]的区别
 * 如果第二个参数deps为空数组[]，那么useEffect只会在mounted的时候`触发一次`！不会在组件更新的时候触发，因为没有监听组件变量的变更
 *  `如果是空，useEffect(func),那么就是默认情况下，那么每次渲染都会触发！`
@@ -32,6 +35,127 @@ export default function Hook() {
     return <div onClick={() => setCount(++count)}>{count}</div>;
 }
 
+```
+
+### 应用场景
+* `如果是setTimout,addEventListener, MutationObserver, Websocket等需要开启，需要关闭的api需要在组件中使用,`
+* `那么我们需要useEffect，是的，需要;这个时候的逻辑就不是生命周期了，我们需要关注的是开启和关闭`
+
+#### websocket连接创建和销毁
+* 初始化的时候创建连接
+* 后面url改变后断开连接并且重新建立连接
+* 在组件销毁后，断开连接，然后结束
+```javascript
+import { useEffect } from 'react';
+import { createConnection } from './chat.js';
+
+function ChatRoom({ roomId }) {
+    const [serverUrl, setServerUrl] = useState('https://localhost:1234');
+
+    useEffect(() => {
+        const connection = createConnection(serverUrl, roomId);
+        connection.connect();
+        return () => {
+            connection.disconnect();
+        };
+    }, [serverUrl, roomId]);
+    // ...
+}
+```
+
+#### 监听全局浏览器事件
+```javascript
+import { useState, useEffect } from 'react';
+
+export default function App() {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    function handleMove(e) {
+      setPosition({ x: e.clientX, y: e.clientY });
+    }
+    window.addEventListener('pointermove', handleMove);
+    return () => {
+      window.removeEventListener('pointermove', handleMove);
+    };
+  }, []);
+
+  return (
+    <div style={{
+      position: 'absolute',
+      backgroundColor: 'pink',
+      borderRadius: '50%',
+      opacity: 0.6,
+      transform: `translate(${position.x}px, ${position.y}px)`,
+      pointerEvents: 'none',
+      left: -20,
+      top: -20,
+      width: 40,
+      height: 40,
+    }} />
+  );
+}
+```
+
+#### 控制弹窗
+```javascript
+import { useEffect, useRef } from 'react';
+
+export default function ModalDialog({ isOpen, children }) {
+  const ref = useRef();
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+    const dialog = ref.current;
+    dialog.showModal();
+    return () => {
+      dialog.close();
+    };
+  }, [isOpen]);
+
+  return <dialog ref={ref}>{children}</dialog>;
+}
+```
+
+#### 跟踪元素可见性
+```javascript
+import { useRef, useEffect } from 'react';
+
+export default function Box() {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const div = ref.current;
+    const observer = new IntersectionObserver(entries => {
+      const entry = entries[0];
+      if (entry.isIntersecting) {
+        document.body.style.backgroundColor = 'black';
+        document.body.style.color = 'white';
+      } else {
+        document.body.style.backgroundColor = 'white';
+        document.body.style.color = 'black';
+      }
+    }, {
+       threshold: 1.0
+    });
+    observer.observe(div);
+    return () => {
+      observer.disconnect();
+    }
+  }, []);
+
+  return (
+    <div ref={ref} style={{
+      margin: 20,
+      height: 100,
+      width: 100,
+      border: '2px solid black',
+      backgroundColor: 'blue'
+    }} />
+  );
+}
 ```
 
 ### 模拟class生命周期

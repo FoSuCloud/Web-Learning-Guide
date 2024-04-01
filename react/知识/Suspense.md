@@ -19,7 +19,7 @@ npm install react@experimental react-dom@experimental
 yarn add react@experimental react-dom@experimental
 ```
 * 开始 Concurrent 模式:
-```typescript jsx
+```jsx
 import ReactDOM from 'react-dom';
 
 ReactDOM.createRoot(
@@ -29,7 +29,7 @@ ReactDOM.createRoot(
 
 ### Suspense
 * Suspense是什么？首先可以搭配React.lazy实现代码分割
-```typescript jsx
+```jsx
 const OtherComponent = React.lazy(() => import('./OtherComponent'));
 
 function MyComponent() {

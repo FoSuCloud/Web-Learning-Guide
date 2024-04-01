@@ -47,6 +47,8 @@
 2）判断协商缓存
 3）从服务器加载数据
 
+* `现代网站一般会同时支持强缓存和协商缓存提供给浏览器，强缓存不支持再走协商缓存`
+
 ## 强缓存
 * `浏览器在加载资源时，会先根据本地缓存资源的header头信息判断是否命中强缓存`
 * `如果命中强缓存，则直接使用强缓存中的资源，而不需要向服务器发起请求`
@@ -110,34 +112,38 @@ res.setHeader('expires',new Date(Date.now()+24*60*1000))
 * `因为浏览器要根据保存的上一次请求的响应时间，来判断是否超过了有效期max-age`
 * `由于cache-control是根据客户端的两次请求时间差来判断，不会因为客户端的系统时间改变`
 * cache-control除了max-age还有以下值：
-1) public:表示可以被任何对象（代理服务器，客户端等）缓存。即使是通常不可缓存的内容也可以缓存。
-* 例如1。该响应没有max-age指令或者没有expires字段。
-* 2。该请求是post请求
-2）private:表示是私有缓存，只能被单个用户缓存，也就是只能被客户端缓存。
+
+1) public: 表示可以被任何对象（代理服务器，客户端等）缓存。即使是通常不可缓存的内容也可以缓存。
+* 例如1.该响应没有max-age指令或者没有expires字段。
+* 2.该请求是post请求
+
+2) private:表示是私有缓存，只能被单个用户缓存，也就是只能被客户端缓存。
 * 不能被代理服务器缓存
-3）no-cache:`在使用缓存之前，强制！！！要求先把请求发给服务器校验，也就是协商缓存校验！`
-4）no-store:`不使用缓存`
+
+3) no-cache:`在使用缓存之前，强制！！！要求先把请求发给服务器校验，也就是协商缓存校验！`
+4) no-store:`不使用缓存`
 * `注意，当expires字段和cache-control字段的max-age值都存在时，cache-control的max-age值优先`
 * [参考]("https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control")
 
-```tsx
-浏览器缓存存在磁盘还是内存主要决定因素是内存空闲情况，如果内存使用率很低就优先放入内存，反之则放入磁盘。
-第一次请求资源会选择放入内存和磁盘，以后的请求如内存不存在缓存就从磁盘缓存获取。
+```shell
+浏览器缓存 存在磁盘还是内存主要决定因素是内存空闲情况, 如果内存使用率很低就优先放入内存, 反之则放入磁盘.
+第一次请求资源会选择放入内存和磁盘, 以后的请求如内存不存在缓存就从磁盘缓存获取.
 ```
 
 `经过测试，发现firefox和safari浏览器可以存储（即使重新打开会话也可以缓存住！）但是chrome和其他浏览器可能因为认证错误（https不安全）导致重新打开浏览器还是要重新加载资源`
-`因为安全的网址是可以缓存住资源的。。。`
+`因为安全的网址是可以缓存住资源的`
 
 ## 协商缓存
 * `当强缓存没有命中，浏览器会发请求给服务器，服务器根据header的部分信息判断是否命中协商缓存`
 * `如果协商缓存命中，返回304，表示资源没有更新，继续使用之前的资源。否则返回新的资源，状态码为200`
-1. Last-Modified和If-Modified-Since
+
+1. Last-Modified 和 If-Modified-Since
 * `在浏览器第一次发起请求的时候，服务器的响应头要带上Last-Modified,表示资源的最后一次修改时间`
 * 然后浏览器之后的请求都会带上一个请求头`if-modified-since(浏览器自己加的，值就是上一个Last-Modified的值)`
 * `然后服务器获取请求头if-modified-since和当前资源的修改时间做对比，如果没有更新则返回304`
 * `如果有更新则返回200，并且更新Last-Modified,然后浏览器下次请求带上的请求字段if-modefied-since就是最新的Last-Modified`
-* node后端
 
+* node后端
 ```js
 const http = require('计算机网络/http请求/http')
 const fs = require('fs')
@@ -185,7 +191,6 @@ const http = require('计算机网络/http请求/http')
 const fs = require('fs')
 const crypto = require('crypto')
 const port = 3000;
-
 
 function getHash() {
     let md5 = crypto.createHash('md5')

@@ -81,7 +81,7 @@ onmessage=function(e){
  主线程发送消息
  发送字符串
  {name: "json", data: "发送json"}
- Blob {size: 32, type: "text/html"}
+ Blob{size: 32, type: "text/html"}
  * */
 ```
 2. worker与主线程的双向通信
