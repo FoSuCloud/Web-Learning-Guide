@@ -14,7 +14,7 @@ MessageChannel.port2 只读
 * 通过 MessageChannel 构建`专门的消息通道`。
 * 提供了更灵活、更精确的控制，适用于`高性能、复杂任务调度`场景。
 * 使用 MessagePort 进行消息传递，支持双向通信。
-* 和postMessage一样，都是宏任务，都是异步的
+* 和postMessage一样，都是`宏任务`，都是异步的
 
 #### 优缺点
 * 优点：

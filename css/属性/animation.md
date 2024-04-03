@@ -1,10 +1,13 @@
-## animation的属性
+## animation
+* 动画样式，不需要被动触发，`可以自动触发`，可结合@keyframe进行`多个关键帧的动画`
+
+### animation的属性
 * 和transition一样，有`animation-duration持续时间，animation-delay推迟多久再执行`
 * `animation-timing-function使用的函数，还有动画名称animation-name`
 * 此外还可以设置动画播放次数:`animation-iteration-count(默认infinite无数次):infinite/0/1/...`
 * `还可以设置动画播放方向(逆向！):animation-direction:alternate(正向播放一次，逆向播放一次)；还可以设置normal(一直正向)`
 * `还可以设置动画的播放和暂停:animation-play-state:paused/running暂停或者播放`
-```
+```html
 			<div class="one">
 				<div class="square"></div>
 			</div>
@@ -56,7 +59,7 @@
 ## 设置translate3d(0,0,0)/translateZ(0),可以开启硬件加速，因为使用了3d，导致gpu使用
 
 ## 下滑菜单动画
-```
+```css
 			/* 通过改变最大高度实现下拉菜单下滑效果 */
 			@keyframes  enter{
 				0%{
@@ -69,10 +72,10 @@
 				}
 			}
 ```
-* `注意:元素需要设置overflow:hidden.隐藏多余的高度，才会看起来是移动的样子`
+* 注意:元素需要设置overflow:hidden.隐藏多余的高度，才会看起来是移动的样子
 
-## 加载中动画(animation不需要时间出发，自动加载)
-```
+### 加载中动画 (animation不需要时间出发，自动加载)
+```html
 		<div class="c_fresh">
 		  <div class="mine_f"></div>
 		  <div class="bf"></div>
