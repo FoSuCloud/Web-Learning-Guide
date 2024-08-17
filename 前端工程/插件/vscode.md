@@ -22,6 +22,9 @@ spdlog_mirror "https://npm.taobao.org/mirrors/spdlog/"
 ## web调试
 * `npm run web`
 
+#### 打开开发者工具
+* Cmd+Shift+P
+
 ## vscode-jupyter
 * nvm use v12
 * npm i
