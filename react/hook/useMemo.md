@@ -52,3 +52,8 @@ function App() {
 
 export default App;
 ```
+
+#### React.memo第二个参数
+* 默认情况下，React.memo执行的是浅比较(shallow comparison)。如果您的 props 是复杂对象或数组，并且在传递给组件时始终会生成新的引用，那么浅比较可能会认为新旧 props 不相等，导致重新渲染。
+
+

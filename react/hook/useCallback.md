@@ -19,7 +19,6 @@
 //     <div onClick={ addItem }> { props.children } </div>
 //   )
 // }
-
 // GOOD shouldComponentUpdate  用useCallback和memo优化以后的代码
 import React, { useState, memo, useEffect, useCallback } from 'react';
 
